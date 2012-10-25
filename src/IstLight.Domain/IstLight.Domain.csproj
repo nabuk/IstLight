@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{55CEC47D-6139-4E9C-91FB-445CAC5844FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IstLight.Domain</RootNamespace>
+    <AssemblyName>IstLight.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\IQuoteContextExtensions.cs" />
+    <Compile Include="Extensions\IReadOnlyListExtensions.cs" />
+    <Compile Include="MultiQuoteList.cs" />
+    <Compile Include="Settings\ISimulationSettings.cs" />
+    <Compile Include="Settings\OnlyRecentQuotesSetting.cs" />
+    <Compile Include="Settings\SimulationSettingsImmutableDecorator.cs" />
+    <Compile Include="Settings\TradeDelaySetting.cs" />
+    <Compile Include="AbortableWorker.cs" />
+    <Compile Include="Simulation\Core\Account.cs" />
+    <Compile Include="Simulation\Core\CommissionCalc.cs" />
+    <Compile Include="Simulation\Core\IAccount.cs" />
+    <Compile Include="Simulation\Core\TransactionProcessor.cs" />
+    <Compile Include="Strategy\EmptyStrategy.cs" />
+    <Compile Include="Strategy\IQuoteContext.cs" />
+    <Compile Include="Simulation\Core\ITransactionProcessor.cs" />
+    <Compile Include="Strategy\IWalletContext.cs" />
+    <Compile Include="Simulation\Core\QuoteContext.cs" />
+    <Compile Include="Simulation\Core\SimulationContext.cs" />
+    <Compile Include="Simulation\Core\TransactionRequest.cs" />
+    <Compile Include="Simulation\Core\WalletContext.cs" />
+    <Compile Include="Strategy\StrategyBase.cs" />
+    <Compile Include="Synchronization\SimplifiedTicker.cs" />
+    <Compile Include="Report\ScalarReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Report\SimulationResultReport.cs" />
+    <Compile Include="Synchronization\Observation.cs" />
+    <Compile Include="Synchronization\ISimpleTickerQuote.cs" />
+    <Compile Include="Simulation\ISimulationContext.cs" />
+    <Compile Include="ITickerQuote.cs" />
+    <Compile Include="QuoteList.cs" />
+    <Compile Include="IDate.cs" />
+    <Compile Include="IReadOnlyList.cs" />
+    <Compile Include="ProxiedIndexer.cs" />
+    <Compile Include="ProxiedReadOnlyList.cs" />
+    <Compile Include="PeriodType.cs" />
+    <Compile Include="Settings\AnnualInterestRateSetting.cs" />
+    <Compile Include="Settings\AnnualInflationRateSetting.cs" />
+    <Compile Include="Settings\CloseAllOnLastBarSetting.cs" />
+    <Compile Include="Settings\CommissionSetting.cs" />
+    <Compile Include="Settings\CommissionType.cs" />
+    <Compile Include="Settings\InitialEquitySetting.cs" />
+    <Compile Include="Settings\ISimulationSetting.cs" />
+    <Compile Include="Settings\PeriodSetting.cs" />
+    <Compile Include="Simulation\SimulationContextAsyncDecorator.cs" />
+    <Compile Include="Simulation\SimulationContextFactory.cs" />
+    <Compile Include="Simulation\Simulator.cs" />
+    <Compile Include="Simulation\SimulatorBase.cs" />
+    <Compile Include="Simulation\SimulationProgressEventArgs.cs" />
+    <Compile Include="Simulation\SimulationResult.cs" />
+    <Compile Include="Simulation\SimulationResultQuote.cs" />
+    <Compile Include="Synchronization\SimpleTickerQuote.cs" />
+    <Compile Include="Synchronization\SimpleTickerQuoteFactory.cs" />
+    <Compile Include="Settings\SimulationPriceSetting.cs" />
+    <Compile Include="Settings\SimulationPriceType.cs" />
+    <Compile Include="Settings\SimulationRangeSetting.cs" />
+    <Compile Include="Settings\SimulationRangeType.cs" />
+    <Compile Include="Settings\SimulationSettings.cs" />
+    <Compile Include="Simulation\SimulationEndEventArgs.cs" />
+    <Compile Include="Simulation\SimulationEndReason.cs" />
+    <Compile Include="Synchronization\SyncTickers.cs" />
+    <Compile Include="Synchronization\SyncTickersFactory.cs" />
+    <Compile Include="Simulation\Transaction.cs" />
+    <Compile Include="Simulation\TransactionType.cs" />
+    <Compile Include="Ticker.cs" />
+    <Compile Include="Extensions\GeneralExtensions.cs" />
+    <Compile Include="TickerDescription.cs" />
+    <Compile Include="TickerQuote.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings\Settings.cd" />
+    <None Include="TickerDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

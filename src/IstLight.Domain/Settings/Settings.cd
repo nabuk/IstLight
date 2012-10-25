@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="IstLight.Domain.Settings.SimulationSettings">
+    <Position X="10" Y="4.5" Width="1.75" />
+    <Members>
+      <Field Name="settings" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAACAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Settings\SimulationSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.AnnualInflationRateSetting">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Settings\AnnualInflationRateSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.AnnualInterestRateSetting">
+    <Position X="3" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Settings\AnnualInterestRateSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.CloseAllOnLastBarSetting">
+    <Position X="5.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Settings\CloseAllOnLastBarSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.CommissionSetting">
+    <Position X="10" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAABA=</HashCode>
+      <FileName>Settings\CommissionSetting.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.InitialEquitySetting">
+    <Position X="8" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Settings\InitialEquitySetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.PeriodSetting">
+    <Position X="0.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Settings\PeriodSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.SimulationPriceSetting">
+    <Position X="3" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Settings\SimulationPriceSetting.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.SimulationRangeSetting">
+    <Position X="5.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Settings\SimulationRangeSetting.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.TradeDelaySetting">
+    <Position X="8" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Settings\TradeDelaySetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.OnlyRecentQuotesSetting">
+    <Position X="0.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Settings\OnlyRecentQuotesSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IstLight.Domain.Settings.SimulationSettingsImmutableDecorator">
+    <Position X="10" Y="6.25" Width="3" />
+    <Members>
+      <Field Name="settings" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAACAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Settings\SimulationSettingsImmutableDecorator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="IstLight.Domain.Settings.ISimulationSetting">
+    <Position X="8" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Settings\ISimulationSetting.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="IstLight.Domain.Settings.CommissionType">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Settings\CommissionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IstLight.Domain.Settings.SimulationPriceType">
+    <Position X="3" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAgAAQAEAAAgAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Settings\SimulationPriceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IstLight.Domain.Settings.SimulationRangeType">
+    <Position X="5.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Settings\SimulationRangeType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,7 +1,7 @@
 ﻿using System;
-using IstLight.Domain.Synchronization;
+using IstLight.Synchronization;
 
-namespace IstLight.Domain.Strategy
+namespace IstLight.Strategy
 {
     public interface IQuoteContext
     {

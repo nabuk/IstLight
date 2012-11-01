@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IstLight.Domain.Services
+namespace IstLight.Services
 {
     public interface ITickerProviderRepository : IBaseRepository<ITickerProvider> { }
     public interface ITickerConverterRepository : IBaseRepository<ITickerConverter> { }

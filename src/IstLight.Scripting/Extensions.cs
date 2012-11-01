@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain;
+using IstLight;
 using ScriptingWrapper;
 
 namespace IstLight.Scripting

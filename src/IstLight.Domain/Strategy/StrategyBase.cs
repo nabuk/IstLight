@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Synchronization;
+using IstLight.Synchronization;
 
-namespace IstLight.Domain.Strategy
+namespace IstLight.Strategy
 {
     public abstract class StrategyBase : IDisposable
     {

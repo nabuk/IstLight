@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.Synchronization
+namespace IstLight.Synchronization
 {
     public class SyncTickers : MultiQuoteList<Observation>
     {

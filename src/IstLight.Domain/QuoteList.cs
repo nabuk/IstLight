@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 
-namespace IstLight.Domain
+namespace IstLight
 {
     /// <summary>
     /// Base class for ticker collections.

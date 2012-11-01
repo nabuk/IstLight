@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IstLight.Domain
+namespace IstLight
 {
     /// <summary>
     /// Exposes Date property getter.

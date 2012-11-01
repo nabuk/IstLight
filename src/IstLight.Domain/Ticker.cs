@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using IstLight.Domain.Services;
+using IstLight.Services;
 
-namespace IstLight.Domain
+namespace IstLight
 {
     public class Ticker : QuoteList<ITickerQuote>
     {

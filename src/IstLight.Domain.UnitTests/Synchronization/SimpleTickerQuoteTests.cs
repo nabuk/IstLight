@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Xunit.Extensions;
 using Xunit;
-using IstLight.Domain.Synchronization;
+using IstLight.Synchronization;
 
-namespace IstLight.Domain.UnitTests.Synchronization
+namespace IstLight.UnitTests.Synchronization
 {
     public class SimpleTickerQuoteTests
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IstLight.Domain.Settings
+namespace IstLight.Settings
 {
     public class TradeDelaySetting : ISimulationSetting
     {

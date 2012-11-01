@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Strategy;
-using IstLight.Domain.Settings;
-using IstLight.Domain.Extensions;
+using IstLight.Synchronization;
+using IstLight.Strategy;
+using IstLight.Settings;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.Simulation.Core
+namespace IstLight.Simulation.Core
 {
     public class SimulationContext : ISimulationContext
     {

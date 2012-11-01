@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IstLight.Domain.Settings;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Strategy;
+using IstLight.Settings;
+using IstLight.Synchronization;
+using IstLight.Strategy;
 using System.Threading;
 
 
-namespace IstLight.Domain.Simulation
+namespace IstLight.Simulation
 {
     public class Simulator : SimulatorBase
     {

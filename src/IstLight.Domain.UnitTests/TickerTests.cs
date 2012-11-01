@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 using Ploeh.AutoFixture;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class TickerTests
     {

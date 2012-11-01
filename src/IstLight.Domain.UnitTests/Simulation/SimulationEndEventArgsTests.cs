@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Extensions;
-using IstLight.Domain.Simulation;
+using IstLight.Extensions;
+using IstLight.Simulation;
 using Xunit;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests.Simulation
+namespace IstLight.UnitTests.Simulation
 {
     public class SimulationEndEventArgsTests
     {

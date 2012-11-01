@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Extensions;
+using IstLight.Synchronization;
+using IstLight.Extensions;
 
 
-namespace IstLight.Domain.UnitTests.Synchronization
+namespace IstLight.UnitTests.Synchronization
 {
     public class SimplifiedTickerTests
     {

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Simulation;
-using IstLight.Domain.Extensions;
+using IstLight.Simulation;
+using IstLight.Extensions;
 using Xunit.Extensions;
-using IstLight.Domain.Synchronization;
+using IstLight.Synchronization;
 using Xunit;
 using Moq;
 using System.Collections;
 
-namespace IstLight.Domain.UnitTests.Simulation
+namespace IstLight.UnitTests.Simulation
 {
     public class SimulationResultQuoteTests
     {

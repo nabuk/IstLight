@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Strategy;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Extensions;
+using IstLight.Strategy;
+using IstLight.Synchronization;
+using IstLight.Extensions;
 using Moq;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Extensions
+namespace IstLight.UnitTests.Extensions
 {
     public class IQuoteContextExtensionsTests
     {

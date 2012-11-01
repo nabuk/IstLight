@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain;
-using IstLight.Domain.Extensions;
+using IstLight;
+using IstLight.Extensions;
 using ScriptingWrapper;
 
 namespace IstLight.Scripting

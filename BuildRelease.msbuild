@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <BuildOutput Include="src\ScriptingWrapper\bin\Release\ScriptingWrapper.dll" />
-    <BuildOutput Include="src\IstLight.Domain\bin\Release\IstLight.Domain.dll" />
+    <BuildOutput Include="src\IstLight\bin\Release\IstLight.dll" />
   </ItemGroup>
   <PropertyGroup>
     <ReleaseFolder>bin</ReleaseFolder>

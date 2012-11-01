@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Simulation;
+using IstLight.Simulation;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Simulation
+namespace IstLight.UnitTests.Simulation
 {
     public class SimulationContextFactoryTests
     {

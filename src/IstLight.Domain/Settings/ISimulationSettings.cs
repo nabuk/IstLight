@@ -1,5 +1,5 @@
 ﻿using System;
-namespace IstLight.Domain.Settings
+namespace IstLight.Settings
 {
     public interface ISimulationSettings : ICloneable
     {

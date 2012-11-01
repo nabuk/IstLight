@@ -8,7 +8,7 @@
     <ProjectGuid>{375526C8-9343-45A3-ABBF-EB899138C279}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IstLight.Domain.UnitTests</RootNamespace>
+    <RootNamespace>IstLight.UnitTests</RootNamespace>
     <AssemblyName>IstLight.Domain.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

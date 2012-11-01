@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Extensions;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Settings;
+using IstLight.Extensions;
+using IstLight.Synchronization;
+using IstLight.Settings;
 using Xunit;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests.Synchronization
+namespace IstLight.UnitTests.Synchronization
 {
     public class SyncTickersFactoryTests
     {

@@ -6,7 +6,7 @@ using Xunit;
 using Moq;
 using System.Threading;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class AbortableWorkerTests
     {

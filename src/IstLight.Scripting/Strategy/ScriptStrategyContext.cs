@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Strategy;
+using IstLight.Strategy;
 using ScriptingWrapper;
 
 namespace IstLight.Scripting.Strategy

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Simulation.Core;
+using IstLight.Simulation.Core;
 
-namespace IstLight.Domain.Simulation
+namespace IstLight.Simulation
 {
     public static class SimulationContextFactory
     {

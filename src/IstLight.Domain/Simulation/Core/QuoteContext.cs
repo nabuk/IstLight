@@ -1,9 +1,9 @@
 ﻿using System;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Extensions;
-using IstLight.Domain.Strategy;
+using IstLight.Synchronization;
+using IstLight.Extensions;
+using IstLight.Strategy;
 
-namespace IstLight.Domain.Simulation.Core
+namespace IstLight.Simulation.Core
 {
     public class QuoteContext : IQuoteContext
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Strategy;
+using IstLight.Strategy;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Strategy
+namespace IstLight.UnitTests.Strategy
 {
     public class EmptyStrategyTests
     {

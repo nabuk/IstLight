@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IstLight.Domain.Strategy
+namespace IstLight.Strategy
 {
     public class EmptyStrategy : StrategyBase
     {

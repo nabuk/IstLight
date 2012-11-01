@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Services;
-using IstLight.Domain.Simulation;
+using IstLight.Services;
+using IstLight.Simulation;
 
 namespace IstLight.Scripting.Repositories
 {

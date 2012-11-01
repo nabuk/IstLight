@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using IstLight.Domain.Synchronization;
+using IstLight.Synchronization;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests.Synchronization
+namespace IstLight.UnitTests.Synchronization
 {
     public class SyncTickersTests
     {

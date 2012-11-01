@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using IstLight.Domain.Simulation;
+using IstLight.Simulation;
 using Moq;
 using Xunit;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests.Simulation
+namespace IstLight.UnitTests.Simulation
 {
     public class SimulationContextAsyncDecoratorTests
     {

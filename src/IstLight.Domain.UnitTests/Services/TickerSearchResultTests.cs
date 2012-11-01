@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Services;
+using IstLight.Services;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Services
+namespace IstLight.UnitTests.Services
 {
     public class TickerSearchResultTests
     {

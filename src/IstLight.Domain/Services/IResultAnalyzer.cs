@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IstLight.Domain.Simulation;
+using IstLight.Simulation;
 
-namespace IstLight.Domain.Services
+namespace IstLight.Services
 {
     public interface IResultAnalyzer : IRepositoryItem
     {

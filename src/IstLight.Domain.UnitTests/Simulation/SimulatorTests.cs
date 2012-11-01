@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Simulation;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Extensions;
+using IstLight.Simulation;
+using IstLight.Synchronization;
+using IstLight.Extensions;
 using Moq;
 using Xunit;
-using IstLight.Domain.Settings;
-using IstLight.Domain.Strategy;
+using IstLight.Settings;
+using IstLight.Strategy;
 using System.Threading;
 
-namespace IstLight.Domain.UnitTests.Simulation
+namespace IstLight.UnitTests.Simulation
 {
     public class SimulatorTests
     {

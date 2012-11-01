@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain;
-using IstLight.Domain.Services;
-using IstLight.Domain.Extensions;
+using IstLight;
+using IstLight.Services;
+using IstLight.Extensions;
 
 namespace IstLight.Scripting.Repositories
 {

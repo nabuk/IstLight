@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Strategy;
+using IstLight.Strategy;
 
-namespace IstLight.Domain.Extensions
+namespace IstLight.Extensions
 {
     public static class IQuoteContextExtensions
     {

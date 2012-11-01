@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Extensions;
+using IstLight.Synchronization;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.Simulation
+namespace IstLight.Simulation
 {
     public class SimulationResultQuote : IDate
     {

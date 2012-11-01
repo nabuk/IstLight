@@ -7,7 +7,7 @@ using Ploeh.AutoFixture.Kernel;
 using System.Reflection;
 using Ploeh.AutoFixture.AutoMoq;
 
-namespace IstLight.Domain.UnitTests.Settings
+namespace IstLight.UnitTests.Settings
 {
     public partial class SettingPropertyProvider : IEnumerable<object[]>
     {

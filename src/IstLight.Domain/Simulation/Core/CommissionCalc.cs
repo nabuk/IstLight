@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Settings;
+using IstLight.Settings;
 
-namespace IstLight.Domain.Simulation.Core
+namespace IstLight.Simulation.Core
 {
     public static class CommissionCalc
     {

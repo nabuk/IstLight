@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Xunit;
 using Moq;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.UnitTests.Extensions
+namespace IstLight.UnitTests.Extensions
 {
     public class GeneralExtensionsTests
     {

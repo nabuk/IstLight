@@ -5,7 +5,7 @@ using System.Text;
 using Xunit;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class PeriodTests
     {

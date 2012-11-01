@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using IstLight.Domain;
-using IstLight.Domain.Extensions;
+using IstLight;
+using IstLight.Extensions;
 using Moq;
 using Xunit;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     
     public class QuoteListTests

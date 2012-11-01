@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Xunit;
 using Ploeh.AutoFixture;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class MultiQuoteListTests
     {

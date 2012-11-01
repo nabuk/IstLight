@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit.Extensions;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 using Moq;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class QuoteListDataAttribute : DataAttribute
     {

@@ -5,12 +5,12 @@ using System.Text;
 using Xunit;
 using Xunit.Extensions;
 using System.Reflection;
-using IstLight.Domain.Settings;
+using IstLight.Settings;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.Kernel;
 
-namespace IstLight.Domain.UnitTests.Settings
+namespace IstLight.UnitTests.Settings
 {
     public class SimulationSettingsTests
     {

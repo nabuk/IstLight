@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IstLight.Domain.Strategy
+namespace IstLight.Strategy
 {
     public interface IWalletContext
     {

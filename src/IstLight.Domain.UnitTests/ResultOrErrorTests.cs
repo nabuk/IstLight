@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Services;
+using IstLight.Services;
 using Xunit;
 using Ploeh.AutoFixture;
 using Xunit.Extensions;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public abstract class ResultOrErrorTests<T>
     {

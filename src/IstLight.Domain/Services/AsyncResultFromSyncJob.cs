@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace IstLight.Domain.Services
+namespace IstLight.Services
 {
     public class AsyncResultFromSyncJob<T> : IAsyncResult<T>, IDisposable
     {

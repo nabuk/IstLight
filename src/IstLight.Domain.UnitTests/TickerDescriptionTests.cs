@@ -5,10 +5,10 @@ using System.Text;
 using Xunit;
 using Xunit.Extensions;
 using Ploeh.AutoFixture.Xunit;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 using Ploeh.AutoFixture;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class TickerDescriptionTests
     {

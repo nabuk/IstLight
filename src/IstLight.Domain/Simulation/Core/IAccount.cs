@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IstLight.Domain.Simulation.Core
+namespace IstLight.Simulation.Core
 {
     public interface IAccount
     {

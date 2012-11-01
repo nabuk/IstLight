@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Settings;
+using IstLight.Settings;
 
-namespace IstLight.Domain.Synchronization
+namespace IstLight.Synchronization
 {
     public static class SimpleTickerQuoteFactory
     {

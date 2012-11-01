@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IstLight.Domain.Services
+namespace IstLight.Services
 {
     public interface ITickerTransformer : IRepositoryItem
     {

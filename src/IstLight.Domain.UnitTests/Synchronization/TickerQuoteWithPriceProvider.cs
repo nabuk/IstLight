@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.Settings;
+using IstLight.Synchronization;
+using IstLight.Settings;
 
-namespace IstLight.Domain.UnitTests.Synchronization
+namespace IstLight.UnitTests.Synchronization
 {
     public class TickerQuoteWithPriceProvider : IEnumerable<object[]>
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.Settings
+namespace IstLight.Settings
 {
     public class SimulationSettingsImmutableDecorator : ISimulationSettings
     {

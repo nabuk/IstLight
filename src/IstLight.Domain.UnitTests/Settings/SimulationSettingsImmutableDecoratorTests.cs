@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Settings;
+using IstLight.Settings;
 using Moq;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Settings
+namespace IstLight.UnitTests.Settings
 {
     public class SimulationSettingsImmutableDecoratorTests
     {

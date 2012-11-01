@@ -1,4 +1,4 @@
-﻿using IstLight.Domain;
+﻿using IstLight;
 
 namespace IstLight.Scripting
 {

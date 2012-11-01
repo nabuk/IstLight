@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using IstLight.Domain;
-using IstLight.Domain.Extensions;
+using IstLight;
+using IstLight.Extensions;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using System.Collections.ObjectModel;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Extensions
+namespace IstLight.UnitTests.Extensions
 {
     public abstract class IReadOnlyListExtensionsTests<T>
     {

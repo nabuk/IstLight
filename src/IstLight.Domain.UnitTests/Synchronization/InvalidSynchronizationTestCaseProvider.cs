@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Settings;
+using IstLight.Settings;
 
-using IstLight.Domain.Extensions;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.UnitTests.Synchronization
+namespace IstLight.UnitTests.Synchronization
 {
     public class InvalidSynchronizationTestCaseProvider : IEnumerable<object[]>
     {

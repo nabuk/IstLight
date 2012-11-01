@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using IstLight.Domain;
+using IstLight;
 using Xunit.Extensions;
 using Ploeh.AutoFixture;
 using System.Collections.ObjectModel;
 using Ploeh.AutoFixture.AutoMoq;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public abstract class ProxiedReadOnlyListTests<T>
     {

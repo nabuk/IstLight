@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain.Extensions;
-using IstLight.Domain.Settings;
-using IstLight.Domain.Simulation;
-using IstLight.Domain.Synchronization;
-using IstLight.Domain.UnitTests.Synchronization;
+using IstLight.Extensions;
+using IstLight.Settings;
+using IstLight.Simulation;
+using IstLight.Synchronization;
+using IstLight.UnitTests.Synchronization;
 using Xunit;
 
-namespace IstLight.Domain.UnitTests.Simulation
+namespace IstLight.UnitTests.Simulation
 {
     public class SimulationResultTests
     {

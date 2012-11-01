@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain;
+using IstLight;
 using Xunit;
 using Ploeh.AutoFixture;
 using Xunit.Extensions;
 using Ploeh.AutoFixture.Xunit;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public class TickerQuoteTests
     {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight.Domain;
-using IstLight.Domain.Settings;
-using IstLight.Domain.Extensions;
+using IstLight;
+using IstLight.Settings;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.Synchronization
+namespace IstLight.Synchronization
 {
     public static class SyncTickersFactory
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using IstLight.Domain.Settings;
-using IstLight.Domain.Strategy;
-using IstLight.Domain.Extensions;
+using IstLight.Settings;
+using IstLight.Strategy;
+using IstLight.Extensions;
 
-namespace IstLight.Domain.Simulation.Core
+namespace IstLight.Simulation.Core
 {
     public class WalletContext : IWalletContext
     {

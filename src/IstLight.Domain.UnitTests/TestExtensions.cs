@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using IstLight.Domain.Extensions;
-using IstLight.Domain.Synchronization;
+using IstLight.Extensions;
+using IstLight.Synchronization;
 
-namespace IstLight.Domain.UnitTests
+namespace IstLight.UnitTests
 {
     public static class Ext
     {

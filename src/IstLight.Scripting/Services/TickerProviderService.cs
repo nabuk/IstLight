@@ -11,21 +11,21 @@ namespace IstLight.Scripting.Services
     {
         public TickerProviderService(IScriptService scripts) : base(scripts) { }
 
-        protected override ResultOrError<ITickerProvider> CreateInstance(Script script)
+        protected override ValueOrError<ITickerProvider> CreateInstance(Script script)
         {
             Exception error = null;
             var executor = new ParallelScriptExecutor(script, out error);
             if (error != null)
             {
                 executor.Dispose();
-                return new ResultOrError<ITickerProvider> { Error = error };
+                return new ValueOrError<ITickerProvider> { Error = error };
             }
             if (!executor.VariableExists("Get"))
             {
                 executor.Dispose();
-                return new ResultOrError<ITickerProvider> { Error = new ScriptException(script, "\"Get\" function not defined.") };
+                return new ValueOrError<ITickerProvider> { Error = new ScriptException(script, "\"Get\" function not defined.") };
             }
-            return new ResultOrError<ITickerProvider> { Result = new TickerProvider(executor) };
+            return new ValueOrError<ITickerProvider> { Value = new TickerProvider(executor) };
         }
     }
 }

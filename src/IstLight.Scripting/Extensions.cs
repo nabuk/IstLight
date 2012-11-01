@@ -9,12 +9,12 @@ namespace IstLight.Scripting
 {
     public static class Extensions
     {
-        public static ResultOrError<T> SafeExecute<T>(this ScriptEngineBase scriptEngine, Func<ScriptEngineBase, dynamic> job)
+        public static ValueOrError<T> SafeExecute<T>(this ScriptEngineBase scriptEngine, Func<ScriptEngineBase, dynamic> job)
         {
             T result;
             try { result = job(scriptEngine); }
-            catch (Exception ex) { return new ResultOrError<T> { Error = ex }; }
-            return new ResultOrError<T> { Result = result };
+            catch (Exception ex) { return new ValueOrError<T> { Error = ex }; }
+            return new ValueOrError<T> { Value = result };
         }
     }
 }

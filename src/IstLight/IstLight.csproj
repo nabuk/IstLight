@@ -49,7 +49,7 @@
     <Compile Include="Services\ITickerProviderService.cs" />
     <Compile Include="Services\ITickerService.cs" />
     <Compile Include="Services\ITickerTransformer.cs" />
-    <Compile Include="ResultOrError.cs" />
+    <Compile Include="ValueOrError.cs" />
     <Compile Include="Services\ITickerTransformerService.cs" />
     <Compile Include="Services\RawTicker.cs" />
     <Compile Include="Services\TickerSearchResult.cs" />

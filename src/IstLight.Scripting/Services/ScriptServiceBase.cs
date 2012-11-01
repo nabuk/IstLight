@@ -14,7 +14,7 @@ namespace IstLight.Scripting.Services
     {
         private readonly IScriptService scripts;
 
-        protected abstract ResultOrError<T> CreateInstance(Script script);
+        protected abstract ValueOrError<T> CreateInstance(Script script);
 
         public ScriptServiceBase(IScriptService scripts)
         {

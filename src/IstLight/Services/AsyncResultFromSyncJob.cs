@@ -10,14 +10,14 @@ namespace IstLight.Services
 {
     public class AsyncResultFromSyncJob<T> : IAsyncResult<T>, IDisposable
     {
-        private Func<ResultOrError<T>> synchronousJob;
+        private Func<ValueOrError<T>> synchronousJob;
         private readonly ManualResetEvent completedEvent = new ManualResetEvent(false);
         private readonly ConcurrentBag<WeakReference> completionCallbacks = new ConcurrentBag<WeakReference>();
 
         private void OnCompletion(IAsyncResult ar)
         {
             var jobResult = synchronousJob.EndInvoke(ar);
-            this.Result = jobResult.Result;
+            this.Result = jobResult.Value;
             this.Error = jobResult.Error;
             this.completedEvent.Set();
 
@@ -35,7 +35,7 @@ namespace IstLight.Services
                     Task.Factory.StartNew(() => callback(this));
         }
 
-        public AsyncResultFromSyncJob(Func<ResultOrError<T>> synchronousJob)
+        public AsyncResultFromSyncJob(Func<ValueOrError<T>> synchronousJob)
         {
             this.synchronousJob = synchronousJob;
             synchronousJob.BeginInvoke(OnCompletion, null);
@@ -70,7 +70,7 @@ namespace IstLight.Services
 
     public static class AsyncResultExtensions
     {
-        public static AsyncResultFromSyncJob<T> AsAsyncJob<T>(this Func<ResultOrError<T>> synchronousJob)
+        public static AsyncResultFromSyncJob<T> AsAsyncJob<T>(this Func<ValueOrError<T>> synchronousJob)
         {
             return new AsyncResultFromSyncJob<T>(synchronousJob);
         }

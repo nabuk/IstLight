@@ -9,16 +9,15 @@ namespace IstLight.Scripting.Services
 {
     public class TickerConverter : BaseScriptServiceItem, ITickerConverter
     {
-        public TickerConverter(ParallelScriptExecutor executor) : base(executor) { }
+        public TickerConverter(string format, ParallelScriptExecutor executor) : base(executor)
+        {
+            this.Format = format;
+        }
 
         public string Format
         {
-            get
-            {
-                var resultOrError = executor.SafeExecute<string>(engine => engine.GetVariable("Format"));
-                if (resultOrError.Error != null) throw resultOrError.Error;
-                return resultOrError.Result;
-            }
+            get;
+            private set;
         }
 
         public IAsyncResult<Ticker> Read(RawTicker rawTicker)

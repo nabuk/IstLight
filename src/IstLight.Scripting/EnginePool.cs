@@ -21,61 +21,61 @@ namespace IstLight.Scripting
             this.script = script;
         }
 
-        private ResultOrError<ScriptEngineBase> CreateEngine()
+        private ValueOrError<ScriptEngineBase> CreateEngine()
         {
             ScriptEngineBase engine;
 
             if ((engine = ScriptEngineFactory.TryCreateEngine(script.Extension)) == null)
-                return new ResultOrError<ScriptEngineBase> { Error = new ArgumentException("Invalid script extension: " + script.Extension) };
+                return new ValueOrError<ScriptEngineBase> { Error = new ArgumentException("Invalid script extension: " + script.Extension) };
 
             engine.AddSearchPaths(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Ticker)).Location));
 
             if (!engine.SetScript(script.Content) || !engine.Execute())
-                return new ResultOrError<ScriptEngineBase>
+                return new ValueOrError<ScriptEngineBase>
                     { Error = new InvalidOperationException(string.Format("{0}.{1}: {2}", script.Name, script.Extension, engine.LastError)) };
 
-            return new ResultOrError<ScriptEngineBase> { Result = engine };
+            return new ValueOrError<ScriptEngineBase> { Value = engine };
         }
 
-        private ResultOrError<ScriptEngineBase> TakeFromPoolOrError()
+        private ValueOrError<ScriptEngineBase> TakeFromPoolOrError()
         {
             ScriptEngineBase engine;
             if (!pool.TryTake(out engine))
             {
                 var engineOrError = CreateEngine();
-                if (engineOrError.Error != null)
-                    return new ResultOrError<ScriptEngineBase> { Error = engineOrError.Error };
-                engine = engineOrError.Result;
+                if (engineOrError.IsError)
+                    return new ValueOrError<ScriptEngineBase> { Error = engineOrError.Error };
+                engine = engineOrError.Value;
             }
-            return new ResultOrError<ScriptEngineBase> { Result = engine };
+            return new ValueOrError<ScriptEngineBase> { Value = engine };
         }
 
-        public ResultOrError<bool> AddEngineToPool()
+        public ValueOrError<bool> AddEngineToPool()
         {
             var engineOrError = CreateEngine();
-            if (engineOrError.Error != null)
-                return new ResultOrError<bool> { Error = engineOrError.Error };
-            pool.Add(engineOrError.Result);
-            return new ResultOrError<bool> { Result = true };
+            if (engineOrError.IsError)
+                return new ValueOrError<bool> { Error = engineOrError.Error };
+            pool.Add(engineOrError.Value);
+            return new ValueOrError<bool> { Value = true };
         }
 
         public T Execute<T>(Func<ScriptEngineBase,T> job)
         {
             var engineOrError = TakeFromPoolOrError();
-            if(engineOrError.Error != null)
+            if(engineOrError.IsError)
                 throw engineOrError.Error;
-            return job(engineOrError.Result);
+            return job(engineOrError.Value);
         }
 
-        public ResultOrError<T> SafeExecute<T>(Func<ScriptEngineBase, dynamic> job)
+        public ValueOrError<T> SafeExecute<T>(Func<ScriptEngineBase, dynamic> job)
         {
             var engineOrError = TakeFromPoolOrError();
-            if (engineOrError.Error != null)
-                return new ResultOrError<T> { Error = engineOrError.Error };
-            ScriptEngineBase engine = engineOrError.Result;
+            if (engineOrError.IsError)
+                return new ValueOrError<T> { Error = engineOrError.Error };
+            ScriptEngineBase engine = engineOrError.Value;
 
             var executeResult = engine.SafeExecute<T>(job);
-            if (executeResult.Error != null)
+            if (executeResult.IsError)
                 pool.Add(engine);
             else
                 engine.Dispose();

@@ -9,16 +9,14 @@ namespace IstLight.Scripting.Services
 {
     public class ResultAnalyzer : BaseScriptServiceItem, IResultAnalyzer
     {
-        public ResultAnalyzer(ParallelScriptExecutor executor) : base(executor) { }
+        public ResultAnalyzer(string category, ParallelScriptExecutor executor) : base(executor)
+        {
+            this.Category = category;
+        }
 
         public string Category
         {
-            get
-            {
-                var resultOrError = executor.SafeExecute<string>(engine => engine.GetVariable("Category"));
-                if (resultOrError.Error != null) throw resultOrError.Error;
-                return resultOrError.Result;
-            }
+            get; private set;
         }
 
         public IAsyncResult<string> Analyze(SimulationResult result)

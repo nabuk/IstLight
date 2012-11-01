@@ -11,29 +11,30 @@ namespace IstLight.Scripting.Services
     {
         public ResultAnalyzerService(IScriptService scripts) : base(scripts) { }
 
-        protected override ResultOrError<IResultAnalyzer> CreateInstance(Script script)
+        protected override ValueOrError<IResultAnalyzer> CreateInstance(Script script)
         {
             Exception error = null;
             var executor = new ParallelScriptExecutor(script, out error);
             if (error != null)
             {
                 executor.Dispose();
-                return new ResultOrError<IResultAnalyzer> { Error = error };
+                return new ValueOrError<IResultAnalyzer> { Error = error };
             }
 
             if (!executor.VariableExists("Analyze"))
             {
                 executor.Dispose();
-                return new ResultOrError<IResultAnalyzer> { Error = new ScriptException(script, "\"Analyze\" function not defined.") };
+                return new ValueOrError<IResultAnalyzer> { Error = new ScriptException(script, "\"Analyze\" function not defined.") };
             }
 
-            if (!executor.VariableExists("Category"))
+            var categoryOrError = executor.SafeExecute<string>(engine => engine.GetVariable("Category"));
+            if (categoryOrError.IsError)
             {
                 executor.Dispose();
-                return new ResultOrError<IResultAnalyzer> { Error = new ScriptException(script, "\"Category\" variable not defined.") };
+                return new ValueOrError<IResultAnalyzer> { Error = new ScriptException(script, "\"Category\" variable is not defined or has wrong type.") };
             }
 
-            return new ResultOrError<IResultAnalyzer> { Result = new ResultAnalyzer(executor) };
+            return new ValueOrError<IResultAnalyzer> { Value = new ResultAnalyzer(categoryOrError.Value,executor) };
         }
     }
 }

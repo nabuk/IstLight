@@ -12,23 +12,23 @@ namespace IstLight.Scripting.Services
     {
         public TickerTransformerService(IScriptService scripts) : base(scripts) { }
 
-        protected override ResultOrError<ITickerTransformer> CreateInstance(Script script)
+        protected override ValueOrError<ITickerTransformer> CreateInstance(Script script)
         {
             Exception error = null;
             var executor = new ParallelScriptExecutor(script, out error);
             if (error != null)
             {
                 executor.Dispose();
-                return new ResultOrError<ITickerTransformer> { Error = error };
+                return new ValueOrError<ITickerTransformer> { Error = error };
             }
 
             if (!executor.VariableExists("Transform"))
             {
                 executor.Dispose();
-                return new ResultOrError<ITickerTransformer> { Error = new ScriptException(script, "\"Transform\" function not defined.") };
+                return new ValueOrError<ITickerTransformer> { Error = new ScriptException(script, "\"Transform\" function not defined.") };
             }
 
-            return new ResultOrError<ITickerTransformer> { Result = new TickerTransformer(executor) };
+            return new ValueOrError<ITickerTransformer> { Value = new TickerTransformer(executor) };
         }
     }
 }

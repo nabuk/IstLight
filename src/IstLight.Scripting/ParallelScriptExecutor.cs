@@ -28,7 +28,7 @@ namespace IstLight.Scripting
             return pool.Execute(engine => engine.ContainsVariable(variableName));
         }
 
-        public ResultOrError<T> SafeExecute<T>(Func<ScriptEngineBase, dynamic> job)
+        public ValueOrError<T> SafeExecute<T>(Func<ScriptEngineBase, dynamic> job)
         {
             return pool.SafeExecute<T>(job);
         }

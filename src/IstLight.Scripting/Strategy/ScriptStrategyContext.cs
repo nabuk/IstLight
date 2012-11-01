@@ -9,27 +9,53 @@ namespace IstLight.Scripting.Strategy
 {
     public class ScriptStrategyContext : StrategyBase
     {
-        private readonly Script script;
+        private readonly Script strategyScript;
+        private readonly IScriptService predefinedFunc;
         private ScriptEngineBase engine;
 
-        public ScriptStrategyContext(Script script)
+        public ScriptStrategyContext(Script strategyScript, IScriptService predefinedFunc)
         {
-            this.script = script;
+            this.strategyScript = strategyScript;
+            this.predefinedFunc = predefinedFunc;
         }
 
         public override bool Initialize()
         {
-            if ((engine = ScriptEngineFactory.TryCreateEngine(script.Extension)) == null)
+            if ((engine = ScriptEngineFactory.TryCreateEngine(strategyScript.Extension)) == null)
             {
-                lastError = string.Format("Script extension \"{0}\" is not valid.", script.Extension);
+                lastError = string.Format("Script extension \"{0}\" is not valid.", strategyScript.Extension);
                 return false;
             }
 
-            if (!engine.SetScript(script.Content))
-                return false;
+            var items = new KeyValuePair<string,dynamic>[]
+            {
+                new KeyValuePair<string,dynamic>("__quotes__", base.QuoteContext),
+                new KeyValuePair<string,dynamic>("__wallet__", base.WalletContext)
+            };
 
-            engine.SetVariable("quotes", base.QuoteContext);
-            engine.SetVariable("wallet", base.WalletContext);
+            foreach (var funcGroup in predefinedFunc.Load().GroupBy(x => x.Extension))
+                using (var groupEngine = ScriptEngineFactory.TryCreateEngine(funcGroup.Key))
+                {
+                    foreach (var item in items)
+                        groupEngine.SetVariable(item.Key, item.Value);
+
+                    foreach (var funcScript in funcGroup)
+                    {
+                        if (!groupEngine.SetScript(funcScript.Content) || !groupEngine.Execute())
+                        {
+                            lastError = string.Format("Predefined\\{0}.{1} error:{2}", funcScript.Name, funcScript.Extension, groupEngine.LastError);
+                            return false;
+                        }
+                    }
+
+                    items = engine.GetItems().ToArray();
+                }
+
+            foreach (var item in items)
+                engine.SetVariable(item.Key, item.Value);
+
+            if (!engine.SetScript(strategyScript.Content))
+                return false;
 
             return false;
         }

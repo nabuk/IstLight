@@ -43,7 +43,7 @@ namespace IstLight.Scripting.Strategy
                     {
                         if (!groupEngine.SetScript(funcScript.Content) || !groupEngine.Execute())
                         {
-                            lastError = string.Format("Predefined\\{0}.{1} error:{2}", funcScript.Name, funcScript.Extension, groupEngine.LastError);
+                            lastError = string.Format("Predefined script {0}.{1} error: {2}", funcScript.Name, funcScript.Extension, groupEngine.LastError);
                             return false;
                         }
                     }

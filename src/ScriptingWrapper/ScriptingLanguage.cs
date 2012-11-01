@@ -1,5 +1,5 @@
 ﻿
-namespace Scripting
+namespace ScriptingWrapper
 {
     /// <summary>
     /// Supported script languages.

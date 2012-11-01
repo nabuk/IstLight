@@ -79,6 +79,9 @@
     </Compile>
     <Compile Include="QuoteListDataAttribute.cs" />
     <Compile Include="QuoteListTests.cs" />
+    <Compile Include="ResultOrErrorTests.cs" />
+    <Compile Include="Services\RawTickerTests.cs" />
+    <Compile Include="Services\TickerSearchResultTests.cs" />
     <Compile Include="Settings\SettingPropertyProvider.cs" />
     <Compile Include="Settings\SimulationSettingsImmutableDecoratorTests.cs" />
     <Compile Include="Settings\SimulationSettingsTests.cs" />

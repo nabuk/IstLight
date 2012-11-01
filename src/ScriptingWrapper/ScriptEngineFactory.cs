@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Scripting
+namespace ScriptingWrapper
 {
     /// <summary>
     /// Creates script engine wrappers

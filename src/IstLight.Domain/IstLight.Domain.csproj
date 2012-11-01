@@ -37,6 +37,18 @@
     <Compile Include="Extensions\IQuoteContextExtensions.cs" />
     <Compile Include="Extensions\IReadOnlyListExtensions.cs" />
     <Compile Include="MultiQuoteList.cs" />
+    <Compile Include="Services\AsyncResultFromSyncJob.cs" />
+    <Compile Include="Services\IAsyncResult.cs" />
+    <Compile Include="Services\IBaseRepository.cs" />
+    <Compile Include="Services\IRepositoryItem.cs" />
+    <Compile Include="Services\IResultAnalyzer.cs" />
+    <Compile Include="Services\ITickerConverter.cs" />
+    <Compile Include="Services\ITickerProvider.cs" />
+    <Compile Include="Services\ITickerTransformer.cs" />
+    <Compile Include="ResultOrError.cs" />
+    <Compile Include="Services\RawTicker.cs" />
+    <Compile Include="Services\Repositories.cs" />
+    <Compile Include="Services\TickerSearchResult.cs" />
     <Compile Include="Settings\ISimulationSettings.cs" />
     <Compile Include="Settings\OnlyRecentQuotesSetting.cs" />
     <Compile Include="Settings\SimulationSettingsImmutableDecorator.cs" />
@@ -56,10 +68,6 @@
     <Compile Include="Simulation\Core\WalletContext.cs" />
     <Compile Include="Strategy\StrategyBase.cs" />
     <Compile Include="Synchronization\SimplifiedTicker.cs" />
-    <Compile Include="Report\ScalarReport.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Report\SimulationResultReport.cs" />
     <Compile Include="Synchronization\Observation.cs" />
     <Compile Include="Synchronization\ISimpleTickerQuote.cs" />
     <Compile Include="Simulation\ISimulationContext.cs" />

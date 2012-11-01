@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Scripting;
+using ScriptingWrapper;
 using Xunit;
 using Xunit.Extensions;
 

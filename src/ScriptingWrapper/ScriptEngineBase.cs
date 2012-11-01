@@ -7,7 +7,7 @@ using System.Threading;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
 
-namespace Scripting
+namespace ScriptingWrapper
 {
     /// <summary>
     /// Script engine wrapper base class.

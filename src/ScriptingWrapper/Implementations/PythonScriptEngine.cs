@@ -1,5 +1,5 @@
 ﻿
-namespace Scripting.Implementations
+namespace ScriptingWrapper.Implementations
 {
     class PythonScriptEngine : ScriptEngineBase
     {

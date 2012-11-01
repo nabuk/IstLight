@@ -2,7 +2,7 @@
 
 namespace IstLight.Scripting
 {
-    public interface IScriptRepository
+    public interface IScriptService
     {
         IReadOnlyList<Script> Load();
     }

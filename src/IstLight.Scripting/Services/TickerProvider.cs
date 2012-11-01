@@ -6,9 +6,9 @@ using IstLight;
 using IstLight.Services;
 using IstLight.Extensions;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class TickerProvider : BaseScriptRepositoryItem, ITickerProvider
+    public class TickerProvider : BaseScriptServiceItem, ITickerProvider
     {
         public TickerProvider(ParallelScriptExecutor executor) : base(executor)
         {

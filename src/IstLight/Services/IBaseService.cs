@@ -5,8 +5,8 @@ using System.Text;
 
 namespace IstLight.Services
 {
-    public interface IBaseRepository<out T>
-        where T : IRepositoryItem
+    public interface IBaseService<out T>
+        where T : IServiceItem
     {
         IReadOnlyList<IAsyncResult<T>> Load();
     }

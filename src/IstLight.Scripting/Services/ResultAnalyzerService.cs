@@ -5,11 +5,11 @@ using System.Text;
 using IstLight;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class ResultAnalyzerRepository : ScriptRepositoryBase<IResultAnalyzer>, IResultAnalyzerRepository
+    public class ResultAnalyzerService : ScriptServiceBase<IResultAnalyzer>, IResultAnalyzerService
     {
-        public ResultAnalyzerRepository(IScriptRepository scripts) : base(scripts) { }
+        public ResultAnalyzerService(IScriptService scripts) : base(scripts) { }
 
         protected override ResultOrError<IResultAnalyzer> CreateInstance(Script script)
         {

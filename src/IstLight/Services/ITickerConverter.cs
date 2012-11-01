@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IstLight.Services
 {
-    public interface ITickerConverter : IRepositoryItem
+    public interface ITickerConverter : IServiceItem
     {
         string Format { get; }
 

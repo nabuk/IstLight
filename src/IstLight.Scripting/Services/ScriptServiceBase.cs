@@ -7,16 +7,16 @@ using IstLight.Extensions;
 using IstLight.Services;
 using ScriptingWrapper;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public abstract class ScriptRepositoryBase<T> : IBaseRepository<T>
-        where T : IRepositoryItem
+    public abstract class ScriptServiceBase<T> : IBaseService<T>
+        where T : IServiceItem
     {
-        private readonly IScriptRepository scripts;
+        private readonly IScriptService scripts;
 
         protected abstract ResultOrError<T> CreateInstance(Script script);
 
-        public ScriptRepositoryBase(IScriptRepository scripts)
+        public ScriptServiceBase(IScriptService scripts)
         {
             this.scripts = scripts;
         }

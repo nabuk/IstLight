@@ -5,11 +5,11 @@ using System.Text;
 using IstLight;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class TickerProviderRepository : ScriptRepositoryBase<ITickerProvider>, ITickerProviderRepository
+    public class TickerProviderService : ScriptServiceBase<ITickerProvider>, ITickerProviderService
     {
-        public TickerProviderRepository(IScriptRepository scripts) : base(scripts) { }
+        public TickerProviderService(IScriptService scripts) : base(scripts) { }
 
         protected override ResultOrError<ITickerProvider> CreateInstance(Script script)
         {

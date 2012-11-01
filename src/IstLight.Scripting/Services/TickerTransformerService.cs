@@ -6,11 +6,11 @@ using IstLight;
 using IstLight.Services;
 
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class TickerTransformerRepository : ScriptRepositoryBase<ITickerTransformer>, ITickerTransformerRepository
+    public class TickerTransformerService : ScriptServiceBase<ITickerTransformer>, ITickerTransformerService
     {
-        public TickerTransformerRepository(IScriptRepository scripts) : base(scripts) { }
+        public TickerTransformerService(IScriptService scripts) : base(scripts) { }
 
         protected override ResultOrError<ITickerTransformer> CreateInstance(Script script)
         {

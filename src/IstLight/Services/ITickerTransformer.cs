@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IstLight.Services
 {
-    public interface ITickerTransformer : IRepositoryItem
+    public interface ITickerTransformer : IServiceItem
     {
         IAsyncResult<Ticker> Transform(Ticker ticker);
     }

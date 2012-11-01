@@ -7,7 +7,7 @@ using ScriptingWrapper;
 
 namespace IstLight.Scripting
 {
-    public class ScriptsFromDirectory : IScriptRepository
+    public class ScriptsFromDirectory : IScriptService
     {
         private readonly string directoryPath;
 

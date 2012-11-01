@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IstLight.Services
 {
-    public interface IRepositoryItem : IDisposable
+    public interface IServiceItem : IDisposable
     {
         string Name { get; }
     }

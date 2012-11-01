@@ -5,11 +5,11 @@ using System.Text;
 using IstLight;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class TickerConverterRepository : ScriptRepositoryBase<ITickerConverter>, ITickerConverterRepository
+    public class TickerConverterService : ScriptServiceBase<ITickerConverter>, ITickerConverterService
     {
-        public TickerConverterRepository(IScriptRepository scripts) : base(scripts) { }
+        public TickerConverterService(IScriptService scripts) : base(scripts) { }
 
         protected override ResultOrError<ITickerConverter> CreateInstance(Script script)
         {

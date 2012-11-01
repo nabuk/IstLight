@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class BaseScriptRepositoryItem : IRepositoryItem
+    public class BaseScriptServiceItem : IServiceItem
     {
         protected readonly ParallelScriptExecutor executor;
-        public BaseScriptRepositoryItem(ParallelScriptExecutor executor)
+        public BaseScriptServiceItem(ParallelScriptExecutor executor)
         {
             this.executor = executor;
 

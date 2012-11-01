@@ -5,9 +5,9 @@ using System.Text;
 using IstLight.Services;
 using IstLight.Simulation;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class ResultAnalyzer : BaseScriptRepositoryItem, IResultAnalyzer
+    public class ResultAnalyzer : BaseScriptServiceItem, IResultAnalyzer
     {
         public ResultAnalyzer(ParallelScriptExecutor executor) : base(executor) { }
 

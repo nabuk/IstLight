@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IstLight.Services
 {
-    public interface ITickerProvider : IRepositoryItem
+    public interface ITickerProvider : IServiceItem
     {
         bool CanSearch { get; }
         IAsyncResult<IReadOnlyList<TickerSearchResult>> Search(string hint);

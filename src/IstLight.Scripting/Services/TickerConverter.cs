@@ -5,9 +5,9 @@ using System.Text;
 using IstLight;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Repositories
+namespace IstLight.Scripting.Services
 {
-    public class TickerConverter : BaseScriptRepositoryItem, ITickerConverter
+    public class TickerConverter : BaseScriptServiceItem, ITickerConverter
     {
         public TickerConverter(ParallelScriptExecutor executor) : base(executor) { }
 

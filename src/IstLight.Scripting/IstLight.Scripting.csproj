@@ -35,23 +35,23 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\BaseScriptRepositoryItem.cs" />
+    <Compile Include="Services\BaseScriptServiceItem.cs" />
     <Compile Include="EnginePool.cs" />
     <Compile Include="IScriptRepository.cs" />
     <Compile Include="ParallelScriptExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Repositories\ResultAnalyzer.cs" />
-    <Compile Include="Repositories\ResultAnalyzerRepository.cs" />
-    <Compile Include="Repositories\TickerConverter.cs" />
-    <Compile Include="Repositories\TickerTransformer.cs" />
+    <Compile Include="Services\ResultAnalyzer.cs" />
+    <Compile Include="Services\ResultAnalyzerService.cs" />
+    <Compile Include="Services\TickerConverter.cs" />
+    <Compile Include="Services\TickerTransformer.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="ScriptException.cs" />
-    <Compile Include="Repositories\ScriptRepositoryBase.cs" />
-    <Compile Include="Repositories\TickerProvider.cs" />
-    <Compile Include="Repositories\TickerProviderRepository.cs" />
-    <Compile Include="Repositories\TickerConverterRepository.cs" />
-    <Compile Include="Repositories\TickerTransformerRepository.cs" />
+    <Compile Include="Services\ScriptServiceBase.cs" />
+    <Compile Include="Services\TickerProvider.cs" />
+    <Compile Include="Services\TickerProviderService.cs" />
+    <Compile Include="Services\TickerConverterService.cs" />
+    <Compile Include="Services\TickerTransformerService.cs" />
     <Compile Include="ScriptsFromDirectory.cs" />
     <Compile Include="Strategy\ScriptStrategyContext.cs" />
   </ItemGroup>

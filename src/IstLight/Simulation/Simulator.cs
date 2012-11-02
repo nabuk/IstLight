@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using IstLight.Settings;
-using IstLight.Synchronization;
 using IstLight.Strategy;
-using System.Threading;
+using IstLight.Synchronization;
 
 
 namespace IstLight.Simulation

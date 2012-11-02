@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight.Strategy;
+﻿using IstLight.Strategy;
 using Xunit;
 
 namespace IstLight.UnitTests.Strategy

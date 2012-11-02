@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight;
 using Xunit;
-using Ploeh.AutoFixture;
 using Xunit.Extensions;
-using Ploeh.AutoFixture.Xunit;
 
 namespace IstLight.UnitTests
 {

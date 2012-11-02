@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using IstLight.Synchronization;
-using IstLight.Strategy;
 using IstLight.Settings;
-using IstLight.Extensions;
+using IstLight.Strategy;
+using IstLight.Synchronization;
 
 namespace IstLight.Simulation.Core
 {

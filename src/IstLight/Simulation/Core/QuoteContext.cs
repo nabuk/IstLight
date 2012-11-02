@@ -1,7 +1,6 @@
 ﻿using System;
-using IstLight.Synchronization;
-using IstLight.Extensions;
 using IstLight.Strategy;
+using IstLight.Synchronization;
 
 namespace IstLight.Simulation.Core
 {

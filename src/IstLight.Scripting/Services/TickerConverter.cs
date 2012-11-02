@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight;
-using IstLight.Services;
-
+﻿
 namespace IstLight.Services
 {
     public class TickerConverter : BaseScriptServiceItem, ITickerConverter

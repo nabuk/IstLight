@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
-using IstLight.Synchronization;
 using IstLight.Settings;
+using IstLight.Synchronization;
+using Xunit;
 using Xunit.Extensions;
 
 namespace IstLight.UnitTests.Synchronization

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight.Extensions;
 using IstLight.Simulation;
 using Xunit;
-using Xunit.Extensions;
 
 namespace IstLight.UnitTests.Simulation
 {

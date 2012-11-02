@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ScriptingWrapper;
+using Ploeh.AutoFixture;
 using Xunit;
 using Xunit.Extensions;
-using Ploeh.AutoFixture;
-using System.Threading;
 
 namespace ScriptingWrapper.UnitTests
 {

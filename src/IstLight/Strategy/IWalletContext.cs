@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace IstLight.Strategy
 {
     public interface IWalletContext

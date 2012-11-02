@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using IstLight.Extensions;
 using IstLight.Settings;
 using IstLight.Simulation;
 using IstLight.Synchronization;

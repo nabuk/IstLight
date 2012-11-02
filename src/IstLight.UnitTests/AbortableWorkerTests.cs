@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
-using Moq;
 using System.Threading;
+using Moq;
+using Xunit;
 
 namespace IstLight.UnitTests
 {

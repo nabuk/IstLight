@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace IstLight.Simulation.Core
 {
     public interface IAccount

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Xunit;
 using IstLight.Synchronization;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
-using IstLight.Extensions;
+using Xunit;
 using Xunit.Extensions;
 
 namespace IstLight.UnitTests.Synchronization

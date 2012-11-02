@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight.Simulation;
+﻿using IstLight.Simulation;
 using Xunit;
 
 namespace IstLight.UnitTests.Simulation

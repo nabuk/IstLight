@@ -1,5 +1,4 @@
-﻿using IstLight;
-
+﻿
 namespace IstLight
 {
     public interface IScriptService

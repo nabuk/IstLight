@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-using IstLight;
-using IstLight.Extensions;
 using Moq;
 using Xunit;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
 using Xunit.Extensions;
 
 namespace IstLight.UnitTests

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using IstLight.Simulation;
-using IstLight.Extensions;
-using Xunit.Extensions;
 using IstLight.Synchronization;
 using Xunit;
-using Moq;
-using System.Collections;
+using Xunit.Extensions;
 
 namespace IstLight.UnitTests.Simulation
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using IstLight.Extensions;
 using ScriptingWrapper;
 
 namespace IstLight

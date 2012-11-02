@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("IstLight")]
+[assembly: AssemblyTitle("IstLight.ViewModel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("IstLight")]
+[assembly: AssemblyProduct("IstLight.ViewModel")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("52682ca0-74f5-4940-a0d2-8b270a3bc64c")]
+[assembly: Guid("a2f217b5-59ed-41dc-a509-98464dafaf3e")]
 
 // Version information for an assembly consists of the following four values:
 //

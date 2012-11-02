@@ -1,6 +1,6 @@
 ﻿using IstLight;
 
-namespace IstLight.Scripting
+namespace IstLight
 {
     public interface IScriptService
     {

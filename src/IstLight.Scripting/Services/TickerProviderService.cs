@@ -5,7 +5,7 @@ using System.Text;
 using IstLight;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Services
+namespace IstLight.Services
 {
     public class TickerProviderService : ScriptServiceBase<ITickerProvider>, ITickerProviderService
     {

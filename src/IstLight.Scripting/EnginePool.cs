@@ -8,7 +8,7 @@ using System.Text;
 using IstLight;
 using ScriptingWrapper;
 
-namespace IstLight.Scripting
+namespace IstLight
 {
     public class EnginePool : IDisposable
     {

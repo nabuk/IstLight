@@ -5,7 +5,7 @@ using System.Text;
 using IstLight.Services;
 using IstLight.Simulation;
 
-namespace IstLight.Scripting.Services
+namespace IstLight.Services
 {
     public class ResultAnalyzer : BaseScriptServiceItem, IResultAnalyzer
     {

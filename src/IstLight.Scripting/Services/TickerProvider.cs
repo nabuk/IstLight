@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight;
-using IstLight.Services;
 using IstLight.Extensions;
 
-namespace IstLight.Scripting.Services
+namespace IstLight.Services
 {
     public class TickerProvider : BaseScriptServiceItem, ITickerProvider
     {

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using IstLight;
 using IstLight.Extensions;
 using ScriptingWrapper;
 
-namespace IstLight.Scripting
+namespace IstLight
 {
     public class ScriptsFromDirectory : IScriptService
     {

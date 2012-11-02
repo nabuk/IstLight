@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IstLight;
-using IstLight.Extensions;
-using IstLight.Services;
 using ScriptingWrapper;
+using IstLight.Extensions;
 
-namespace IstLight.Scripting.Services
+namespace IstLight.Services
 {
     public abstract class ScriptServiceBase<T> : IBaseService<T>
         where T : IServiceItem

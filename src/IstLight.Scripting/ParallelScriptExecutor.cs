@@ -6,7 +6,7 @@ using IstLight;
 using IstLight.Services;
 using ScriptingWrapper;
 
-namespace IstLight.Scripting
+namespace IstLight
 {
     public class ParallelScriptExecutor
     {

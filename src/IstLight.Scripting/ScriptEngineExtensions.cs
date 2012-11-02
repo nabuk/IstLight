@@ -5,9 +5,9 @@ using System.Text;
 using IstLight;
 using ScriptingWrapper;
 
-namespace IstLight.Scripting
+namespace IstLight
 {
-    public static class Extensions
+    public static class ScriptEngineExtensions
     {
         public static ValueOrError<T> SafeExecute<T>(this ScriptEngineBase scriptEngine, Func<ScriptEngineBase, dynamic> job)
         {

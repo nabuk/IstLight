@@ -6,7 +6,7 @@ using IstLight;
 using IstLight.Services;
 
 
-namespace IstLight.Scripting.Services
+namespace IstLight.Services
 {
     public class TickerTransformerService : ScriptServiceBase<ITickerTransformer>, ITickerTransformerService
     {

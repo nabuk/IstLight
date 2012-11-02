@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using IstLight.Services;
 
-namespace IstLight.Scripting.Services
+namespace IstLight.Services
 {
     public class BaseScriptServiceItem : IServiceItem
     {

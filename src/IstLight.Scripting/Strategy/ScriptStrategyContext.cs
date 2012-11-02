@@ -5,7 +5,7 @@ using System.Text;
 using IstLight.Strategy;
 using ScriptingWrapper;
 
-namespace IstLight.Scripting.Strategy
+namespace IstLight.Strategy
 {
     public class ScriptStrategyContext : StrategyBase
     {

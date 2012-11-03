@@ -2,9 +2,9 @@
 
 namespace IstLight.Services
 {
-    public class ResultAnalyzerService : ScriptServiceBase<IResultAnalyzer>, IResultAnalyzerService
+    public class ResultAnalyzerService : ScriptAsyncLoadService<IResultAnalyzer>
     {
-        public ResultAnalyzerService(IScriptService scripts) : base(scripts) { }
+        public ResultAnalyzerService(IScriptLoadService scripts) : base(scripts) { }
 
         protected override ValueOrError<IResultAnalyzer> CreateInstance(Script script)
         {

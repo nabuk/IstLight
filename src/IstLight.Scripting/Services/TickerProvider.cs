@@ -2,7 +2,7 @@
 
 namespace IstLight.Services
 {
-    public class TickerProvider : BaseScriptServiceItem, ITickerProvider
+    public class TickerProvider : ScriptNamedItemBase, ITickerProvider
     {
         public TickerProvider(ParallelScriptExecutor executor) : base(executor)
         {

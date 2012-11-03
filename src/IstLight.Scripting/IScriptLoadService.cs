@@ -1,7 +1,7 @@
 ﻿
 namespace IstLight
 {
-    public interface IScriptService
+    public interface IScriptLoadService
     {
         IReadOnlyList<Script> Load();
     }

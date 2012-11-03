@@ -1,7 +1,7 @@
 ﻿
 namespace IstLight.Services
 {
-    public class TickerConverter : BaseScriptServiceItem, ITickerConverter
+    public class TickerConverter : ScriptNamedItemBase, ITickerConverter
     {
         public TickerConverter(string format, ParallelScriptExecutor executor) : base(executor)
         {

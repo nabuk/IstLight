@@ -1,10 +1,10 @@
 ﻿
 namespace IstLight.Services
 {
-    public class BaseScriptServiceItem : IServiceItem
+    public class ScriptNamedItemBase : INamedItem
     {
         protected readonly ParallelScriptExecutor executor;
-        public BaseScriptServiceItem(ParallelScriptExecutor executor)
+        public ScriptNamedItemBase(ParallelScriptExecutor executor)
         {
             this.executor = executor;
 

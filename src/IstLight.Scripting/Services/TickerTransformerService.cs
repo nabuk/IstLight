@@ -3,9 +3,9 @@
 
 namespace IstLight.Services
 {
-    public class TickerTransformerService : ScriptServiceBase<ITickerTransformer>, ITickerTransformerService
+    public class TickerTransformerService : ScriptAsyncLoadService<ITickerTransformer>
     {
-        public TickerTransformerService(IScriptService scripts) : base(scripts) { }
+        public TickerTransformerService(IScriptLoadService scripts) : base(scripts) { }
 
         protected override ValueOrError<ITickerTransformer> CreateInstance(Script script)
         {

@@ -1,8 +1,8 @@
 ﻿
 namespace IstLight.Services
 {
-    public interface IBaseService<out T>
-        where T : IServiceItem
+    public interface IAsyncLoadService<out T>
+        where T : INamedItem
     {
         IReadOnlyList<IAsyncResult<T>> Load();
     }

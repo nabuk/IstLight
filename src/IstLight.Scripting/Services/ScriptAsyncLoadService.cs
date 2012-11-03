@@ -2,14 +2,14 @@
 
 namespace IstLight.Services
 {
-    public abstract class ScriptServiceBase<T> : IBaseService<T>
-        where T : IServiceItem
+    public abstract class ScriptAsyncLoadService<T> : IAsyncLoadService<T>
+        where T : INamedItem
     {
-        private readonly IScriptService scripts;
+        private readonly IScriptLoadService scripts;
 
         protected abstract ValueOrError<T> CreateInstance(Script script);
 
-        public ScriptServiceBase(IScriptService scripts)
+        public ScriptAsyncLoadService(IScriptLoadService scripts)
         {
             this.scripts = scripts;
         }

@@ -2,7 +2,7 @@
 
 namespace IstLight.Services
 {
-    public class ResultAnalyzer : BaseScriptServiceItem, IResultAnalyzer
+    public class ResultAnalyzer : ScriptNamedItemBase, IResultAnalyzer
     {
         public ResultAnalyzer(string category, ParallelScriptExecutor executor) : base(executor)
         {

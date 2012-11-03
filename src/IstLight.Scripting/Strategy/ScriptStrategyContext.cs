@@ -7,10 +7,10 @@ namespace IstLight.Strategy
     public class ScriptStrategyContext : StrategyBase
     {
         private readonly Script strategyScript;
-        private readonly IScriptService predefinedFunc;
+        private readonly IScriptLoadService predefinedFunc;
         private ScriptEngineBase engine;
 
-        public ScriptStrategyContext(Script strategyScript, IScriptService predefinedFunc)
+        public ScriptStrategyContext(Script strategyScript, IScriptLoadService predefinedFunc)
         {
             this.strategyScript = strategyScript;
             this.predefinedFunc = predefinedFunc;

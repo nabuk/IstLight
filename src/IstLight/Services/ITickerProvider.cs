@@ -1,7 +1,7 @@
 ﻿
 namespace IstLight.Services
 {
-    public interface ITickerProvider : IServiceItem
+    public interface ITickerProvider : INamedItem
     {
         bool CanSearch { get; }
         IAsyncResult<IReadOnlyList<TickerSearchResult>> Search(string hint);

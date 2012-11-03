@@ -2,7 +2,7 @@
 
 namespace IstLight.Services
 {
-    public interface IServiceItem : IDisposable
+    public interface INamedItem : IDisposable
     {
         string Name { get; }
     }

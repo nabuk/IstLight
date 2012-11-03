@@ -1,7 +1,7 @@
 ﻿
 namespace IstLight.Services
 {
-    public interface ITickerConverter : IServiceItem
+    public interface ITickerConverter : INamedItem
     {
         string Format { get; }
 

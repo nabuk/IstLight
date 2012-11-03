@@ -35,9 +35,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\BaseScriptServiceItem.cs" />
+    <Compile Include="Services\ScriptNamedItemBase.cs" />
     <Compile Include="EnginePool.cs" />
-    <Compile Include="IScriptRepository.cs" />
+    <Compile Include="IScriptLoadService.cs" />
     <Compile Include="ParallelScriptExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptEngineExtensions.cs" />
@@ -47,7 +47,7 @@
     <Compile Include="Services\TickerTransformer.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="ScriptException.cs" />
-    <Compile Include="Services\ScriptServiceBase.cs" />
+    <Compile Include="Services\ScriptAsyncLoadService.cs" />
     <Compile Include="Services\TickerProvider.cs" />
     <Compile Include="Services\TickerProviderService.cs" />
     <Compile Include="Services\TickerConverterService.cs" />

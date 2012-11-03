@@ -2,7 +2,7 @@
 
 namespace IstLight.Services
 {
-    public interface IResultAnalyzer : IServiceItem
+    public interface IResultAnalyzer : INamedItem
     {
         string Category { get; }
         IAsyncResult<string> Analyze(SimulationResult result);

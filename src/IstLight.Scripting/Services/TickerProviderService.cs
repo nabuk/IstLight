@@ -2,9 +2,9 @@
 
 namespace IstLight.Services
 {
-    public class TickerProviderService : ScriptServiceBase<ITickerProvider>, ITickerProviderService
+    public class TickerProviderService : ScriptAsyncLoadService<ITickerProvider>
     {
-        public TickerProviderService(IScriptService scripts) : base(scripts) { }
+        public TickerProviderService(IScriptLoadService scripts) : base(scripts) { }
 
         protected override ValueOrError<ITickerProvider> CreateInstance(Script script)
         {

@@ -8,42 +8,54 @@
   <ItemGroup>
     <ProjectToBuild Include="src\*.sln" />
   </ItemGroup>
+  
   <ItemGroup>
     <BuildOutput Include="src\ScriptingWrapper\bin\Release\ScriptingWrapper.dll" />
     <BuildOutput Include="src\IstLight\bin\Release\IstLight.dll" />
   </ItemGroup>
+  
   <PropertyGroup>
     <ReleaseFolder>bin</ReleaseFolder>
   </PropertyGroup>
+  
   <!--Optional Clean targets-->
   <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
+  
   <Target Name="CleanDebug">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
   </Target>
+  
   <Target Name="CleanRelease">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
   </Target>
+  
   <!--Build tasks-->
   <Target Name="DeleteReleaseFolder">
     <RemoveDir Directories="$(ReleaseFolder)" />
   </Target>
+  
   <Target Name="MakeReleaseFolder" DependsOnTargets="DeleteReleaseFolder">
     <MakeDir Directories="$(ReleaseFolder)" Condition="!Exists($(ReleaseFolder))" />
   </Target>
+  
   <Target Name="Build" DependsOnTargets="MakeReleaseFolder">
     <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
   </Target>
+
   <Target Name="Test" DependsOnTargets="Build">
     <Exec ContinueOnError="false" Command=".\lib\xunit-1.9.1\xunit.console.clr4.x86 .\src\AllTests.xunit /silent">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
     </Exec>
   </Target>
+  
   <Target Name="CopyToReleaseFolder" DependsOnTargets="Test">
     <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
+    <Exec Command="xcopy scripts bin\scripts /E /I" WorkingDirectory="$(DeployRoot)" />
   </Target>
+  
   <Target Name="ZipReleaseFiles" DependsOnTargets="CopyToReleaseFolder">
     <ItemGroup>
-      <FilesToZip Include="$(ReleaseFolder)\*.*" />
+      <FilesToZip Include="$(ReleaseFolder)\**\*" />
     </ItemGroup>
     <Zip Files="@(FilesToZip)"
          WorkingDirectory="$(ReleaseFolder)"

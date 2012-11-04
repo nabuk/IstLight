@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IstLight.ViewModel", "IstLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IstLight.Scripting.UnitTests", "IstLight.Scripting.UnitTests\IstLight.Scripting.UnitTests.csproj", "{9FCA18FC-5BA8-4AC5-8B4D-245F2EC95B58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IstLight.WpfClient", "IstLight.WpfClient\IstLight.WpfClient.csproj", "{8CFF4C58-9ADD-435A-AB7D-128253556A30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,16 @@ Global
 		{9FCA18FC-5BA8-4AC5-8B4D-245F2EC95B58}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9FCA18FC-5BA8-4AC5-8B4D-245F2EC95B58}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9FCA18FC-5BA8-4AC5-8B4D-245F2EC95B58}.Release|x86.ActiveCfg = Release|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8CFF4C58-9ADD-435A-AB7D-128253556A30}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

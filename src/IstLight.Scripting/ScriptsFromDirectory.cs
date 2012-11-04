@@ -22,7 +22,7 @@ namespace IstLight
                 new
                 {
                     Name = Path.GetFileNameWithoutExtension(filePath),
-                    Extension = Path.GetExtension(filePath),
+                    Extension = Path.GetExtension(filePath).Replace(".",""),
                     Path = filePath
                 })
                 .Where(x => allowedExtensions.Contains(x.Extension))

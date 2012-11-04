@@ -5,7 +5,7 @@ using System.Text;
 using IstLight.Services;
 using Ninject.Modules;
 
-namespace IstLight.WpfClient.Bootstrapper
+namespace IstLight.Bootstrapper
 {
     public class Bindings : NinjectModule
     {

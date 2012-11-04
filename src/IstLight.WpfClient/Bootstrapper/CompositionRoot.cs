@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using Ninject;
 
-namespace IstLight.WpfClient.Bootstrapper
+namespace IstLight.Bootstrapper
 {
     public class CompositionRoot : IDisposable
     {

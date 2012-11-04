@@ -131,9 +131,9 @@
       <Project>{f1f3e9e8-af56-4f14-9fdd-56e157ba1b97}</Project>
       <Name>IstLight.ViewModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IstLight\IstLight.csproj">
+    <ProjectReference Include="..\IstLight\IstLight.Domain.csproj">
       <Project>{55cec47d-6139-4e9c-91fb-445cac5844fc}</Project>
-      <Name>IstLight</Name>
+      <Name>IstLight.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

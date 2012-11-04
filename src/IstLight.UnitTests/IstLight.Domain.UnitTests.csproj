@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IstLight.UnitTests</RootNamespace>
-    <AssemblyName>IstLight.UnitTests</AssemblyName>
+    <AssemblyName>IstLight.Domain.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -115,9 +115,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IstLight\IstLight.csproj">
+    <ProjectReference Include="..\IstLight\IstLight.Domain.csproj">
       <Project>{55CEC47D-6139-4E9C-91FB-445CAC5844FC}</Project>
-      <Name>IstLight</Name>
+      <Name>IstLight.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

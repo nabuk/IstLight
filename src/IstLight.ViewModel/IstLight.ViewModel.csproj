@@ -53,9 +53,9 @@
     <Compile Include="Services\ITickerLocationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IstLight\IstLight.csproj">
+    <ProjectReference Include="..\IstLight\IstLight.Domain.csproj">
       <Project>{55cec47d-6139-4e9c-91fb-445cac5844fc}</Project>
-      <Name>IstLight</Name>
+      <Name>IstLight.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

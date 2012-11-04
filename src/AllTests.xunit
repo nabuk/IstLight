@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xunit>
   <assemblies>
-    <assembly filename="IstLight.UnitTests\bin\Release\IstLight.UnitTests.dll" shadow-copy="true" />
+    <assembly filename="IstLight.Domain.UnitTests\bin\Release\IstLight.Domain.UnitTests.dll" shadow-copy="true" />
     <assembly filename="IstLight.Scripting.UnitTests\bin\Release\IstLight.Scripting.UnitTests.dll" shadow-copy="true" />
     <assembly filename="ScriptingWrapper.UnitTests\bin\Release\ScriptingWrapper.UnitTests.dll" shadow-copy="true" />
   </assemblies>

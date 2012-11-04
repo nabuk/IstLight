@@ -116,6 +116,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,7 +132,7 @@
       <Project>{f1f3e9e8-af56-4f14-9fdd-56e157ba1b97}</Project>
       <Name>IstLight.ViewModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IstLight\IstLight.Domain.csproj">
+    <ProjectReference Include="..\IstLight.Domain\IstLight.Domain.csproj">
       <Project>{55cec47d-6139-4e9c-91fb-445cac5844fc}</Project>
       <Name>IstLight.Domain</Name>
     </ProjectReference>
@@ -139,7 +140,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)..\scripts $(TargetDir)scripts /E /I /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(SolutionDir)..\scripts $(TargetDir)scripts /E /I /Y /Q
+rd /S /Q $(TargetDir)lib
+md $(TargetDir)lib
+move /Y $(TargetDir)*.dll $(TargetDir)lib</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

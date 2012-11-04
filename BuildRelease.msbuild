@@ -2,22 +2,16 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CompleteBuild" ToolsVersion="4.0">
   <PropertyGroup>
     <MSBuildExtensionsPath>lib\MSBuildCommunityTasks</MSBuildExtensionsPath>
+    <ReleaseFolder>bin</ReleaseFolder>
+    <OutputPath>src\IstLight.WpfClient\bin\Release</OutputPath>
   </PropertyGroup>
   <UsingTask TaskName="MSBuild.Community.Tasks.Zip" AssemblyFile="$(MSBuildExtensionsPath)\MSBuild.Community.Tasks.dll" />
   
   <ItemGroup>
     <ProjectToBuild Include="src\*.sln" />
+    <!--<BuildOutput Include="$(OutputPath)\**\*" Exclude="$(OutputPath)\**\*.xml;$(OutputPath)\**\*vshost.*;$(OutputPath)\**\*.pdb" />-->
   </ItemGroup>
-  
-  <ItemGroup>
-    <BuildOutput Include="src\ScriptingWrapper\bin\Release\ScriptingWrapper.dll" />
-    <BuildOutput Include="src\IstLight\bin\Release\IstLight.dll" />
-  </ItemGroup>
-  
-  <PropertyGroup>
-    <ReleaseFolder>bin</ReleaseFolder>
-  </PropertyGroup>
-  
+
   <!--Optional Clean targets-->
   <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
   
@@ -49,10 +43,9 @@
   </Target>
   
   <Target Name="CopyToReleaseFolder" DependsOnTargets="Test">
-    <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
-    <Exec Command="xcopy scripts bin\scripts /E /I" WorkingDirectory="$(DeployRoot)" />
+    <Exec Command="xcopy $(OutputPath) bin /E /I /Y /exclude:ignoreInOutput.txt" WorkingDirectory="$(DeployRoot)" />
   </Target>
-  
+
   <Target Name="ZipReleaseFiles" DependsOnTargets="CopyToReleaseFolder">
     <ItemGroup>
       <FilesToZip Include="$(ReleaseFolder)\**\*" />

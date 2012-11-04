@@ -71,7 +71,7 @@ namespace IstLight
             ScriptEngineBase engine = engineOrError.Value;
 
             var executeResult = engine.SafeExecute<T>(job);
-            if (executeResult.IsError)
+            if (!executeResult.IsError)
                 pool.Add(engine);
             else
                 engine.Dispose();

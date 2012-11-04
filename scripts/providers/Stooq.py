@@ -2,11 +2,13 @@ import System
 from System import ArgumentException
 import clr
 clr.AddReference("System.Core")
+clr.AddReference("IstLight.Domain");
+from IstLight.Services import *
 from System.Collections.Generic import *
 from System.Net import *
-from System import DateTime,Double
+from System import DateTime,Double,String
 from System.Globalization import NumberStyles,CultureInfo
-
+from System.Linq import Enumerable
 clr.ImportExtensions(System.Linq)
 
 providerSiteUrl = "http://stooq.com"
@@ -52,6 +54,6 @@ def Search(hint):
     rawData = GetRawData(providerSiteUrl, ProviderGetTickersUrl(hint))
     rawData = rawData.Substring(14,rawData.Length - 17).Replace(oldValue = "<b>", newValue = "").Replace(oldValue = "</b>", newValue = "")
     rawData = rawData.Split("|").Select(lambda x: x.Split('~'))
-    rawData = rawData.Select(lambda x: (x[0], x[1] if x.Length > 1 else None, x[2] if x.Length > 2 else None)).ToList()
+    rawData = rawData.Select(lambda x: (x[0], x[1] if x.Length > 1 else String.Empty, x[2] if x.Length > 2 else None)).ToList()
     if(rawData.Count == 1 and rawData[0][0].Length == 0): rawData.Clear()
-    return rawData
+    return rawData.Select(lambda x: TickerSearchResult(x[0], x[1] + (String.Empty if String.IsNullOrWhiteSpace(x[2]) else ", Market: "+x[2]))).ToArray();

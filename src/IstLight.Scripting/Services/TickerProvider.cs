@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace IstLight.Services
 {
@@ -18,8 +19,9 @@ namespace IstLight.Services
         {
             if (!CanSearch) throw new InvalidOperationException("Cannot search");
             return executor.SafeExecuteAsync<IReadOnlyList<TickerSearchResult>>(engine =>
-                (engine.GetVariable("Search")(hint) as TickerSearchResult[]).AsReadOnlyList());
+                ((object[])engine.GetVariable("Search")(hint)).Cast<TickerSearchResult>().ToArray().AsReadOnlyList());
         }
+
         public IAsyncResult<Ticker> Get(string tickerName)
         {
             return executor.SafeExecuteAsync<Ticker>(engine => engine.GetVariable("Get")(tickerName));

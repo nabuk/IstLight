@@ -1,8 +1,23 @@
 ﻿<Window x:Class="IstLight.WpfClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"
+		Height="500" Width="800"
+		Background="{DynamicResource DefaultBackground}">
     <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition/>
+    		<RowDefinition Height="Auto"/>
+    	</Grid.RowDefinitions>
+    	<Menu x:Name="MainMenu" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
+    		<MenuItem x:Name="FileMenuItem" Header="File" Margin="0"/>
+    		<MenuItem x:Name="HelpMenuItem" Header="Help" Margin="0">
+    			<MenuItem x:Name="AboutMenuItem" Header="About"/>
+    		</MenuItem>
+    	</Menu>
+    	<DockPanel x:Name="MainWindowContent" LastChildFill="False" Margin="0" Grid.Row="1"/>
+    	<ContentPresenter x:Name="ErrorsPlaceholder" Margin="0" Grid.Row="2"/>
         
     </Grid>
 </Window>

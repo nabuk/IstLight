@@ -4,9 +4,10 @@ import clr
 clr.AddReference("System.Core")
 clr.AddReference("IstLight.Domain");
 from IstLight.Services import *
+from IstLight import *
 from System.Collections.Generic import *
 from System.Net import *
-from System import DateTime,Double,String
+from System import DateTime,Double,String, Array
 from System.Globalization import NumberStyles,CultureInfo
 from System.Linq import Enumerable
 clr.ImportExtensions(System.Linq)
@@ -42,12 +43,23 @@ def GetRawData(webUrl, fileUrl):
 		raise ApplicationException('No data')
 	return result
 
+def ExtractDate(x): return DateTime.Parse(x,CultureInfo.InvariantCulture)
+def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)
+def ExtractQuote(row):
+	date = ExtractDate(row[0])
+	open = ExtractDouble(row[1])
+	high = ExtractDouble(row[2])
+	low = ExtractDouble(row[3])
+	close = ExtractDouble(row[4])
+	volume = row[5] if row.Length > 5 else None
+	return TickerQuote(date,open,high,low,close,volume)
+
 #Download ticker
 def Get(ticker):
     rawData = GetRawData(providerSiteUrl, ProviderGetTickerDataUrl(ticker))
-    rawRows = rawData.Replace(oldValue = '\r', newValue = '').Split('\n').Skip(1).TakeWhile(lambda row: row.Length > 6).Select(lambda row: row.Split(',')[:2])
-    result = rawRows.Select(lambda row: (DateTime.Parse(row[0],CultureInfo.InvariantCulture),Double.Parse(row[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture))).ToList()
-    return result
+    rawRows = rawData.Replace(oldValue = '\r', newValue = '').Split('\n').Skip(1).TakeWhile(lambda row: row.Length > 6).Select(lambda row: row.Split(','))
+    quotes = Array[TickerQuote](rawRows.Select(lambda row: ExtractQuote(row)).ToArray()).AsReadOnlyList()
+    return Ticker(ticker,quotes)
 
 #Find available tickers
 def Search(hint):

@@ -51,14 +51,15 @@ def ExtractQuote(row):
 	high = ExtractDouble(row[2])
 	low = ExtractDouble(row[3])
 	close = ExtractDouble(row[4])
-	volume = row[5] if row.Length > 5 else None
-	return TickerQuote(date,open,high,low,close,volume)
+	volume = ExtractDouble(row[5]) if row.Length > 5 else None
+	return TickerQuote(date,open,close,high,low,volume)
 
 #Download ticker
 def Get(ticker):
     rawData = GetRawData(providerSiteUrl, ProviderGetTickerDataUrl(ticker))
     rawRows = rawData.Replace(oldValue = '\r', newValue = '').Split('\n').Skip(1).TakeWhile(lambda row: row.Length > 6).Select(lambda row: row.Split(','))
-    quotes = Array[TickerQuote](rawRows.Select(lambda row: ExtractQuote(row)).ToArray()).AsReadOnlyList()
+    quotes = Array[TickerQuote](rawRows.Select(lambda row: ExtractQuote(row)).ToArray())
+    quotes = IReadOnlyListExtensions.AsReadOnlyList(quotes)
     return Ticker(ticker,quotes)
 
 #Find available tickers
@@ -68,4 +69,5 @@ def Search(hint):
     rawData = rawData.Split("|").Select(lambda x: x.Split('~'))
     rawData = rawData.Select(lambda x: (x[0], x[1] if x.Length > 1 else String.Empty, x[2] if x.Length > 2 else None)).ToList()
     if(rawData.Count == 1 and rawData[0][0].Length == 0): rawData.Clear()
-    return rawData.Select(lambda x: TickerSearchResult(x[0], x[1] + (String.Empty if String.IsNullOrWhiteSpace(x[2]) else ", Market: "+x[2]))).ToArray();
+    searchResult = rawData.Select(lambda x: TickerSearchResult(x[0], x[1] + (String.Empty if String.IsNullOrWhiteSpace(x[2]) else ", Market: "+x[2])))
+    return Array[TickerSearchResult](searchResult.ToArray())

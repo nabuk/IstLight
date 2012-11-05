@@ -19,7 +19,7 @@ namespace IstLight.Services
         {
             if (!CanSearch) throw new InvalidOperationException("Cannot search");
             return executor.SafeExecuteAsync<IReadOnlyList<TickerSearchResult>>(engine =>
-                ((object[])engine.GetVariable("Search")(hint)).Cast<TickerSearchResult>().ToArray().AsReadOnlyList());
+                ((TickerSearchResult[])engine.GetVariable("Search")(hint)).AsReadOnlyList());
         }
 
         public IAsyncResult<Ticker> Get(string tickerName)

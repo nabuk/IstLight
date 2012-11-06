@@ -10,11 +10,13 @@ namespace IstLight
     {
         public TickerSearchResultViewModel(TickerSearchResult tickerSearchResult)
         {
-            this.TickerName = tickerSearchResult.TickerName;
-            this.TickerDescription = tickerSearchResult.TickerDescription;
+            this.Name = tickerSearchResult.Name;
+            this.Description = tickerSearchResult.Description;
+            this.Market = tickerSearchResult.Market;
         }
 
-        public string TickerName { get; private set; }
-        public string TickerDescription { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string Market { get; private set; }
     }
 }

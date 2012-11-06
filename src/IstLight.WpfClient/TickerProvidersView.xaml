@@ -7,12 +7,20 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
              mc:Ignorable="d" 
              d:DesignWidth="300" Height="25">
-    <DockPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <ComboBox
             ItemsSource="{Binding Providers, Mode=OneWay}"
             SelectedItem="{Binding SelectedProvider}"
             Foreground="White"
-            IsEnabled="False"
+            IsEnabled="{Binding CanChangeProvider}"
             MinWidth="100"
             DockPanel.Dock="Left">
             <ComboBox.ItemTemplate>
@@ -21,21 +29,33 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="tbTickerName" IsEnabled="{Binding SelectedProvider.CanSearch, FallbackValue=False}">
+        <TextBox x:Name="tbTickerName" Grid.Column="1"
+                 IsEnabled="{Binding CanSearch}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <cmd:EventToCommand
-                        Command="{Binding SelectedProvider.SearchCommand, Mode=OneWay}"
+                        Command="{Binding SearchCommand, Mode=OneWay}"
                         CommandParameter="{Binding Text,ElementName=tbTickerName,Mode=OneWay}"
                          />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TextBox.InputBindings>
                 <KeyBinding
-                    Command="{Binding SelectedProvider.DownloadCommand, Mode=OneWay}"
+                    Command="{Binding DownloadCommand, Mode=OneWay}"
                     CommandParameter="{Binding Text, ElementName=tbTickerName}"
                     Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-    </DockPanel>
+        <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False">
+            <ListView ItemsSource="{Binding SearchResults}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
+                        <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Popup>
+    </Grid>
 </UserControl>

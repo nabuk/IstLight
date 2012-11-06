@@ -4,16 +4,18 @@ namespace IstLight.Services
 {
     public class TickerSearchResult
     {
-        public TickerSearchResult(string tickerName, string tickerDescription)
+        public TickerSearchResult(string name, string description, string market)
         {
-            if (string.IsNullOrWhiteSpace(tickerName))
+            if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException("tickerName", "tickerName is null or empty.");
 
-            TickerName = tickerName;
-            TickerDescription = tickerDescription ?? "";
+            Name = name;
+            Description = description ?? "";
+            Market = market ?? "";
         }
 
-        public string TickerName { get; private set; }
-        public string TickerDescription { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string Market { get; private set; }
     }
 }

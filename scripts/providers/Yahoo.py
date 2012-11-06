@@ -7,16 +7,16 @@ from IstLight.Services import *
 from IstLight import *
 from System.Collections.Generic import *
 from System.Net import *
-from System import DateTime,Double,String, Array
+from System import DateTime,Double,String, Array, StringSplitOptions
 from System.Globalization import NumberStyles,CultureInfo
 from System.Text import Encoding
 from System.Linq import Enumerable
 clr.ImportExtensions(System.Linq)
 
-providerSiteUrl = "http://stooq.com"
-def ProviderGetTickerDataUrl(ticker): return "http://stooq.com/q/d/l/?s="+ticker+"&i=d"
-def ProviderGetTickersUrl(ticker): return "http://stooq.com/cmp/?q=" + ticker
-Name = "Stooq.com"
+providerSiteUrl = "http://ichart.yahoo.com"
+def ProviderGetTickerDataUrl(ticker): return "ichart.yahoo.com/table.csv?s="+ticker
+def ProviderGetTickersUrl(ticker): return "http://d.yimg.com/aq/autoc?query="+ticker+"&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks"
+Name = "Yahoo.com"
 
 class WebClientEx(WebClient):
 	def GetWebRequest(self,address):
@@ -46,6 +46,21 @@ def GetRawData(webUrl, fileUrl):
 		raise ApplicationException('No data')
 	return result
 
+def GetIndexesOf(input,c):
+	return input.Select(lambda x,i: (x,i)).Where(lambda x: x[0] == c).Select(lambda x: x[1])
+
+def AsPairs(collection):
+	return collection.Where(lambda x, i: i % 2 == 0).Zip(collection.Where(lambda y, j: (j + 1) % 2 == 0), lambda x1, x2: (x1,x2))
+
+def ExtractSearchResultFromLine(line):
+	items = AsPairs(GetIndexesOf(line, '"')).Select(lambda x: line[x[0]+1:][:x[1]-x[0]-1])
+	pairs = {}
+	for p in AsPairs(items): pairs[p[0]] = p[1]
+	symbol = pairs["symbol"]
+	desc = pairs["name"]
+	market = pairs.get("exchDisp", pairs.get("exch", String.Empty))
+	return TickerSearchResult(symbol,desc,market)
+
 def ExtractDate(x): return DateTime.Parse(x,CultureInfo.InvariantCulture)
 def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)
 def ExtractQuote(row):
@@ -68,10 +83,11 @@ def Get(ticker):
 #Find available tickers
 def Search(hint):
 	if(String.IsNullOrWhiteSpace(hint)): return Array[TickerSearchResult]([])
-	rawData = GetRawData(providerSiteUrl, ProviderGetTickersUrl(hint))
-	rawData = rawData.Substring(14,rawData.Length - 17).Replace(oldValue = "<b>", newValue = "").Replace(oldValue = "</b>", newValue = "")
-	rawData = rawData.Split("|").Select(lambda x: x.Split('~'))
-	rawData = rawData.Select(lambda x: (x[0], x[1] if x.Length > 1 else String.Empty, x[2] if x.Length > 2 else None)).ToList()
-	if(rawData.Count == 1 and rawData[0][0].Length == 0): rawData.Clear()
-	searchResult = rawData.Select(lambda x: TickerSearchResult(x[0], x[1], x[2]))
-	return Array[TickerSearchResult](searchResult.ToArray())
+	input = GetRawData(providerSiteUrl, ProviderGetTickersUrl(hint))
+	if input == None: return Array[TickerSearchResult]([])
+	start = input.IndexOf('[');
+	end = input.IndexOf(']');
+	if (start < 0 or end < 0): return Array[TickerSearchResult]([])
+	input = input[start+1:][:end-start-1] #input.Substring(start+1, end - start - 1);
+	input = input.Split(Array[str](["},{"]), StringSplitOptions.RemoveEmptyEntries).Select(lambda x: x.Replace("{", "")).Select(lambda x: x.Replace("}", ""))
+	return Array[TickerSearchResult](input.Select(lambda x: ExtractSearchResultFromLine(x)).ToArray())

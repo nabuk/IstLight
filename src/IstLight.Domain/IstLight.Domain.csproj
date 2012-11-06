@@ -38,6 +38,8 @@
     <Compile Include="Extensions\IReadOnlyListExtensions.cs" />
     <Compile Include="MultiQuoteList.cs" />
     <Compile Include="Services\AsyncResultFromSyncJob.cs" />
+    <Compile Include="Services\AsyncLoadValidService.cs" />
+    <Compile Include="Services\IAsyncLoadValidService.cs" />
     <Compile Include="Services\IAsyncResult.cs" />
     <Compile Include="Services\IAsyncLoadService.cs" />
     <Compile Include="Services\INamedItem.cs" />

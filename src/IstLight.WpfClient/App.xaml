@@ -5,8 +5,9 @@
          
     	<ResourceDictionary>
     		<ResourceDictionary.MergedDictionaries>
-    			<ResourceDictionary Source="Resources/ExpressionDark.xaml"/>
-    			<ResourceDictionary Source="Resources/CommonResourceDictionary.xaml"/>
+                <ResourceDictionary Source="Dictionaries/ExpressionDark.xaml"/>
+                <ResourceDictionary Source="Dictionaries/CommonResources.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Renderers.xaml"/>
     		</ResourceDictionary.MergedDictionaries>
     	</ResourceDictionary>
          

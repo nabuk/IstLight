@@ -11,6 +11,8 @@ namespace IstLight.Bootstrapper
     {
         public override void Load()
         {
+            Kernel.Bind<Action<Exception>>().ToMethod(x => ex => System.Windows.MessageBox.Show(ex.Message));
+
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>().To<TickerProviderService>();
             Kernel.Bind<IAsyncLoadService<ITickerConverter>>().To<TickerConverterService>();
             Kernel.Bind<IAsyncLoadService<ITickerTransformer>>().To<TickerTransformerService>();
@@ -24,6 +26,11 @@ namespace IstLight.Bootstrapper
                 .WhenInjectedInto<TickerTransformerService>().WithConstructorArgument("path", "scripts\\transformers");
             Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
                 .WhenInjectedInto<ResultAnalyzerService>().WithConstructorArgument("path", "scripts\\analyzers");
+
+
+            Kernel.Bind<IAsyncLoadValidService<ITickerProvider>>().To<AsyncLoadValidService<ITickerProvider>>();
+
+            Kernel.Bind<Action<TickerViewModel>>().ToMethod(x => t => System.Windows.MessageBox.Show("Loading :" + t.Name));
         }
     }
 }

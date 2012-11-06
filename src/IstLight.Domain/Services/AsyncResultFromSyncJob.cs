@@ -9,7 +9,7 @@ namespace IstLight.Services
     {
         private Func<ValueOrError<T>> synchronousJob;
         private readonly ManualResetEvent completedEvent = new ManualResetEvent(false);
-        private readonly ConcurrentBag<WeakReference> completionCallbacks = new ConcurrentBag<WeakReference>();
+        private readonly ConcurrentBag<Action<IAsyncResult<T>>> completionCallbacks = new ConcurrentBag<Action<IAsyncResult<T>>>();
 
         private void OnCompletion(IAsyncResult ar)
         {
@@ -24,12 +24,10 @@ namespace IstLight.Services
         }
         private void FireCallbacks()
         {
-            WeakReference wr;
             Action<IAsyncResult<T>> callback;
 
-            while (completionCallbacks.TryTake(out wr))
-                if ((callback = wr.Target as Action<IAsyncResult<T>>) != null)
-                    Task.Factory.StartNew(() => callback(this));
+            while (completionCallbacks.TryTake(out callback))
+                Task.Factory.StartNew(x => (x as Action<IAsyncResult<T>>)(this), callback);
         }
 
         public AsyncResultFromSyncJob(Func<ValueOrError<T>> synchronousJob)
@@ -50,7 +48,7 @@ namespace IstLight.Services
 
         public void AddCallback(Action<IAsyncResult<T>> callback)
         {
-            completionCallbacks.Add(new WeakReference(callback));
+            completionCallbacks.Add(callback);
             
             if(IsCompleted)
                 FireCallbacks();

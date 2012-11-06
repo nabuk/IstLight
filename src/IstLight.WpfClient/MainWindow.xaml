@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow"
 		Height="500" Width="800"
-		Background="{DynamicResource DefaultBackground}">
+		Background="{DynamicResource DefaultBackground}"
+        TextOptions.TextFormattingMode="Display">
     <Grid>
     	<Grid.RowDefinitions>
     		<RowDefinition Height="Auto"/>
@@ -16,7 +17,7 @@
     			<MenuItem x:Name="AboutMenuItem" Header="About"/>
     		</MenuItem>
     	</Menu>
-        <DockPanel x:Name="MainWindowContent" Grid.Row="1" LastChildFill="False">
+        <DockPanel x:Name="MainWindowContent" Margin="10" LastChildFill="False" Grid.Row="1">
             <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" DockPanel.Dock="Left" />
         </DockPanel>
         <ContentPresenter x:Name="ErrorsPlaceholder" Grid.Row="2"/>

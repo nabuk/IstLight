@@ -6,5 +6,9 @@
     <DataTemplate DataType="{x:Type VM:TickerExplorerViewModel}">
         <View:TickerExplorerView />
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type VM:TickerProvidersViewModel}">
+        <View:TickerProvidersView />
+    </DataTemplate>
+
 </ResourceDictionary>

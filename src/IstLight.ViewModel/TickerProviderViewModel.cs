@@ -19,6 +19,7 @@ namespace IstLight
         private void Search(string hint)
         {
             //handle diff request times //DateTime.Now.Ticks
+
             provider.Search(hint).AddCallback(x =>
                 {
                     if (x.Result != null)
@@ -34,16 +35,19 @@ namespace IstLight
         {
             this.provider = provider;
             this.acceptTicker = acceptTicker;
-            this.SearchCommand = new RelayCommand<string>(Search, x => provider.CanSearch);
-            this.DownloadCommand = new RelayCommand<string>(tName => acceptTicker(new TickerViewModel(tName, provider.Get(tName))));
+            this.SearchCommand = new DelegateCommand<string>(Search, x => provider.CanSearch);
+            this.DownloadCommand = new DelegateCommand<string>(tName => acceptTicker(new TickerViewModel(tName, provider.Get(tName))));
 
             this.SearchResult = new ReadOnlyObservableCollection<TickerSearchResultViewModel>(searchResult);
+
         }
 
         public string Name { get { return provider.Name; } }
 
         public ICommand SearchCommand { get; private set; }
         public ICommand DownloadCommand { get; private set; }
+
+        public bool CanSearch { get { return SearchCommand.CanExecute(null); } }
 
         public ReadOnlyObservableCollection<TickerSearchResultViewModel> SearchResult { get; private set; }
     }

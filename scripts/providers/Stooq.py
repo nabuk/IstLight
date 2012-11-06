@@ -64,6 +64,7 @@ def Get(ticker):
 
 #Find available tickers
 def Search(hint):
+    if(String.IsNullOrWhiteSpace(hint)): return Array[TickerSearchResult]([])
     rawData = GetRawData(providerSiteUrl, ProviderGetTickersUrl(hint))
     rawData = rawData.Substring(14,rawData.Length - 17).Replace(oldValue = "<b>", newValue = "").Replace(oldValue = "</b>", newValue = "")
     rawData = rawData.Split("|").Select(lambda x: x.Split('~'))

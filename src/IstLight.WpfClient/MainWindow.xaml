@@ -16,7 +16,7 @@
     			<MenuItem x:Name="AboutMenuItem" Header="About"/>
     		</MenuItem>
     	</Menu>
-        <DockPanel x:Name="MainWindowContent" Grid.Row="1">
+        <DockPanel x:Name="MainWindowContent" Grid.Row="1" LastChildFill="False">
             <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" DockPanel.Dock="Left" />
         </DockPanel>
         <ContentPresenter x:Name="ErrorsPlaceholder" Grid.Row="2"/>

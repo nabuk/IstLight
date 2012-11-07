@@ -8,20 +8,24 @@ namespace IstLight.Services
     public class AsyncResultFromSyncJob<T> : IAsyncResult<T>
     {
         private Func<ValueOrError<T>> synchronousJob;
-        private readonly ManualResetEvent completedEvent;
         private readonly ConcurrentBag<Action<IAsyncResult<T>>> completionCallbacks = new ConcurrentBag<Action<IAsyncResult<T>>>();
+        private readonly ManualResetEvent completionEvent;
 
         private void OnCompletion(IAsyncResult ar)
         {
             var jobResult = synchronousJob.EndInvoke(ar);
             this.Result = jobResult.Value;
             this.Error = jobResult.Error;
-            this.completedEvent.Set();
+            this.IsCompleted = true;
+            completionEvent.Set();
 
             synchronousJob = null;
 
             FireCallbacks();
+
+            completionEvent.Close();
         }
+
         private void FireCallbacks()
         {
             Action<IAsyncResult<T>> callback;
@@ -35,18 +39,20 @@ namespace IstLight.Services
             if (synchronousJob == null) throw new ArgumentNullException("synchronousJob");
 
             this.synchronousJob = synchronousJob;
-            this.completedEvent = new ManualResetEvent(false);
+            this.completionEvent = new ManualResetEvent(false);
             synchronousJob.BeginInvoke(OnCompletion, null);
         }
 
         #region IAsyncResult<T>
         public T Result { get; private set; }
         public Exception Error { get; private set; }
-        public bool IsCompleted { get { return this.completedEvent.WaitOne(0); } }
+        public bool IsCompleted { get; private set; }
 
         public bool Wait(int timeout = Timeout.Infinite)
         {
-            return completedEvent.WaitOne(timeout);
+            if (!IsCompleted)
+                return completionEvent.WaitOne(timeout);
+            return true;
         }
 
         public void AddCallback(Action<IAsyncResult<T>> callback)

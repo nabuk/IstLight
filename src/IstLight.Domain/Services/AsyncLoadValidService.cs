@@ -10,15 +10,22 @@ namespace IstLight.Services
         where T : INamedItem
     {
         private readonly ConcurrentBag<Action<T>> callbacks = new ConcurrentBag<Action<T>>();
-        private readonly Action<Exception> errorCallback;
+        private readonly IErrorReporter errorReporter;
         private readonly IAsyncLoadService<T> asyncLoadService;
 
-        public AsyncLoadValidService(IAsyncLoadService<T> asyncLoadService, Action<Exception> errorCallback)
+        private void HandleLoaded(IAsyncResult<T> item)
+        {
+            if (item.Error != null && errorReporter != null)
+                errorReporter.Add(item.Error);
+            else foreach (Action<T> callback in callbacks)
+                    callback(item.Result);
+        }
+
+        public AsyncLoadValidService(IAsyncLoadService<T> asyncLoadService, IErrorReporter errorReporter = null)
         {
             if (asyncLoadService == null) throw new ArgumentNullException("asyncLoadService");
-            if (errorCallback == null) throw new ArgumentNullException("errorCallback");
 
-            this.errorCallback = errorCallback;
+            this.errorReporter = errorReporter;
             this.asyncLoadService = asyncLoadService;
         }
 
@@ -26,7 +33,6 @@ namespace IstLight.Services
         public void AddCallback(Action<T> callback)
         {
             if (callback == null) throw new ArgumentNullException("callback");
-
             callbacks.Add(callback);
         }
 
@@ -37,12 +43,6 @@ namespace IstLight.Services
         }
         #endregion
 
-        private void HandleLoaded(IAsyncResult<T> item)
-        {
-            if (item.Error != null && errorCallback != null)
-                errorCallback(item.Error);
-            else foreach (Action<T> callback in callbacks)
-                    callback(item.Result);
-        }
+        
     }
 }

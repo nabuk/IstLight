@@ -42,6 +42,7 @@
     <Compile Include="Services\IAsyncLoadValidService.cs" />
     <Compile Include="Services\IAsyncResult.cs" />
     <Compile Include="Services\IAsyncLoadService.cs" />
+    <Compile Include="Services\IErrorReporter.cs" />
     <Compile Include="Services\INamedItem.cs" />
     <Compile Include="Services\IResultAnalyzer.cs" />
     <Compile Include="Services\ITickerConverter.cs" />

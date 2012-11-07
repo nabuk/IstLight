@@ -5,11 +5,12 @@
 		Height="500" Width="800"
 		Background="{DynamicResource DefaultBackground}"
         TextOptions.TextFormattingMode="Display">
-    <Grid>
+    <Grid Margin="10,0">
     	<Grid.RowDefinitions>
     		<RowDefinition Height="Auto"/>
-    		<RowDefinition/>
-    		<RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="25" />
     	</Grid.RowDefinitions>
     	<Menu x:Name="MainMenu" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
     		<MenuItem x:Name="FileMenuItem" Header="File" Margin="0"/>
@@ -17,10 +18,21 @@
     			<MenuItem x:Name="AboutMenuItem" Header="About"/>
     		</MenuItem>
     	</Menu>
-        <DockPanel x:Name="MainWindowContent" Margin="10" LastChildFill="False" Grid.Row="1">
-            <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" DockPanel.Dock="Left" />
+        <DockPanel x:Name="MainWindowContent" Margin="0,10" LastChildFill="False" Grid.Row="1">
+            <Border CornerRadius="2" BorderThickness="0" Background="#8222" DockPanel.Dock="Left" Padding="3,0">
+            <ContentPresenter
+                x:Name="TickerExplorerPlaceholder"
+                Content="{Binding TickerExplorer, Mode=OneTime}" DockPanel.Dock="Left" />
+            </Border>
         </DockPanel>
-        <ContentPresenter x:Name="ErrorsPlaceholder" Grid.Row="2"/>
-        
+        <ContentPresenter
+            x:Name="ErrorListPlaceholder"
+            Content="{Binding ErrorList, Mode=OneTime}"
+            Grid.Row="2"
+            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+            Panel.ZIndex="1" />
+        <Border Grid.Row="3" HorizontalAlignment="Left" Margin="10,0">
+            <CheckBox Content="Error list" VerticalAlignment="Center" />
+        </Border>
     </Grid>
 </Window>

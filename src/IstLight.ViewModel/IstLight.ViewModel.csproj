@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="ErrorListViewModel.cs" />
     <Compile Include="IWindow.cs">
       <SubType>Code</SubType>
     </Compile>

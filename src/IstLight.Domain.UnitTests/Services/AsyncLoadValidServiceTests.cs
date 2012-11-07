@@ -18,13 +18,13 @@ namespace IstLight.UnitTests.Services
         [Fact]
         public void ctor_NullService_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => new AsyncLoadValidService<T>(null, x => { }));
+            Assert.Throws<ArgumentNullException>(() => new AsyncLoadValidService<T>(null, ErrorReporterMock.Object));
         }
 
         [Fact]
-        public void ctor_NullCallback_Throws()
+        public void ctor_NullErrorReporter_DoesNotThrow()
         {
-            Assert.Throws<ArgumentNullException>(() => CreateSut(null, true));
+            Assert.DoesNotThrow(() => CreateSut(null, true));
         }
 
         [Fact]
@@ -46,23 +46,25 @@ namespace IstLight.UnitTests.Services
             resume.Dispose();
         }
 
-        [Fact]
+        [Fact(Timeout=5000)]
         public void Load_CallsIAsyncLoadServiceLoadMethod()
         {
-            var sutAndService = CreateSutAndServiceMock(x => { }, true);
+            var sutAndService = CreateSutAndServiceMock(ErrorReporterMock.Object, true);
             sutAndService.Key.Load();
             sutAndService.Value.Verify(x => x.Load(), Times.Once());
         }
 
         [Fact(Timeout=5000)]
-        public void LoadExceptions_AreReturnedByErrorCallbackDelegate()
+        public void LoadExceptions_AreReturnedByErrorReporter()
         {
             var resume = new ManualResetEvent(false);
-            Action<Exception> errorCallback = ex => resume.Set();
-            var sut = CreateSut(errorCallback, false);
+            var errorReporterMock = ErrorReporterMock;
+            errorReporterMock.Setup(x => x.Add(It.IsAny<Exception>())).Callback(() => resume.Set()).Verifiable();
+            var sut = CreateSut(errorReporterMock.Object, false);
             sut.Load();
-            Assert.True(resume.WaitOne());
+            resume.WaitOne();
             resume.Dispose();
+            errorReporterMock.Verify();
         }
 
         [Fact]
@@ -73,13 +75,13 @@ namespace IstLight.UnitTests.Services
 
         public AsyncLoadValidService<T> CreateSut(bool correct)
         {
-            return CreateSut(x => { }, correct);
+            return CreateSut(null, correct);
         }
-        public AsyncLoadValidService<T> CreateSut(Action<Exception> errorCallback, bool correct)
+        public AsyncLoadValidService<T> CreateSut(IErrorReporter errorReporter, bool correct)
         {
-            return CreateSutAndServiceMock(errorCallback, correct).Key;
+            return CreateSutAndServiceMock(errorReporter, correct).Key;
         }
-        public KeyValuePair<AsyncLoadValidService<T>, Mock<IAsyncLoadService<T>>> CreateSutAndServiceMock(Action<Exception> errorCallback, bool correct)
+        public KeyValuePair<AsyncLoadValidService<T>, Mock<IAsyncLoadService<T>>> CreateSutAndServiceMock(IErrorReporter errorReporter, bool correct)
         {
             var loadServiceMock = new Mock<IAsyncLoadService<T>>();
             loadServiceMock.Setup(x => x.Load())
@@ -94,9 +96,11 @@ namespace IstLight.UnitTests.Services
                             })
                     }.AsReadOnlyList());
             return new KeyValuePair<AsyncLoadValidService<T>, Mock<IAsyncLoadService<T>>>(
-                new AsyncLoadValidService<T>(loadServiceMock.Object, errorCallback),
+                new AsyncLoadValidService<T>(loadServiceMock.Object, errorReporter),
                 loadServiceMock);
         }
+
+        public Mock<IErrorReporter> ErrorReporterMock { get { return new Mock<IErrorReporter>(); } }
     }
 
     public class ClassImplementingINamedItem : INamedItem

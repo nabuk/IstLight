@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using IstLight.Services;
 using Ninject.Modules;
+using Ninject;
 
 namespace IstLight.Bootstrapper
 {
@@ -11,7 +12,8 @@ namespace IstLight.Bootstrapper
     {
         public override void Load()
         {
-            Kernel.Bind<Action<Exception>>().ToMethod(x => ex => System.Windows.MessageBox.Show(ex.Message));
+            Kernel.Bind<ErrorListViewModel>().ToSelf().InSingletonScope();
+            Kernel.Bind<IErrorReporter>().ToMethod(x => x.Kernel.Get<ErrorListViewModel>());
 
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>().To<TickerProviderService>();
             Kernel.Bind<IAsyncLoadService<ITickerConverter>>().To<TickerConverterService>();

@@ -47,14 +47,14 @@
             </TextBox.InputBindings>
         </TextBox>
         <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False">
-            <DataGrid ItemsSource="{Binding SearchResults}" IsReadOnly="True" AutoGenerateColumns="False">
+            <!--<DataGrid ItemsSource="{Binding SearchResults}" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Symbol" Binding="{Binding Name}" Width="Auto" />
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="Auto" />
                     <DataGridTextColumn Header="Market" Binding="{Binding Market}" Width="Auto" />
                 </DataGrid.Columns>
-            </DataGrid>
-            <!--<ListView ItemsSource="{Binding SearchResults}">
+            </DataGrid>-->
+            <ListView ItemsSource="{Binding SearchResults}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Name}" Width="Auto" />
@@ -62,7 +62,7 @@
                         <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}" Width="Auto" />
                     </GridView>
                 </ListView.View>
-            </ListView>-->
+            </ListView>
         </Popup>
     </Grid>
 </UserControl>

@@ -37,7 +37,7 @@ namespace IstLight
                 CanChangeProvider = providerVMs.Count > 1;
             };
 
-            this.loadProvidersService.AttachCallback(iProvider =>
+            this.loadProvidersService.AddCallback(iProvider =>
                     observableProviders.Add(new TickerProviderViewModel(iProvider)));
             this.loadProvidersService.Load();
 

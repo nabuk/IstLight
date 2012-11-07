@@ -38,6 +38,22 @@ namespace IstLight.UnitTests
             Assert.False(sut.IsError);
         }
 
+        [Fact]
+        public void ctorWithFuncArg_FuncThrows_SetsError()
+        {
+            var ex = new InvalidOperationException();
+            var sut = new ValueOrError<int>(() => { throw ex; });
+            Assert.Same(ex, sut.Error);
+        }
+
+        [Fact]
+        public void ctorWithFuncArg_FuncDoesNotThrow_SetsResult()
+        {
+            var result = 2;
+            var sut = new ValueOrError<int>(() => result);
+            Assert.Equal<int>(result, sut.Value);
+        }
+
         public ValueOrError<T> CreateSut()
         {
             return new ValueOrError<T>();

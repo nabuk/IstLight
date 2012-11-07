@@ -15,13 +15,18 @@ namespace IstLight.Services
 
         public AsyncLoadValidService(IAsyncLoadService<T> asyncLoadService, Action<Exception> errorCallback)
         {
+            if (asyncLoadService == null) throw new ArgumentNullException("asyncLoadService");
+            if (errorCallback == null) throw new ArgumentNullException("errorCallback");
+
             this.errorCallback = errorCallback;
             this.asyncLoadService = asyncLoadService;
         }
 
         #region IAsyncLoadValidService<T>
-        public void AttachCallback(Action<T> callback)
+        public void AddCallback(Action<T> callback)
         {
+            if (callback == null) throw new ArgumentNullException("callback");
+
             callbacks.Add(callback);
         }
 

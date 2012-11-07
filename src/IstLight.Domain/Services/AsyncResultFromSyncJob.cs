@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace IstLight.Services
 {
-    public class AsyncResultFromSyncJob<T> : IAsyncResult<T>, IDisposable
+    public class AsyncResultFromSyncJob<T> : IAsyncResult<T>
     {
         private Func<ValueOrError<T>> synchronousJob;
-        private readonly ManualResetEvent completedEvent = new ManualResetEvent(false);
+        private readonly ManualResetEvent completedEvent;
         private readonly ConcurrentBag<Action<IAsyncResult<T>>> completionCallbacks = new ConcurrentBag<Action<IAsyncResult<T>>>();
 
         private void OnCompletion(IAsyncResult ar)
@@ -32,7 +32,10 @@ namespace IstLight.Services
 
         public AsyncResultFromSyncJob(Func<ValueOrError<T>> synchronousJob)
         {
+            if (synchronousJob == null) throw new ArgumentNullException("synchronousJob");
+
             this.synchronousJob = synchronousJob;
+            this.completedEvent = new ManualResetEvent(false);
             synchronousJob.BeginInvoke(OnCompletion, null);
         }
 
@@ -48,26 +51,22 @@ namespace IstLight.Services
 
         public void AddCallback(Action<IAsyncResult<T>> callback)
         {
+            if (callback == null) throw new ArgumentNullException("callback");
+
             completionCallbacks.Add(callback);
             
             if(IsCompleted)
                 FireCallbacks();
         }
         #endregion
-
-        #region IDisposable
-        public void Dispose()
-        {
-            completedEvent.Dispose();
-        }
-        #endregion
     }
 
-    public static class AsyncResultExtensions
-    {
-        public static AsyncResultFromSyncJob<T> AsAsyncJob<T>(this Func<ValueOrError<T>> synchronousJob)
-        {
-            return new AsyncResultFromSyncJob<T>(synchronousJob);
-        }
-    }
+    //Not used, not tested
+    //public static class AsyncResultExtensions
+    //{
+    //    public static AsyncResultFromSyncJob<T> AsAsyncJob<T>(this Func<ValueOrError<T>> synchronousJob)
+    //    {
+    //        return new AsyncResultFromSyncJob<T>(synchronousJob);
+    //    }
+    //}
 }

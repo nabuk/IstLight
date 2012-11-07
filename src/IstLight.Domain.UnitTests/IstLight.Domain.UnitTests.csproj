@@ -79,6 +79,8 @@
     </Compile>
     <Compile Include="QuoteListDataAttribute.cs" />
     <Compile Include="QuoteListTests.cs" />
+    <Compile Include="Services\AsyncLoadValidServiceTests.cs" />
+    <Compile Include="Services\AsyncResultFromSyncJobTests.cs" />
     <Compile Include="ValueOrErrorTests.cs" />
     <Compile Include="Services\RawTickerTests.cs" />
     <Compile Include="Services\TickerSearchResultTests.cs" />

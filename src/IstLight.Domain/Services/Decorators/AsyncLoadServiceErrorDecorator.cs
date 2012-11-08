@@ -21,17 +21,17 @@ namespace IstLight.Services.Decorators
                     ErrorDecoratorDelegate<T>(errorReporter)));
         }
 
-        private static Func<T, T> ErrorDecoratorDelegate<T>(IErrorReporter errorReporter)
-            where T : INamedItem
+        private static Func<V, V> ErrorDecoratorDelegate<V>(IErrorReporter errorReporter)
+            where V : INamedItem
         {
             Type decoratorType =
-                typeof(T).Assembly.GetTypes()
-                    .Where(t => t.IsSubclassOf(typeof(NamedItemBaseErrorDecorator<T>)) && !t.IsAbstract)
+                typeof(V).Assembly.GetTypes()
+                    .Where(t => t.IsSubclassOf(typeof(NamedItemBaseErrorDecorator<V>)) && !t.IsAbstract)
                     .FirstOrDefault();
             if (decoratorType == null)
                 return null;
 
-            return x => (T)Activator.CreateInstance(decoratorType, x, errorReporter);
+            return x => (V)Activator.CreateInstance(decoratorType, x, errorReporter);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace IstLight
     public class TickerProvidersViewModel : ViewModelBase
     {
         #region Data
-        private readonly IAsyncLoadValidService<ITickerProvider> loadProvidersService;
+        private readonly IAsyncLoadService<ITickerProvider> loadProvidersService;
         private ReadOnlyObservableCollection<TickerProviderViewModel> providerVMs;
         private TickerProviderViewModel selectedProvider;
         private IEnumerable<TickerSearchResultViewModel> searchResults = Enumerable.Empty<TickerSearchResultViewModel>();
@@ -37,9 +37,12 @@ namespace IstLight
                 CanChangeProvider = providerVMs.Count > 1;
             };
 
-            this.loadProvidersService.AddCallback(iProvider =>
-                    observableProviders.Add(new TickerProviderViewModel(iProvider)));
-            this.loadProvidersService.Load();
+            foreach (var arProvider in loadProvidersService.Load())
+                arProvider.AddCallback(x =>
+                    {
+                        if (x.Error == null)
+                            observableProviders.Add(new TickerProviderViewModel(x.Result));
+                    });
 
             return this.providerVMs;
         }
@@ -73,7 +76,7 @@ namespace IstLight
         }
         #endregion
 
-        public TickerProvidersViewModel(IAsyncLoadValidService<ITickerProvider> loadProvidersService, Action<TickerViewModel> acceptTicker)
+        public TickerProvidersViewModel(IAsyncLoadService<ITickerProvider> loadProvidersService, Action<TickerViewModel> acceptTicker)
         {
             this.loadProvidersService = loadProvidersService;
 

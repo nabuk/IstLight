@@ -19,7 +19,7 @@ namespace IstLight.Bootstrapper
 
         public static MainViewModel Compose()
         {
-            using (var root = new CompositionRoot())
+            using(var root = new CompositionRoot())
             {
                 return root.kernel.Get<MainViewModel>();
             }

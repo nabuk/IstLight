@@ -37,11 +37,20 @@
     <Compile Include="Extensions\IQuoteContextExtensions.cs" />
     <Compile Include="Extensions\IReadOnlyListExtensions.cs" />
     <Compile Include="MultiQuoteList.cs" />
+    <Compile Include="Services\Decorators\AsyncLoadServiceDecorator.cs" />
     <Compile Include="Services\AsyncResultFromSyncJob.cs" />
-    <Compile Include="Services\AsyncLoadValidService.cs" />
-    <Compile Include="Services\IAsyncLoadValidService.cs" />
+    <Compile Include="Services\Decorators\AsyncResultErrorDecorator.cs" />
+    <Compile Include="Services\Decorators\NamedItemBaseDecorator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Decorators\NamedItemBaseErrorDecorator.cs" />
+    <Compile Include="Services\Decorators\TickerProviderErrorDecorator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Decorators\AsyncLoadServiceErrorDecorator.cs" />
     <Compile Include="Services\IAsyncResult.cs" />
     <Compile Include="Services\IAsyncLoadService.cs" />
+    <Compile Include="Services\Decorators\IAsyncResultDecoratorFactory.cs" />
     <Compile Include="Services\IErrorReporter.cs" />
     <Compile Include="Services\INamedItem.cs" />
     <Compile Include="Services\IResultAnalyzer.cs" />

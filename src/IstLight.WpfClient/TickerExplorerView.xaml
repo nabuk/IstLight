@@ -6,10 +6,11 @@
              xmlns:view="clr-namespace:IstLight"
              mc:Ignorable="d" 
              d:DesignHeight="300" Width="300">
-    <DockPanel LastChildFill="False">
+    <DockPanel>
         <view:SectionHeaderView Title="Ticker Explorer" DockPanel.Dock="Top" />
         <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" />
-        
-
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Tickers}" />
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

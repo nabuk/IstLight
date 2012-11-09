@@ -22,7 +22,7 @@ namespace IstLight
         /// <param name="dotIt">The delegate to run</param>
         /// <param name="priority">The DispatcherPriority</param>
         public static void InvokeIfRequired(this Dispatcher disp,
-            Action dotIt, DispatcherPriority priority)
+            Action dotIt, DispatcherPriority priority = DispatcherPriority.DataBind)
         {
             if (disp.Thread != Thread.CurrentThread)
             {

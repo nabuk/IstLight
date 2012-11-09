@@ -16,8 +16,6 @@ namespace IstLight.Bootstrapper
             Kernel.Bind<ErrorListViewModel>().ToSelf().InSingletonScope();
             Kernel.Bind<IErrorReporter>().ToMethod(x => x.Kernel.Get<ErrorListViewModel>()).InSingletonScope();
 
-            Kernel.Bind<Action<TickerViewModel>>().ToMethod(x => t => System.Windows.MessageBox.Show("Loading :" + t.Name));
-
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
                 .To<TickerProviderService>()
                 .WhenInjectedInto<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
@@ -30,6 +28,7 @@ namespace IstLight.Bootstrapper
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
                 .To<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
                 .InSingletonScope();
+
         }
     }
 }

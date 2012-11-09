@@ -76,12 +76,12 @@ namespace IstLight
         }
         #endregion
 
-        public TickerProvidersViewModel(IAsyncLoadService<ITickerProvider> loadProvidersService, Action<TickerViewModel> acceptTicker)
+        public TickerProvidersViewModel(IAsyncLoadService<ITickerProvider> loadProvidersService)
         {
             this.loadProvidersService = loadProvidersService;
 
             SearchCommand = new DelegateCommand<string>(hint => Search(hint), x => CanSearch);
-            DownloadCommand = new DelegateCommand<string>(name => acceptTicker(Download(name)), x => CanDownload);
+            DownloadCommand = new DelegateCommand<string>(name => LoadingTicker(Download(name)), x => CanDownload);
         }
 
         public ReadOnlyObservableCollection<TickerProviderViewModel> Providers
@@ -130,7 +130,6 @@ namespace IstLight
                 base.RaisePropertyChanged<IEnumerable<TickerSearchResultViewModel>>(() => SearchResults);
             }
         }
-
         public bool ShowSearchResults
         {
             get { return this.showResults; }
@@ -142,5 +141,6 @@ namespace IstLight
             }
         }
 
+        public event Action<TickerViewModel> LoadingTicker = delegate { };
     }
 }

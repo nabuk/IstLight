@@ -54,9 +54,9 @@ namespace IstLight
                 ShowSearchResults = SearchResults.Any();
             });
         }
-        private TickerViewModel Download(string name)
+        private TickerFileViewModel Download(string name)
         {
-            return new TickerViewModel(name, SelectedProvider.Provider.Get(name));
+            return new TickerFileViewModel(name, SelectedProvider.Provider.Get(name));
         }
         private void HandleSelectedProviderChange(TickerProviderViewModel previous, TickerProviderViewModel current)
         {
@@ -141,6 +141,6 @@ namespace IstLight
             }
         }
 
-        public event Action<TickerViewModel> LoadingTicker = delegate { };
+        public event Action<TickerFileViewModel> LoadingTicker = delegate { };
     }
 }

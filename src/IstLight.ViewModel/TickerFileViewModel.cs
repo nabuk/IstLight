@@ -11,7 +11,7 @@ using IstLight.Services;
 
 namespace IstLight
 {
-    public class TickerViewModel : ViewModelBase
+    public class TickerFileViewModel : ViewModelBase
     {
         private readonly IAsyncResult<Ticker> asyncTicker;
         private readonly Dispatcher dispatcher;
@@ -20,14 +20,15 @@ namespace IstLight
         {
             dispatcher.InvokeIfRequired(() =>
             {
-                base.RaisePropertyChanged<bool>(() => Loaded);
+                LoadState = asyncTicker.GetState();
+                base.RaisePropertyChanged<AsyncState>(() => LoadState);
 
-                if (asyncTicker.Error != null)
-                    CloseCommand.Execute(null);
+                //if (asyncTicker.Error != null)
+                //    CloseCommand.Execute(null);
             });
         }
 
-        public TickerViewModel(string name, IAsyncResult<Ticker> asyncTicker)
+        public TickerFileViewModel(string name, IAsyncResult<Ticker> asyncTicker)
         {
             this.dispatcher = Dispatcher.CurrentDispatcher;
             this.Name = name;
@@ -38,13 +39,14 @@ namespace IstLight
 
         public string Name { get; set; }
 
-        public bool Loaded
+        public ICommand CloseCommand { get; private set; }
+        public event Action<TickerFileViewModel> CloseCommandExecuted = delegate { };
+
+        public AsyncState LoadState
         {
-            get { return this.asyncTicker.IsCompleted; }
+            get;
+            private set;
         }
 
-        public ICommand CloseCommand { get; private set; }
-
-        public event Action<TickerViewModel> CloseCommandExecuted = delegate { };
     }
 }

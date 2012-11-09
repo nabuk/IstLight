@@ -15,4 +15,8 @@
         <View:ErrorListView />
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type VM:TickerFileViewModel}">
+        <View:TickerFileView />
+    </DataTemplate>
+    
 </ResourceDictionary>

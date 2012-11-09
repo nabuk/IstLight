@@ -45,7 +45,7 @@ namespace IstLight
         public DelegateCommand(Action execute, Func<bool> canExecute)
         {
             this.execute = execute;
-            this.canExecute = canExecute;
+            this.canExecute = canExecute ?? (() => true);
         }
 
         public bool CanExecute(object parameter)

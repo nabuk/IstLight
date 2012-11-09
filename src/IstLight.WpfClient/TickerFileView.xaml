@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="IstLight.TickerFileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:IstLight.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             helpers:StateManager.VisualState="{Binding LoadState, Mode=OneWay}"
+             >
+    <Grid>
+        <TextBlock Text="{Binding Name}" Foreground="White" />
+        <TextBlock x:Name="tbState" Text="{Binding LoadState, Mode=OneWay}" HorizontalAlignment="Right" Foreground="White" />
+        <Button Content="Close" HorizontalAlignment="Center" Command="{Binding CloseCommand}" />
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="LoadStates">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.4"/>
+                    <VisualTransition GeneratedDuration="0:0:0" To="Running"/>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Running">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbState">
+                            <EasingColorKeyFrame KeyTime="0" Value="Gray"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Completed">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbState">
+                            <EasingColorKeyFrame KeyTime="0" Value="CornflowerBlue"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Error">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbState">
+                            <EasingColorKeyFrame KeyTime="0" Value="Red"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>

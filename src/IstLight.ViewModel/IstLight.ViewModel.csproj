@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncState.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="ErrorListViewModel.cs" />
     <Compile Include="IWindow.cs">
@@ -60,7 +61,7 @@
     <Compile Include="TickerExplorerViewModel.cs" />
     <Compile Include="TickerProvidersViewModel.cs" />
     <Compile Include="TickerProviderViewModel.cs" />
-    <Compile Include="TickerViewModel.cs" />
+    <Compile Include="TickerFileViewModel.cs" />
     <Compile Include="WPFControlThreadingExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

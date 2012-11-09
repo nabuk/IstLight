@@ -10,12 +10,12 @@ namespace IstLight
 {
     public class TickerExplorerViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<TickerViewModel> tickers = new ObservableCollection<TickerViewModel>();
+        private readonly ObservableCollection<TickerFileViewModel> tickers = new ObservableCollection<TickerFileViewModel>();
         
         public TickerExplorerViewModel(TickerProvidersViewModel providers)
         {
             this.Providers = providers;
-            this.Tickers = new ReadOnlyObservableCollection<TickerViewModel>(this.tickers);
+            this.Tickers = new ReadOnlyObservableCollection<TickerFileViewModel>(this.tickers);
             Providers.LoadingTicker += tvm =>
                 {
                     tickers.Add(tvm);
@@ -25,6 +25,6 @@ namespace IstLight
 
         public TickerProvidersViewModel Providers { get; private set; }
 
-        public ReadOnlyObservableCollection<TickerViewModel> Tickers { get; private set; }
+        public ReadOnlyObservableCollection<TickerFileViewModel> Tickers { get; private set; }
     }
 }

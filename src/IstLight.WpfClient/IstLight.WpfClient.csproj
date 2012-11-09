@@ -76,6 +76,7 @@
     <Compile Include="ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\StateManager.cs" />
     <Compile Include="SectionHeaderView.xaml.cs">
       <DependentUpon>SectionHeaderView.xaml</DependentUpon>
     </Compile>
@@ -84,6 +85,9 @@
     </Compile>
     <Compile Include="TickerProvidersView.xaml.cs">
       <DependentUpon>TickerProvidersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TickerFileView.xaml.cs">
+      <DependentUpon>TickerFileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowAdapter.cs">
       <SubType>Code</SubType>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TickerProvidersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TickerFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

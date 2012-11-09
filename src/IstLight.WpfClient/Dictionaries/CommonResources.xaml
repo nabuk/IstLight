@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<!--<SolidColorBrush x:Key="DefaultBackground" Color="#FF2D2D30"/>-->
-    <SolidColorBrush x:Key="DefaultBackground" Color="#FF333333"/>
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:IstLight.Helpers">
+    
+    <helpers:BoolToVisibilityConverter x:Key="boolToVisConverter" />
     
 </ResourceDictionary>

@@ -3,36 +3,70 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow"
 		Height="500" Width="800"
-		Background="{DynamicResource DefaultBackground}"
+		Background="{StaticResource ControlBackgroundBrush}"
         TextOptions.TextFormattingMode="Display">
-    <Grid Margin="10,0">
-    	<Grid.RowDefinitions>
-    		<RowDefinition Height="Auto"/>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="25" />
-    	</Grid.RowDefinitions>
-    	<Menu x:Name="MainMenu" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
-    		<MenuItem x:Name="FileMenuItem" Header="File" Margin="0"/>
-    		<MenuItem x:Name="HelpMenuItem" Header="Help" Margin="0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
+    	
+    	
+        <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3">
+    		<MenuItem x:Name="FileMenuItem" Header="File" />
+    		<MenuItem x:Name="HelpMenuItem" Header="Help" >
     			<MenuItem x:Name="AboutMenuItem" Header="About"/>
     		</MenuItem>
     	</Menu>
-        <DockPanel x:Name="MainWindowContent" Margin="0,10" LastChildFill="False" Grid.Row="1">
-            <Border CornerRadius="2" BorderThickness="0" Background="#8222" DockPanel.Dock="Left" Padding="3,0">
-            <ContentPresenter
-                x:Name="TickerExplorerPlaceholder"
-                Content="{Binding TickerExplorer, Mode=OneTime}" DockPanel.Dock="Left" />
+        
+        <CheckBox x:Name="cbTickerExplorer" IsChecked="True" Content="Ticker Explorer" Grid.Row="1" Margin="0,0,5,0">
+            <CheckBox.LayoutTransform>
+                <RotateTransform Angle="90" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="cbErrorList" Content="Error list" Grid.Row="2" Grid.Column="1" />
+
+        <CheckBox Content="Simulation settings" Grid.Row="1" Grid.Column="2">
+            <CheckBox.LayoutTransform>
+                <RotateTransform Angle="90" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+        
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Border Background="#595959"  Margin="5,0" Grid.RowSpan="2"
+                    Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}}">
+                <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
             </Border>
-        </DockPanel>
-        <ContentPresenter
-            x:Name="ErrorListPlaceholder"
-            Content="{Binding ErrorList, Mode=OneTime}"
-            Grid.Row="2"
-            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-            Panel.ZIndex="1" />
-        <Border Grid.Row="3" HorizontalAlignment="Left" Margin="10,0">
-            <CheckBox Content="Error list" VerticalAlignment="Center" />
-        </Border>
+            <!--<GridSplitter Grid.RowSpan="2" Grid.Column="1" Width="5" ShowsPreview="True"
+                          ResizeBehavior="PreviousAndNext" Background="Transparent" />-->
+            
+            <TabControl Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2">
+                <TabItem Header="Script.py" />
+                <TabItem Header="Script2.py" />
+            </TabControl>
+
+            <ContentPresenter Content="{Binding ErrorList, Mode=OneTime}" Grid.Row="1" Grid.ColumnSpan="4"
+                Visibility="{Binding IsChecked, ElementName=cbErrorList, Converter={StaticResource boolToVisConverter}}"
+                Panel.ZIndex="2"/>
+        </Grid>
     </Grid>
 </Window>

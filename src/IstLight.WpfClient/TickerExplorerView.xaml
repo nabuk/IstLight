@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" Width="300">
     <DockPanel>
-        <view:SectionHeaderView Title="Ticker Explorer" DockPanel.Dock="Top" />
-        <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" />
+        <view:SectionHeaderView x:Name="header" Title="Ticker Explorer" DockPanel.Dock="Top" />
+        <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" Margin="10" />
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Tickers}" />
         </ScrollViewer>

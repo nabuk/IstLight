@@ -7,7 +7,13 @@
              xmlns:helpers="clr-namespace:IstLight.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" Width="300"
-             Background="{StaticResource NormalBrush}">
+             >
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="{StaticResource HoverColor}" />
+            <GradientStop Offset="0.05" Color="{StaticResource MainColor}" />
+        </LinearGradientBrush>
+    </UserControl.Background>
     <DockPanel>
         <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" Margin="10" />
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10">

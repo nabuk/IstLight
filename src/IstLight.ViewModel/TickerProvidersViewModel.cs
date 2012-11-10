@@ -56,6 +56,7 @@ namespace IstLight
         }
         private TickerFileViewModel Download(string name)
         {
+            ShowSearchResults = false;
             return new TickerFileViewModel(name, SelectedProvider.Provider.Get(name));
         }
         private void HandleSelectedProviderChange(TickerProviderViewModel previous, TickerProviderViewModel current)
@@ -82,6 +83,7 @@ namespace IstLight
 
             SearchCommand = new DelegateCommand<string>(hint => Search(hint), x => CanSearch);
             DownloadCommand = new DelegateCommand<string>(name => LoadingTicker(Download(name)), x => CanDownload);
+            CloseSearchResultsCommand = new DelegateCommand(() => ShowSearchResults = false);
         }
 
         public ReadOnlyObservableCollection<TickerProviderViewModel> Providers
@@ -140,6 +142,7 @@ namespace IstLight
                 base.RaisePropertyChanged<bool>(() => ShowSearchResults);
             }
         }
+        public ICommand CloseSearchResultsCommand { get; private set; }
 
         public event Action<TickerFileViewModel> LoadingTicker = delegate { };
     }

@@ -41,9 +41,16 @@
             </i:Interaction.Triggers>
             <TextBox.InputBindings>
                 <KeyBinding
-                    Command="{Binding DownloadCommand, Mode=OneWay}"
-                    CommandParameter="{Binding Text, ElementName=tbTickerName}"
+                    Command="{Binding DownloadCommand, Mode=OneTime}"
+                    CommandParameter="{Binding Text,ElementName=tbTickerName,Mode=OneWay}"
                     Key="Enter" />
+                <KeyBinding
+                    Command="{Binding SearchCommand, Mode=OneTime}"
+                    CommandParameter="{Binding Text,ElementName=tbTickerName,Mode=OneWay}"
+                    Key="Space" Modifiers="Control" />
+                <KeyBinding
+                    Command="{Binding CloseSearchResultsCommand, Mode=OneWay}"
+                    Key="Escape" />
             </TextBox.InputBindings>
         </TextBox>
         <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False" AllowsTransparency="True">
@@ -55,12 +62,12 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </Popup.Resources>
-            <ListView ItemsSource="{Binding SearchResults}" Opacity="0.7">
+            <ListView ItemsSource="{Binding SearchResults}" Opacity="0.8">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Name}" Width="Auto" />
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="Auto" />
-                        <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}" Width="Auto" />
+                        <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Name}" Width="NaN" />
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="NaN" />
+                        <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}" Width="NaN" />
                     </GridView>
                 </ListView.View>
             </ListView>

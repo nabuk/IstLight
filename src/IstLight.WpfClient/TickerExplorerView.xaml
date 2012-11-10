@@ -13,7 +13,7 @@
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10">
             <ItemsControl
                 ItemsSource="{Binding Tickers}"
-                helpers:ScrollViewerHelper.AutoScrollToEnd="true"
+                helpers:ItemsControlHelper.AutoScrollToEnd="true"
                 Background="{StaticResource LightBrush}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

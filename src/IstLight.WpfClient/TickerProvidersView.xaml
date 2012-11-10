@@ -29,7 +29,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="tbTickerName" Grid.Column="1" VerticalContentAlignment="Center"
+        <TextBox x:Name="tbTickerName" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,0,0,0"
                  IsEnabled="{Binding CanSearch}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
@@ -46,19 +46,20 @@
                     Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False">
-            <!--<DataGrid ItemsSource="{Binding SearchResults}" IsReadOnly="True" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding Name}" Width="Auto" />
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="Auto" />
-                    <DataGridTextColumn Header="Market" Binding="{Binding Market}" Width="Auto" />
-                </DataGrid.Columns>
-            </DataGrid>-->
-            <ListView ItemsSource="{Binding SearchResults}">
+        <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False" AllowsTransparency="True">
+            <Popup.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </Popup.Resources>
+            <ListView ItemsSource="{Binding SearchResults}" Opacity="0.7">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Name}" Width="Auto" />
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="Auto" />
                         <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}" Width="Auto" />
                     </GridView>
                 </ListView.View>

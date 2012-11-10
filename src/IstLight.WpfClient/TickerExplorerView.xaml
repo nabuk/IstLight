@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:IstLight"
              mc:Ignorable="d" 
-             d:DesignHeight="300" Width="300">
+             d:DesignHeight="300" Width="300"
+             Background="{StaticResource NormalBrush}">
     <DockPanel>
-        <view:SectionHeaderView x:Name="header" Title="Ticker Explorer" DockPanel.Dock="Top" />
         <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" Margin="10" />
-        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10">
             <ItemsControl ItemsSource="{Binding Tickers}" />
         </ScrollViewer>
     </DockPanel>

@@ -6,29 +6,38 @@
              xmlns:view="clr-namespace:IstLight"
              x:Name="ErrorListViewControl"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="250" d:DesignWidth="300"
+             Background="{StaticResource NormalBrush}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="25" />
         </Grid.RowDefinitions>
-        <view:SectionHeaderView Title="Error list"  />
-        <ScrollViewer
-            Grid.Row="1"
+        <ScrollViewer Margin="3"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ListBox ItemsSource="{Binding ErrorList, Mode=OneWay}" BorderThickness="0">
+            <ItemsControl ItemsSource="{Binding ErrorList, Mode=OneTime}" 
+                          Background="{StaticResource LightBrush}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentPresenter Content="{Binding}" />
+                        <TextBox x:Name="tbError"
+                                 Text="{Binding Path=., Mode=OneTime}"
+                                 Foreground="{StaticResource TextBrush}"
+                                 IsReadOnly="True">
+                            <TextBox.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Offset="0" Color="{StaticResource HoverColor}" />
+                                    <GradientStop Offset="1" Color="#333333" />
+                                </LinearGradientBrush>
+                            </TextBox.Background>
+                        </TextBox>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ListBox>
+            </ItemsControl>
         </ScrollViewer>
         <Button
             Content="Clear"
-            Command="{Binding ClearCommand, Mode=OneWay}"
-            Grid.Row="2"
+            Command="{Binding ClearCommand, Mode=OneTime}"
+            Grid.Row="1"
             Margin="3"
             Width="50"
             HorizontalAlignment="Left" />

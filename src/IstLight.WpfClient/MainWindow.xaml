@@ -32,9 +32,9 @@
             </CheckBox.LayoutTransform>
         </CheckBox>
 
-        <CheckBox x:Name="cbErrorList" Content="Error list" Grid.Row="2" Grid.Column="1" />
+        <CheckBox x:Name="cbErrorList" Content="Error list" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0" />
 
-        <CheckBox Content="Simulation settings" Grid.Row="1" Grid.Column="2">
+        <CheckBox Content="Simulation settings" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0">
             <CheckBox.LayoutTransform>
                 <RotateTransform Angle="90" />
             </CheckBox.LayoutTransform>
@@ -52,10 +52,18 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Border Background="#595959"  Margin="5,0" Grid.RowSpan="2"
+            <!--<Border Background="#595959"  Margin="5,0" Grid.RowSpan="2" BorderBrush="{StaticResource ShadeBrush}" BorderThickness="2"
                     Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}}">
                 <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
-            </Border>
+            </Border>-->
+            
+            <TabControl Margin="0,0,5,0" Grid.RowSpan="2"
+                        Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}}">
+                <TabItem Header="Ticker Explorer">
+                    <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
+                </TabItem>
+            </TabControl>
+            
             <!--<GridSplitter Grid.RowSpan="2" Grid.Column="1" Width="5" ShowsPreview="True"
                           ResizeBehavior="PreviousAndNext" Background="Transparent" />-->
             
@@ -64,9 +72,13 @@
                 <TabItem Header="Script2.py" />
             </TabControl>
 
-            <ContentPresenter Content="{Binding ErrorList, Mode=OneTime}" Grid.Row="1" Grid.ColumnSpan="4"
-                Visibility="{Binding IsChecked, ElementName=cbErrorList, Converter={StaticResource boolToVisConverter}}"
-                Panel.ZIndex="2"/>
+            <TabControl Grid.Row="1" Grid.ColumnSpan="4"
+                        Visibility="{Binding IsChecked, ElementName=cbErrorList, Converter={StaticResource boolToVisConverter}}">
+                <TabItem Header="Error List">
+                    <ContentPresenter Content="{Binding ErrorList, Mode=OneTime}" Panel.ZIndex="2" />
+                </TabItem>
+            </TabControl>
+
         </Grid>
     </Grid>
 </Window>

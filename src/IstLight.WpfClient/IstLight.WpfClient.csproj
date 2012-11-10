@@ -183,7 +183,9 @@
       <Name>IstLight.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(SolutionDir)..\scripts $(TargetDir)scripts /E /I /Y /Q

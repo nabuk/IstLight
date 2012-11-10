@@ -5,42 +5,82 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:helpers="clr-namespace:IstLight.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignWidth="300"
              helpers:StateManager.VisualState="{Binding LoadState, Mode=OneWay}"
              >
-    <Grid>
-        <TextBlock Text="{Binding Name}" Foreground="White" />
-        <TextBlock x:Name="tbState" Text="{Binding LoadState, Mode=OneWay}" HorizontalAlignment="Right" Foreground="White" />
-        <Button Content="Close" HorizontalAlignment="Center" Command="{Binding CloseCommand}" />
+    <Border
+        x:Name="mainBorder"
+        Background="{StaticResource NormalBrush}">
+        <Grid Margin="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <DockPanel>
+                <Button DockPanel.Dock="Right"
+                    Content="Remove"
+                    Command="{Binding CloseCommand}"
+                    VerticalAlignment="Top"
+                    Padding="6,2"
+                    />
+
+                <TextBox
+                    x:Name="tbSymbol"
+                    Text="{Binding Name}"
+                    Foreground="Gray"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Width="150"
+                    Margin="0,3"
+                    IsReadOnly="True"
+                />
+            </DockPanel>
+
+            <ProgressBar
+                x:Name="loadProgress"
+                IsIndeterminate="True"
+                Grid.Row="1"
+                Height="4"
+                VerticalAlignment="Bottom" />
+        </Grid>
         
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LoadStates">
                 <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0:0:0.4"/>
+                    <VisualTransition GeneratedDuration="0:0:1"/>
                     <VisualTransition GeneratedDuration="0:0:0" To="Running"/>
+                    <VisualTransition GeneratedDuration="0:0:0.4" To="Error"/>
+                    <VisualTransition GeneratedDuration="0:0:0.4" To="Completed"/>
                 </VisualStateGroup.Transitions>
-                <VisualState x:Name="Running">
+                <!--<VisualState x:Name="Running">
                     <Storyboard>
-                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbState">
-                            <EasingColorKeyFrame KeyTime="0" Value="Gray"/>
-                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
+                                    To="{StaticResource BlackColor}" Duration="0:0:0" />
                     </Storyboard>
-                </VisualState>
+                </VisualState>-->
                 <VisualState x:Name="Completed">
                     <Storyboard>
-                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbState">
-                            <EasingColorKeyFrame KeyTime="0" Value="CornflowerBlue"/>
-                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="mainBorder"
+                            To="SlateGray" Duration="0" />
+                        <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
+                                    To="{StaticResource WhiteColor}" Duration="0" />
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="loadProgress"
+                            To="0" Duration="0" />
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly" Storyboard.TargetName="tbSymbol">
+                            <DiscreteBooleanKeyFrame Value="False" />
+                        </BooleanAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Error">
                     <Storyboard>
-                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbState">
-                            <EasingColorKeyFrame KeyTime="0" Value="Red"/>
-                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="mainBorder"
+                            To="#944" Duration="0" />
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="loadProgress"
+                            To="0" Duration="0" />
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-    </Grid>
+    </Border>
 </UserControl>

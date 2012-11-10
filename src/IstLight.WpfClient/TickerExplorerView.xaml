@@ -10,7 +10,13 @@
     <DockPanel>
         <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" Margin="10" />
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10">
-            <ItemsControl ItemsSource="{Binding Tickers}" />
+            <ItemsControl ItemsSource="{Binding Tickers}" Background="{StaticResource LightBrush}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding}" Margin="2,2,2,0" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </DockPanel>
 </UserControl>

@@ -24,6 +24,16 @@
                     VerticalAlignment="Top"
                     Padding="6,2"
                     />
+                
+                <TextBox
+                    x:Name="tbIndex"
+                    Text="{Binding Index}"
+                    Foreground="Gray"
+                    IsReadOnly="True"
+                    VerticalAlignment="Center"
+                    Width="25"
+                    TextAlignment="Right"
+                    />
 
                 <TextBox
                     x:Name="tbSymbol"
@@ -32,7 +42,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Width="150"
-                    Margin="0,3"
+                    Margin="3"
                     IsReadOnly="True"
                 />
             </DockPanel>
@@ -62,7 +72,7 @@
                 <VisualState x:Name="Completed">
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="mainBorder"
-                            To="SlateGray" Duration="0" />
+                            To="#889B" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
                                     To="{StaticResource WhiteColor}" Duration="0" />
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="loadProgress"
@@ -75,7 +85,7 @@
                 <VisualState x:Name="Error">
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="mainBorder"
-                            To="#944" Duration="0" />
+                            To="#4F00" Duration="0" />
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="loadProgress"
                             To="0" Duration="0" />
                     </Storyboard>

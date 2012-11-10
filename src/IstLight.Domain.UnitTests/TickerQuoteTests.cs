@@ -6,12 +6,18 @@ namespace IstLight.UnitTests
 {
     public class TickerQuoteTests
     {
-        [Theory]
-        [InlineData(0)]
-        [InlineData(-1)]
-        public void ctor_NegativeVolume_Throws(double volume)
+
+        [Fact]
+        public void ctor_ZeroVolume_IsConvertedToNull()
         {
-            Assert.Throws<ArgumentException>(() => CreateByLongCtor(volume: volume));
+            var sut = CreateByLongCtor(volume: 0);
+            Assert.Null(sut.Volume);
+        }
+
+        [Fact]
+        public void ctor_NegativeVolume_Throws()
+        {
+            Assert.Throws<ArgumentException>(() => CreateByLongCtor(volume:-1));
         }
 
         [Fact]

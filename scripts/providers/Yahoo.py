@@ -14,8 +14,8 @@ from System.Linq import Enumerable
 clr.ImportExtensions(System.Linq)
 
 providerSiteUrl = "http://ichart.yahoo.com"
-def ProviderGetTickerDataUrl(ticker): return "ichart.yahoo.com/table.csv?s="+ticker
-def ProviderGetTickersUrl(ticker): return "http://d.yimg.com/aq/autoc?query="+ticker+"&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks"
+def ProviderGetTickerDataUrl(ticker): return "http://ichart.yahoo.com/table.csv?s="+ticker
+def ProviderGetTickersUrl(ticker): return "http://d.yimg.com/aq/autoc?query="+ticker+"&callback=YAHOO.util.ScriptNodeDataSource.callbacks"
 Name = "Yahoo.com"
 
 class WebClientEx(WebClient):
@@ -41,9 +41,9 @@ def GetRawData(webUrl, fileUrl):
 		client.Encoding = Encoding.UTF8
 		result = client.DownloadString(fileUrl)
 	if (result is None) or (result == ''):
-		raise ApplicationException('Can\'t download data')
+		raise Exception('Can\'t download data')
 	elif result.Length < 10:
-		raise ApplicationException('No data')
+		raise Exception('No data')
 	return result
 
 def GetIndexesOf(input,c):

@@ -15,6 +15,7 @@ namespace IstLight
     {
         private readonly IAsyncResult<Ticker> asyncTicker;
         private readonly Dispatcher dispatcher;
+        private int index;
 
         private void HandleLoaded()
         {
@@ -48,5 +49,14 @@ namespace IstLight
             private set;
         }
 
+        public int Index
+        {
+            get { return index; }
+            internal set
+            {
+                index = value;
+                base.RaisePropertyChanged<int>(() => Index);
+            }
+        }
     }
 }

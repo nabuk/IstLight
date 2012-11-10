@@ -77,6 +77,7 @@
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ScrollViewerHelper.cs" />
     <Compile Include="Helpers\StateManager.cs" />
     <Compile Include="SectionHeaderView.xaml.cs">
       <DependentUpon>SectionHeaderView.xaml</DependentUpon>

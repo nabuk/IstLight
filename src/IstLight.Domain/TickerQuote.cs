@@ -8,7 +8,8 @@ namespace IstLight
 
         public TickerQuote(DateTime date, double open, double close, double high, double low, double? volume)
         {
-            if (volume <= 0) throw new ArgumentException("Cannot be negative.", "volume");
+            if (volume == 0) volume = null;
+            if (volume < 0) throw new ArgumentException("Cannot be negative.", "volume");
             if (high < Math.Max(open, close)) throw new ArgumentException("Value is not valid.", "high");
             if (low > Math.Min(open, close)) throw new ArgumentException("Value is not valid.", "low");
 

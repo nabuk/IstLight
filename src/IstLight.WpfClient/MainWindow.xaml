@@ -58,7 +58,7 @@
             </Border>-->
             
             <TabControl Margin="0,0,5,0" Grid.RowSpan="2"
-                        Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}}">
+                        Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
                 <TabItem Header="Ticker Explorer">
                     <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
                 </TabItem>
@@ -73,7 +73,7 @@
             </TabControl>
 
             <TabControl Grid.Row="1" Grid.ColumnSpan="4"
-                        Visibility="{Binding IsChecked, ElementName=cbErrorList, Converter={StaticResource boolToVisConverter}}">
+                        Visibility="{Binding IsChecked, ElementName=cbErrorList, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
                 <TabItem Header="Error List">
                     <ContentPresenter Content="{Binding ErrorList, Mode=OneTime}" Panel.ZIndex="2" />
                 </TabItem>

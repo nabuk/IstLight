@@ -15,15 +15,15 @@
         </LinearGradientBrush>
     </UserControl.Background>
     <DockPanel>
-        <ContentPresenter Content="{Binding Providers}" DockPanel.Dock="Top" Margin="10" />
+        <ContentPresenter Content="{Binding Providers, Mode=OneWay}" DockPanel.Dock="Top" Margin="10" />
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10">
             <ItemsControl
-                ItemsSource="{Binding Tickers}"
+                ItemsSource="{Binding Tickers, Mode=OneWay}"
                 helpers:ItemsControlHelper.AutoScrollToEnd="true"
                 Background="{StaticResource LightBrush}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentPresenter Content="{Binding}" Margin="2,2,2,0" />
+                        <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2,2,2,0" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

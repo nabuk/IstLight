@@ -20,7 +20,7 @@
             ItemsSource="{Binding Providers, Mode=OneWay}"
             SelectedItem="{Binding SelectedProvider}"
             Foreground="White"
-            IsEnabled="{Binding CanChangeProvider}"
+            IsEnabled="{Binding CanChangeProvider, Mode=OneWay}"
             MinWidth="100"
             DockPanel.Dock="Left">
             <ComboBox.ItemTemplate>
@@ -30,7 +30,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBox x:Name="tbTickerName" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,0,0,0"
-                 IsEnabled="{Binding CanSearch}">
+                 IsEnabled="{Binding CanSearch, Mode=OneWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <cmd:EventToCommand
@@ -56,13 +56,13 @@
         <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False" AllowsTransparency="True">
             <DataGrid
                 x:Name="dgSearchResults"
-                ItemsSource="{Binding SearchResults}"
+                ItemsSource="{Binding SearchResults, Mode=OneWay}"
                 Opacity="1"
                 Style="{StaticResource SearchTickerResultsStyle}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding Name}" Width="Auto" />
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="Auto" />
-                    <DataGridTextColumn Header="Market" Binding="{Binding Market}" Width="Auto" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Name, Mode=OneWay}" Width="Auto" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=OneWay}" Width="Auto" />
+                    <DataGridTextColumn Header="Market" Binding="{Binding Market, Mode=OneWay}" Width="Auto" />
                 </DataGrid.Columns>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

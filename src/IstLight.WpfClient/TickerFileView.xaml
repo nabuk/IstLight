@@ -29,14 +29,14 @@
             <DockPanel>
                 <Button DockPanel.Dock="Right"
                     Content="X"
-                    Command="{Binding CloseCommand}"
+                    Command="{Binding CloseCommand, Mode=OneWay}"
                     VerticalAlignment="Top"
                     Padding="6,2"
                     />
 
                 <TextBox
                     x:Name="tbIndex"
-                    Text="{Binding Index}"
+                    Text="{Binding Index, Mode=OneWay}"
                     Foreground="Gray"
                     IsReadOnly="True"
                     VerticalAlignment="Center"
@@ -56,8 +56,8 @@
                 />
             </DockPanel>
             <Grid x:Name="detailsGrid" Opacity="0">
-                <TextBlock Text="{Binding From}" />
-                <TextBlock Text="{Binding To}" HorizontalAlignment="Right" />
+                <TextBlock Text="{Binding From, Mode=OneWay}" />
+                <TextBlock Text="{Binding To, Mode=OneWay}" HorizontalAlignment="Right" />
             </Grid>
         </StackPanel>
         

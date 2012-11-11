@@ -10,8 +10,14 @@
              >
     <Border
         x:Name="mainBorder"
-        Background="{StaticResource NormalBrush}">
-        <Grid Margin="2">
+        >
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#393939" />
+                <GradientStop Offset="1" Color="#393939" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid Margin="4,2">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
@@ -19,7 +25,7 @@
             
             <DockPanel>
                 <Button DockPanel.Dock="Right"
-                    Content="Remove"
+                    Content="X"
                     Command="{Binding CloseCommand}"
                     VerticalAlignment="Top"
                     Padding="6,2"
@@ -45,34 +51,31 @@
                     Margin="3"
                     IsReadOnly="True"
                 />
+                
             </DockPanel>
 
             <ProgressBar
                 x:Name="loadProgress"
                 IsIndeterminate="True"
                 Grid.Row="1"
-                Height="4"
+                Height="3"
+                Opacity="0"
                 VerticalAlignment="Bottom" />
+
         </Grid>
         
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LoadStates">
                 <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0:0:1"/>
+                    <VisualTransition GeneratedDuration="0:0:0.3"/>
                     <VisualTransition GeneratedDuration="0:0:0" To="Running"/>
-                    <VisualTransition GeneratedDuration="0:0:0.4" To="Error"/>
-                    <VisualTransition GeneratedDuration="0:0:0.4" To="Completed"/>
+                    <VisualTransition GeneratedDuration="0:0:0.3" To="Error"/>
+                    <VisualTransition GeneratedDuration="0:0:0.3" To="Completed"/>
                 </VisualStateGroup.Transitions>
-                <!--<VisualState x:Name="Running">
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
-                                    To="{StaticResource BlackColor}" Duration="0:0:0" />
-                    </Storyboard>
-                </VisualState>-->
                 <VisualState x:Name="Completed">
                     <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="mainBorder"
-                            To="#889B" Duration="0" />
+                        <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[1].Color" Storyboard.TargetName="mainBorder"
+                            To="SlateGray" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
                                     To="{StaticResource WhiteColor}" Duration="0" />
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="loadProgress"
@@ -84,8 +87,8 @@
                 </VisualState>
                 <VisualState x:Name="Error">
                     <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="mainBorder"
-                            To="#4F00" Duration="0" />
+                        <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[1].Color" Storyboard.TargetName="mainBorder"
+                            To="#6B00" Duration="0" />
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="loadProgress"
                             To="0" Duration="0" />
                     </Storyboard>

@@ -26,7 +26,7 @@
                             <TextBox.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                     <GradientStop Offset="0" Color="{StaticResource HoverColor}" />
-                                    <GradientStop Offset="1" Color="#333333" />
+                                    <GradientStop Offset="1" Color="{StaticResource LightColor}" />
                                 </LinearGradientBrush>
                             </TextBox.Background>
                         </TextBox>

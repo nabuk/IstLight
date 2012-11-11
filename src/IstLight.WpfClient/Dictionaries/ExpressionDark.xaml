@@ -13,7 +13,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
 
     <!-- Main Colors -->
-    <Color x:Key="LightColor">#FF333333</Color>
+    <Color x:Key="LightColor">#222</Color>
     <Color x:Key="ShadeColor">#FF434343</Color>
     <Color x:Key="MainColor">#FF595959</Color>
     <Color x:Key="HoverColor">#FF393939</Color>

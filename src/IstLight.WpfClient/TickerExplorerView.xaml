@@ -23,7 +23,7 @@
                 Background="{StaticResource LightBrush}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2,2,2,0" />
+                        <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

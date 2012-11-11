@@ -189,10 +189,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)..\scripts $(TargetDir)scripts /E /I /Y /Q
-rd /S /Q $(TargetDir)lib
-md $(TargetDir)lib
-move /Y $(TargetDir)*.dll $(TargetDir)lib</PostBuildEvent>
+    <PostBuildEvent>copy /Y $(SolutionDir)..\lib\Scripting\*.dll $(TargetDir)
+xcopy $(SolutionDir)..\scripts $(TargetDir)scripts /E /I /Y /Q</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

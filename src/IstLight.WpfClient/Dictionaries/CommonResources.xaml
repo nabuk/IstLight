@@ -4,5 +4,75 @@
     xmlns:helpers="clr-namespace:IstLight.Helpers">
     
     <helpers:BoolToVisibilityConverter x:Key="boolToVisConverter" />
-    
+
+
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="SearchTickerResultsStyle" TargetType="{x:Type DataGrid}">
+        <!--<Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource MainColor}"/>
+        </Style.Resources>-->
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="SelectionUnit" Value="FullRow" />
+        <Setter Property="RowBackground" Value="#4333" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{x:Null}" />
+        <Setter Property="HeadersVisibility" Value="None" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Background" Value="#8222" />
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource NormalBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#4333" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Focusable" Value="False" />
+                    <Setter Property="Margin" Value="2,1" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--<DataGrid.RowStyle>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                           Value="True">
+                    <Setter Property="Background"
+                               Value="Green" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </DataGrid.RowStyle>-->
+
+    <!--<DataTemplate x:Key="bulletItemTemplate">
+        <BulletDecorator Width="Auto" Margin="2,0">
+            <BulletDecorator.Bullet>
+                <Ellipse Fill="Black" Width="4" Height="4" />
+            </BulletDecorator.Bullet>
+            <ContentPresenter Content="{Binding}" Margin="5,0" />
+        </BulletDecorator>
+    </DataTemplate>-->
+
 </ResourceDictionary>

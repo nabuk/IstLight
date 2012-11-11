@@ -54,23 +54,25 @@
             </TextBox.InputBindings>
         </TextBox>
         <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False" AllowsTransparency="True">
-            <Popup.Resources>
-                <Style TargetType="{x:Type GridViewColumnHeader}">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </Style>
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </Popup.Resources>
-            <ListView ItemsSource="{Binding SearchResults}" Opacity="0.8">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Name}" Width="NaN" />
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="NaN" />
-                        <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}" Width="NaN" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <DataGrid
+                x:Name="dgSearchResults"
+                ItemsSource="{Binding SearchResults}"
+                Opacity="1"
+                Style="{StaticResource SearchTickerResultsStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Name}" Width="Auto" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="Auto" />
+                    <DataGridTextColumn Header="Market" Binding="{Binding Market}" Width="Auto" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <cmd:EventToCommand
+                        Command="{Binding DownloadCommand, Mode=OneWay}"
+                        CommandParameter="{Binding Path=SelectedItem.Name,ElementName=dgSearchResults,Mode=OneWay}"
+                         />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
         </Popup>
     </Grid>
 </UserControl>

@@ -75,6 +75,11 @@ namespace IstLight
 
             base.RaisePropertyChanged<TickerProviderViewModel>(() => SelectedProvider);
         }
+        private void HandleDownloadCommand(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+                LoadingTicker(Download(name.Trim().ToUpperInvariant()));
+        }
         #endregion
 
         public TickerProvidersViewModel(IAsyncLoadService<ITickerProvider> loadProvidersService)
@@ -82,7 +87,7 @@ namespace IstLight
             this.loadProvidersService = loadProvidersService;
 
             SearchCommand = new DelegateCommand<string>(hint => Search(hint), x => CanSearch);
-            DownloadCommand = new DelegateCommand<string>(name => LoadingTicker(Download(name)), x => CanDownload);
+            DownloadCommand = new DelegateCommand<string>(HandleDownloadCommand, x => CanDownload);
             CloseSearchResultsCommand = new DelegateCommand(() => ShowSearchResults = false);
         }
 

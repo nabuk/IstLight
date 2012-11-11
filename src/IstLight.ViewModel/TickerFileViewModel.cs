@@ -24,8 +24,16 @@ namespace IstLight
                 LoadState = asyncTicker.GetState();
                 base.RaisePropertyChanged<AsyncState>(() => LoadState);
 
-                //if (asyncTicker.Error != null)
-                //    CloseCommand.Execute(null);
+                if (asyncTicker.Error == null)
+                {
+                    Func<DateTime, string> formatDate = dt => dt.ToShortDateString();
+                    var t = asyncTicker.Result;
+                    From = formatDate(t.From);
+                    To = formatDate(t.To);
+
+                    base.RaisePropertyChanged<string>(() => From);
+                    base.RaisePropertyChanged<string>(() => To);
+                }
             });
         }
 
@@ -58,5 +66,8 @@ namespace IstLight
                 base.RaisePropertyChanged<int>(() => Index);
             }
         }
+
+        public string From { get; private set; }
+        public string To { get; private set; }
     }
 }

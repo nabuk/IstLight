@@ -31,6 +31,7 @@ namespace IstLight.Bootstrapper
                 .InSingletonScope();
 
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
+            Kernel.Bind<SimulationSettingsViewModel>().ToSelf().InSingletonScope();
 
         }
     }

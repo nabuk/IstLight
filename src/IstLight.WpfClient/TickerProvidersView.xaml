@@ -30,15 +30,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBox x:Name="tbTickerName" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,0,0,0"
-                 IsEnabled="{Binding CanSearch, Mode=OneWay}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <cmd:EventToCommand
-                        Command="{Binding SearchCommand, Mode=OneWay}"
-                        CommandParameter="{Binding Text,ElementName=tbTickerName,Mode=OneWay}"
-                         />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+                 IsEnabled="{Binding CanSearch, Mode=OneWay}" Text="{Binding Hint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TextBox.InputBindings>
                 <KeyBinding
                     Command="{Binding DownloadCommand, Mode=OneTime}"
@@ -53,7 +45,7 @@
                     Key="Escape" />
             </TextBox.InputBindings>
         </TextBox>
-        <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults}" StaysOpen="False" AllowsTransparency="True">
+        <Popup Grid.Row="1" Grid.ColumnSpan="2" IsOpen="{Binding ShowSearchResults, Mode=TwoWay}" StaysOpen="False" AllowsTransparency="True">
             <DataGrid
                 x:Name="dgSearchResults"
                 ItemsSource="{Binding SearchResults, Mode=OneWay}"

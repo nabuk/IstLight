@@ -20,10 +20,29 @@ namespace IstLight
         private TickerProviderViewModel selectedProvider;
         private IEnumerable<TickerSearchResultViewModel> searchResults = Enumerable.Empty<TickerSearchResultViewModel>();
         private bool showResults = false;
+        private bool blockShowResultsTillNextSearch = false;
         private  bool canChangeProvider = false;
+        private string hint = string.Empty;
+        private ConcurrentDictionary<object, long> searchRequestTime = new ConcurrentDictionary<object, long>();
+        private long lastReqTime = 0;
+        private readonly object syncUpdateLastReqTime = new object();
         #endregion
 
         #region Inner methods
+        private bool IsLastRequest(long reqTime)
+        {
+            lock (syncUpdateLastReqTime)
+            {
+                if (reqTime > lastReqTime)
+                {
+                    lastReqTime = reqTime;
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
+
         private ReadOnlyObservableCollection<TickerProviderViewModel> InitializeProviders()
         {
             var observableProviders = new ThreadSafeObservableCollection<TickerProviderViewModel>();
@@ -48,15 +67,34 @@ namespace IstLight
         }
         private void Search(string hint)
         {
-            SelectedProvider.Provider.Search(hint).AddCallback(ar =>
+            long currentTicks = DateTime.Now.Ticks;
+            hint = RelevantText(hint);
+            if (hint == string.Empty)
             {
-                SearchResults = (ar.Result ?? Enumerable.Empty<TickerSearchResult>()).Select(x => new TickerSearchResultViewModel(x));
-                ShowSearchResults = SearchResults.Any();
+                IsLastRequest(currentTicks);
+                ShowSearchResults = false;
+                return;
+            }
+            blockShowResultsTillNextSearch = false;
+
+            var arReq = SelectedProvider.Provider.Search(hint);
+            searchRequestTime.AddOrUpdate(arReq, currentTicks,(k,v)=>v);
+            arReq.AddCallback(ar =>
+            {
+                long reqTime = 0;
+                searchRequestTime.TryRemove(ar, out reqTime);
+                if (IsLastRequest(reqTime))
+                {
+                    SearchResults = (ar.Result ?? Enumerable.Empty<TickerSearchResult>()).Select(x => new TickerSearchResultViewModel(x));
+                    ShowSearchResults = SearchResults.Any();
+                }
             });
         }
         private TickerFileViewModel Download(string name)
         {
+            blockShowResultsTillNextSearch = true;
             ShowSearchResults = false;
+            Hint = string.Empty;
             return new TickerFileViewModel(name, SelectedProvider.Provider.Get(name));
         }
         private void HandleSelectedProviderChange(TickerProviderViewModel previous, TickerProviderViewModel current)
@@ -78,7 +116,17 @@ namespace IstLight
         private void HandleDownloadCommand(string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
-                LoadingTicker(Download(name.Trim().ToUpperInvariant()));
+                LoadingTicker(Download(RelevantText(name)));
+        }
+
+        private string RelevantText(string str)
+        {
+            return (str ?? "").Trim().ToUpperInvariant();
+        }
+
+        private void HandleHintChange()
+        {
+            if (CanSearch) SearchCommand.Execute(Hint);
         }
         #endregion
 
@@ -143,6 +191,7 @@ namespace IstLight
             set
             {
                 if (showResults == value) return;
+                if (value && blockShowResultsTillNextSearch) return;
                 this.showResults = value;
                 base.RaisePropertyChanged<bool>(() => ShowSearchResults);
             }
@@ -150,5 +199,19 @@ namespace IstLight
         public ICommand CloseSearchResultsCommand { get; private set; }
 
         public event Action<TickerFileViewModel> LoadingTicker = delegate { };
+
+        public string Hint
+        {
+            get { return hint; }
+            set
+            {
+                if (hint == value)
+                    return;
+
+                hint = value;
+                base.RaisePropertyChanged<string>(() => Hint);
+                HandleHintChange();
+            }
+        }
     }
 }

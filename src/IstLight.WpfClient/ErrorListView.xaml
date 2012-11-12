@@ -7,13 +7,13 @@
              x:Name="ErrorListViewControl"
              mc:Ignorable="d" 
              Height="250" d:DesignWidth="300"
-             Background="{StaticResource NormalBrush}">
+             Background="{x:Null}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer Margin="10"
+        <ScrollViewer Margin="3"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding ErrorList, Mode=OneTime}" 
                           Background="{StaticResource LightBrush}">
@@ -38,7 +38,7 @@
             Content="Clear"
             Command="{Binding ClearCommand, Mode=OneTime}"
             Grid.Row="1"
-            Margin="10,0,0,10"
+            Margin="3,0,0,3"
             Width="50"
             HorizontalAlignment="Left" />
     </Grid>

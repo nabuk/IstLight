@@ -23,6 +23,8 @@ namespace IstLight
             this.periodTypeNames = PeriodTypeNames.TypeNames;
             this.simulationPriceTypeNames = SimulationPriceTypeNames.TypeNames;
             this.simulationRangeTypeNames = SimulationRangeTypeNames.TypeNames;
+            this.SimulationRangeFrom = DateTime.Now.AddYears(-10);
+            this.SimulationRangeTo = DateTime.Now;
         }
 
         public double AnnualInflationRate

@@ -15,9 +15,6 @@
     </Style>
 
     <Style x:Key="SearchTickerResultsStyle" TargetType="{x:Type DataGrid}">
-        <!--<Style.Resources>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource MainColor}"/>
-        </Style.Resources>-->
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="SelectionUnit" Value="FullRow" />
@@ -57,26 +54,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--<DataGrid.RowStyle>
-        <Style TargetType="DataGridRow">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver"
-                           Value="True">
-                    <Setter Property="Background"
-                               Value="Green" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </DataGrid.RowStyle>-->
-
-    <!--<DataTemplate x:Key="bulletItemTemplate">
-        <BulletDecorator Width="Auto" Margin="2,0">
-            <BulletDecorator.Bullet>
-                <Ellipse Fill="Black" Width="4" Height="4" />
-            </BulletDecorator.Bullet>
-            <ContentPresenter Content="{Binding}" Margin="5,0" />
-        </BulletDecorator>
-    </DataTemplate>-->
 
 </ResourceDictionary>

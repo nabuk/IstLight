@@ -4,38 +4,170 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" Width="300"
+             Width="300"
              Background="{x:Null}">
+    <UserControl.Resources>
+        <Thickness x:Key="rightElemMargin">
+            8,2,2,2
+        </Thickness>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="{StaticResource rightElemMargin}" />
+        </Style>
+        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="{StaticResource rightElemMargin}" />
+        </Style>
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="{StaticResource rightElemMargin}" />
+        </Style>
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="{StaticResource rightElemMargin}" />
+        </Style>
+    </UserControl.Resources>
     <StackPanel>
-        <GroupBox Header="Commission &amp; rates" Margin="10">
-            <Grid>
+
+        <Expander IsExpanded="True" Header="Commission &amp; rates">
+            <Grid Background="{StaticResource NormalBrush}">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="C1" />
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="C2" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="C1" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="C2" />
                 </Grid.ColumnDefinitions>
+                
                 <TextBlock
-                    Text="Commision type"
-                    VerticalAlignment="Center" />
+                    Text="Commision type" />
                 <ComboBox
                     Grid.Column="1"
                     ItemsSource="{Binding CommissionTypes, Mode=OneTime}"
-                    SelectedItem="{Binding SelectedCommissionType}"
-                    HorizontalAlignment="Right"/>
-                
-                <TextBlock
-                    Grid.Row="1"
-                    Text="Commission value"
-                    VerticalAlignment="Center" />
-                
-                <TextBox
-                    Grid.Row="1" Grid.Column="1"
-                    Text="{Binding CommissionValue}"
-                    HorizontalAlignment="Right" />
+                    SelectedItem="{Binding SelectedCommissionType}" />
+
+                <TextBlock Grid.Row="1"
+                    Text="Commission value" />
+                <TextBox Grid.Row="1" Grid.Column="1"
+                    Text="{Binding CommissionValue}" />
+
+                <TextBlock Grid.Row="3"
+                    Text="Annual interest rate" />
+                <TextBox Grid.Row="3" Grid.Column="1"
+                    Text="{Binding AnnualInterestRate}" />
+
+                <TextBlock Grid.Row="4"
+                    Text="Annual inflation rate" />
+                <TextBox Grid.Row="4" Grid.Column="1"
+                         Text="{Binding AnnualInflationRate}" />
             </Grid>
-        </GroupBox>
+        </Expander>
+        
+        <Expander IsExpanded="True" Header="Range &amp; period">
+            <Grid Background="{StaticResource NormalBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" SharedSizeGroup="C1" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="C2" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Text="Range type" />
+                <ComboBox Grid.Column="1"
+                    ItemsSource="{Binding SimulationRangeTypes, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedSimulationRangeType}" />
+                
+                <TextBlock Grid.Row="1"
+                    Text="From" 
+                    Visibility="{Binding CanEditSimulationRangeDates, Mode=OneWay, Converter={StaticResource boolToVisConverter}}" />
+                <DatePicker Grid.Row="1" Grid.Column="1"
+                    SelectedDate="{Binding SimulationRangeFrom}"
+                    Visibility="{Binding CanEditSimulationRangeDates, Mode=OneWay, Converter={StaticResource boolToVisConverter}}" />
+
+                <TextBlock Grid.Row="2"
+                    Text="To"
+                    Visibility="{Binding CanEditSimulationRangeDates, Mode=OneWay, Converter={StaticResource boolToVisConverter}}" />
+                <DatePicker Grid.Row="2" Grid.Column="1"
+                    SelectedDate="{Binding SimulationRangeTo}"
+                Visibility="{Binding CanEditSimulationRangeDates, Mode=OneWay, Converter={StaticResource boolToVisConverter}}" />
+                
+                <TextBlock Grid.Row="4"
+                    Text="Period" />
+                <ComboBox Grid.Row="4" Grid.Column="1"
+                    ItemsSource="{Binding PeriodTypes, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedPeriodType}" />
+            </Grid>
+        </Expander>
+
+        <Expander IsExpanded="True" Header="Trading">
+            <Grid Background="{StaticResource NormalBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" SharedSizeGroup="C1" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="C2" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Text="Initial equity" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding InitialEquity}" />
+
+                <TextBlock Grid.Row="1"
+                    Text="Trade delay" />
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding TradeDelay}" />
+
+                <TextBlock Grid.Row="2"
+                    Text="Close all on last bar" />
+                <CheckBox Grid.Row="2" Grid.Column="1"
+                          IsChecked="{Binding CloseAllOnLastBar}" />
+            </Grid>
+        </Expander>
+
+        <Expander IsExpanded="True" Header="Quotes">
+            <Grid Background="{StaticResource NormalBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" SharedSizeGroup="C1" />
+                    <ColumnDefinition Width="*" SharedSizeGroup="C2" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Text="Price type" />
+                <ComboBox Grid.Column="1"
+                    ItemsSource="{Binding SimulationPriceTypes, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedSimulationPriceType}" />
+
+                <TextBlock Grid.Row="1"
+                    Text="Only recent quotes" />
+                <CheckBox Grid.Row="1" Grid.Column="1"
+                          IsChecked="{Binding OnlyRecentQuotes}" />
+            </Grid>
+        </Expander>
     </StackPanel>
 </UserControl>

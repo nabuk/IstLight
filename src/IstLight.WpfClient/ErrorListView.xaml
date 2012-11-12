@@ -11,9 +11,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="25" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer Margin="3"
+        <ScrollViewer Margin="10"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding ErrorList, Mode=OneTime}" 
                           Background="{StaticResource LightBrush}">
@@ -38,7 +38,7 @@
             Content="Clear"
             Command="{Binding ClearCommand, Mode=OneTime}"
             Grid.Row="1"
-            Margin="3"
+            Margin="10,0,0,10"
             Width="50"
             HorizontalAlignment="Left" />
     </Grid>

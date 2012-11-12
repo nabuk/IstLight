@@ -13,7 +13,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
 
     <!-- Main Colors -->
-    <Color x:Key="LightColor">#222</Color>
+    <Color x:Key="LightColor">#2D2D30</Color>
     <Color x:Key="ShadeColor">#FF434343</Color>
     <Color x:Key="MainColor">#FF595959</Color>
     <Color x:Key="HoverColor">#FF393939</Color>
@@ -1930,7 +1930,10 @@
                             </TabPanel>
                         </Border>
                         <Border x:Name="ContentPanel" Grid.Column="0" Grid.Row="1" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local"
-                                Background="{DynamicResource ShadeBrush}" CornerRadius="0,0,2,2">
+                                Background="{StaticResource ShadeBrush}"
+                                BorderBrush="{StaticResource NormalBrush}"
+                                BorderThickness="1"
+                                CornerRadius="0">
                             <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
                         </Border>
                         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" BorderThickness="0" CornerRadius="10,0,0,0" Opacity="0.5" Margin="2,0,2,0" x:Name="border1">
@@ -2606,7 +2609,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="6" />
                         </Grid.RowDefinitions>
-                        <Border Grid.ColumnSpan="4" Grid.RowSpan="4" Background="{DynamicResource LightBrush}" CornerRadius="4,4,4,4" BorderThickness="1,1,1,1" />
+                        <Border Grid.ColumnSpan="4" Grid.RowSpan="4" Background="{StaticResource LightBrush}" CornerRadius="4,4,4,4" BorderThickness="1,1,1,1" />
                         <Border Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" BorderThickness="1,1,1,1" CornerRadius="4" BorderBrush="{DynamicResource NormalBorderBrush}">
                             <Border.OpacityMask>
                                 <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">

@@ -5,6 +5,10 @@
     
     <helpers:BoolToVisibilityConverter x:Key="boolToVisConverter" />
 
+    <LinearGradientBrush x:Key="PanelBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource HoverColor}" />
+        <GradientStop Offset="0.05" Color="{StaticResource MainColor}" />
+    </LinearGradientBrush>
 
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Center" />

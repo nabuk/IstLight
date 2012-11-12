@@ -4,7 +4,9 @@
         Title="MainWindow"
 		Height="500" Width="800"
 		Background="{StaticResource ControlBackgroundBrush}"
-        TextOptions.TextFormattingMode="Display">
+        TextOptions.TextFormattingMode="Display"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,7 +36,7 @@
 
         <CheckBox x:Name="cbErrorList" Content="Error list" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0" />
 
-        <CheckBox Content="Simulation settings" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0">
+        <CheckBox x:Name="cbSimulationSettings" IsChecked="True" Content="Simulation settings" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0">
             <CheckBox.LayoutTransform>
                 <RotateTransform Angle="90" />
             </CheckBox.LayoutTransform>
@@ -57,7 +59,7 @@
                 <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
             </Border>-->
             
-            <TabControl Margin="0,0,5,0" Grid.RowSpan="2"
+            <TabControl Margin="0,0,3,0" Grid.RowSpan="2"
                         Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
                 <TabItem Header="Ticker Explorer">
                     <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
@@ -67,9 +69,16 @@
             <!--<GridSplitter Grid.RowSpan="2" Grid.Column="1" Width="5" ShowsPreview="True"
                           ResizeBehavior="PreviousAndNext" Background="Transparent" />-->
             
-            <TabControl Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2">
+            <TabControl Grid.RowSpan="2" Grid.Column="2">
                 <TabItem Header="Script.py" />
                 <TabItem Header="Script2.py" />
+            </TabControl>
+            
+            <TabControl Margin="3,0,0,0" Grid.RowSpan="2" Grid.Column="3"
+                        Visibility="{Binding IsChecked, ElementName=cbSimulationSettings, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
+                <TabItem Header="Simulation settings">
+                    <ContentPresenter Content="{Binding SimulationSettings, Mode=OneTime}" Panel.ZIndex="1" />
+                </TabItem>
             </TabControl>
 
             <TabControl Grid.Row="1" Grid.ColumnSpan="4"

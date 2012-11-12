@@ -18,5 +18,11 @@
     <DataTemplate DataType="{x:Type VM:TickerFileViewModel}">
         <View:TickerFileView />
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type VM:SimulationSettingsViewModel}">
+        <View:SimulationSettingsView />
+    </DataTemplate>
+
+
+
 </ResourceDictionary>

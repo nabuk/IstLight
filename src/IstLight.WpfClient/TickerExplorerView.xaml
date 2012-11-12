@@ -7,20 +7,17 @@
              xmlns:helpers="clr-namespace:IstLight.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" Width="300"
+             Background="Transparent"
              >
-    <UserControl.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="{StaticResource HoverColor}" />
-            <GradientStop Offset="0.05" Color="{StaticResource MainColor}" />
-        </LinearGradientBrush>
-    </UserControl.Background>
     <DockPanel>
-        <ContentPresenter Content="{Binding Providers, Mode=OneWay}" DockPanel.Dock="Top" Margin="10" />
-        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10">
+        <ContentPresenter Content="{Binding Providers, Mode=OneWay}"
+                            DockPanel.Dock="Top"
+                            Margin="3" />
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="3,0,3,3">
             <ItemsControl
-                ItemsSource="{Binding Tickers, Mode=OneWay}"
-                helpers:ItemsControlHelper.AutoScrollToEnd="true"
-                Background="{StaticResource LightBrush}">
+            ItemsSource="{Binding Tickers, Mode=OneWay}"
+            helpers:ItemsControlHelper.AutoScrollToEnd="true"
+            Background="{StaticResource LightBrush}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2" />

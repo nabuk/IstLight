@@ -82,6 +82,9 @@
     <Compile Include="SectionHeaderView.xaml.cs">
       <DependentUpon>SectionHeaderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SimulationSettingsView.xaml.cs">
+      <DependentUpon>SimulationSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TickerExplorerView.xaml.cs">
       <DependentUpon>TickerExplorerView.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SectionHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimulationSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

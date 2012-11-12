@@ -50,11 +50,17 @@
     <Compile Include="AsyncState.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="ErrorListViewModel.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IWindow.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\CommissionTypeNames.cs" />
+    <Compile Include="Settings\PeriodTypeNames.cs" />
+    <Compile Include="Settings\SimulationPriceTypeNames.cs" />
+    <Compile Include="Settings\SimulationRangeTypeNames.cs" />
+    <Compile Include="SimulationSettingsViewModel.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />
     <Compile Include="TickerSearchResultViewModel.cs" />
     <Compile Include="Services\ITickerLocationService.cs" />

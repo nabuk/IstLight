@@ -6,6 +6,7 @@ using IstLight.Services;
 using IstLight.Services.Decorators;
 using Ninject.Modules;
 using Ninject;
+using IstLight.Settings;
 
 namespace IstLight.Bootstrapper
 {
@@ -28,6 +29,8 @@ namespace IstLight.Bootstrapper
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
                 .To<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
                 .InSingletonScope();
+
+            Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
 
         }
     }

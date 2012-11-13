@@ -24,7 +24,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Margin" Value="{StaticResource rightElemMargin}" />
         </Style>
-        <Style TargetType="{x:Type DatePicker}">
+        <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource {x:Type DatePicker}}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Margin" Value="{StaticResource rightElemMargin}" />
@@ -36,7 +36,6 @@
         </Style>
     </UserControl.Resources>
     <StackPanel>
-
         <Expander IsExpanded="True" Header="Commission &amp; rates">
             <Grid Background="{StaticResource NormalBrush}">
                 <Grid.RowDefinitions>

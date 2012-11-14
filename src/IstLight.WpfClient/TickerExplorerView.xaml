@@ -13,17 +13,37 @@
         <ContentPresenter Content="{Binding Providers, Mode=OneWay}"
                             DockPanel.Dock="Top"
                             Margin="3" />
-        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="3,0,3,3">
-            <ItemsControl
-            ItemsSource="{Binding Tickers, Mode=OneWay}"
-            helpers:ItemsControlHelper.AutoScrollToEnd="true"
-            Background="{StaticResource LightBrush}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        
+        <Grid>
+            <Rectangle Fill="#2d2d2d" />
+            <Rectangle>
+                <Rectangle.Fill>
+                    <DrawingBrush ViewportUnits="Absolute" TileMode="Tile" Viewport="0,0,15,15" >
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Geometry="M0,0 L2,0 2,2, 0,2Z" Brush="#2f2f2f" />
+                                <GeometryDrawing Geometry="M2,2 L4,2 4,4, 2,4Z" Brush="#2f2f2f" />
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="3,0,3,3">
+                <ItemsControl
+                    ItemsSource="{Binding Tickers, Mode=OneWay}"
+                    helpers:ItemsControlHelper.AutoScrollToEnd="true">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2" >
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect BlurRadius="5" Opacity="0.5" ShadowDepth="6" />
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+            
     </DockPanel>
 </UserControl>

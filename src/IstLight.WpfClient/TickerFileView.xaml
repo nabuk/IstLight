@@ -19,11 +19,12 @@
     <Border
         x:Name="mainBorder"
         BorderThickness="0"
+        CornerRadius="2"
         >
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Offset="0" Color="{StaticResource HoverColor}" />
-                <GradientStop Offset="1" Color="{StaticResource HoverColor}" />
+                <GradientStop Offset="0" Color="#5444" />
+                <GradientStop Offset="1" Color="#5444" />
             </LinearGradientBrush>
         </Border.Background>
         <StackPanel Margin="2">
@@ -73,9 +74,9 @@
                 <VisualState x:Name="Completed">
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[0].Color" Storyboard.TargetName="mainBorder"
-                            To="#6346" Duration="0" />
+                            To="#5346" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[1].Color" Storyboard.TargetName="mainBorder"
-                            To="SlateGray" Duration="0" />
+                            To="#5ABE" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
                                     To="{StaticResource WhiteColor}" Duration="0" />
                         <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly" Storyboard.TargetName="tbSymbol">
@@ -90,9 +91,9 @@
                 <VisualState x:Name="Error">
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[0].Color" Storyboard.TargetName="mainBorder"
-                            To="#6400" Duration="0" />
+                            To="#5400" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[1].Color" Storyboard.TargetName="mainBorder"
-                            To="#6F00" Duration="0" />
+                            To="#5F00" Duration="0" />
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>

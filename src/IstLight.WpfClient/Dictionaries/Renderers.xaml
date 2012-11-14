@@ -23,6 +23,12 @@
         <View:SimulationSettingsView />
     </DataTemplate>
 
-
+    <DataTemplate DataType="{x:Type VM:StrategyExplorerViewModel}">
+        <View:StrategyExplorerView />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type VM:StrategyViewModel}">
+        <View:StrategyView />
+    </DataTemplate>
 
 </ResourceDictionary>

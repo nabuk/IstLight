@@ -21,7 +21,7 @@
         
     	
     	
-        <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3">
+        <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="0,0,0,20">
     		<MenuItem x:Name="FileMenuItem" Header="File" />
     		<MenuItem x:Name="HelpMenuItem" Header="Help" >
     			<MenuItem x:Name="AboutMenuItem" Header="About"/>
@@ -75,11 +75,6 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-
-            <!--<Border Background="#595959"  Margin="5,0" Grid.RowSpan="2" BorderBrush="{StaticResource ShadeBrush}" BorderThickness="2"
-                    Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}}">
-                <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
-            </Border>-->
             
             <TabControl Margin="0,0,3,0" Grid.RowSpan="2"
                         Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
@@ -88,13 +83,8 @@
                 </TabItem>
             </TabControl>
             
-            <!--<GridSplitter Grid.RowSpan="2" Grid.Column="1" Width="5" ShowsPreview="True"
-                          ResizeBehavior="PreviousAndNext" Background="Transparent" />-->
-            
-            <TabControl Grid.RowSpan="2" Grid.Column="2">
-                <TabItem Header="Script.py" />
-                <TabItem Header="Script2.py" />
-            </TabControl>
+            <ContentPresenter Grid.RowSpan="2" Grid.Column="2"
+                Content="{Binding StrategyExplorer, Mode=OneTime}" />
             
             <TabControl Margin="3,0,0,0" Grid.RowSpan="2" Grid.Column="3"
                         Visibility="{Binding IsChecked, ElementName=cbSimulationSettings, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">

@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvvmLight.4.1.23.0\GalaSoft.MvvmLight.WPF4.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\..\lib\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Ninject.3.0.1.10\Ninject.dll</HintPath>
@@ -84,6 +87,12 @@
     </Compile>
     <Compile Include="SimulationSettingsView.xaml.cs">
       <DependentUpon>SimulationSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StrategyExplorerView.xaml.cs">
+      <DependentUpon>StrategyExplorerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StrategyView.xaml.cs">
+      <DependentUpon>StrategyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TickerExplorerView.xaml.cs">
       <DependentUpon>TickerExplorerView.xaml</DependentUpon>
@@ -139,6 +148,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StrategyExplorerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StrategyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TickerExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +188,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
+    <Resource Include="Dictionaries\SyntaxHighlighting.Python.xshd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -191,9 +209,7 @@
       <Name>IstLight.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(SolutionDir)..\lib\Scripting\*.dll $(TargetDir)

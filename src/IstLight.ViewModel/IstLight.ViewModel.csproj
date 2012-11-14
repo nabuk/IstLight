@@ -61,6 +61,8 @@
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
     <Compile Include="SimulationSettingsViewModel.cs" />
+    <Compile Include="StrategyExplorerViewModel.cs" />
+    <Compile Include="StrategyViewModel.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />
     <Compile Include="TickerSearchResultViewModel.cs" />
     <Compile Include="Services\ITickerLocationService.cs" />

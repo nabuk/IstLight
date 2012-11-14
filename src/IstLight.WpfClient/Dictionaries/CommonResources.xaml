@@ -279,5 +279,46 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PanelCheckBoxStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="Foreground" Value="{StaticResource GlyphBrush}" />
+        <Setter Property="Padding" Value="0,2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ContentPresenter
+							 x:Name="CheckBoxContent"
+							 Grid.Row="1"
+							 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							 Margin="{TemplateBinding Padding}"
+							 RecognizesAccessKey="True"
+							 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+							 >
+                        </ContentPresenter>
+                        <Rectangle
+							  x:Name="bar"
+							  Grid.Row="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"
+							  Height="6"
+							  HorizontalAlignment="Stretch"
+							  Fill="{TemplateBinding Foreground}" >
+                        </Rectangle>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource GlyphBrush}" />
+                            <Setter TargetName="bar" Property="Fill" Value="{StaticResource HoverBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

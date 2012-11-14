@@ -51,14 +51,17 @@
                    IsHitTestVisible="False"
                    >
             <TextBlock.Style>
-                <Style TargetType="TextBlock">
+                <Style TargetType="TextBlock" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsFocused, ElementName=tbTickerName}" Value="True">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsEnabled, ElementName=tbTickerName}" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsFocused, ElementName=tbTickerName}" Value="False" />
+                                <Condition Binding="{Binding IsEnabled, ElementName=tbTickerName}" Value="True" />
+                                <Condition Binding="{Binding Text, ElementName=tbTickerName, Mode=OneWay}" Value="{x:Static sys:String.Empty}" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>

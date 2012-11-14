@@ -28,13 +28,13 @@
                     </DrawingBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="3,0,3,3">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,1.5">
                 <ItemsControl
                     ItemsSource="{Binding Tickers, Mode=OneWay}"
                     helpers:ItemsControlHelper.AutoScrollToEnd="true">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentPresenter Content="{Binding Mode=OneWay}" Margin="2" >
+                            <ContentPresenter Content="{Binding Mode=OneWay}" Margin="3,1.5" >
                                 <ContentPresenter.Effect>
                                     <DropShadowEffect BlurRadius="5" Opacity="0.5" ShadowDepth="6" />
                                 </ContentPresenter.Effect>

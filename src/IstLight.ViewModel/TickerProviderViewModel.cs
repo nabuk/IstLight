@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight.Services;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using System.Collections.ObjectModel;
+﻿using IstLight.Services;
 
 namespace IstLight
 {

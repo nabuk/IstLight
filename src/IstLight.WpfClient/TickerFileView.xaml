@@ -38,7 +38,7 @@
 
                 <TextBox
                     x:Name="tbIndex"
-                    Text="{Binding Index, Mode=OneWay}"
+                    Text="{Binding Index, Mode=OneWay, TargetNullValue=''}"
                     Foreground="Gray"
                     IsReadOnly="True"
                     VerticalAlignment="Center"

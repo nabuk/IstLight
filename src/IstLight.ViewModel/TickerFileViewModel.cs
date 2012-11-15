@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
@@ -13,26 +8,25 @@ namespace IstLight
 {
     public class TickerFileViewModel : ViewModelBase
     {
-        private readonly IAsyncResult<Ticker> asyncTicker;
         private readonly Dispatcher dispatcher;
-        private int index;
+        private int? index;
+        internal readonly IAsyncResult<Ticker> AsyncTicker;
+        private readonly OneTimeCallbackContainer<TickerFileViewModel> completionCallbacks = new OneTimeCallbackContainer<TickerFileViewModel>();
 
         private void HandleLoaded()
         {
             dispatcher.InvokeIfRequired(() =>
             {
-                LoadState = asyncTicker.GetState();
+                LoadState = AsyncTicker.GetState();
                 base.RaisePropertyChanged<AsyncState>(() => LoadState);
 
-                if (asyncTicker.Error == null)
+                if (AsyncTicker.Error == null)
                 {
                     Func<DateTime, string> formatDate = dt => dt.ToShortDateString();
-                    var t = asyncTicker.Result;
-                    From = formatDate(t.From);
-                    To = formatDate(t.To);
-
-                    base.RaisePropertyChanged<string>(() => From);
-                    base.RaisePropertyChanged<string>(() => To);
+                    var t = AsyncTicker.Result;
+                    From = formatDate(t.From); base.RaisePropertyChanged<string>(() => From);
+                    To = formatDate(t.To); base.RaisePropertyChanged<string>(() => To);
+                    completionCallbacks.FireCallbacks(this);
                 }
             });
         }
@@ -41,7 +35,7 @@ namespace IstLight
         {
             this.dispatcher = Dispatcher.CurrentDispatcher;
             this.Name = name;
-            this.asyncTicker = asyncTicker;
+            this.AsyncTicker = asyncTicker;
             asyncTicker.AddCallback(x => HandleLoaded());
             this.CloseCommand = new DelegateCommand(() => CloseCommandExecuted(this));
         }
@@ -56,14 +50,20 @@ namespace IstLight
             get;
             private set;
         }
+        public void ExecuteWhenLoadCompletes(Action<TickerFileViewModel> callback)
+        {
+            completionCallbacks.AddCallback(callback);
+            if (LoadState == AsyncState.Completed)
+                completionCallbacks.FireCallbacks(this);
+        }
 
-        public int Index
+        public int? Index
         {
             get { return index; }
             internal set
             {
                 index = value;
-                base.RaisePropertyChanged<int>(() => Index);
+                base.RaisePropertyChanged<int?>(() => Index);
             }
         }
 

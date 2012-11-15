@@ -37,6 +37,7 @@
     <Compile Include="Extensions\IQuoteContextExtensions.cs" />
     <Compile Include="Extensions\IReadOnlyListExtensions.cs" />
     <Compile Include="MultiQuoteList.cs" />
+    <Compile Include="Services\AsyncOneTimeCallbackContainer.cs" />
     <Compile Include="Services\Decorators\AsyncLoadServiceDecorator.cs" />
     <Compile Include="Services\AsyncResultFromSyncJob.cs" />
     <Compile Include="Services\Decorators\AsyncResultErrorDecorator.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Services\ITickerConverter.cs" />
     <Compile Include="Services\ITickerProvider.cs" />
     <Compile Include="Services\ITickerTransformer.cs" />
+    <Compile Include="Services\OneTimeCallbackContainer.cs" />
     <Compile Include="ValueOrError.cs" />
     <Compile Include="Services\RawTicker.cs" />
     <Compile Include="Services\TickerSearchResult.cs" />

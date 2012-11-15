@@ -1,39 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
-using IstLight.Services;
 
 namespace IstLight
 {
     public class TickerExplorerViewModel : ViewModelBase
     {
         private readonly ObservableCollection<TickerFileViewModel> tickers = new ObservableCollection<TickerFileViewModel>();
+        private readonly object recalculateIndicesSync = new object();
+
+        private void RecalculateIndicesFrom(int current)
+        {
+            lock (recalculateIndicesSync)
+            {
+                if (current >= tickers.Count)
+                    return;
+
+                int indexBefore = -1;
+                for (int i = current-1; i >= 0; i--)
+                    if (tickers[i].Index != null)
+                    {
+                        indexBefore = tickers[i].Index.Value;
+                        break;
+                    }
+
+                for (; current < tickers.Count; current++)
+                    if (tickers[current].LoadState == AsyncState.Completed)
+                        tickers[current].Index = ++indexBefore;
+            }
+        }
+
+        private void HandleTickerLoading(TickerFileViewModel tickerVM)
+        {
+            tickers.Add(tickerVM);
+            tickerVM.ExecuteWhenLoadCompletes(x => RecalculateIndicesFrom(tickers.IndexOf(x)));
+            tickerVM.CloseCommandExecuted += x =>
+            {
+                int index = tickers.IndexOf(x);
+                tickers.Remove(x);
+                RecalculateIndicesFrom(index);
+            };
+        }
         
         public TickerExplorerViewModel(TickerProvidersViewModel providers)
         {
             this.Providers = providers;
             this.Tickers = new ReadOnlyObservableCollection<TickerFileViewModel>(this.tickers);
-            tickers.CollectionChanged += (s, e) =>
-            {
-                var collection = s as ObservableCollection<TickerFileViewModel>;
-                if (e.Action == NotifyCollectionChangedAction.Remove)
-                    for (int i = e.OldStartingIndex; i < collection.Count; i++)
-                        collection[i].Index = i;
-            };
-            Providers.LoadingTicker += tvm =>
-            {
-                tvm.Index = tickers.Count;
-                tickers.Add(tvm);
-                tvm.CloseCommandExecuted += x => tickers.Remove(x);
-            };
+            Providers.LoadingTicker += HandleTickerLoading;
         }
 
         public TickerProvidersViewModel Providers { get; private set; }
-
         public ReadOnlyObservableCollection<TickerFileViewModel> Tickers { get; private set; }
     }
 }

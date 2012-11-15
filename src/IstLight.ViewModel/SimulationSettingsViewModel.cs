@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IstLight.Settings;
-using IstLight.Extensions;
 using GalaSoft.MvvmLight;
+using IstLight.Extensions;
+using IstLight.Settings;
 
 namespace IstLight
 {

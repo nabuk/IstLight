@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using IstLight.Services;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Collections.Concurrent;
-using System.Collections.Specialized;
-using System.Windows.Input;
 
 namespace IstLight
 {
@@ -90,13 +88,7 @@ namespace IstLight
                 }
             });
         }
-        private TickerFileViewModel Download(string name)
-        {
-            blockShowResultsTillNextSearch = true;
-            ShowSearchResults = false;
-            Hint = string.Empty;
-            return new TickerFileViewModel(name, SelectedProvider.Provider.Get(name));
-        }
+
         private void HandleSelectedProviderChange(TickerProviderViewModel previous, TickerProviderViewModel current)
         {
             if ((previous != null && previous.Provider.CanSearch) != (current != null && current.Provider.CanSearch))
@@ -113,20 +105,21 @@ namespace IstLight
 
             base.RaisePropertyChanged<TickerProviderViewModel>(() => SelectedProvider);
         }
-        private void HandleDownloadCommand(string name)
+        private void HandleDownloadCommand(string tickerName)
         {
-            if (!string.IsNullOrWhiteSpace(name))
-                LoadingTicker(Download(RelevantText(name)));
+            if (!string.IsNullOrWhiteSpace(tickerName))
+            {
+                tickerName = RelevantText(tickerName);
+                blockShowResultsTillNextSearch = true;
+                ShowSearchResults = false;
+                Hint = string.Empty;
+                LoadingTicker(new TickerFileViewModel(tickerName,SelectedProvider.Provider.Get(tickerName)));
+            }
         }
 
         private string RelevantText(string str)
         {
             return (str ?? "").Trim().ToUpperInvariant();
-        }
-
-        private void HandleHintChange()
-        {
-            if (CanSearch) SearchCommand.Execute(Hint);
         }
         #endregion
 
@@ -210,7 +203,7 @@ namespace IstLight
 
                 hint = value;
                 base.RaisePropertyChanged<string>(() => Hint);
-                HandleHintChange();
+                if (CanSearch) SearchCommand.Execute(Hint);
             }
         }
     }

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace IstLight.Services
 {
     public class AsyncResultFromSyncJob<T> : IAsyncResult<T>
     {
         private Func<ValueOrError<T>> synchronousJob;
-        private readonly ConcurrentBag<Action<IAsyncResult<T>>> completionCallbacks = new ConcurrentBag<Action<IAsyncResult<T>>>();
+        private readonly AsyncOneTimeCallbackContainer<IAsyncResult<T>> callbackContainer = new AsyncOneTimeCallbackContainer<IAsyncResult<T>>();
         private readonly ManualResetEvent completionEvent;
 
         private void OnCompletion(IAsyncResult ar)
@@ -21,17 +19,9 @@ namespace IstLight.Services
 
             synchronousJob = null;
 
-            FireCallbacks();
+            callbackContainer.FireCallbacks(this);
 
             completionEvent.Close();
-        }
-
-        private void FireCallbacks()
-        {
-            Action<IAsyncResult<T>> callback;
-
-            while (completionCallbacks.TryTake(out callback))
-                Task.Factory.StartNew(x => (x as Action<IAsyncResult<T>>)(this), callback);
         }
 
         public AsyncResultFromSyncJob(Func<ValueOrError<T>> synchronousJob)
@@ -59,10 +49,10 @@ namespace IstLight.Services
         {
             if (callback == null) throw new ArgumentNullException("callback");
 
-            completionCallbacks.Add(callback);
-            
-            if(IsCompleted)
-                FireCallbacks();
+            callbackContainer.AddCallback(callback);
+
+            if (IsCompleted)
+                callbackContainer.FireCallbacks(this);
         }
         #endregion
     }

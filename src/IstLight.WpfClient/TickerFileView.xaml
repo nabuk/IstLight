@@ -74,9 +74,9 @@
                 <VisualState x:Name="Completed">
                     <Storyboard>
                         <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[0].Color" Storyboard.TargetName="mainBorder"
-                            To="#5346" Duration="0" />
+                            To="#5458" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[1].Color" Storyboard.TargetName="mainBorder"
-                            To="#5ABE" Duration="0" />
+                            To="#5ABF" Duration="0" />
                         <ColorAnimation Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbSymbol"
                                     To="{StaticResource WhiteColor}" Duration="0" />
                         <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly" Storyboard.TargetName="tbSymbol">

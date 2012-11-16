@@ -12,12 +12,14 @@ namespace IstLight
         private int? index;
         internal readonly IAsyncResult<Ticker> AsyncTicker;
         private readonly OneTimeCallbackContainer<TickerFileViewModel> completionCallbacks = new OneTimeCallbackContainer<TickerFileViewModel>();
+        private readonly object stateChangeSync = new object();
 
         private void HandleLoaded()
         {
             dispatcher.InvokeIfRequired(() =>
             {
-                LoadState = AsyncTicker.GetState();
+                lock(stateChangeSync)
+                    LoadState = AsyncTicker.GetState();
                 base.RaisePropertyChanged<AsyncState>(() => LoadState);
 
                 if (AsyncTicker.Error == null)
@@ -53,7 +55,10 @@ namespace IstLight
         public void ExecuteWhenLoadCompletes(Action<TickerFileViewModel> callback)
         {
             completionCallbacks.AddCallback(callback);
-            if (LoadState == AsyncState.Completed)
+            AsyncState state;
+            lock (stateChangeSync)
+                state = LoadState;
+            if(state == AsyncState.Completed)
                 completionCallbacks.FireCallbacks(this);
         }
 

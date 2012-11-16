@@ -12,7 +12,7 @@ namespace IstLight
         {
             lock (recalculateIndicesSync)
             {
-                if (current >= tickers.Count)
+                if (current >= tickers.Count || current < 0)
                     return;
 
                 int indexBefore = -1;

@@ -44,6 +44,7 @@
                     VerticalAlignment="Center"
                     Width="25"
                     TextAlignment="Right"
+                    Opacity="0"
                     />
 
                 <TextBox
@@ -85,6 +86,8 @@
                         <DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="ucTickerFileView"
                                          To="38" Duration="0" />
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="detailsGrid"
+                                         To="1" Duration="0" />
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="tbIndex"
                                          To="1" Duration="0" />
                     </Storyboard>
                 </VisualState>

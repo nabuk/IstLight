@@ -17,6 +17,12 @@ namespace IstLight
             this.ClearCommand = new DelegateCommand(() => errorList.Clear(), () => ErrorList.Count > 0);
             this.ErrorList = new ReadOnlyObservableCollection<string>(errorList);
             (this.ErrorList as INotifyCollectionChanged).CollectionChanged += delegate { (ClearCommand as DelegateCommand).RaiseCanExecuteChanged(); };
+            (this.ErrorList as INotifyCollectionChanged).CollectionChanged += (s, e) =>
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                    foreach (string error in e.NewItems)
+                        NewError(this,EventArgs.Empty);
+            };
         }
 
         public ReadOnlyObservableCollection<string> ErrorList
@@ -24,6 +30,8 @@ namespace IstLight
             get;
             private set;
         }
+
+        public event EventHandler NewError = delegate { };
 
         public ICommand ClearCommand { get; private set; }
 

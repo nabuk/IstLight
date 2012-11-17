@@ -7,9 +7,11 @@ namespace IstLight.Simulation
 {
     public class SimulationRunner
     {
+        private readonly SimulationDependencies dependencies;
+
         public SimulationRunner(SimulationDependencies dependencies)
         {
-
+            
         }
     }
 }

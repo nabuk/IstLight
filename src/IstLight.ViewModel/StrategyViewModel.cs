@@ -1,23 +1,28 @@
 ﻿using System;
+using GalaSoft.MvvmLight;
 using IstLight.Strategy;
 
 namespace IstLight
 {
-    public class StrategyViewModel
+    public class StrategyViewModel : ViewModelBase
     {
+        private string name;
         private string content;
-
-        internal bool CompileStrategy(out StrategyBase strategy)
-        {
-            throw new NotImplementedException();
-        }
+        private string extension;
 
         public StrategyViewModel()
         {
-            Caption = "Strategy";
+            name = "Strategy";
+            extension = "py";
         }
 
-        public string Caption { get; private set; }
+        public string Caption
+        {
+            get
+            {
+                return name + (string.IsNullOrWhiteSpace(extension) ? "" : ".") + extension;
+            }
+        }
 
         public string Content
         {
@@ -29,6 +34,11 @@ namespace IstLight
 
                 content = value;
             }
+        }
+
+        internal Script ToScript()
+        {
+            return new Script(name, extension, content);
         }
     }
 }

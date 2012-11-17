@@ -7,13 +7,13 @@ namespace IstLight.Strategy
     public class ScriptStrategyContext : StrategyBase
     {
         private readonly Script strategyScript;
-        private readonly IScriptLoadService predefinedFunc;
+        private readonly IScriptLoadService predefinedFunctions;
         private ScriptEngineBase engine;
 
-        public ScriptStrategyContext(Script strategyScript, IScriptLoadService predefinedFunc)
+        public ScriptStrategyContext(Script strategyScript, IScriptLoadService predefinedFunctions)
         {
             this.strategyScript = strategyScript;
-            this.predefinedFunc = predefinedFunc;
+            this.predefinedFunctions = predefinedFunctions;
         }
 
         public override bool Initialize()
@@ -30,7 +30,7 @@ namespace IstLight.Strategy
                 new KeyValuePair<string,dynamic>("__wallet__", base.WalletContext)
             };
 
-            foreach (var funcGroup in predefinedFunc.Load().GroupBy(x => x.Extension))
+            foreach (var funcGroup in predefinedFunctions.Load().GroupBy(x => x.Extension))
                 using (var groupEngine = ScriptEngineFactory.TryCreateEngine(funcGroup.Key))
                 {
                     foreach (var item in items)

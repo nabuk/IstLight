@@ -54,6 +54,7 @@
     <Compile Include="Services\TickerTransformerService.cs" />
     <Compile Include="ScriptsFromDirectory.cs" />
     <Compile Include="Strategy\ScriptStrategyContext.cs" />
+    <Compile Include="Strategy\ScriptStrategyFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IstLight.Domain\IstLight.Domain.csproj">

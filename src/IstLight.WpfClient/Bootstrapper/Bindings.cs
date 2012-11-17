@@ -1,6 +1,8 @@
 ﻿using IstLight.Services;
 using IstLight.Services.Decorators;
 using IstLight.Settings;
+using IstLight.Strategy;
+using IstLight.Synchronization;
 using Ninject;
 using Ninject.Modules;
 
@@ -29,6 +31,26 @@ namespace IstLight.Bootstrapper
                 .To<ScriptsFromDirectory>()
                 .WhenInjectedInto<TickerProviderService>()
                 .WithConstructorArgument("path", "scripts\\providers");
+
+            Kernel.Bind<IScriptLoadService>()
+                .To<ScriptsFromDirectory>()
+                .WhenInjectedInto<ScriptStrategyFactory>()
+                .WithConstructorArgument("path", "scripts\\functions");
+
+            Kernel.Bind<IStrategyCreator>().To<StrategyCreator>();
+
+            Kernel.Bind<ISyncTickersGetter>()
+                .To<SyncTickersGetter>()
+                .WhenInjectedInto<SyncTickersGetterErrorDecorator>()
+                .InSingletonScope();
+            Kernel.Bind<ISyncTickersGetter>()
+                .To<SyncTickersGetterErrorDecorator>()
+                .InSingletonScope();
+
+            Kernel.Bind<ISimulationSettingsGetter>()
+                .To<SimulationSettingsGetter>()
+                .InSingletonScope();
+
 
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
         }

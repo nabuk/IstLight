@@ -8,7 +8,7 @@ namespace IstLight
     {
         private readonly ObservableCollection<StrategyViewModel> strategies;
         private StrategyViewModel selectedStrategy;
-        private ICommand runCommand = DelegateCommand.NotRunnable;
+        //private ICommand runCommand = DelegateCommand.NotRunnable;
         
         public StrategyExplorerViewModel()
         {
@@ -31,14 +31,14 @@ namespace IstLight
             }
         }
 
-        public ICommand RunCommand
-        {
-            get { return runCommand; }
-            set
-            {
-                runCommand = value ?? DelegateCommand.NotRunnable;
-                base.RaisePropertyChanged<ICommand>(() => RunCommand);
-            }
-        }
+        //public ICommand RunCommand
+        //{
+        //    get { return runCommand; }
+        //    set
+        //    {
+        //        runCommand = value ?? DelegateCommand.NotRunnable;
+        //        base.RaisePropertyChanged<ICommand>(() => RunCommand);
+        //    }
+        //}
     }
 }

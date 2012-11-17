@@ -57,14 +57,19 @@
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\CommissionTypeNames.cs" />
+    <Compile Include="Settings\ISimulationSettingsGetter.cs" />
     <Compile Include="Settings\PeriodTypeNames.cs" />
+    <Compile Include="Settings\SimulationSettingsGetter.cs" />
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
     <Compile Include="SimulationSettingsViewModel.cs" />
-    <Compile Include="Simulation\SimulationDependencies.cs" />
-    <Compile Include="Simulation\SimulationRunner.cs" />
     <Compile Include="StrategyExplorerViewModel.cs" />
     <Compile Include="StrategyViewModel.cs" />
+    <Compile Include="Strategy\IStrategyCreator.cs" />
+    <Compile Include="Strategy\StrategyCreator.cs" />
+    <Compile Include="Synchronization\ISyncTickersGetter.cs" />
+    <Compile Include="Synchronization\SyncTickersGetter.cs" />
+    <Compile Include="Synchronization\SyncTickersGetterErrorDecorator.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />
     <Compile Include="TickerSearchResultViewModel.cs" />
     <Compile Include="Services\ITickerLocationService.cs" />
@@ -79,8 +84,18 @@
       <Project>{55cec47d-6139-4e9c-91fb-445cac5844fc}</Project>
       <Name>IstLight.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IstLight.Scripting\IstLight.Scripting.csproj">
+      <Project>{4c689aed-efa4-4d9a-bd78-76252a644bf0}</Project>
+      <Name>IstLight.Scripting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Simulation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y $(SolutionDir)..\lib\Scripting\*.dll $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

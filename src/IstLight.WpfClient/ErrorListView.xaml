@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:IstLight"
+             xmlns:helpers="clr-namespace:IstLight.Helpers"
              x:Name="ErrorListViewControl"
              mc:Ignorable="d" 
              Height="250" d:DesignWidth="300"
@@ -16,7 +17,8 @@
         <ScrollViewer Margin="3"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding ErrorList, Mode=OneTime}" 
-                          Background="{StaticResource LightBrush}">
+                          Background="{StaticResource LightBrush}"
+                          helpers:ItemsControlHelper.AutoScrollToEnd="true">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <TextBox x:Name="tbError"

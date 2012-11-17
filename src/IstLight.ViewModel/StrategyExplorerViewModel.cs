@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 
 namespace IstLight
@@ -7,6 +8,7 @@ namespace IstLight
     {
         private readonly ObservableCollection<StrategyViewModel> strategies;
         private StrategyViewModel selectedStrategy;
+        private ICommand runCommand = DelegateCommand.NotRunnable;
         
         public StrategyExplorerViewModel()
         {
@@ -26,6 +28,16 @@ namespace IstLight
 
                 selectedStrategy = value;
                 base.RaisePropertyChanged<StrategyViewModel>(() => SelectedStrategy);
+            }
+        }
+
+        public ICommand RunCommand
+        {
+            get { return runCommand; }
+            set
+            {
+                runCommand = value ?? DelegateCommand.NotRunnable;
+                base.RaisePropertyChanged<ICommand>(() => RunCommand);
             }
         }
     }

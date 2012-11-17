@@ -28,19 +28,31 @@ namespace IstLight
         public double AnnualInflationRate
         {
             get { return simulationSettings.Get<AnnualInflationRateSetting>().Value; }
-            set { simulationSettings.Get<AnnualInflationRateSetting>().Value = value; }
+            set
+            {
+                simulationSettings.Get<AnnualInflationRateSetting>().Value = value;
+                base.RaisePropertyChanged<double>(() => AnnualInflationRate);
+            }
         }
 
         public double AnnualInterestRate
         {
             get { return simulationSettings.Get<AnnualInterestRateSetting>().Value; }
-            set { simulationSettings.Get<AnnualInterestRateSetting>().Value = value; }
+            set
+            { 
+                simulationSettings.Get<AnnualInterestRateSetting>().Value = value;
+                base.RaisePropertyChanged<double>(() => AnnualInterestRate);
+            }
         }
 
         public bool CloseAllOnLastBar
         {
             get { return simulationSettings.Get<CloseAllOnLastBarSetting>().Value; }
-            set { simulationSettings.Get<CloseAllOnLastBarSetting>().Value = value; }
+            set
+            {
+                simulationSettings.Get<CloseAllOnLastBarSetting>().Value = value;
+                base.RaisePropertyChanged<bool>(() => CloseAllOnLastBar);
+            }
         }
 
         public IEnumerable<string> CommissionTypes { get { return commisionTypeNames.Values; } }
@@ -53,6 +65,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<CommissionSetting>().Type = commisionTypeNames.ValueToKey(value);
+                base.RaisePropertyChanged<string>(() => SelectedCommissionType);
             }
         }
         public double CommissionValue
@@ -64,6 +77,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<CommissionSetting>().Value = value;
+                base.RaisePropertyChanged<double>(() => CommissionValue);
             }
         }
 
@@ -76,6 +90,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<InitialEquitySetting>().Value = value;
+                base.RaisePropertyChanged<double>(() => InitialEquity);
             }
         }
 
@@ -88,6 +103,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<OnlyRecentQuotesSetting>().Value = value;
+                base.RaisePropertyChanged<bool>(() => OnlyRecentQuotes);
             }
         }
 
@@ -101,6 +117,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<PeriodSetting>().Type = periodTypeNames.ValueToKey(value);
+                base.RaisePropertyChanged<string>(() => SelectedPeriodType);
             }
         }
 
@@ -114,6 +131,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<SimulationPriceSetting>().Type = simulationPriceTypeNames.ValueToKey(value);
+                base.RaisePropertyChanged<string>(() => SelectedSimulationPriceType);
             }
         }
 
@@ -127,11 +145,28 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<SimulationRangeSetting>().Type = simulationRangeTypeNames.ValueToKey(value);
+                base.RaisePropertyChanged<string>(() => SelectedSimulationRangeType);
                 base.RaisePropertyChanged<bool>(() => CanEditSimulationRangeDates);
             }
         }
-        public DateTime SimulationRangeFrom { get; set; }
-        public DateTime SimulationRangeTo { get; set; }
+        public DateTime SimulationRangeFrom
+        {
+            get { return simulationSettings.Get<SimulationRangeSetting>().From; }
+            set
+            {
+                simulationSettings.Get<SimulationRangeSetting>().From = value;
+                base.RaisePropertyChanged<DateTime>(() => SimulationRangeFrom);
+            }
+        }
+        public DateTime SimulationRangeTo
+        {
+            get { return simulationSettings.Get<SimulationRangeSetting>().To; }
+            set
+            {
+                simulationSettings.Get<SimulationRangeSetting>().To = value;
+                base.RaisePropertyChanged<DateTime>(() => SimulationRangeTo);
+            }
+        }
         public bool CanEditSimulationRangeDates
         {
             get
@@ -149,6 +184,7 @@ namespace IstLight
             set
             {
                 simulationSettings.Get<TradeDelaySetting>().Value = value;
+                base.RaisePropertyChanged<int>(() => TradeDelay);
             }
         }
 

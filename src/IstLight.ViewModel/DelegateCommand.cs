@@ -61,5 +61,7 @@ namespace IstLight
         {
             CanExecuteChanged(this, EventArgs.Empty);
         }
+
+        public static DelegateCommand NotRunnable { get { return new DelegateCommand(() => { }, () => false); } }
     }
 }

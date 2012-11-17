@@ -61,6 +61,8 @@
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
     <Compile Include="SimulationSettingsViewModel.cs" />
+    <Compile Include="Simulation\SimulationDependencies.cs" />
+    <Compile Include="Simulation\SimulationRunner.cs" />
     <Compile Include="StrategyExplorerViewModel.cs" />
     <Compile Include="StrategyViewModel.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />

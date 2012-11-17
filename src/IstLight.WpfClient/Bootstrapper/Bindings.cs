@@ -10,25 +10,27 @@ namespace IstLight.Bootstrapper
     {
         public override void Load()
         {
+            Kernel.Bind<TickerExplorerViewModel>().ToSelf().InSingletonScope();
+            Kernel.Bind<StrategyExplorerViewModel>().ToSelf().InSingletonScope();
+            Kernel.Bind<SimulationSettingsViewModel>().ToSelf().InSingletonScope();
             Kernel.Bind<ErrorListViewModel>().ToSelf().InSingletonScope();
+
             Kernel.Bind<IErrorReporter>().ToMethod(x => x.Kernel.Get<ErrorListViewModel>()).InSingletonScope();
 
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
                 .To<TickerProviderService>()
                 .WhenInjectedInto<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
                 .InSingletonScope();
+            Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
+                .To<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
+                .InSingletonScope();
 
             Kernel.Bind<IScriptLoadService>()
                 .To<ScriptsFromDirectory>()
                 .WhenInjectedInto<TickerProviderService>()
                 .WithConstructorArgument("path", "scripts\\providers");
-            Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
-                .To<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
-                .InSingletonScope();
 
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
-            Kernel.Bind<SimulationSettingsViewModel>().ToSelf().InSingletonScope();
-
         }
     }
 }

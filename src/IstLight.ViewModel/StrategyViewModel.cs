@@ -1,9 +1,16 @@
-﻿
+﻿using System;
+using IstLight.Strategy;
+
 namespace IstLight
 {
     public class StrategyViewModel
     {
         private string content;
+
+        internal bool CompileStrategy(out StrategyBase strategy)
+        {
+            throw new NotImplementedException();
+        }
 
         public StrategyViewModel()
         {

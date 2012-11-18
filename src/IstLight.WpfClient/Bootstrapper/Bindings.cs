@@ -7,6 +7,7 @@ using IstLight.Strategy;
 using IstLight.Synchronization;
 using Ninject;
 using Ninject.Modules;
+using System.Linq;
 
 namespace IstLight.Bootstrapper
 {
@@ -53,21 +54,19 @@ namespace IstLight.Bootstrapper
                 .To<SimulationSettingsGetter>()
                 .InSingletonScope();
 
-
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
 
-            //zly window jest wstrzykiwany do entry point
             Kernel.Bind<MainWindowAdapter>().ToSelf()
                 .InSingletonScope()
                 .WithConstructorArgument("mainWindow", new MainWindow());
 
             Kernel.Bind<IWindow>().ToMethod(x => x.Kernel.Get<MainWindowAdapter>());
-                
 
-            Kernel.Bind<IGlobalCommand>().To<CloseApplicationCommand>();
             Kernel.Bind<GlobalCommandContainer>().ToSelf()
                 .InSingletonScope();
 
+            foreach (var t in typeof(IGlobalCommand).Assembly.GetTypes().Where(t => typeof(IGlobalCommand).IsAssignableFrom(t) && !t.IsAbstract))
+                Kernel.Bind<IGlobalCommand>().To(t);
         }
     }
 }

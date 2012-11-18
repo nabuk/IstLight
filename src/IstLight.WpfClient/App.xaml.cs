@@ -11,8 +11,6 @@ namespace IstLight
         {
             base.OnStartup(e);
 
-            //new MainWindow { DataContext = Bootstrapper.CompositionRoot.Compose() }
-            //    .Show();
             Bootstrapper.CompositionRoot.GetEntryPoint().Enter();
         }
     }

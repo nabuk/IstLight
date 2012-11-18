@@ -14,11 +14,11 @@ namespace IstLight.Bootstrapper
             kernel.Load(Assembly.GetExecutingAssembly());
         }
 
-        public static MainViewModel Compose()
+        public static EntryPoint GetEntryPoint()
         {
             using(var root = new CompositionRoot())
             {
-                return root.kernel.Get<MainViewModel>();
+                return root.kernel.Get<EntryPoint>();
             }
         }
 

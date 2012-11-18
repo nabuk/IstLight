@@ -1,4 +1,6 @@
-﻿using IstLight.Services;
+﻿using IstLight.Commands;
+using IstLight.Commands.Concrete;
+using IstLight.Services;
 using IstLight.Services.Decorators;
 using IstLight.Settings;
 using IstLight.Strategy;
@@ -53,6 +55,19 @@ namespace IstLight.Bootstrapper
 
 
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
+
+            //zly window jest wstrzykiwany do entry point
+            Kernel.Bind<MainWindowAdapter>().ToSelf()
+                .InSingletonScope()
+                .WithConstructorArgument("mainWindow", new MainWindow());
+
+            Kernel.Bind<IWindow>().ToMethod(x => x.Kernel.Get<MainWindowAdapter>());
+                
+
+            Kernel.Bind<IGlobalCommand>().To<CloseApplicationCommand>();
+            Kernel.Bind<GlobalCommandContainer>().ToSelf()
+                .InSingletonScope();
+
         }
     }
 }

@@ -24,9 +24,11 @@
     	
     	
         <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="0,0,0,20">
-    		<MenuItem x:Name="FileMenuItem" Header="File" />
-    		<MenuItem x:Name="HelpMenuItem" Header="Help" >
-    			<MenuItem x:Name="AboutMenuItem" Header="About"/>
+            <MenuItem x:Name="FileMenuItem" Header="_File" >
+                <MenuItem Header="_Close" Command="{Binding Commands[Close], Mode=OneTime}"  />
+            </MenuItem>
+            <MenuItem x:Name="HelpMenuItem" Header="_Help" >
+    			<MenuItem x:Name="AboutMenuItem" Header="_About"/>
     		</MenuItem>
     	</Menu>
 

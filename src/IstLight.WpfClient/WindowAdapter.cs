@@ -6,7 +6,7 @@ namespace IstLight
 {
     public class WindowAdapter : IWindow
     {
-        private readonly Window wpfWindow;
+        protected readonly Window wpfWindow;
 
         public WindowAdapter(Window wpfWindow)
         {
@@ -55,7 +55,7 @@ namespace IstLight
         private static void ConfigureBehavior(ContentWindow cw)
         {
             cw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            cw.CommandBindings.Add(new CommandBinding(new RoutedCommand("Accept", cw.GetType()), (sender, e) => cw.DialogResult = true));
+            //cw.CommandBindings.Add(new CommandBinding(new RoutedCommand("Accept", cw.GetType()), (sender, e) => cw.DialogResult = true));
         }
     }
 }

@@ -66,14 +66,19 @@
     <Compile Include="Settings\SimulationSettingsGetter.cs" />
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
+    <Compile Include="SimulationProgressViewModel.cs" />
     <Compile Include="SimulationSettingsViewModel.cs" />
+    <Compile Include="Simulation\SimulationInput.cs" />
+    <Compile Include="Simulation\SimulationProgressStatus.cs" />
+    <Compile Include="Simulation\SimulationRunner.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StrategyExplorerViewModel.cs" />
     <Compile Include="StrategyViewModel.cs" />
     <Compile Include="Strategy\IStrategyCreator.cs" />
     <Compile Include="Strategy\StrategyCreator.cs" />
     <Compile Include="Synchronization\ISyncTickersGetter.cs" />
     <Compile Include="Synchronization\SyncTickersGetter.cs" />
-    <Compile Include="Synchronization\SyncTickersGetterErrorDecorator.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />
     <Compile Include="TickerSearchResultViewModel.cs" />
     <Compile Include="Services\ITickerLocationService.cs" />
@@ -93,9 +98,7 @@
       <Name>IstLight.Scripting</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Simulation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(SolutionDir)..\lib\Scripting\*.dll $(TargetDir)</PostBuildEvent>

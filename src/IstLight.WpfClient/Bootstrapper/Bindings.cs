@@ -8,6 +8,7 @@ using IstLight.Synchronization;
 using Ninject;
 using Ninject.Modules;
 using System.Linq;
+using IstLight.Simulation;
 
 namespace IstLight.Bootstrapper
 {
@@ -44,10 +45,6 @@ namespace IstLight.Bootstrapper
 
             Kernel.Bind<ISyncTickersGetter>()
                 .To<SyncTickersGetter>()
-                .WhenInjectedInto<SyncTickersGetterErrorDecorator>()
-                .InSingletonScope();
-            Kernel.Bind<ISyncTickersGetter>()
-                .To<SyncTickersGetterErrorDecorator>()
                 .InSingletonScope();
 
             Kernel.Bind<ISimulationSettingsGetter>()
@@ -55,6 +52,8 @@ namespace IstLight.Bootstrapper
                 .InSingletonScope();
 
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
+
+            Kernel.Bind<SimulationInput>().ToSelf().InSingletonScope();
 
             Kernel.Bind<MainWindowAdapter>().ToSelf()
                 .InSingletonScope()

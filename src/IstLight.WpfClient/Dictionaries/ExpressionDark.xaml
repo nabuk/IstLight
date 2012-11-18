@@ -1822,7 +1822,7 @@
                                 <Grid x:Name="SubMenu">
                                     <Border x:Name="SubMenuBorder" Background="{DynamicResource LightBrush}" BorderThickness="1" Opacity="0.8">
                                         <Border.BorderBrush>
-                                            <SolidColorBrush Color="{DynamicResource WhiteColor}" />
+                                            <SolidColorBrush Color="{DynamicResource ShadeColor}" />
                                         </Border.BorderBrush>
                                     </Border>
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />

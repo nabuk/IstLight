@@ -28,8 +28,8 @@
                 <MenuItem Header="_Close" Command="{Binding Commands[Close], Mode=OneTime}"  />
             </MenuItem>
             <MenuItem Header="_Simulation" >
-                <MenuItem Header="_Run" />
-                <MenuItem Header="_Stop" />
+                <MenuItem Header="_Run" Command="{Binding Commands[RunSimulation], Mode=OneTime}" />
+                <MenuItem Header="_Stop" Command="{Binding Commands[StopSimulation], Mode=OneTime}" />
             </MenuItem>
             <MenuItem Header="_Help" >
     			<MenuItem x:Name="AboutMenuItem" Header="_About"/>

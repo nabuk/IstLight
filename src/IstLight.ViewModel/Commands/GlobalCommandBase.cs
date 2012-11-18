@@ -11,6 +11,11 @@ namespace IstLight.Commands
         private readonly string key;
         private readonly ICommand command;
 
+        protected void RaiseCanExecuteChanged()
+        {
+            this.CanExecuteChanged(this, EventArgs.Empty);
+        }
+
         public GlobalCommandBase(string key, ICommand command)
         {
             this.key = key;

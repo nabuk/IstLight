@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AsyncState.cs" />
     <Compile Include="Commands\Concrete\CloseApplicationCommand.cs" />
+    <Compile Include="Commands\Concrete\RunSimulationCommand.cs" />
+    <Compile Include="Commands\Concrete\StopSimulationCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="ErrorListViewModel.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

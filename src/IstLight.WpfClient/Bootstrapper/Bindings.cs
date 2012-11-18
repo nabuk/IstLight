@@ -23,49 +23,40 @@ namespace IstLight.Bootstrapper
 
             Kernel.Bind<IErrorReporter>().ToMethod(x => x.Kernel.Get<ErrorListViewModel>()).InSingletonScope();
 
-            Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
-                .To<TickerProviderService>()
+            Kernel.Bind<IAsyncLoadService<ITickerProvider>>().To<TickerProviderService>()
                 .WhenInjectedInto<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
                 .InSingletonScope();
-            Kernel.Bind<IAsyncLoadService<ITickerProvider>>()
-                .To<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
-                .InSingletonScope();
+            Kernel.Bind<IAsyncLoadService<ITickerProvider>>().To<AsyncLoadServiceErrorDecorator<ITickerProvider>>().InSingletonScope();
 
-            Kernel.Bind<IScriptLoadService>()
-                .To<ScriptsFromDirectory>()
+            Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
                 .WhenInjectedInto<TickerProviderService>()
                 .WithConstructorArgument("path", "scripts\\providers");
 
-            Kernel.Bind<IScriptLoadService>()
-                .To<ScriptsFromDirectory>()
+            Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
                 .WhenInjectedInto<ScriptStrategyFactory>()
                 .WithConstructorArgument("path", "scripts\\functions");
 
-            Kernel.Bind<IStrategyCreator>().To<StrategyCreator>();
+            Kernel.Bind<IStrategyCreator>().To<StrategyCreator>().InSingletonScope();
 
-            Kernel.Bind<ISyncTickersGetter>()
-                .To<SyncTickersGetter>()
-                .InSingletonScope();
+            Kernel.Bind<ISyncTickersGetter>().To<SyncTickersGetter>().InSingletonScope();
 
-            Kernel.Bind<ISimulationSettingsGetter>()
-                .To<SimulationSettingsGetter>()
-                .InSingletonScope();
+            Kernel.Bind<ISimulationSettingsGetter>().To<SimulationSettingsGetter>().InSingletonScope();
 
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
 
             Kernel.Bind<SimulationInput>().ToSelf().InSingletonScope();
 
-            Kernel.Bind<MainWindowAdapter>().ToSelf()
-                .InSingletonScope()
+            Kernel.Bind<MainWindowAdapter>().ToSelf().InSingletonScope()
                 .WithConstructorArgument("mainWindow", new MainWindow());
 
             Kernel.Bind<IWindow>().ToMethod(x => x.Kernel.Get<MainWindowAdapter>());
 
-            Kernel.Bind<GlobalCommandContainer>().ToSelf()
-                .InSingletonScope();
+            Kernel.Bind<GlobalCommandContainer>().ToSelf().InSingletonScope();
 
             foreach (var t in typeof(IGlobalCommand).Assembly.GetTypes().Where(t => typeof(IGlobalCommand).IsAssignableFrom(t) && !t.IsAbstract))
                 Kernel.Bind<IGlobalCommand>().To(t);
+
+            Kernel.Bind<SimulationRunner>().ToSelf().InSingletonScope();
         }
     }
 }

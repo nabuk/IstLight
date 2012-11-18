@@ -54,7 +54,7 @@ namespace IstLight.Strategy
             if (!engine.SetScript(strategyScript.Content))
                 return false;
 
-            return false;
+            return true;
         }
 
         public override bool Run()

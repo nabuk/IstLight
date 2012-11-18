@@ -56,7 +56,11 @@ namespace IstLight.Bootstrapper
             foreach (var t in typeof(IGlobalCommand).Assembly.GetTypes().Where(t => typeof(IGlobalCommand).IsAssignableFrom(t) && !t.IsAbstract))
                 Kernel.Bind<IGlobalCommand>().To(t);
 
-            Kernel.Bind<SimulationRunner>().ToSelf().InSingletonScope();
+            
+            Kernel.Bind<ISimulationRunner>().To<SimulationRunnerErrorDecorator>().InSingletonScope();
+            Kernel.Bind<ISimulationRunner>().To<SimulationRunner>()
+                .WhenInjectedInto<SimulationRunnerErrorDecorator>()
+                .InSingletonScope();
         }
     }
 }

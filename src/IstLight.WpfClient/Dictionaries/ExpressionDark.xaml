@@ -18,6 +18,7 @@
     <Color x:Key="MainColor">#FF595959</Color>
     <Color x:Key="HoverColor">#FF393939</Color>
     <Color x:Key="DefaultColor">#FF9BB1C5</Color>
+    <Color x:Key="GlyphColor">#D1D1D1</Color>
     <SolidColorBrush x:Key="LightBrush" Color="{StaticResource LightColor}" />
     <SolidColorBrush x:Key="ShadeBrush" Color="{StaticResource ShadeColor}" />
 
@@ -32,7 +33,7 @@
     <SolidColorBrush x:Key="NormalBorderBrush" Color="{StaticResource LightColor}" />
     <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}" />
     <SolidColorBrush x:Key="DefaultBrush" Color="{StaticResource DefaultColor}" />
-    <SolidColorBrush x:Key="GlyphBrush" Color="#FFD1D1D1" />
+    <SolidColorBrush x:Key="GlyphBrush" Color="{StaticResource GlyphColor}" />
 
     <LinearGradientBrush x:Key="PressedBrush" EndPoint="0.5,0.971" StartPoint="0.5,0.042">
         <GradientStop Color="#4C000000" Offset="0" />

@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace IstLight.Simulation
 {
-    public class SimulationRunner
+    public class SimulationRunner : IstLight.Simulation.ISimulationRunner
     {
         private readonly SimulationInput input;
         private readonly Simulator simulator;
@@ -77,7 +77,7 @@ namespace IstLight.Simulation
             simulator.Cancel();
         }
         public bool IsRunning { get { return isRunning; } }
-        public Action<bool> IsRunningChanged = delegate { };
+        public event Action<bool> IsRunningChanged = delegate { };
         public event Action<SimulationRunner> SimulationStarted = delegate { };
         public event Action<SimulationProgressStatus> ProgressStatus = delegate { };
         public event Action<SimulationEndEventArgs> SimulationEnded = delegate { };

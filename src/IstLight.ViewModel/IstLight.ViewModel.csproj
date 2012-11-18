@@ -70,11 +70,14 @@
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
     <Compile Include="SimulationProgressViewModel.cs" />
     <Compile Include="SimulationSettingsViewModel.cs" />
+    <Compile Include="Simulation\ISimulationRunner.cs" />
     <Compile Include="Simulation\SimulationInput.cs" />
     <Compile Include="Simulation\SimulationProgressStatus.cs" />
     <Compile Include="Simulation\SimulationRunner.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Simulation\SimulationRunnerDecoratorBase.cs" />
+    <Compile Include="Simulation\SimulationRunnerErrorDecorator.cs" />
     <Compile Include="StrategyExplorerViewModel.cs" />
     <Compile Include="StrategyViewModel.cs" />
     <Compile Include="Strategy\IStrategyCreator.cs" />

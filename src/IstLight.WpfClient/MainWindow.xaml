@@ -20,8 +20,6 @@
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        
-    	
     	
         <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="0,0,0,20">
             <MenuItem Header="_File" >
@@ -63,7 +61,7 @@
                     <ei:ControlStoryboardAction ControlStoryboardOption="Play">
                         <ei:ControlStoryboardAction.Storyboard>
                             <Storyboard AutoReverse="True" RepeatBehavior="0:0:.9">
-                                <ColorAnimation To="#F00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
+                                <ColorAnimation From="{StaticResource GlyphColor}" To="#F00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
                             </Storyboard>
                         </ei:ControlStoryboardAction.Storyboard>
                     </ei:ControlStoryboardAction>

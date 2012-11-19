@@ -1,15 +1,14 @@
-﻿using IstLight.Commands;
-using IstLight.Commands.Concrete;
+﻿using System.Linq;
+using IstLight.Commands;
 using IstLight.Services;
 using IstLight.Services.Decorators;
 using IstLight.Settings;
+using IstLight.Simulation;
 using IstLight.Strategy;
 using IstLight.Synchronization;
+using IstLight.ViewModels;
 using Ninject;
 using Ninject.Modules;
-using System.Linq;
-using IstLight.Simulation;
-using IstLight.ViewModels;
 
 namespace IstLight.Bootstrapper
 {

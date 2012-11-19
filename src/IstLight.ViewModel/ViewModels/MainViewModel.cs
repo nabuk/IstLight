@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using IstLight.Commands;
 
 namespace IstLight.ViewModels

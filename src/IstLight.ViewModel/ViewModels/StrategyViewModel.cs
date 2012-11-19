@@ -1,6 +1,4 @@
-﻿using System;
-using GalaSoft.MvvmLight;
-using IstLight.Strategy;
+﻿using GalaSoft.MvvmLight;
 
 namespace IstLight.ViewModels
 {

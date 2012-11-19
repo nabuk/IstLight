@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using IstLight.Settings;
+﻿using IstLight.Settings;
 using IstLight.Strategy;
 using IstLight.Synchronization;
 

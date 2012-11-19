@@ -11,6 +11,7 @@ namespace IstLight.Simulation
         private bool isRunning;
         private readonly object isRunningLocker = new object();
         private Dispatcher dispatcher;
+        private DateTime lastUpdate;
 
         private void StartSimulation()
         {
@@ -34,12 +35,16 @@ namespace IstLight.Simulation
                 EndSimulation(new SimulationEndEventArgs { EndReason = SimulationEndReason.Error, Error = syncTickersGetter.Error.Message });
                 return;
             }
-
+            lastUpdate = DateTime.MinValue;
             simulator.RunAsync(syncTickersGetter.Value(), strategy, settings);
         }
         private void ReportProgress(SimulationProgressStatus progress)
         {
-            dispatcher.InvokeIfRequired(() => ProgressStatus(progress));
+            if ((DateTime.Now - lastUpdate) > TimeSpan.FromMilliseconds(10))
+            {
+                lastUpdate = DateTime.Now;
+                dispatcher.InvokeIfRequired(() => ProgressStatus(progress));
+            }
         }
         private void EndSimulation(SimulationEndEventArgs args)
         {

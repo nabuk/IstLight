@@ -74,7 +74,7 @@ namespace IstLight.Simulation
             if (!isRunning)
                 return;
 
-            simulator.Cancel();
+            simulator.Cancel(false);
         }
         public bool IsRunning { get { return isRunning; } }
         public event Action<bool> IsRunningChanged = delegate { };

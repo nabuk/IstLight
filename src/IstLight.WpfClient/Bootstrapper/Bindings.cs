@@ -52,15 +52,19 @@ namespace IstLight.Bootstrapper
             Kernel.Bind<IWindow>().ToMethod(x => x.Kernel.Get<MainWindowAdapter>());
 
             Kernel.Bind<GlobalCommandContainer>().ToSelf().InSingletonScope();
-
             foreach (var t in typeof(IGlobalCommand).Assembly.GetTypes().Where(t => typeof(IGlobalCommand).IsAssignableFrom(t) && !t.IsAbstract))
                 Kernel.Bind<IGlobalCommand>().To(t);
 
-            
-            Kernel.Bind<ISimulationRunner>().To<SimulationRunnerErrorDecorator>().InSingletonScope();
+
+            Kernel.Bind<ISimulationRunner>().To<SimulationRunnerProgressDecorator>().InSingletonScope();
+            Kernel.Bind<ISimulationRunner>().To<SimulationRunnerErrorDecorator>()
+                .WhenInjectedInto<SimulationRunnerProgressDecorator>()
+                .InSingletonScope();
             Kernel.Bind<ISimulationRunner>().To<SimulationRunner>()
                 .WhenInjectedInto<SimulationRunnerErrorDecorator>()
                 .InSingletonScope();
+
+
         }
     }
 }

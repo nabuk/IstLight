@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using IstLight.Dictionaries;
 
 namespace IstLight
 {
@@ -27,12 +28,11 @@ namespace IstLight
 
         public virtual IWindow CreateChild(object viewModel)
         {
-            var cw = new ContentWindow();
-            cw.Owner = this.wpfWindow;
-            cw.DataContext = viewModel;
-            WindowAdapter.ConfigureBehavior(cw);
-
-            return new WindowAdapter(cw);
+            var child = ViewModelToWindowMap.Create(viewModel);
+            child.Owner = this.wpfWindow;
+            child.DataContext = viewModel;
+            WindowAdapter.ConfigureBehavior(child);
+            return new WindowAdapter(child);
         }
 
         public virtual void Show()
@@ -52,9 +52,9 @@ namespace IstLight
             get { return this.wpfWindow; }
         }
 
-        private static void ConfigureBehavior(ContentWindow cw)
+        private static void ConfigureBehavior(Window wnd)
         {
-            cw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             //cw.CommandBindings.Add(new CommandBinding(new RoutedCommand("Accept", cw.GetType()), (sender, e) => cw.DialogResult = true));
         }
     }

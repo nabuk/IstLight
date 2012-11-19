@@ -84,6 +84,7 @@
     <Compile Include="ContentWindow.xaml.cs">
       <DependentUpon>ContentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dictionaries\ViewModelToWindowMap.cs" />
     <Compile Include="ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +94,9 @@
     <Compile Include="MainWindowAdapter.cs" />
     <Compile Include="SectionHeaderView.xaml.cs">
       <DependentUpon>SectionHeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SimulationProgressView.xaml.cs">
+      <DependentUpon>SimulationProgressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SimulationSettingsView.xaml.cs">
       <DependentUpon>SimulationSettingsView.xaml</DependentUpon>
@@ -150,6 +154,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SectionHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimulationProgressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

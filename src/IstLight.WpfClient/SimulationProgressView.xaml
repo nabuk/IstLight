@@ -1,0 +1,15 @@
+﻿<Window x:Class="IstLight.SimulationProgressView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SimulationProgressView" Height="70" Width="300"
+        Background="{StaticResource LightBrush}"
+        WindowStyle="ToolWindow">
+    <StackPanel VerticalAlignment="Center">
+        <ProgressBar Height="8" Margin="5"
+            Value="{Binding Status.Current, Mode=OneWay}"
+            Maximum="{Binding Status.Max, Mode=OneWay}" />
+        <TextBlock TextAlignment="Center"
+            Text="{Binding Status.Status, Mode=OneWay}"
+            Foreground="{StaticResource GlyphBrush}" />
+    </StackPanel>
+</Window>

@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="Simulation\SimulationRunnerDecoratorBase.cs" />
     <Compile Include="Simulation\SimulationRunnerErrorDecorator.cs" />
+    <Compile Include="Simulation\SimulationRunnerProgressDecorator.cs" />
     <Compile Include="StrategyExplorerViewModel.cs" />
     <Compile Include="StrategyViewModel.cs" />
     <Compile Include="Strategy\IStrategyCreator.cs" />

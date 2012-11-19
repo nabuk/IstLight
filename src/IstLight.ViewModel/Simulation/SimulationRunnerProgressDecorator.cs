@@ -36,7 +36,7 @@ namespace IstLight.Simulation
             : base(simulationRunner)
         {
             this.mainWindow = mainWindow;
-            this.statusViewModel = new SimulationProgressViewModel();
+            this.statusViewModel = new SimulationProgressViewModel(new DelegateCommand(this.Cancel));
 
             simulationRunner.IsRunningChanged += isRunning =>
             {

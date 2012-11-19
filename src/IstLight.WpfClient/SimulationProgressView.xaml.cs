@@ -16,7 +16,7 @@ namespace IstLight
     /// <summary>
     /// Interaction logic for SimulationProgressView.xaml
     /// </summary>
-    public partial class SimulationProgressView : Window
+    public partial class SimulationProgressView
     {
         public SimulationProgressView()
         {

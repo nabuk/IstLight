@@ -8,7 +8,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using IstLight.Services;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class TickerProvidersViewModel : ViewModelBase
     {

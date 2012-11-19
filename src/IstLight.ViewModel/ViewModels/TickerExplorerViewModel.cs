@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class TickerExplorerViewModel : ViewModelBase
     {

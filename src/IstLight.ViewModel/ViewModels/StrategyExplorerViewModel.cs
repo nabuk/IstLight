@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class StrategyExplorerViewModel : ViewModelBase
     {

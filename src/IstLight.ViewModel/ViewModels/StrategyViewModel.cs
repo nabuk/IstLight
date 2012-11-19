@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight;
 using IstLight.Strategy;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class StrategyViewModel : ViewModelBase
     {

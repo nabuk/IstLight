@@ -3,7 +3,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using IstLight.Commands;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {

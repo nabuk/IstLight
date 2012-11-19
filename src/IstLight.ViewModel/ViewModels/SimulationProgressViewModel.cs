@@ -6,7 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using IstLight.Simulation;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class SimulationProgressViewModel : ViewModelBase
     {

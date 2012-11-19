@@ -4,7 +4,7 @@ using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using IstLight.Services;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class TickerFileViewModel : ViewModelBase
     {

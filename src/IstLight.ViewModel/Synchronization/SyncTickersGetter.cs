@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using IstLight.Services;
 using IstLight.Settings;
+using IstLight.ViewModels;
 
 namespace IstLight.Synchronization
 {

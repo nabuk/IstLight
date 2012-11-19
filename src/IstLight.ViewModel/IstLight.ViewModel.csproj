@@ -52,12 +52,12 @@
     <Compile Include="Commands\Concrete\RunSimulationCommand.cs" />
     <Compile Include="Commands\Concrete\StopSimulationCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
-    <Compile Include="ErrorListViewModel.cs" />
+    <Compile Include="ViewModels\ErrorListViewModel.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IWindow.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Commands\GlobalCommandBase.cs" />
     <Compile Include="Commands\GlobalCommandContainer.cs" />
     <Compile Include="Commands\IGlobalCommand.cs" />
@@ -68,8 +68,8 @@
     <Compile Include="Settings\SimulationSettingsGetter.cs" />
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
-    <Compile Include="SimulationProgressViewModel.cs" />
-    <Compile Include="SimulationSettingsViewModel.cs" />
+    <Compile Include="ViewModels\SimulationProgressViewModel.cs" />
+    <Compile Include="ViewModels\SimulationSettingsViewModel.cs" />
     <Compile Include="Simulation\ISimulationRunner.cs" />
     <Compile Include="Simulation\SimulationInput.cs" />
     <Compile Include="Simulation\SimulationProgressStatus.cs" />
@@ -79,19 +79,19 @@
     <Compile Include="Simulation\SimulationRunnerDecoratorBase.cs" />
     <Compile Include="Simulation\SimulationRunnerErrorDecorator.cs" />
     <Compile Include="Simulation\SimulationRunnerProgressDecorator.cs" />
-    <Compile Include="StrategyExplorerViewModel.cs" />
-    <Compile Include="StrategyViewModel.cs" />
+    <Compile Include="ViewModels\StrategyExplorerViewModel.cs" />
+    <Compile Include="ViewModels\StrategyViewModel.cs" />
     <Compile Include="Strategy\IStrategyCreator.cs" />
     <Compile Include="Strategy\StrategyCreator.cs" />
     <Compile Include="Synchronization\ISyncTickersGetter.cs" />
     <Compile Include="Synchronization\SyncTickersGetter.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />
-    <Compile Include="TickerSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\TickerSearchResultViewModel.cs" />
     <Compile Include="Services\ITickerLocationService.cs" />
-    <Compile Include="TickerExplorerViewModel.cs" />
-    <Compile Include="TickerProvidersViewModel.cs" />
-    <Compile Include="TickerProviderViewModel.cs" />
-    <Compile Include="TickerFileViewModel.cs" />
+    <Compile Include="ViewModels\TickerExplorerViewModel.cs" />
+    <Compile Include="ViewModels\TickerProvidersViewModel.cs" />
+    <Compile Include="ViewModels\TickerProviderViewModel.cs" />
+    <Compile Include="ViewModels\TickerFileViewModel.cs" />
     <Compile Include="WPFControlThreadingExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

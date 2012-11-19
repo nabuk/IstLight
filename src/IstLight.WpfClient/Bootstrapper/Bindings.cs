@@ -9,6 +9,7 @@ using Ninject;
 using Ninject.Modules;
 using System.Linq;
 using IstLight.Simulation;
+using IstLight.ViewModels;
 
 namespace IstLight.Bootstrapper
 {

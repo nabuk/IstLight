@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:VM="clr-namespace:IstLight;assembly=IstLight.ViewModel"
+                    xmlns:VM="clr-namespace:IstLight.ViewModels;assembly=IstLight.ViewModel"
                     xmlns:View="clr-namespace:IstLight.Views">
     
     <DataTemplate DataType="{x:Type VM:TickerExplorerViewModel}">

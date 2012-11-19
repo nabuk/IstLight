@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight;
 using IstLight.Extensions;
 using IstLight.Settings;
 
-namespace IstLight
+namespace IstLight.ViewModels
 {
     public class SimulationSettingsViewModel : ViewModelBase
     {

@@ -82,7 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper\EntryPoint.cs" />
     <Compile Include="Dictionaries\ViewModelToWindowMap.cs" />
-    <Compile Include="ErrorListView.xaml.cs">
+    <Compile Include="Views\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
@@ -90,28 +90,28 @@
     <Compile Include="Helpers\StateManager.cs" />
     <Compile Include="MainWindowAdapter.cs" />
     <Compile Include="PopupWindowBase.cs" />
-    <Compile Include="SectionHeaderView.xaml.cs">
+    <Compile Include="Views\SectionHeaderView.xaml.cs">
       <DependentUpon>SectionHeaderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SimulationProgressView.xaml.cs">
+    <Compile Include="Views\SimulationProgressView.xaml.cs">
       <DependentUpon>SimulationProgressView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SimulationSettingsView.xaml.cs">
+    <Compile Include="Views\SimulationSettingsView.xaml.cs">
       <DependentUpon>SimulationSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StrategyExplorerView.xaml.cs">
+    <Compile Include="Views\StrategyExplorerView.xaml.cs">
       <DependentUpon>StrategyExplorerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StrategyView.xaml.cs">
+    <Compile Include="Views\StrategyView.xaml.cs">
       <DependentUpon>StrategyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TickerExplorerView.xaml.cs">
+    <Compile Include="Views\TickerExplorerView.xaml.cs">
       <DependentUpon>TickerExplorerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TickerProvidersView.xaml.cs">
+    <Compile Include="Views\TickerProvidersView.xaml.cs">
       <DependentUpon>TickerProvidersView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TickerFileView.xaml.cs">
+    <Compile Include="Views\TickerFileView.xaml.cs">
       <DependentUpon>TickerFileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowAdapter.cs">
@@ -121,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ErrorListView.xaml">
+    <Page Include="Views\ErrorListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,35 +147,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SectionHeaderView.xaml">
+    <Page Include="Views\SectionHeaderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SimulationProgressView.xaml">
+    <Page Include="Views\SimulationProgressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SimulationSettingsView.xaml">
+    <Page Include="Views\SimulationSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StrategyExplorerView.xaml">
+    <Page Include="Views\StrategyExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StrategyView.xaml">
+    <Page Include="Views\StrategyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TickerExplorerView.xaml">
+    <Page Include="Views\TickerExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TickerProvidersView.xaml">
+    <Page Include="Views\TickerProvidersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TickerFileView.xaml">
+    <Page Include="Views\TickerFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,9 +220,7 @@
       <Name>IstLight.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(SolutionDir)..\lib\Scripting\*.dll $(TargetDir)

@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace IstLight
+namespace IstLight.Views
 {
     /// <summary>
     /// Interaction logic for SimulationProgressView.xaml

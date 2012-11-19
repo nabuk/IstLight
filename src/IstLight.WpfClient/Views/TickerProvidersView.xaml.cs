@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace IstLight
+namespace IstLight.Views
 {
     /// <summary>
     /// Interaction logic for TickerProvidersView.xaml

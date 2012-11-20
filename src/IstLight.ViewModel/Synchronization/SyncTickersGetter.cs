@@ -21,7 +21,7 @@ namespace IstLight.Synchronization
             var tickers =
                 tickerExplorer.Tickers
                 .Where(t => t.LoadState == AsyncState.Completed)
-                .Select(t => t.AsyncTicker.Result)
+                .Select(t => t.Ticker)
                 .AsReadOnlyList();
             var settings = settingsGetter.Get();
 

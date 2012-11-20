@@ -49,7 +49,7 @@
 
                 <TextBox
                     x:Name="tbSymbol"
-                    Text="{Binding Name}"
+                    Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Foreground="Gray"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"

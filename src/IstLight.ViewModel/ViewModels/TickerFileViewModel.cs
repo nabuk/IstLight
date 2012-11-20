@@ -10,7 +10,7 @@ namespace IstLight.ViewModels
     {
         private readonly Dispatcher dispatcher;
         private int? index;
-        internal readonly IAsyncResult<Ticker> AsyncTicker;
+        private readonly IAsyncResult<Ticker> AsyncTicker;
         private readonly OneTimeCallbackContainer<TickerFileViewModel> completionCallbacks = new OneTimeCallbackContainer<TickerFileViewModel>();
         private readonly object stateChangeSync = new object();
 
@@ -74,5 +74,17 @@ namespace IstLight.ViewModels
 
         public string From { get; private set; }
         public string To { get; private set; }
+
+        public Ticker Ticker
+        {
+            get
+            {
+                var ticker = AsyncTicker.Result;
+                if (ticker == null)
+                    throw new InvalidOperationException("Ticker is not loaded.");
+                ticker.Name = Name;
+                return ticker;
+            }
+        }
     }
 }

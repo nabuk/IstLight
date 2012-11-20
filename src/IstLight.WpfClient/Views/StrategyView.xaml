@@ -3,21 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:avalon="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+             xmlns:controls="clr-namespace:IstLight.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <avalon:TextEditor
-        Name="avalonTextEditor"
-        ShowLineNumbers="True"
-        Foreground="{StaticResource GlyphBrush}" Background="#1C1C1C"
-        FontSize="10pt"
-        WordWrap="True"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-        ScrollViewer.VerticalScrollBarVisibility="Auto"
-        >
-        <!--<avalon:TextEditor.InputBindings>
-            <KeyBinding Command="{Binding Path=Strategy.RunStrategyCommand}" Key="F5" />
-            <KeyBinding Command="{Binding Path=Strategy.RunStrategyCommand}" Key="E" Modifiers="Ctrl" />
-        </avalon:TextEditor.InputBindings>-->
-    </avalon:TextEditor>
+    <controls:CodeEditor Text="{Binding Content, Mode=TwoWay}" />
 </UserControl>

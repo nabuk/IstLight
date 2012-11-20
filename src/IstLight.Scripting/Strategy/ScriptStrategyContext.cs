@@ -45,7 +45,7 @@ namespace IstLight.Strategy
                         }
                     }
 
-                    items = engine.GetItems().ToArray();
+                    items = groupEngine.GetItems().ToArray();
                 }
 
             foreach (var item in items)

@@ -81,7 +81,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper\EntryPoint.cs" />
+    <Compile Include="Controls\CodeEditor.xaml.cs">
+      <DependentUpon>CodeEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dictionaries\ViewModelToWindowMap.cs" />
+    <Compile Include="Helpers\PropertyChangeNotifier.cs" />
     <Compile Include="Views\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +124,10 @@
     <Compile Include="WindowAdapter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Controls\CodeEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dictionaries\Renderers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

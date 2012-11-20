@@ -17,13 +17,6 @@ namespace IstLight.Views
         public StrategyView()
         {
             InitializeComponent();
-
-            StreamResourceInfo sri = Application.GetResourceStream(new Uri("Dictionaries/SyntaxHighlighting.Python.xshd", UriKind.Relative));
-            if (sri != null)
-                using (Stream s = sri.Stream)
-                {
-                    avalonTextEditor.SyntaxHighlighting = HighlightingLoader.Load(new XmlTextReader(s), HighlightingManager.Instance);
-                }
         }
     }
 }

@@ -11,9 +11,7 @@ namespace IstLight
         public WindowAdapter(Window wpfWindow)
         {
             if (wpfWindow == null)
-            {
-                throw new ArgumentNullException("window");
-            }
+                throw new ArgumentNullException("wpfWindow");
 
             this.wpfWindow = wpfWindow;
         }
@@ -29,6 +27,7 @@ namespace IstLight
         {
             var child = ViewModelToWindowMap.Create(viewModel);
             child.Owner = this.wpfWindow;
+            child.Closing += (s, e) => (s as Window).Owner = null;
             child.DataContext = viewModel;
             WindowAdapter.ConfigureBehavior(child);
             return new WindowAdapter(child);

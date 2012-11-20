@@ -8,9 +8,10 @@ namespace IstLight.Dictionaries
 {
     public static class ViewModelToWindowMap
     {
-        private static IDictionary<Type, Type> map = new Dictionary<Type, Type>
+        private static readonly IDictionary<Type, Type> map = new Dictionary<Type, Type>
         {
-            { typeof(SimulationProgressViewModel), typeof(SimulationProgressView) }
+            { typeof(SimulationProgressViewModel), typeof(SimulationProgressView) },
+            { typeof(SimulationResultViewModel), typeof(SimulationResultView) }
         };
 
         public static Window Create(object viewModel)

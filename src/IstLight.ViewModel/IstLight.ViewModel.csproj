@@ -52,6 +52,7 @@
     <Compile Include="Commands\Concrete\RunSimulationCommand.cs" />
     <Compile Include="Commands\Concrete\StopSimulationCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Simulation\SimulationRunnerResultDecorator.cs" />
     <Compile Include="ViewModels\ErrorListViewModel.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IWindow.cs">
@@ -69,6 +70,8 @@
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
     <Compile Include="ViewModels\SimulationProgressViewModel.cs" />
+    <Compile Include="ViewModels\SimulationResultViewModel.cs" />
+    <Compile Include="ViewModels\SimulationResultViewModelFactory.cs" />
     <Compile Include="ViewModels\SimulationSettingsViewModel.cs" />
     <Compile Include="Simulation\ISimulationRunner.cs" />
     <Compile Include="Simulation\SimulationInput.cs" />

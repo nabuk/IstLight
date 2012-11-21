@@ -93,10 +93,7 @@
     <Compile Include="Helpers\ItemsControlHelper.cs" />
     <Compile Include="Helpers\StateManager.cs" />
     <Compile Include="MainWindowAdapter.cs" />
-    <Compile Include="PopupWindowBase.cs" />
-    <Compile Include="Views\SectionHeaderView.xaml.cs">
-      <DependentUpon>SectionHeaderView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\PopupWindowBase.cs" />
     <Compile Include="Views\SimulationProgressView.xaml.cs">
       <DependentUpon>SimulationProgressView.xaml</DependentUpon>
     </Compile>
@@ -157,10 +154,6 @@
     <Page Include="Dictionaries\ExpressionDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SectionHeaderView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SimulationProgressView.xaml">
       <SubType>Designer</SubType>

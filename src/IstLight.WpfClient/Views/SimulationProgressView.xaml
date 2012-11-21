@@ -1,7 +1,7 @@
-﻿<local:PopupWindowBase x:Class="IstLight.Views.SimulationProgressView"
+﻿<controls:PopupWindowBase x:Class="IstLight.Views.SimulationProgressView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:IstLight"
+        xmlns:controls="clr-namespace:IstLight.Controls"
         Title="Simulation progress" Height="75" Width="400"
         TextOptions.TextFormattingMode="Display"
         Background="{StaticResource LightBrush}"
@@ -30,4 +30,4 @@
         </Grid>
         
     </StackPanel>
-</local:PopupWindowBase>
+</controls:PopupWindowBase>

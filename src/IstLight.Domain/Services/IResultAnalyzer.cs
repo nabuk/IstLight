@@ -1,10 +1,11 @@
-﻿using IstLight.Simulation;
+﻿using System.Collections.Generic;
+using IstLight.Simulation;
 
 namespace IstLight.Services
 {
     public interface IResultAnalyzer : INamedItem
     {
         string Category { get; }
-        IAsyncResult<string> Analyze(SimulationResult result);
+        IAsyncResult<IReadOnlyList<KeyValuePair<string,string>>> Analyze(SimulationResult result);
     }
 }

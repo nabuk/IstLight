@@ -1,4 +1,5 @@
-﻿using IstLight.Simulation;
+﻿using System.Collections.Generic;
+using IstLight.Simulation;
 
 namespace IstLight.Services
 {
@@ -14,9 +15,10 @@ namespace IstLight.Services
             get; private set;
         }
 
-        public IAsyncResult<string> Analyze(SimulationResult result)
+        public IAsyncResult<IReadOnlyList<KeyValuePair<string, string>>> Analyze(SimulationResult result)
         {
-            return executor.SafeExecuteAsync<string>(engine => engine.GetVariable("Analyze")(result));
+            return executor.SafeExecuteAsync<IReadOnlyList<KeyValuePair<string, string>>>(engine =>
+                ((KeyValuePair<string,string>[])engine.GetVariable("Analyze")(result)).AsReadOnlyList());
         }
     }
 }

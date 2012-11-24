@@ -8,7 +8,11 @@
         Title="SimulationResultView"
         Background="{StaticResource ControlBackgroundBrush}"
         WindowState="Maximized">
-    <Grid>
-        
-    </Grid>
+    <TabControl Margin="10" ItemsSource="{Binding Sections, Mode=OneTime}" SelectedIndex="0">
+        <TabControl.ItemContainerStyle>
+            <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                <Setter Property="Header" Value="{Binding Header, Mode=OneTime}" />
+            </Style>
+        </TabControl.ItemContainerStyle>
+    </TabControl>
 </Window>

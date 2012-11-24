@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="IstLight.Views.ResultSections.SummaryGroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             MinWidth="300" MaxWidth="500"
+             Margin="10,10,0,0"
+             >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="SelectionUnit" Value="FullRow" />
+            <Setter Property="RowBackground" Value="#4333" />
+            <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}" />
+            <Setter Property="VerticalGridLinesBrush" Value="{x:Null}" />
+            <Setter Property="HeadersVisibility" Value="None" />
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="Background" Value="#8222" />
+            <Setter Property="RowStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource NormalBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#4333" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="Margin" Value="2,1" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="{StaticResource NormalBrush}" BorderThickness="0">
+            <TextBlock FontWeight="Bold" Text="{Binding Name}" Margin="5" Foreground="{StaticResource GlyphBrush}" />
+        </Border>
+        <DataGrid Margin="10,5"
+            ItemsSource="{Binding Items, Mode=OneWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Key" Binding="{Binding Key, Mode=OneTime}" Width="Auto" />
+                <DataGridTextColumn Header="Value" Binding="{Binding Value, Mode=OneTime}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

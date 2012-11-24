@@ -27,21 +27,25 @@ namespace IstLight.Bootstrapper
                 .WhenInjectedInto<AsyncLoadServiceErrorDecorator<ITickerProvider>>()
                 .InSingletonScope();
             Kernel.Bind<IAsyncLoadService<ITickerProvider>>().To<AsyncLoadServiceErrorDecorator<ITickerProvider>>().InSingletonScope();
-
             Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
                 .WhenInjectedInto<TickerProviderService>()
                 .WithConstructorArgument("path", "scripts\\providers");
+
+            Kernel.Bind<IAsyncLoadService<IResultAnalyzer>>().To<ResultAnalyzerService>()
+                .WhenInjectedInto<AsyncLoadServiceErrorDecorator<IResultAnalyzer>>()
+                .InSingletonScope();
+            Kernel.Bind<IAsyncLoadService<IResultAnalyzer>>().To<AsyncLoadServiceErrorDecorator<IResultAnalyzer>>().InSingletonScope();
+            Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
+                .WhenInjectedInto<ResultAnalyzerService>()
+                .WithConstructorArgument("path", "scripts\\report");
 
             Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
                 .WhenInjectedInto<ScriptStrategyFactory>()
                 .WithConstructorArgument("path", "scripts\\functions");
 
             Kernel.Bind<IStrategyCreator>().To<StrategyCreator>().InSingletonScope();
-
             Kernel.Bind<ISyncTickersGetter>().To<SyncTickersGetter>().InSingletonScope();
-
             Kernel.Bind<ISimulationSettingsGetter>().To<SimulationSettingsGetter>().InSingletonScope();
-
             Kernel.Bind<ISimulationSettings>().To<SimulationSettings>();
 
             Kernel.Bind<SimulationInput>().ToSelf().InSingletonScope();
@@ -65,8 +69,6 @@ namespace IstLight.Bootstrapper
             Kernel.Bind<ISimulationRunner>().To<SimulationRunner>()
                 .WhenInjectedInto<SimulationRunnerErrorDecorator>()
                 .InSingletonScope();
-
-
         }
     }
 }

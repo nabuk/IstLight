@@ -45,6 +45,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Decorators\NamedItemBaseErrorDecorator.cs" />
+    <Compile Include="Services\Decorators\ResultAnalyzerErrorDecorator.cs" />
     <Compile Include="Services\Decorators\TickerProviderErrorDecorator.cs">
       <SubType>Code</SubType>
     </Compile>

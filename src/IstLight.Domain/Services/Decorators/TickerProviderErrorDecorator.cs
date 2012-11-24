@@ -6,6 +6,7 @@ namespace IstLight.Services.Decorators
         public TickerProviderErrorDecorator(ITickerProvider itemToDecorate, IErrorReporter errorReporter)
             : base(itemToDecorate, errorReporter) { }
 
+        #region ITickerProvider
         public bool CanSearch
         {
             get { return base.itemToDecorate.CanSearch; }
@@ -20,5 +21,6 @@ namespace IstLight.Services.Decorators
         {
             return Decorate(itemToDecorate.Get(tickerName));
         }
+        #endregion //ITickerProvider
     }
 }

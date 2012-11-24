@@ -58,6 +58,7 @@
     <Compile Include="IWindow.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\ISectionViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Commands\GlobalCommandBase.cs" />
     <Compile Include="Commands\GlobalCommandContainer.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="Settings\SimulationSettingsGetter.cs" />
     <Compile Include="Settings\SimulationPriceTypeNames.cs" />
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
+    <Compile Include="ViewModels\ResultSections\SummaryGroupViewModel.cs" />
+    <Compile Include="ViewModels\ResultSections\SummarySectionViewModel.cs" />
     <Compile Include="ViewModels\SimulationProgressViewModel.cs" />
     <Compile Include="ViewModels\SimulationResultViewModel.cs" />
     <Compile Include="ViewModels\SimulationResultViewModelFactory.cs" />

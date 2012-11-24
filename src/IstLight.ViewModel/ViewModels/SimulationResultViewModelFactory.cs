@@ -25,6 +25,7 @@ namespace IstLight.ViewModels
                 new ISectionViewModel[]
                 {
                     new SummarySectionViewModel(analyzerList,result),
+                    new EquityViewModel(result)
                 });
         }
     }

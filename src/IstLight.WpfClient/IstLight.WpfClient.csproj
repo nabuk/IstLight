@@ -94,6 +94,9 @@
     <Compile Include="Helpers\StateManager.cs" />
     <Compile Include="MainWindowAdapter.cs" />
     <Compile Include="Controls\PopupWindowBase.cs" />
+    <Compile Include="Views\ResultSections\EquityView.xaml.cs">
+      <DependentUpon>EquityView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResultSections\SummaryGroupView.xaml.cs">
       <DependentUpon>SummaryGroupView.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
     <Page Include="Dictionaries\ExpressionDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ResultSections\EquityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ResultSections\SummaryGroupView.xaml">
       <SubType>Designer</SubType>

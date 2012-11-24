@@ -41,5 +41,9 @@
     <DataTemplate DataType="{x:Type VMResult:SummaryGroupViewModel}">
         <ViewResult:SummaryGroupView />
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type VMResult:EquityViewModel}">
+        <ViewResult:EquityView />
+    </DataTemplate>
 
 </ResourceDictionary>

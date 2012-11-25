@@ -6,34 +6,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid Margin="10,5"
-            ItemsSource="{Binding Rows, Mode=OneWay}"
-            Style="{StaticResource ReadOnlyDataGrid}">
+        <DataGrid Margin="10"
+            ItemsSource="{Binding Rows, Mode=OneTime}"
+            Style="{StaticResource ReadOnlyDataGrid}" HorizontalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Header="Bar"
                     Binding="{Binding Bar, Mode=OneTime}"
-                    Width="Auto" />
+                    Width="Auto" CanUserResize="False" />
                 <DataGridTextColumn
                     Header="Date"
-                    Binding="{Binding Date, Mode=OneTime}"
-                    Width="Auto" />
+                    Binding="{Binding Date, Mode=OneTime, StringFormat={}{0:yyyy-MM-dd}}"
+                    Width="Auto" CanUserResize="False"/>
                 <DataGridTextColumn
                     Header="Cash"
-                    Binding="{Binding Cash, Mode=OneTime}"
-                    Width="Auto" />
+                    Binding="{Binding Cash, Mode=OneTime, StringFormat={}${0:0.00}}"
+                    Width="Auto" CanUserResize="False"/>
                 <DataGridTextColumn
                     Header="Portfolio"
-                    Binding="{Binding Portfolio, Mode=OneTime}"
-                    Width="Auto" />
+                    Binding="{Binding Portfolio, Mode=OneTime, StringFormat={}${0:0.00}}"
+                    Width="Auto" CanUserResize="False"/>
                 <DataGridTextColumn
                     Header="Commissions"
-                    Binding="{Binding Commissions, Mode=OneTime}"
-                    Width="Auto" />
+                    Binding="{Binding Commissions, Mode=OneTime, StringFormat={}${0:0.00}}"
+                    Width="Auto" CanUserResize="False"/>
                 <DataGridTextColumn
                     Header="Total"
-                    Binding="{Binding Total, Mode=OneTime}"
-                    Width="Auto" />
+                    Binding="{Binding Total, Mode=OneTime, StringFormat={}${0:0.00}}"
+                    Width="Auto" CanUserResize="False"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

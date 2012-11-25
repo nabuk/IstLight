@@ -15,6 +15,7 @@ namespace IstLight.ViewModels.ResultSections
             var resultQuote = result[barIndex];
             this.Date = resultQuote.Date;
             this.Cash = resultQuote.Cash;
+            this.Interest = resultQuote.Interest;
             this.Total = resultQuote.Equity(result.SyncTickers);
             this.Portfolio = Total - Cash;
             this.Commissions = resultQuote.Transactions.Select(t => t.Commission).Sum();
@@ -27,6 +28,7 @@ namespace IstLight.ViewModels.ResultSections
         public int Bar { get; private set; }
         public DateTime Date { get; private set; }
         public double Cash { get; private set; }
+        public double Interest { get; private set; }
         public double Portfolio { get; private set; }
         public double Commissions { get; private set; }
         public int TransactionCount { get; private set; }

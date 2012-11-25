@@ -18,6 +18,8 @@ namespace IstLight.Simulation.Core
         private SyncTickers syncTickers;
         private List<SimulationResultQuote> resultQuotes;
 
+        private double lastInterest;
+
         #region ISimulationContext
 
         bool ISimulationContext.Initialize(SyncTickers syncTickers, StrategyBase strategy, ISimulationSettings settings)
@@ -48,7 +50,11 @@ namespace IstLight.Simulation.Core
             var quantities = Enumerable.Range(0, quoteContext.TickerCount).Select(i => walletContext.GetQuantity(i)).AsReadOnlyList();
             var observation = syncTickers[quoteContext.CurrentObservationIndex];
             var cash = walletContext.Cash;
-            resultQuotes.Add(new SimulationResultQuote(quantities, cash, observation) { Transactions = transactionProcessor.PopMadeTransactions() });
+            resultQuotes.Add(new SimulationResultQuote(quantities, cash, observation)
+            {
+                Transactions = transactionProcessor.PopMadeTransactions(),
+                Interest = lastInterest
+            });
         }
 
         bool ISimulationContext.RunStrategy()
@@ -63,7 +69,7 @@ namespace IstLight.Simulation.Core
 
         void ISimulationContext.ApplyInterestRate()
         {
-            account.ApplyInterestRate(settings.Get<AnnualInterestRateSetting>().Value, quoteContext.Span.Value);
+            lastInterest = account.ApplyInterestRate(settings.Get<AnnualInterestRateSetting>().Value, quoteContext.Span.Value);
         }
 
         SimulationResult ISimulationContext.GetResult()

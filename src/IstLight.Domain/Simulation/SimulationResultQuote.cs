@@ -32,6 +32,7 @@ namespace IstLight.Simulation
                 transactions = value;
             }
         }
+        public double Interest { get; set; }
         public DateTime Date
         {
             get { return Observation.Date; }

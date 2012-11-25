@@ -31,9 +31,15 @@ namespace IstLight.Simulation.Core
             cash += cashChange;
         }
 
-        public void ApplyInterestRate(double annualInterestRate, TimeSpan span)
+        //returns interest equity (not rate)
+        public double ApplyInterestRate(double annualInterestRate, TimeSpan span)
         {
-            cash *= Math.Pow(annualInterestRate + 1.0, span.TotalDays / 365.25);
+            double prevCash = cash;
+            double interestRate = Math.Pow(annualInterestRate + 1.0, span.TotalDays / 365.25);
+            
+            cash *= interestRate;
+
+            return cash - prevCash;
         }
     }
 }

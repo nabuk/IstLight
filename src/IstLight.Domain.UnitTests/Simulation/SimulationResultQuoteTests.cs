@@ -47,7 +47,7 @@ namespace IstLight.UnitTests.Simulation
         [Theory, PropertyData("Sut")]
         public void Transactions_SetToSth_GetReturnsWhatWasSet(SimulationResultQuote sut)
         {
-            var transactions = new Transaction[] { new Transaction(TransactionType.Buy, 1, 1, 0) }.AsReadOnlyList();
+            var transactions = new Transaction[] { new Transaction(TransactionType.Buy, 1, 1, 0, 0, 1) }.AsReadOnlyList();
             sut.Transactions = transactions;
             Assert.Same(transactions, sut.Transactions);
         }

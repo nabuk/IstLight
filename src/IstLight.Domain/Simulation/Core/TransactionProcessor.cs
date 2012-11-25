@@ -86,7 +86,7 @@ namespace IstLight.Simulation.Core
                 tType == TransactionType.Sell ?
                     (transactionValue / quantityChange) / avgPrice[tickerIndex] : 0;
 
-            madeTransactions.Add(new Transaction(tType, tickerIndex, quantityChange, netProfit));
+            madeTransactions.Add(new Transaction(tType, tickerIndex, quantityChange, netProfit, fee, transactionValue));
 
             account.ChangeTickerQuantity(tickerIndex, quantityChange, transactionValue * (-1));
         }

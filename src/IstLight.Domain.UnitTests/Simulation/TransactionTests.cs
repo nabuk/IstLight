@@ -35,7 +35,7 @@ namespace IstLight.UnitTests.Simulation
         {
             get
             {
-                yield return new object[] { new Transaction(TransactionType.Sell, 1, 1, 1) };
+                yield return new object[] { new Transaction(TransactionType.Sell, 1, 1, 1, 0, 1) };
             }
         }
     }

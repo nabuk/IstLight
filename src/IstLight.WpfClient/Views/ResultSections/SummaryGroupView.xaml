@@ -8,6 +8,18 @@
              MinWidth="300" MaxWidth="500"
              Margin="10,10,0,0"
              >
+    <UserControl.Resources>
+        <Style x:Key="leftCellAlignment" TargetType="DataGridCell">
+            <Style.Setters>
+                <Setter Property="TextBlock.TextAlignment" Value="Left" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="rightCellAlignment" TargetType="DataGridCell">
+            <Style.Setters>
+                <Setter Property="TextBlock.TextAlignment" Value="Right" />
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
     <DockPanel>
         <Border DockPanel.Dock="Top" Background="{StaticResource NormalBrush}" BorderThickness="0">
             <TextBlock FontWeight="Bold" Text="{Binding Name}" Margin="5" Foreground="{StaticResource GlyphBrush}" />
@@ -17,8 +29,16 @@
             HeadersVisibility="None"
             Style="{StaticResource ReadOnlyDataGrid}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Key" Binding="{Binding Key, Mode=OneTime}" Width="Auto" />
-                <DataGridTextColumn Header="Value" Binding="{Binding Value, Mode=OneTime}" Width="Auto" />
+                <DataGridTextColumn Header="Key"
+                                    Binding="{Binding Key, Mode=OneTime}"
+                                    Width="Auto" CanUserResize="False"
+                                    CellStyle="{StaticResource leftCellAlignment}"
+                                    />
+                <DataGridTextColumn Header="Value"
+                                    Binding="{Binding Value, Mode=OneTime}"
+                                    Width="*" CanUserResize="False"
+                                    CellStyle="{StaticResource rightCellAlignment}"
+                                    />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

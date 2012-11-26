@@ -5,14 +5,14 @@ namespace IstLight.Simulation
 {
     public class Transaction
     {
-        public Transaction(TransactionType type, int tickerIndex, double quantity, double netProfit, double commission, double total)
+        public Transaction(TransactionType type, int tickerIndex, double quantity, double netProfitRate, double commission, double cashFlow)
         {
             this.Type = type;
             this.TickerIndex = tickerIndex;
             this.Quantity = quantity;
-            this.NetProfit = netProfit;
+            this.NetProfitRate = netProfitRate;
             this.Commission = commission;
-            this.Total = Math.Abs(total);
+            this.CashFlow = cashFlow;
         }
 
         /// <summary>
@@ -30,10 +30,19 @@ namespace IstLight.Simulation
         /// <summary>
         /// Transaction level profit (sell only).
         /// </summary>
-        public double NetProfit { get; private set; }
+        public double NetProfitRate { get; private set; }
 
         public double Commission { get; private set; }
 
-        public double Total { get; private set; }
+        public double CashFlow { get; private set; }
+
+        public double NetProfit
+        {
+            get
+            {
+                if (NetProfitRate == 0) return 0;
+                return (CashFlow / (1 + NetProfitRate)) * NetProfitRate;
+            }
+        }
     }
 }

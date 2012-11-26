@@ -20,7 +20,7 @@ namespace IstLight.ViewModels.ResultSections
             this.Portfolio = Total - Cash;
             this.Commissions = resultQuote.Transactions.Select(t => t.Commission).Sum();
             this.TransactionCount = resultQuote.Transactions.Count;
-            this.TransactionTotal = resultQuote.Transactions.Select(t => t.Total).Sum();
+            this.TransactionTotal = resultQuote.Transactions.Select(t => t.CashFlow).Sum();
 
             this.Bar = barIndex + 1;
         }

@@ -26,9 +26,9 @@ namespace IstLight.UnitTests.Simulation
         }
 
         [Theory, PropertyData("Sut")]
-        public void ctor_NetProfit_IsSet(Transaction sut)
+        public void ctor_NetProfitRate_IsSet(Transaction sut)
         {
-            Assert.Equal<double>(1, sut.NetProfit);
+            Assert.Equal<double>(1, sut.NetProfitRate);
         }
 
         public static IEnumerable<object[]> Sut

@@ -63,20 +63,40 @@ def ExtractSearchResultFromLine(line):
 
 def ExtractDate(x): return DateTime.Parse(x,CultureInfo.InvariantCulture)
 def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)
-def ExtractQuote(row):
-	date = ExtractDate(row[0])
-	open = ExtractDouble(row[1])
-	high = ExtractDouble(row[2])
-	low = ExtractDouble(row[3])
-	close = ExtractDouble(row[4])
-	volume = ExtractDouble(row[5]) if row.Length > 5 else None
+def ExtractIndices(header):
+	indices = {}
+	indices['date'] = header.IndexOf('Date')
+	indices['open'] = header.IndexOf('Open')
+	indices['high'] = header.IndexOf('High')
+	indices['low'] = header.IndexOf('Low')
+	indices['close'] = header.IndexOf('Close')
+	indices['volume'] = header.IndexOf('Volume')
+	indices['adjClose'] = header.IndexOf('Adj Close')
+	return indices
+	
+def ExtractQuote(row, indices):
+	date = ExtractDate(row[indices['date']])
+	open = ExtractDouble(row[indices['open']])
+	high = ExtractDouble(row[indices['high']])
+	low = ExtractDouble(row[indices['low']])
+	close = ExtractDouble(row[indices['close']])
+	if indices['volume'] >= 0: volume = ExtractDouble(row[indices['volume']])
+	else: volume = None
+	if indices['adjClose'] >= 0:
+		ratio = ExtractDouble(row[indices['adjClose']]) / close
+		open *= ratio
+		high *= ratio
+		low *= ratio
+		close *= ratio
 	return TickerQuote(date,open,close,high,low,volume)
 
 #Download ticker
 def Get(ticker):
 	rawData = GetRawData(providerSiteUrl, ProviderGetTickerDataUrl(ticker))
-	rawRows = rawData.Replace(oldValue = '\r', newValue = '').Split('\n').Skip(1).TakeWhile(lambda row: row.Length > 6).Select(lambda row: row.Split(','))
-	quotes = Array[TickerQuote](rawRows.Select(lambda row: ExtractQuote(row)).ToArray())
+	rawRows = rawData.Replace(oldValue = '\r', newValue = '').Split('\n')
+	indices = ExtractIndices(rawRows.First().Split(',').ToList())
+	rawRows = rawRows.Skip(1).TakeWhile(lambda row: row.Length >= 5).Select(lambda row: row.Split(','))
+	quotes = Array[TickerQuote](rawRows.Select(lambda row: ExtractQuote(row, indices)).ToArray())
 	quotes = IReadOnlyListExtensions.AsReadOnlyList(quotes)
 	return Ticker(ticker,quotes)
 

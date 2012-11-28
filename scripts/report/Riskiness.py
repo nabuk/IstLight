@@ -78,7 +78,8 @@ def GetSharpeRatio(result):
 	retL = list(ExtractYearlyReturns(result))
 	ratio = 'not enough data'
 	sd = ComputeStandardDeviation(retL)
-	if sd != None:
+	if sd == 0: ratio = 'standard deviation must be greater than 0'
+	elif sd != None:
 		avg = sum(retL) / len(retL)
 		interestRate = AnnualInterest(result)
 		ratio = (avg - interestRate) / sd

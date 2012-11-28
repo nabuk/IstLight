@@ -20,7 +20,7 @@ def TotalInflation(result): return pow(AnnualInflation(result) + 1, YearDiff(res
 def Equity(result, bar): return SimulationResultQuoteExtensions.Equity(result[bar], result.SyncTickers)
 def InflationAdjustment(x, inflation): return (1 / (inflation + 1))*x
 def InvariantFormat(format,x): return String.Format(CultureInfo.InvariantCulture,format, x)
-def LargestDrawdown(result, startIndex, endIndex):
+def HighestDrawdown(result, startIndex, endIndex):
 	drawDown = 1.0
 	bestPeak = 0.0
 	for v in range(endIndex - startIndex + 1).Select(lambda i: Equity(result,i)):
@@ -30,9 +30,9 @@ def LargestDrawdown(result, startIndex, endIndex):
 			drawDown = v / bestPeak
 	return drawDown - 1
 	
-def GetLargestDrawdown(result):
-	drawDown = LargestDrawdown(result,0,result.Count-1) * 100
-	return AsStringPair('Largest drawdown', InvariantFormat('{0:0.00} %', drawDown))
+def GetHighestDrawdown(result):
+	drawDown = HighestDrawdown(result,0,result.Count-1) * 100
+	return AsStringPair('Highest drawdown', InvariantFormat('{0:0.00} %', drawDown))
 def GetLongestFlatRange(result):
 	maxDaySpan = 0
 	maxValue = Equity(result,0)
@@ -89,7 +89,7 @@ def GetSterlingRatio(result):
 	indices = list(ExtractYearPeriodIndices(result))
 	ratio = 'not enough data'
 	if len(indices) > 3:
-		drops = list(indices.Zip(indices.Skip(1), lambda x,y: abs(LargestDrawdown(result,x,y))).OrderByDescending(lambda x: x).Take(3))
+		drops = list(indices.Zip(indices.Skip(1), lambda x,y: abs(HighestDrawdown(result,x,y))).OrderByDescending(lambda x: x).Take(3))
 		avgDrop = sum(drops) / len(drops)
 		yearDiff = YearDiff(result)
 		annualizedPerformance = (pow(Equity(result,result.Count-1) / Equity(result,0), 1 / YearDiff(result)) - 1)
@@ -99,7 +99,7 @@ def GetSterlingRatio(result):
 
 def Analyze(result):
 	return Array[KeyValuePair[String,String]]([
-		GetLargestDrawdown(result),
+		GetHighestDrawdown(result),
 		GetLongestFlatRange(result),
 		GetStandardDeviation(result),
 		GetSharpeRatio(result),

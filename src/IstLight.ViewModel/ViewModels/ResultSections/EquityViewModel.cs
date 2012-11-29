@@ -21,6 +21,8 @@ namespace IstLight.ViewModels.ResultSections
         public DateTime From { get { return result.From; } }
         public DateTime To { get { return result.To; } }
 
+        public IEnumerable<double> Points { get { return Rows.Select(x => x.Total); } }
+
         #region ISectionViewModel
         public string Header
         {

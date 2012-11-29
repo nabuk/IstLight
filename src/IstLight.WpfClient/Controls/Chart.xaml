@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="IstLight.Controls.Chart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataVis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:chartPrmtvs="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Effect>
+        <DropShadowEffect BlurRadius="12" ShadowDepth="4" Color="#F000" />
+    </UserControl.Effect>
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="areaBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Offset="0" Color="#FFB2E710" />
+            <GradientStop Offset="1" Color="#FF30600A" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    <Grid>
+        <charts:Chart  Name="areaChart" BorderThickness="0" >
+            <charts:Chart.Palette>
+                <dataVis:ResourceDictionaryCollection>
+                </dataVis:ResourceDictionaryCollection>
+            </charts:Chart.Palette>
+            <charts:Chart.Template>
+                <ControlTemplate TargetType="charts:Chart">
+                    <chartPrmtvs:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}" Background="Transparent" MinHeight="0">
+                        <Grid Canvas.ZIndex="-1" Style="{TemplateBinding PlotAreaStyle}" Background="Transparent" />
+                    </chartPrmtvs:EdgePanel>
+                </ControlTemplate>
+            </charts:Chart.Template>
+            <charts:AreaSeries Name="areaSeries" DependentValuePath="Value"
+                                                    IndependentValuePath="Key" ItemsSource="{Binding}"
+                                                    IsSelectionEnabled="False" >
+                <charts:AreaSeries.DataPointStyle>
+                    <Style TargetType="charts:AreaDataPoint">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Setter Property="Background" Value="{DynamicResource areaBrush}" />
+                        <Setter Property="Width" Value="0" />
+                        <Setter Property="Height" Value="0" />
+                    </Style>
+                </charts:AreaSeries.DataPointStyle>
+            </charts:AreaSeries>
+            <charts:Chart.Axes>
+                <charts:LinearAxis Orientation="X" ShowGridLines="False" Visibility="Hidden" Height="0" />
+                <charts:LinearAxis Orientation="Y" ShowGridLines="False" Visibility="Hidden" Width="0" />
+            </charts:Chart.Axes>
+        </charts:Chart>
+
+        <charts:Chart Name="lineChart" BorderThickness="0" >
+            <charts:Chart.Palette>
+                <dataVis:ResourceDictionaryCollection>
+                </dataVis:ResourceDictionaryCollection>
+            </charts:Chart.Palette>
+            <charts:Chart.Template>
+                <ControlTemplate TargetType="{x:Type charts:Chart}">
+                    <chartPrmtvs:EdgePanel Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}" MinHeight="0" >
+                        <Grid Panel.ZIndex="-1" Style="{TemplateBinding PlotAreaStyle}" Background="Transparent" />
+                    </chartPrmtvs:EdgePanel>
+                </ControlTemplate>
+
+            </charts:Chart.Template>
+            <charts:LineSeries Name="lineSeries" DependentValuePath="Value"
+                                               IndependentValuePath="Key" ItemsSource="{Binding}"
+                                               IsSelectionEnabled="False" >
+
+                <charts:LineSeries.DataPointStyle>
+                    <Style TargetType="charts:LineDataPoint">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Setter Property="Background" Value="#E0000000" />
+                        <Setter Property="Width" Value="0" />
+                        <Setter Property="Height" Value="0" />
+                    </Style>
+                </charts:LineSeries.DataPointStyle>
+                <charts:LineSeries.PolylineStyle>
+                    <Style TargetType="Polyline">
+                        <Setter Property="StrokeThickness" Value="0.8" />
+
+                    </Style>
+                </charts:LineSeries.PolylineStyle>
+            </charts:LineSeries>
+            <charts:Chart.Axes>
+                <charts:LinearAxis Orientation="X" ShowGridLines="False" Visibility="Hidden" Height="0" />
+                <charts:LinearAxis Orientation="Y" ShowGridLines="False" Visibility="Hidden" Width="0" />
+            </charts:Chart.Axes>
+            <charts:Chart.Effect>
+                <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="3" />
+            </charts:Chart.Effect>
+        </charts:Chart>
+    </Grid>
+</UserControl>

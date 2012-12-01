@@ -6,12 +6,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         mc:Ignorable="d" 
-        Title="MainWindow"
+        Title="IstLight"
 		d:DesignHeight="500" d:DesignWidth="800"
 		Background="{StaticResource ControlBackgroundBrush}"
         TextOptions.TextFormattingMode="Display"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized">
+        WindowState="Maximized" Icon="AppIcon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

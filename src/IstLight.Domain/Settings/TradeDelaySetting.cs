@@ -5,7 +5,7 @@ namespace IstLight.Settings
     {
         public TradeDelaySetting()
         {
-            Value = 1;
+            Value = 0;
         }
 
         public int Value { get; set; }

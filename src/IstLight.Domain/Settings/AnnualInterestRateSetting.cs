@@ -5,7 +5,7 @@ namespace IstLight.Settings
     {
         public AnnualInterestRateSetting()
         {
-            Value = 0;
+            Value = 0.02;
         }
 
         public double Value { get; set; }

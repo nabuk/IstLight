@@ -13,6 +13,13 @@ namespace IstLight.ViewModels
         private readonly IDictionary<PeriodType, string> periodTypeNames;
         private readonly IDictionary<SimulationPriceType, string> simulationPriceTypeNames;
         private readonly IDictionary<SimulationRangeType, string> simulationRangeTypeNames;
+        private double CommissionTypeMultiplier
+        {
+            get
+            {
+                return simulationSettings.Get<CommissionSetting>().Type == CommissionType.Percent ? 100 : 1;
+            }
+        }
 
         public SimulationSettingsViewModel(ISimulationSettings simulationSettings)
         {
@@ -27,20 +34,20 @@ namespace IstLight.ViewModels
 
         public double AnnualInflationRate
         {
-            get { return simulationSettings.Get<AnnualInflationRateSetting>().Value; }
+            get { return simulationSettings.Get<AnnualInflationRateSetting>().Value * 100; }
             set
             {
-                simulationSettings.Get<AnnualInflationRateSetting>().Value = value;
+                simulationSettings.Get<AnnualInflationRateSetting>().Value = value / 100;
                 base.RaisePropertyChanged<double>(() => AnnualInflationRate);
             }
         }
 
         public double AnnualInterestRate
         {
-            get { return simulationSettings.Get<AnnualInterestRateSetting>().Value; }
+            get { return simulationSettings.Get<AnnualInterestRateSetting>().Value * 100; }
             set
             { 
-                simulationSettings.Get<AnnualInterestRateSetting>().Value = value;
+                simulationSettings.Get<AnnualInterestRateSetting>().Value = value / 100;
                 base.RaisePropertyChanged<double>(() => AnnualInterestRate);
             }
         }
@@ -64,7 +71,9 @@ namespace IstLight.ViewModels
             }
             set
             {
+                var valueBeforeChange = CommissionValue;
                 simulationSettings.Get<CommissionSetting>().Type = commisionTypeNames.ValueToKey(value);
+                CommissionValue = valueBeforeChange;
                 base.RaisePropertyChanged<string>(() => SelectedCommissionType);
             }
         }
@@ -72,11 +81,11 @@ namespace IstLight.ViewModels
         {
             get
             {
-                return simulationSettings.Get<CommissionSetting>().Value;
+                return simulationSettings.Get<CommissionSetting>().Value * CommissionTypeMultiplier;
             }
             set
             {
-                simulationSettings.Get<CommissionSetting>().Value = value;
+                simulationSettings.Get<CommissionSetting>().Value = value / CommissionTypeMultiplier;
                 base.RaisePropertyChanged<double>(() => CommissionValue);
             }
         }

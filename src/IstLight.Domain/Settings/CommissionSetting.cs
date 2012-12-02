@@ -5,7 +5,7 @@ namespace IstLight.Settings
     {
         public CommissionSetting()
         {
-            Value = 0;
+            Value = 0.005;
             Type = CommissionType.Percent;
         }
 

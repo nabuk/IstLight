@@ -33,8 +33,8 @@
                 <MenuItem Header="_Stop" Command="{Binding Commands[StopSimulation], Mode=OneTime}" />
             </MenuItem>
             <MenuItem Header="_Help" >
-    			<MenuItem x:Name="AboutMenuItem" Header="_About"/>
-    		</MenuItem>
+                <MenuItem Header="_About" Command="{Binding Commands[About], Mode=OneTime}" />
+            </MenuItem>
     	</Menu>
 
         <CheckBox

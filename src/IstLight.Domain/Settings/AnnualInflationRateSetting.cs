@@ -5,7 +5,7 @@ namespace IstLight.Settings
     {
         public AnnualInflationRateSetting()
         {
-            Value = 0;
+            Value = 0.03;
         }
 
         public double Value { get; set; }

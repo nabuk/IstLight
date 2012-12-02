@@ -15,11 +15,11 @@
                     <Setter.Value>
                         <DataTemplate>
                             <DockPanel>
-                                <ToolBarPanel DockPanel.Dock="Top">
+                                <!--<ToolBarPanel DockPanel.Dock="Top">
                                     <ToolBar>
                                         <Button Content="Run" />
                                     </ToolBar>
-                                </ToolBarPanel>
+                                </ToolBarPanel>-->
                                 
                                 <ContentPresenter Content="{Binding}" />
                             </DockPanel>

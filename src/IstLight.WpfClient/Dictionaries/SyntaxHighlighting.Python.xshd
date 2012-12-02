@@ -42,7 +42,7 @@
         <Key word="setShare" />
         <Key word="getCashShare" />
       </KeyWords>
-      <KeyWords name="BuiltInStatements" bold="false" color="#429C9E">
+      <KeyWords name="BuiltInStatements" bold="false" color="CornflowerBlue">
         <Key word="assert" />
         <Key word="del" />
         <Key word="exec" />
@@ -50,49 +50,49 @@
         <Key word="lambda" />
         <Key word="print" />
       </KeyWords>
-      <KeyWords name="ClassStatement" bold="false" color="#429C9E">
+      <KeyWords name="ClassStatement" bold="false" color="CornflowerBlue">
         <Key word="class" />
       </KeyWords>
-      <KeyWords name="ExceptionHandlingStatements" bold="false" color="#429C9E">
+      <KeyWords name="ExceptionHandlingStatements" bold="false" color="CornflowerBlue">
         <Key word="except" />
         <Key word="finally" />
         <Key word="raise" />
         <Key word="try" />
       </KeyWords>
-      <KeyWords name="FunctionDefinition" bold="false" color="#429C9E">
+      <KeyWords name="FunctionDefinition" bold="false" color="CornflowerBlue">
         <Key word="def" />
       </KeyWords>
-      <KeyWords name="Imports" bold="false" color="#429C9E">
+      <KeyWords name="Imports" bold="false" color="CornflowerBlue">
         <Key word="import" />
         <Key word="from" />
       </KeyWords>
-      <KeyWords name="IterationStatements" bold="false" color="#429C9E">
+      <KeyWords name="IterationStatements" bold="false" color="CornflowerBlue">
         <Key word="for" />
         <Key word="in" />
         <Key word="while" />
       </KeyWords>
-      <KeyWords name="JumpStatements" color="#429C9E">
+      <KeyWords name="JumpStatements" color="CornflowerBlue">
         <Key word="break" />
         <Key word="continue" />
         <Key word="yield" />
         <Key word="return" />
       </KeyWords>
-      <KeyWords name="OperatorStatements" bold="false" color="#429C9E">
+      <KeyWords name="OperatorStatements" bold="false" color="CornflowerBlue">
         <Key word="and" />
         <Key word="as" />
         <Key word="is" />
         <Key word="not" />
         <Key word="or" />
       </KeyWords>
-      <KeyWords name="PassStatement" color="#429C9E">
+      <KeyWords name="PassStatement" color="CornflowerBlue">
         <Key word="pass" />
       </KeyWords>
-      <KeyWords name="SelectionStatements" bold="false" color="#429C9E">
+      <KeyWords name="SelectionStatements" bold="false" color="CornflowerBlue">
         <Key word="elif" />
         <Key word="else" />
         <Key word="if" />
       </KeyWords>
-      <KeyWords name="WithStatement" color="#429C9E">
+      <KeyWords name="WithStatement" color="CornflowerBlue">
         <Key word="with" />
       </KeyWords>
     </RuleSet>

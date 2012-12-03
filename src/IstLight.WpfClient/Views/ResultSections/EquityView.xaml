@@ -12,8 +12,6 @@
             DockPanel.Dock="Top"
             Height="200"
             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-            FirstBackgroundColor="#6893CB"
-            SecondBackgroundColor="#49466D"
             Points="{Binding Points, Mode=OneTime}" />
 
         <DataGrid Margin="10,0,10,10"

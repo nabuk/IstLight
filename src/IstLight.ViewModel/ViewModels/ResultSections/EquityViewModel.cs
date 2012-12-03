@@ -21,7 +21,13 @@ namespace IstLight.ViewModels.ResultSections
         public DateTime From { get { return result.From; } }
         public DateTime To { get { return result.To; } }
 
-        public IEnumerable<double> Points { get { return Rows.Select(x => x.Total); } }
+        public IEnumerable<KeyValuePair<DateTime,double>> Points
+        {
+            get
+            {
+                return Rows.Select(x => new KeyValuePair<DateTime,double>(x.Date,x.Total));
+            }
+        }
 
         #region ISectionViewModel
         public string Header

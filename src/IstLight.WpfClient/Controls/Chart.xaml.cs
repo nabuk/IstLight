@@ -12,11 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using winChart = System.Windows.Forms.DataVisualization.Charting;
+
 namespace IstLight.Controls
 {
-    /// <summary>
-    /// Interaction logic for Chart.xaml
-    /// </summary>
     public partial class Chart : UserControl
     {
         private static T[] UpTo<T>(T[] collection, int maxElements = 0)
@@ -24,7 +23,6 @@ namespace IstLight.Controls
             if (maxElements == 1 || maxElements < 0)
                 maxElements = 2;
 
-            
             if (maxElements < collection.Length && maxElements != 0)
             {
                 double multiplier = (double)(collection.Length - 1) / (double)(maxElements - 1);
@@ -34,89 +32,73 @@ namespace IstLight.Controls
 
             return collection;
         }
+        private winChart.Chart ChartCtrl { get { return (winChart.Chart)this.winHost.Child; } }
 
-        private static IEnumerable<double> LogarithmicIfPossible(IEnumerable<double> input)
+        private void SetChartPoints(KeyValuePair<DateTime, double>[] points)
         {
-            double min = input.Min();
+            var chart = ChartCtrl;
+            chart.BeginInit();
+            chart.BackColor = System.Drawing.Color.FromArgb(0);
+            chart.Series.Clear();
+            chart.ChartAreas.Clear();
 
-            if (min < 0.001)
-            {
-                return input;
-            }
-            //can be logarithmic
-            else
-            {
-                //fix for values < 1 (log2 turns them into negative and that is undesired)
-                double fix = LogValue(min);
+            var area = chart.ChartAreas.Add("DefaultArea");
+            var series = chart.Series.Add("DefaultSeries");
+            series.ChartArea = area.Name;
+            series.ChartType = winChart.SeriesChartType.Area;
+            series.Color = System.Drawing.Color.FromArgb(180, 255, 64, 0);
+            series.BackSecondaryColor = System.Drawing.Color.FromArgb(180, 210, 96, 0);
+            series.BackGradientStyle = winChart.GradientStyle.TopBottom;
 
-                return input.Select(v => LogValue(v) - fix);
-            }
+            area.AxisX.IsMarginVisible = false;
+            area.AxisX.InterlacedColor = System.Drawing.Color.Red;
+            area.AxisX.LineWidth = 0;
+            area.AxisY.LineWidth = 0;
+            
+            area.BorderDashStyle = winChart.ChartDashStyle.NotSet;
 
+            var font = new System.Drawing.Font(area.AxisY.LabelStyle.Font.FontFamily, 8);
+            area.AxisX.LabelStyle.Font = font;
+            area.AxisY.LabelStyle.Font = font;
+
+            area.AxisY.IsLogarithmic = !points.Any(p => p.Value <= 0);
+            area.AxisY.LogarithmBase = 2;
+            area.AxisY.IsStartedFromZero = false;
+            area.AxisY.IntervalType = winChart.DateTimeIntervalType.Number;
+            area.BackColor = System.Drawing.Color.FromArgb(0);
+            foreach (var p in points)
+                series.Points.AddXY(p.Key.ToShortDateString(),p.Value);
+
+            chart.EndInit();
         }
-        private static double LogValue(double linearValue, double logBase = 2)
-        {
-            double signMultiplier = linearValue < 0 ? -1 : 1;
-            return Math.Log(Math.Abs(linearValue), logBase) * signMultiplier;
-        }
-
-        private LinearGradientBrush areaChartBrush { get { return FindResource("areaBrush") as LinearGradientBrush; } }
-
-        public Chart()
-        {
-            InitializeComponent();
-
-            areaSeries.TransitionDuration = TimeSpan.FromSeconds(0);
-            lineSeries.TransitionDuration = TimeSpan.FromSeconds(0);
-        }
-
         private static void PointsChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue == null) return;
 
             var ctrl = (Chart)sender;
-            var points = UpTo(((IEnumerable<double>)e.NewValue).ToArray(), 300);
+            var points = UpTo(((IEnumerable<KeyValuePair<DateTime, double>>)e.NewValue).ToArray(), 2000);
 
-            var d2points = LogarithmicIfPossible(points).Select((v, i) => new KeyValuePair<double, double>(i, v)).ToArray();
-
-            ctrl.areaChart.DataContext = d2points;
-            ctrl.lineChart.DataContext = d2points;
-
+            ctrl.SetChartPoints(points);
         }
-        public static readonly DependencyProperty PointsProperty =
-            DependencyProperty.Register("Points", typeof(IEnumerable<double>), typeof(Chart), new PropertyMetadata(PointsChangedCallback));
+        public Chart()
+        {
+            InitializeComponent();
+
+            winHost.Child = new winChart.Chart();
+        }
         
-        public IEnumerable<double> Points
+        public static readonly DependencyProperty PointsProperty =
+            DependencyProperty.Register("Points", typeof(IEnumerable<KeyValuePair<DateTime,double>>), typeof(Chart), new PropertyMetadata(PointsChangedCallback));
+        
+        public IEnumerable<KeyValuePair<DateTime,double>> Points
         {
             get
             {
-                return (IEnumerable<double>)GetValue(PointsProperty);
+                return (IEnumerable<KeyValuePair<DateTime, double>>)GetValue(PointsProperty);
             }
             set
             {
                 SetValue(PointsProperty, value);
-            }
-        }
-
-        public Color FirstBackgroundColor
-        {
-            get
-            {
-                return areaChartBrush.GradientStops[0].Color;
-            }
-            set
-            {
-                areaChartBrush.GradientStops[0].Color = value;
-            }
-        }
-        public Color SecondBackgroundColor
-        {
-            get
-            {
-                return areaChartBrush.GradientStops[1].Color;
-            }
-            set
-            {
-                areaChartBrush.GradientStops[1].Color = value;
             }
         }
     }

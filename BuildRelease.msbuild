@@ -46,6 +46,7 @@
     <Exec Command="xcopy $(OutputPath) bin /E /I /Y /exclude:ignoreInOutput.txt" WorkingDirectory="$(DeployRoot)" />
     <Exec Command="md lib" WorkingDirectory="$(ReleaseFolder)" />
     <Exec Command="move /Y *.dll lib" WorkingDirectory="$(ReleaseFolder)" />
+    <Exec Command="copy /Y COPYING.txt bin" WorkingDirectory="$(DeployRoot)" />
   </Target>
 
   <Target Name="ZipReleaseFiles" DependsOnTargets="CopyToReleaseFolder">

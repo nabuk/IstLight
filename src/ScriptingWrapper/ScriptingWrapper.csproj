@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ScriptEngineFactory.cs" />
     <Compile Include="Implementations\PythonScriptEngine.cs" />
     <Compile Include="ScriptingLanguage.cs" />

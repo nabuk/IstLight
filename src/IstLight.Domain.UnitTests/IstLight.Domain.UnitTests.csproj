@@ -64,6 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AbortableWorkerTests.cs" />
     <Compile Include="AutoMockingDataAttribute.cs" />
     <Compile Include="Extensions\GeneralExtensionsTests.cs" />

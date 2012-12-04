@@ -47,6 +47,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AsyncState.cs" />
     <Compile Include="Commands\Concrete\AboutCommand.cs" />
     <Compile Include="Commands\Concrete\CloseApplicationCommand.cs" />

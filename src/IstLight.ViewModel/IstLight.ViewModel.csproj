@@ -107,7 +107,7 @@
     <Compile Include="ViewModels\TickerProvidersViewModel.cs" />
     <Compile Include="ViewModels\TickerProviderViewModel.cs" />
     <Compile Include="ViewModels\TickerFileViewModel.cs" />
-    <Compile Include="WPFControlThreadingExtensions.cs" />
+    <Compile Include="ThreadingExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IstLight.Domain\IstLight.Domain.csproj">

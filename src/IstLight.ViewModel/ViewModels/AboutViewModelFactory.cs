@@ -12,9 +12,9 @@ namespace IstLight.ViewModels
 
         public AboutViewModelFactory(Assembly executingAssembly)
         {
-            var assemblyName = executingAssembly.GetName();
-            string appName = assemblyName.Name;
-            string appVersion = assemblyName.Version.ToString();
+            string appName = executingAssembly.GetName().Name;
+            string appVersion = ((AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(
+                executingAssembly, typeof(AssemblyFileVersionAttribute), false)).Version;
             string appCopyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(
                 executingAssembly, typeof(AssemblyCopyrightAttribute), false)).Copyright;
             

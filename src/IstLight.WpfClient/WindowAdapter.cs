@@ -27,7 +27,11 @@ namespace IstLight
         {
             var child = ViewModelToWindowMap.Create(viewModel);
             child.Owner = this.wpfWindow;
-            child.Closing += (s, e) => (s as Window).Owner = null;
+            child.Closing += (s, e) =>
+                {
+                    if (!System.Windows.Interop.ComponentDispatcher.IsThreadModal)
+                        (s as Window).Owner = null;
+                };
             child.DataContext = viewModel;
             WindowAdapter.ConfigureBehavior(child);
             return new WindowAdapter(child);

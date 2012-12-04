@@ -53,10 +53,13 @@
     <Compile Include="AsyncState.cs" />
     <Compile Include="Commands\Concrete\AboutCommand.cs" />
     <Compile Include="Commands\Concrete\CloseApplicationCommand.cs" />
+    <Compile Include="Commands\Concrete\ProjectWebsiteCommand.cs" />
     <Compile Include="Commands\Concrete\RunSimulationCommand.cs" />
     <Compile Include="Commands\Concrete\StopSimulationCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Simulation\SimulationRunnerResultDecorator.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\AboutViewModelFactory.cs" />
     <Compile Include="ViewModels\ErrorListViewModel.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IWindow.cs">

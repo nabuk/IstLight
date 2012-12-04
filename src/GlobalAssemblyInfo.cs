@@ -2,7 +2,7 @@ using System.Reflection;
 
 [assembly: AssemblyProduct("IstLight")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright © 2012")]
+[assembly: AssemblyCopyright("Copyright 2012 Jakub Niemyjski")]
 [assembly: AssemblyTrademark("")]
 
 #if DEBUG

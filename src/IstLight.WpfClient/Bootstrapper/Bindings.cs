@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Reflection;
 using IstLight.Commands;
 using IstLight.Services;
 using IstLight.Services.Decorators;
@@ -68,6 +69,10 @@ namespace IstLight.Bootstrapper
                 .InSingletonScope();
             Kernel.Bind<ISimulationRunner>().To<SimulationRunner>()
                 .WhenInjectedInto<SimulationRunnerErrorDecorator>()
+                .InSingletonScope();
+
+            Kernel.Bind<AboutViewModelFactory>().ToMethod(x =>
+                new AboutViewModelFactory(Assembly.GetExecutingAssembly()))
                 .InSingletonScope();
         }
     }

@@ -11,7 +11,8 @@ namespace IstLight.Dictionaries
         private static readonly IDictionary<Type, Type> map = new Dictionary<Type, Type>
         {
             { typeof(SimulationProgressViewModel), typeof(SimulationProgressView) },
-            { typeof(SimulationResultViewModel), typeof(SimulationResultView) }
+            { typeof(SimulationResultViewModel), typeof(SimulationResultView) },
+            { typeof(AboutViewModel), typeof(AboutView) }
         };
 
         public static Window Create(object viewModel)

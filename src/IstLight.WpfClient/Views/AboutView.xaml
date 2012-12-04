@@ -1,0 +1,58 @@
+﻿<Window x:Class="IstLight.Views.AboutView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="#1C1C1C"
+        WindowStyle="SingleBorderWindow" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Title="About" Height="300" Width="300" Icon="../AppIcon.ico">
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            
+            </Grid.RowDefinitions>
+            <DockPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding AppVersion, Mode=OneTime}"
+                            Foreground="{StaticResource GlyphBrush}"
+                            DockPanel.Dock="Bottom"
+                            HorizontalAlignment="Right"
+                            />
+
+                <Viewbox>
+                    <TextBlock Text="{Binding AppName, Mode=OneTime}"
+                               Foreground="#D40"
+                           
+                               FontWeight="Bold"
+                               FontStretch="Expanded"
+                               />
+                </Viewbox>
+                <DockPanel.Effect>
+                    <DropShadowEffect />
+                </DockPanel.Effect>
+            </DockPanel>
+        
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="{Binding AppCopyright}"
+                           Foreground="{StaticResource GlyphBrush}"/>
+            </StackPanel>
+        </Grid>
+
+        <Rectangle Panel.ZIndex="-1">
+            <Rectangle.Fill>
+                <DrawingBrush Viewbox="0,0,1,1.2" Viewport="-0.1,0.1,1.2,1">
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing >
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="0.5" Brush="#222" />
+                            </GeometryDrawing.Pen>
+                            <GeometryDrawing.Geometry>
+                                <PathGeometry Figures="M0,0 L2,-2 L3,-1 L5,-4 L6,-3" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
+</Window>

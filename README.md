@@ -1,7 +1,7 @@
 # IstLight
 **Investment Strategy Tester Light**
 
-IstLight is a flexible, customizable and extensible software application made for testing investment strategies.
+IstLight is a flexible software application made for testing investment strategies.
 It heavily incorporates Python scripting language giving you the ability to:
 
 * write arbitrarily complex investment strategies

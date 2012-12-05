@@ -12,12 +12,12 @@ It heavily incorporates Python scripting language giving you the ability to:
 
 ## Installation
 
-Download and extract latest binary archive.
+[Download](https://github.com/nabuk/IstLight/downloads/) and extract binary archive.
 Run IstLight.exe.
 
 ## Help
 
-See wiki pages.
+See [wiki pages](https://github.com/nabuk/IstLight/wiki/_pages/).
 
 ## Contact
 

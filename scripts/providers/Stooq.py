@@ -64,7 +64,7 @@ def GetRawData(webUrl, fileUrl):
 	return result
 
 def ExtractDate(x): return DateTime.Parse(x,CultureInfo.InvariantCulture)
-def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)
+def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture)
 def ExtractQuote(row):
 	date = ExtractDate(row[0])
 	open = ExtractDouble(row[1])

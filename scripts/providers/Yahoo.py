@@ -79,7 +79,7 @@ def ExtractSearchResultFromLine(line):
 	return TickerSearchResult(symbol,desc,market)
 
 def ExtractDate(x): return DateTime.Parse(x,CultureInfo.InvariantCulture)
-def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)
+def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture)
 def ExtractIndices(header):
 	indices = {}
 	indices['date'] = header.IndexOf('Date')

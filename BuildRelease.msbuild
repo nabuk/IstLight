@@ -47,6 +47,7 @@
     <Exec Command="md lib" WorkingDirectory="$(ReleaseFolder)" />
     <Exec Command="move /Y *.dll lib" WorkingDirectory="$(ReleaseFolder)" />
     <Exec Command="copy /Y COPYING.txt bin" WorkingDirectory="$(DeployRoot)" />
+	<Exec Command="copy /Y README.md bin" WorkingDirectory="$(DeployRoot)" />
   </Target>
 
   <Target Name="ZipReleaseFiles" DependsOnTargets="CopyToReleaseFolder">

@@ -10,7 +10,9 @@ It heavily incorporates Python scripting language giving you the ability to:
 * make your own reports
 * transform data (i.e. bond yield to absolute value) (planned)
 
-## Installation
+[Watch](http://www.youtube.com/watch?v=RsLcKhea1hQ&hd=1) presentation.
+
+## Setup
 
 [Download](https://github.com/nabuk/IstLight/downloads/) and extract binary archive.
 Run IstLight.exe.

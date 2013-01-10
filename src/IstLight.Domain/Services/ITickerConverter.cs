@@ -22,7 +22,7 @@ namespace IstLight.Services
     {
         string Format { get; }
 
-        IAsyncResult<Ticker> Read(RawTicker rawTicker);
-        IAsyncResult<RawTicker> Save(Ticker ticker);
+        IAsyncResult<Ticker> Read(RawFile rawTicker);
+        IAsyncResult<RawFile> Save(Ticker ticker);
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="AsyncState.cs" />
     <Compile Include="Commands\Concrete\AboutCommand.cs" />
     <Compile Include="Commands\Concrete\CloseApplicationCommand.cs" />
+    <Compile Include="Commands\Concrete\OpenCommand.cs" />
     <Compile Include="Commands\Concrete\ProjectWebsiteCommand.cs" />
     <Compile Include="Commands\Concrete\RunSimulationCommand.cs" />
     <Compile Include="Commands\Concrete\StopSimulationCommand.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Synchronization\ISyncTickersGetter.cs" />
     <Compile Include="Synchronization\SyncTickersGetter.cs" />
     <Compile Include="ThreadSafeObservableCollection.cs" />
+    <Compile Include="ViewModels\TickerOpenerViewModel.cs" />
     <Compile Include="ViewModels\TickerSearchResultViewModel.cs" />
     <Compile Include="Services\ITickerLocationService.cs" />
     <Compile Include="ViewModels\TickerExplorerViewModel.cs" />

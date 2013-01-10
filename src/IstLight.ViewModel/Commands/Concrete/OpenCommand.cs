@@ -16,24 +16,15 @@
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using IstLight.ViewModels;
 
-namespace IstLight.Services
+namespace IstLight.Commands.Concrete
 {
-    public class RawTicker
+    public class OpenCommand : GlobalCommandBase
     {
-        public RawTicker(string name, string format, byte[] data)
-        {
-            if (name == null) throw new ArgumentNullException("name");
-            if (format == null) throw new ArgumentNullException("format");
-            if (data == null) throw new ArgumentNullException("data");
-
-            this.Name = name;
-            this.Format = format;
-            this.Data = data;
-        }
-
-        public string Name { get; private set; }
-        public string Format { get; private set; }
-        public byte[] Data { get; private set; }
+        public OpenCommand(TickerOpenerViewModel opener) : base("Open", opener.OpenCommand) { }
     }
 }

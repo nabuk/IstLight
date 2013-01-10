@@ -74,12 +74,22 @@ namespace IstLight.Services
         #endregion
     }
 
-    //Not used, not tested
-    //public static class AsyncResultExtensions
-    //{
-    //    public static AsyncResultFromSyncJob<T> AsAsyncJob<T>(this Func<ValueOrError<T>> synchronousJob)
-    //    {
-    //        return new AsyncResultFromSyncJob<T>(synchronousJob);
-    //    }
-    //}
+    public static class AsyncResultExtensions
+    {
+        //public static AsyncResultFromSyncJob<T> AsAsyncJob<T>(this Func<ValueOrError<T>> synchronousJob)
+        //{
+        //    return new AsyncResultFromSyncJob<T>(synchronousJob);
+        //}
+        public static ValueOrError<T> Sync<T>(this IAsyncResult<T> asyncJob)
+        {
+            asyncJob.Wait(Timeout.Infinite);
+            return new ValueOrError<T>
+            {
+                Error = asyncJob.Error,
+                Value = asyncJob.Result
+            };
+        }
+    }
+
+
 }

@@ -15,32 +15,16 @@
 // You should have received a copy of the GNU General Public License
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace IstLight.Services
 {
-    public class TickerConverter : ScriptNamedItemBase, ITickerConverter
+    public interface IFileIO
     {
-        public TickerConverter(string format, ParallelScriptExecutor executor) : base(executor)
-        {
-            this.Format = format;
-        }
-
-        #region ITickerConverter
-        public string Format
-        {
-            get;
-            private set;
-        }
-
-        public IAsyncResult<Ticker> Read(RawFile rawTicker)
-        {
-            return executor.SafeExecuteAsync<Ticker>(engine => engine.GetVariable("Read")(rawTicker));
-        }
-
-        public IAsyncResult<RawFile> Save(Ticker ticker)
-        {
-            return executor.SafeExecuteAsync<RawFile>(engine => engine.GetVariable("Save")(ticker));
-        }
-        #endregion // ITickerConverter
+        RawFile Read(string filePath);
+        void Save(string path, RawFile file);
     }
 }

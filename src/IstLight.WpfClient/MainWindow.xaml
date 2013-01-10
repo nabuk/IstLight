@@ -43,7 +43,8 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
     	
         <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="0,0,0,20">
             <MenuItem Header="_File" >
-                <MenuItem Header="_Close" Command="{Binding Commands[Close], Mode=OneTime}"  />
+                <MenuItem Header="_Open" Command="{Binding Commands[Open], Mode=OneTime}" />
+                <MenuItem Header="_Close" Command="{Binding Commands[Close], Mode=OneTime}" />
             </MenuItem>
             <MenuItem Header="_Simulation" >
                 <MenuItem Header="_Run" Command="{Binding Commands[RunSimulation], Mode=OneTime}" />

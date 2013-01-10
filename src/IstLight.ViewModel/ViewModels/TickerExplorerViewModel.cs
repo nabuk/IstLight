@@ -58,14 +58,17 @@ namespace IstLight.ViewModels
             };
         }
         
-        public TickerExplorerViewModel(TickerProvidersViewModel providers)
+        public TickerExplorerViewModel(TickerProvidersViewModel providers, TickerOpenerViewModel opener)
         {
             this.Providers = providers;
+            this.Opener = opener;
             this.Tickers = new ReadOnlyObservableCollection<TickerFileViewModel>(this.tickers);
             Providers.LoadingTicker += HandleTickerLoading;
+            Opener.LoadingTicker += HandleTickerLoading;
         }
 
         public TickerProvidersViewModel Providers { get; private set; }
+        public TickerOpenerViewModel Opener { get; private set; }
         public ReadOnlyObservableCollection<TickerFileViewModel> Tickers { get; private set; }
     }
 }

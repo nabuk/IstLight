@@ -45,15 +45,18 @@
     <Compile Include="Services\Decorators\AsyncLoadServiceDecorator.cs" />
     <Compile Include="Services\AsyncResultFromSyncJob.cs" />
     <Compile Include="Services\Decorators\AsyncResultErrorDecorator.cs" />
+    <Compile Include="Services\Decorators\FileIOErrorDecorator.cs" />
     <Compile Include="Services\Decorators\NamedItemBaseDecorator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Decorators\NamedItemBaseErrorDecorator.cs" />
     <Compile Include="Services\Decorators\ResultAnalyzerErrorDecorator.cs" />
+    <Compile Include="Services\Decorators\TickerConverterErrorDecorator.cs" />
     <Compile Include="Services\Decorators\TickerProviderErrorDecorator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Decorators\AsyncLoadServiceErrorDecorator.cs" />
+    <Compile Include="Services\FileIO.cs" />
     <Compile Include="Services\IAsyncResult.cs" />
     <Compile Include="Services\IAsyncLoadService.cs" />
     <Compile Include="Services\Decorators\IAsyncResultDecoratorFactory.cs" />
@@ -61,11 +64,12 @@
     <Compile Include="Services\INamedItem.cs" />
     <Compile Include="Services\IResultAnalyzer.cs" />
     <Compile Include="Services\ITickerConverter.cs" />
+    <Compile Include="Services\IFileIO.cs" />
     <Compile Include="Services\ITickerProvider.cs" />
     <Compile Include="Services\ITickerTransformer.cs" />
     <Compile Include="Services\OneTimeCallbackContainer.cs" />
     <Compile Include="ValueOrError.cs" />
-    <Compile Include="Services\RawTicker.cs" />
+    <Compile Include="Services\RawFile.cs" />
     <Compile Include="Services\TickerSearchResult.cs" />
     <Compile Include="Settings\ISimulationSettings.cs" />
     <Compile Include="Settings\OnlyRecentQuotesSetting.cs" />

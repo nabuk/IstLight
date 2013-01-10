@@ -38,6 +38,7 @@ namespace IstLight.Bootstrapper
             Kernel.Bind<StrategyExplorerViewModel>().ToSelf().InSingletonScope();
             Kernel.Bind<SimulationSettingsViewModel>().ToSelf().InSingletonScope();
             Kernel.Bind<ErrorListViewModel>().ToSelf().InSingletonScope();
+            Kernel.Bind<TickerOpenerViewModel>().ToSelf().InSingletonScope();
 
             Kernel.Bind<IErrorReporter>().ToMethod(x => x.Kernel.Get<ErrorListViewModel>()).InSingletonScope();
 
@@ -57,9 +58,22 @@ namespace IstLight.Bootstrapper
                 .WhenInjectedInto<ResultAnalyzerService>()
                 .WithConstructorArgument("path", "scripts\\report");
 
+            Kernel.Bind<IAsyncLoadService<ITickerConverter>>().To<TickerConverterService>()
+                .WhenInjectedInto<AsyncLoadServiceErrorDecorator<ITickerConverter>>()
+                .InSingletonScope();
+            Kernel.Bind<IAsyncLoadService<ITickerConverter>>().To<AsyncLoadServiceErrorDecorator<ITickerConverter>>().InSingletonScope();
+            Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
+                .WhenInjectedInto<TickerConverterService>()
+                .WithConstructorArgument("path", "scripts\\converters");
+
             Kernel.Bind<IScriptLoadService>().To<ScriptsFromDirectory>()
                 .WhenInjectedInto<ScriptStrategyFactory>()
                 .WithConstructorArgument("path", "scripts\\functions");
+
+            Kernel.Bind<IFileIO>().To<FileIO>()
+                .WhenInjectedExactlyInto<FileIOErrorDecorator>()
+                .InSingletonScope();
+            Kernel.Bind<IFileIO>().To<FileIOErrorDecorator>().InSingletonScope();
 
             Kernel.Bind<IStrategyCreator>().To<StrategyCreator>().InSingletonScope();
             Kernel.Bind<ISyncTickersGetter>().To<SyncTickersGetter>().InSingletonScope();

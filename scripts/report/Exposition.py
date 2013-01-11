@@ -23,33 +23,51 @@ from System import *
 from System.Globalization import CultureInfo
 from System.Collections.Generic import *
 from IstLight.Simulation import *
+from System.Linq import Enumerable
+clr.ImportExtensions(System.Linq)
 
 Category = 'Averaged exposition'
 
 def AsStringPair(k,v): return KeyValuePair[String,String](k,v)
 def InvariantFormat(format,x): return String.Format(CultureInfo.InvariantCulture,format, x)
 
-def Equity(result, bar): return SimulationResultQuoteExtensions.Equity(result[bar], result.SyncTickers)
-def Cash(result, bar): return result[bar].Cash
-def ExpositionToTicker(result, bar, tickerIndex): return SimulationResultQuoteExtensions.ExpositionToTicker(result[bar], tickerIndex, result.SyncTickers)
-
-def YieldCashExp(result):
-	for i,x in enumerate(result):
-		yield x.Cash / Equity(result,i)
-def YieldTickerExp(result,tickerIndex):
-	for i,x in enumerate(result):
-		yield ExpositionToTicker(result,i,tickerIndex)
-def Average(iterable):
-	l = list(iterable)
-	return sum(l) / len(l)
-
-def GetCashExpList(result):
-	return [AsStringPair('Cash', InvariantFormat('{0:0.00} %', Average(YieldCashExp(result))*100))]
-def GetTickersExpList(result):
+def GetEquitiesAt(result, bar):
 	l = []
-	for i,x in enumerate(result.Descriptions):
-		l.append(AsStringPair(x.Name, InvariantFormat('{0:0.00} %', Average(YieldTickerExp(result,i))*100)))
+	for tickerI in range(result.Descriptions.Count):
+		l.append(SimulationResultQuoteExtensions.TickerEquity(result[bar], tickerI, result.SyncTickers))
+	l.append(result[bar].Cash)
 	return l
-	
+
+def GetEquityMatrix(result):
+	matrix = []
+	for barI in range(result.Count):
+		matrix.append(GetEquitiesAt(result,barI))
+	return matrix
+
+def ComputeExpositionsAtBar(expList):
+	s = sum(expList)
+	for i in range(expList.Count):
+		expList[i] = expList[i] / s
+	return expList
+
+def GetExpositions(result):
+	l = GetEquityMatrix(result)
+	for i,x in enumerate(l):
+		l[i] = ComputeExpositionsAtBar(x)
+	exps = []
+	for i in range(result.Descriptions.Count+1):
+		exps.append(sum([x[i] for x in l]) / result.Count)
+	return exps
+		
+def DescribeExpositions(result, exps):
+	descCount = result.Descriptions.Count
+	descs = list(result.Descriptions)
+	for i in range(descCount):
+		exps[i] = (descs[i].Name, exps[i])
+	exps[descCount] = ("Cash", exps[descCount])
+	exps = [exps[descCount]] + sorted(exps[:descCount], cmp = lambda x,y: y[1] > x[1])
+	return Array[KeyValuePair[String,String]]([AsStringPair(x[0], InvariantFormat('{0:0.00} %', x[1] * 100)) for x in exps])
+	#return Array[KeyValuePair[String,String]]([])
+		
 def Analyze(result):
-	return Array[KeyValuePair[String,String]]( GetCashExpList(result) + GetTickersExpList(result) )
+	return DescribeExpositions(result, GetExpositions(result))

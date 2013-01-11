@@ -45,8 +45,9 @@ namespace IstLight.ViewModels
                     var t = AsyncTicker.Result;
                     From = formatDate(t.From); base.RaisePropertyChanged<string>(() => From);
                     To = formatDate(t.To); base.RaisePropertyChanged<string>(() => To);
-                    completionCallbacks.FireCallbacks(this);
                 }
+
+                completionCallbacks.FireCallbacks(this);
             });
         }
 

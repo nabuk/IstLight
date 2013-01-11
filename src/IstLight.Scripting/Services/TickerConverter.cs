@@ -32,14 +32,14 @@ namespace IstLight.Services
             private set;
         }
 
-        public IAsyncResult<Ticker> Read(RawFile rawTicker)
+        public ValueOrError<Ticker> Read(RawFile rawTicker)
         {
-            return executor.SafeExecuteAsync<Ticker>(engine => engine.GetVariable("Read")(rawTicker));
+            return executor.SafeExecute<Ticker>(engine => engine.GetVariable("Read")(rawTicker));
         }
 
-        public IAsyncResult<RawFile> Save(Ticker ticker)
+        public ValueOrError<RawFile> Save(Ticker ticker)
         {
-            return executor.SafeExecuteAsync<RawFile>(engine => engine.GetVariable("Save")(ticker));
+            return executor.SafeExecute<RawFile>(engine => engine.GetVariable("Save")(ticker));
         }
         #endregion // ITickerConverter
     }

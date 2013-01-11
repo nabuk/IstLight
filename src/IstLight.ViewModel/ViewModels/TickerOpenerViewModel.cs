@@ -26,6 +26,7 @@ using System.Windows.Threading;
 using IstLight.Services;
 using System.IO;
 using System.Threading;
+using System.Globalization;
 
 namespace IstLight.ViewModels
 {
@@ -68,40 +69,19 @@ namespace IstLight.ViewModels
                             .Select(p => new KeyValuePair<string,ResultAsAsyncResult<Ticker>>(p, new ResultAsAsyncResult<Ticker>()))
                             .ToArray();
 
-                        dispatcher.InvokeIfRequired(() =>
-                            {
-                                foreach(var x in toLoad)
-                                    LoadingTicker(
-                                        new TickerFileViewModel(Path.GetFileNameWithoutExtension(x.Key),x.Value));
-                            });
+                        foreach(var p in toLoad)
+                            dispatcher.InvokeIfRequired(() =>
+                                LoadingTicker(new TickerFileViewModel(Path.GetFileNameWithoutExtension(p.Key), p.Value)));
 
-                        toLoad.AsParallel().ForAll(x =>
-                            {
-                                var rawFile = fileIO.Read(x.Key);
-                                var readResult = rawFile != null ?
-                                    converters[openDlg.FilterIndex - 1].Read(rawFile).Sync()
-                                    :
-                                    new ValueOrError<Ticker> { Error = new Exception("Cannot read " + x.Key) };
-                                x.Value.SetResult(readResult);
-                            });
-
-
-                        //foreach (var filePath in (string[])paths)
-                        //{
-                        //    //var rawFile = fileIO.Read(filePath);
-                        //    //var readResult = rawFile != null ?
-                        //    //    converters[openDlg.FilterIndex - 1].Read(rawFile).Sync()
-                        //    //    :
-                        //    //    new ValueOrError<Ticker> { Error = new Exception("Cannot read " + filePath) };
-                        //    var readResult = new ValueOrError<Ticker> { Error = new Exception("Cannot read " + filePath) };
-
-                        //    dispatcher.InvokeIfRequired(() =>
-                        //        LoadingTicker(
-                        //            new TickerFileViewModel(
-                        //                Path.GetFileNameWithoutExtension(filePath),
-                        //                new ResultAsAsyncResult<Ticker>(readResult))));
-                        //}
-                        
+                        toLoad.Select(x => new { x.Key, x.Value, data = fileIO.Read(x.Key) })
+                            .AsParallel().ForAll(x =>
+                                {
+                                    var readResult = x.data != null ?
+                                        converters[openDlg.FilterIndex - 1].Read(x.data)
+                                        :
+                                        new ValueOrError<Ticker> { Error = new Exception("Cannot read " + x.Key) };
+                                    x.Value.SetResult(readResult);
+                                });
                     }, openDlg.FileNames);
             }
         }

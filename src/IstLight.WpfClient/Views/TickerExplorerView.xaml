@@ -31,8 +31,11 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
         <ContentPresenter Content="{Binding Providers, Mode=OneWay}"
                             DockPanel.Dock="Top"
                             Margin="3" />
-        
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Rectangle Fill="#2d2d2d" />
             <Rectangle>
                 <Rectangle.Fill>
@@ -61,6 +64,20 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+            
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Margin="2"
+                    Text="{Binding LoadingCount, Mode=OneWay}"
+                    Foreground="SlateGray" />
+
+                <TextBlock Margin="2"
+                    Text="{Binding ErrorCount, Mode=OneWay}"
+                    Foreground="DarkRed" />
+
+                <TextBlock Margin="2"
+                    Text="{Binding LoadedCount, Mode=OneWay}"
+                    Foreground="SlateBlue" />
+            </StackPanel>
         </Grid>
             
     </DockPanel>

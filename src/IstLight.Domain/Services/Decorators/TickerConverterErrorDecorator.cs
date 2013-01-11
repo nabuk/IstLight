@@ -33,12 +33,12 @@ namespace IstLight.Services.Decorators
             get { return base.itemToDecorate.Format; }
         }
 
-        public IAsyncResult<Ticker> Read(RawFile rawTicker)
+        public ValueOrError<Ticker> Read(RawFile rawTicker)
         {
             return Decorate(itemToDecorate.Read(rawTicker));
         }
 
-        public IAsyncResult<RawFile> Save(Ticker ticker)
+        public ValueOrError<RawFile> Save(Ticker ticker)
         {
             return Decorate(itemToDecorate.Save(ticker));
         }

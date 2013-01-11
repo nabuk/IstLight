@@ -19,16 +19,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace IstLight.Services
 {
     public class ResultAsAsyncResult<T> : IAsyncResult<T>
     {
-        public ResultAsAsyncResult(ValueOrError<T> result)
+        private readonly OneTimeCallbackContainer<IAsyncResult<T>> callbackContainer = new OneTimeCallbackContainer<IAsyncResult<T>>();
+        private readonly ManualResetEvent completionEvent;
+
+        public ResultAsAsyncResult()
+        {
+            this.completionEvent = new ManualResetEvent(false);
+        }
+
+        public void SetResult(ValueOrError<T> result)
         {
             this.Result = result.Value;
             this.Error = result.Error;
+            this.IsCompleted = true;
+
+            completionEvent.Set();
+            callbackContainer.FireCallbacks(this);
+            completionEvent.Close();
         }
+
+        #region IAsyncResult
         public T Result
         {
             get; private set;
@@ -41,17 +57,26 @@ namespace IstLight.Services
 
         public bool IsCompleted
         {
-            get { return true; }
+            get;
+            private set;
         }
 
         public bool Wait(int timeout)
         {
+            if (!IsCompleted)
+                return completionEvent.WaitOne(timeout);
             return true;
         }
 
         public void AddCallback(Action<IAsyncResult<T>> callback)
         {
-            callback(this);
+            if (callback == null) throw new ArgumentNullException("callback");
+
+            callbackContainer.AddCallback(callback);
+
+            if (IsCompleted)
+                callbackContainer.FireCallbacks(this);
         }
+        #endregion // IAsyncResult
     }
 }

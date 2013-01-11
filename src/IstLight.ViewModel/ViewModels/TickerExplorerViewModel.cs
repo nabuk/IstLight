@@ -70,5 +70,8 @@ namespace IstLight.ViewModels
         public TickerProvidersViewModel Providers { get; private set; }
         public TickerOpenerViewModel Opener { get; private set; }
         public ReadOnlyObservableCollection<TickerFileViewModel> Tickers { get; private set; }
+
+        public int TotalCount { get; private set; }
+        public int ErrorCount { get; private set; }
     }
 }

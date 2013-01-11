@@ -79,6 +79,10 @@ namespace IstLight.ViewModels
             if(state == AsyncState.Completed)
                 completionCallbacks.FireCallbacks(this);
         }
+        public void RemoveNotification(Action<TickerFileViewModel> callback)
+        {
+            completionCallbacks.RemoveCallback(callback);
+        }
 
         public int? Index
         {

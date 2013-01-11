@@ -16,8 +16,11 @@
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using System.Linq;
 
 namespace IstLight.ViewModels
 {
@@ -62,12 +65,19 @@ namespace IstLight.ViewModels
             }
         }
 
+        private void OnLoadingEnd(TickerFileViewModel tickerVM)
+        {
+            if (tickerVM.LoadState == AsyncState.Error)
+                OnTickerError(tickerVM);
+            else
+                OnTickerLoaded(tickerVM);
+        }
         private void OnTickerLoading(TickerFileViewModel tickerVM)
         {
             LoadingCount++;
 
             tickers.Add(tickerVM);
-            tickerVM.ExecuteWhenLoadCompletes(x => { if (x.LoadState == AsyncState.Error)OnTickerError(x); else OnTickerLoaded(x); });
+            tickerVM.ExecuteWhenLoadCompletes(OnLoadingEnd);
             tickerVM.CloseCommandExecuted += OnCloseCommand;
         }
         private void OnTickerError(TickerFileViewModel tickerVM)
@@ -90,14 +100,28 @@ namespace IstLight.ViewModels
             tickers.Remove(tickerVM);
             RecalculateIndicesFrom(index);
         }
+        private void OnClearAll()
+        {
+            var tickersCopy = new TickerFileViewModel[tickers.Count];
+            tickers.CopyTo(tickersCopy, 0);
+            tickers.Clear();
+            foreach (var t in tickersCopy.Where(x => x.LoadState == AsyncState.Running))
+                t.RemoveNotification(OnLoadingEnd);
+            LoadingCount = 0;
+            ErrorCount = 0;
+            LoadedCount = 0;
+        }
 
         public TickerExplorerViewModel(TickerProvidersViewModel providers, TickerOpenerViewModel opener)
         {
             this.Providers = providers;
             this.Opener = opener;
             this.Tickers = new ReadOnlyObservableCollection<TickerFileViewModel>(this.tickers);
+            
             Providers.LoadingTicker += OnTickerLoading;
             Opener.LoadingTicker += OnTickerLoading;
+            
+            this.ClearAllCommand = new DelegateCommand(OnClearAll);
         }
 
         public TickerProvidersViewModel Providers { get; private set; }
@@ -140,5 +164,7 @@ namespace IstLight.ViewModels
                 RaisePropertyChanged<int>(() => LoadedCount);
             }
         }
+
+        public ICommand ClearAllCommand { get; private set; }
     }
 }

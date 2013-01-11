@@ -65,19 +65,27 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                 </ItemsControl>
             </ScrollViewer>
             
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <DockPanel Grid.Row="1" LastChildFill="False">
                 <TextBlock Margin="2"
+                    VerticalAlignment="Center"
                     Text="{Binding LoadingCount, Mode=OneWay}"
                     Foreground="SlateGray" />
 
                 <TextBlock Margin="2"
+                    VerticalAlignment="Center"
                     Text="{Binding ErrorCount, Mode=OneWay}"
                     Foreground="DarkRed" />
 
                 <TextBlock Margin="2"
+                    VerticalAlignment="Center"
                     Text="{Binding LoadedCount, Mode=OneWay}"
                     Foreground="SlateBlue" />
-            </StackPanel>
+                
+                <Button Margin="2" Padding="4,1"
+                    Content="Clear all"
+                    DockPanel.Dock="Right"
+                    Command="{Binding ClearAllCommand, Mode=OneTime}" />
+            </DockPanel>
         </Grid>
             
     </DockPanel>

@@ -17,24 +17,35 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IstLight.Services
 {
     public class OneTimeCallbackContainer<T>
     {
-        private readonly ConcurrentBag<Action<T>> callbacks = new ConcurrentBag<Action<T>>();
+        private readonly List<Action<T>> callbacks = new List<Action<T>>();
+        private readonly object locker = new object();
 
         public void AddCallback(Action<T> callback)
         {
-            callbacks.Add(callback);
+            lock (locker)
+                callbacks.Add(callback);
+        }
+
+        public void RemoveCallback(Action<T> callback)
+        {
+            lock (locker)
+                callbacks.RemoveAll(x => x == callback);
         }
 
         public void FireCallbacks(T arg)
         {
-            Action<T> callback;
-
-            while (callbacks.TryTake(out callback))
-                FireCallback(callback, arg);
+            lock (locker)
+            {
+                callbacks.ForEach(x => FireCallback(x, arg));
+                callbacks.Clear();
+            }
         }
 
         protected virtual void FireCallback(Action<T> callback, T arg)

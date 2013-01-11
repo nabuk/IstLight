@@ -40,24 +40,17 @@ namespace IstLight.ViewModels
             get
             {
                 return converters
-                    .Select(conv => string.Format("{0} files (*.{1})|*.{1}", conv.Name, conv.Format.ToUpper()))
+                    .Select(conv =>
+                        string.Format("{0} files ({1})|{1}",
+                            conv.Name,
+                            conv.Format.ToUpper()
+                                .Split(';')
+                                .Select(ext => "*."+ext)
+                                .Aggregate((e1,e2) => e1+";"+e2)))
                     .Aggregate((s1,s2) => s1 + "|" + s2);
             }
         }
-        private void ReadTicker(string filePath, ITickerConverter converter)
-        {
-            LoadingTicker(
-                new TickerFileViewModel(
-                    Path.GetFileNameWithoutExtension(filePath),
-                    new AsyncResultFromSyncJob<Ticker>(() =>
-                        {
-                            var tickerFile = fileIO.Read(filePath);
-                            return tickerFile != null ?
-                                converter.Read(tickerFile).Sync()
-                                :
-                                new ValueOrError<Ticker> { Error = new Exception("Cannot read " + filePath) };
-                        })));
-        }
+
         private void Open()
         {
             var openDlg = new WF.OpenFileDialog
@@ -68,8 +61,28 @@ namespace IstLight.ViewModels
                 Filter = Filter,
             };
             if (openDlg.ShowDialog() == WF.DialogResult.OK)
-                foreach (var filePath in openDlg.FileNames)
-                    ReadTicker(filePath, converters[openDlg.FilterIndex-1]);
+            {
+                Task.Factory.StartNew(paths =>
+                    {
+                        foreach (var filePath in (string[])paths)
+                        {
+                            var rawFile = fileIO.Read(filePath);
+                            var readResult = rawFile != null ?
+                                converters[openDlg.FilterIndex - 1].Read(rawFile).Sync()
+                                :
+                                new ValueOrError<Ticker> { Error = new Exception("Cannot read " + filePath) };
+                            dispatcher.InvokeIfRequired(() =>
+                                LoadingTicker(
+                                    new TickerFileViewModel(
+                                        Path.GetFileNameWithoutExtension(filePath),
+                                        new ResultAsAsyncResult<Ticker>(readResult))));
+
+                        //    //ReadTicker(filePath, converters[openDlg.FilterIndex - 1]);
+
+                        }
+                        
+                    }, openDlg.FileNames);
+            }
         }
 
         private void BeginLoadConverters(IAsyncLoadService<ITickerConverter> loadConvertersService)

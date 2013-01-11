@@ -24,15 +24,16 @@ from IstLight.Services import *
 from IstLight import *
 from System.Collections.Generic import *
 from System import DateTime,Double,String, Array
-from System.Globalization import NumberStyles,CultureInfo
+from System.Globalization import NumberStyles,CultureInfo,DateTimeStyles
 from System.Text import Encoding
 from System.Linq import Enumerable
 clr.ImportExtensions(System.Linq)
 
 Name = "Stooq.com"
-Format = "CSV"
+Format = "CSV;TXT"
 
-def ExtractDate(x): return DateTime.Parse(x,CultureInfo.InvariantCulture)
+def ExtractDate(x):
+	return DateTime.ParseExact(x,Array[String](("yyyy-MM-dd","yyyyMMdd")),CultureInfo.InvariantCulture,DateTimeStyles.AssumeLocal)
 def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture)
 def ExtractQuote(row):
 	date = ExtractDate(row[0])

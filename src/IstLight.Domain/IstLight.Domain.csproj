@@ -42,6 +42,7 @@
     <Compile Include="Extensions\IReadOnlyListExtensions.cs" />
     <Compile Include="MultiQuoteList.cs" />
     <Compile Include="Services\AsyncOneTimeCallbackContainer.cs" />
+    <Compile Include="Services\ResultAsAsyncResult.cs" />
     <Compile Include="Services\Decorators\AsyncLoadServiceDecorator.cs" />
     <Compile Include="Services\AsyncResultFromSyncJob.cs" />
     <Compile Include="Services\Decorators\AsyncResultErrorDecorator.cs" />

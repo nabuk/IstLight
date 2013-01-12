@@ -14,7 +14,7 @@ It heavily incorporates Python scripting language giving you the ability to:
 
 ## Setup
 
-[Download](https://github.com/nabuk/IstLight/downloads/) and extract binary archive.
+[Download](https://skydrive.live.com/redir?resid=9B88D15AF13BDEB4!105) and extract binary archive.
 Run IstLight.exe.
 
 ## Help

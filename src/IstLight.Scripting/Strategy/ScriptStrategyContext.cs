@@ -79,6 +79,13 @@ namespace IstLight.Strategy
             return engine.Execute();
         }
 
+        public override string ReadOutput()
+        {
+            var output = engine.Output;
+            engine.ClearOutput();
+            return string.IsNullOrWhiteSpace(output) ? null : output;
+        }
+
         public override void Dispose()
         {
             if (engine != null) engine.Dispose();

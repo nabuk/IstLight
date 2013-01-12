@@ -54,6 +54,7 @@ namespace IstLight.Simulation
         {
             get { return Observation.Date; }
         }
+        public string Output { get; set; }
     }
 
     public static class SimulationResultQuoteExtensions

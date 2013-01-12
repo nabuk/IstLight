@@ -320,8 +320,14 @@ namespace ScriptingWrapper
             get
             {
                 outputStream.Position = 0;
-                return new StreamReader(outputStream).ReadToEnd();
+                return new StreamReader(outputStream).ReadToEnd().TrimEnd();
             }
+        }
+
+        public void ClearOutput()
+        {
+            outputStream.Position = 0;
+            outputStream.SetLength(0);
         }
 
         /// <summary>

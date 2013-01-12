@@ -41,8 +41,9 @@ namespace IstLight.ViewModels
             return new SimulationResultViewModel(
                 new ISectionViewModel[]
                 {
+                    new EquityViewModel(result),
                     new SummarySectionViewModel(analyzerList,result),
-                    new EquityViewModel(result)
+                    new OutputViewModel(result)
                 });
         }
     }

@@ -63,5 +63,9 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
     <DataTemplate DataType="{x:Type VMResult:EquityViewModel}">
         <ViewResult:EquityView />
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type VMResult:OutputViewModel}">
+        <ViewResult:OutputView />
+    </DataTemplate>
 
 </ResourceDictionary>

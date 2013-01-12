@@ -80,6 +80,8 @@
     <Compile Include="Settings\SimulationRangeTypeNames.cs" />
     <Compile Include="ViewModels\ResultSections\EquityRowViewModel.cs" />
     <Compile Include="ViewModels\ResultSections\EquityViewModel.cs" />
+    <Compile Include="ViewModels\ResultSections\OutputRowViewModel.cs" />
+    <Compile Include="ViewModels\ResultSections\OutputViewModel.cs" />
     <Compile Include="ViewModels\ResultSections\SummaryGroupViewModel.cs" />
     <Compile Include="ViewModels\ResultSections\SummarySectionViewModel.cs" />
     <Compile Include="ViewModels\SimulationProgressViewModel.cs" />

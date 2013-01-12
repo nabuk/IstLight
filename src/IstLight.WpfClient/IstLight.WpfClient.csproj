@@ -113,6 +113,9 @@
     <Compile Include="Views\ResultSections\EquityView.xaml.cs">
       <DependentUpon>EquityView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ResultSections\OutputView.xaml.cs">
+      <DependentUpon>OutputView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResultSections\SummaryGroupView.xaml.cs">
       <DependentUpon>SummaryGroupView.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResultSections\EquityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResultSections\OutputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

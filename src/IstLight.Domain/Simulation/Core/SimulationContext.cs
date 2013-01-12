@@ -70,7 +70,8 @@ namespace IstLight.Simulation.Core
             resultQuotes.Add(new SimulationResultQuote(quantities, cash, observation)
             {
                 Transactions = transactionProcessor.PopMadeTransactions(),
-                Interest = lastInterest
+                Interest = lastInterest,
+                Output = strategy.ReadOutput()
             });
         }
 

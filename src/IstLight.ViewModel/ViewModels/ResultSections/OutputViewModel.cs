@@ -16,24 +16,25 @@
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using IstLight.Simulation;
 
-namespace IstLight.Strategy
+namespace IstLight.ViewModels.ResultSections
 {
-    public abstract class StrategyBase : IDisposable
+    public class OutputViewModel : ISectionViewModel
     {
-        protected internal IQuoteContext QuoteContext { get; internal set; }
-        protected internal IWalletContext WalletContext { get; internal set; }
+        public OutputViewModel(SimulationResult result)
+        {
+            this.Rows = result.Select((q, i) => new OutputRowViewModel(q.Output, i, q.Date)).Where(r => r.Text != null);
+        }
 
-        #region To override
-        public virtual bool Initialize() { return true; }
+        public string Header
+        {
+            get { return "Output"; }
+        }
 
-        public abstract bool Run();
-
-        public virtual string ReadOutput() { return null; }
-
-        public virtual string LastError { get { return null; } }
-
-        public virtual void Dispose() { }
-        #endregion
+        public IEnumerable<OutputRowViewModel> Rows { get; private set; }
     }
 }

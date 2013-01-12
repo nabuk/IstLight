@@ -40,7 +40,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                     Width="*" CanUserResize="False">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Text}" TextAlignment="Left" />
+                        <TextBlock Text="{Binding Text}" TextAlignment="Left" TextWrapping="Wrap" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

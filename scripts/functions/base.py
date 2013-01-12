@@ -23,6 +23,22 @@ def getIndex(ticker):
 	if type(ticker) is str: tIndex = __quotes__.GetTickerIndex(ticker)
 	else: tIndex = int(ticker)
 	return tIndex
+	
+def getDescription(ticker):
+	tIndex = getIndex(ticker)
+	return __quotes__.GetTickerDescription(tIndex)
+	
+def getName(ticker):
+	return getDescription(ticker).Name;
+	
+def getTickerCount():
+	return __quotes__.TickerCount
+	
+def isBuyable(ticker):
+	return getDescription(ticker).CanBeBought
+	
+def isBuyableNow(ticker):
+	return isBuyable(ticker) and getPrice(ticker) != None
 
 def isFirst():
 	return __quotes__.IsFirst
@@ -85,3 +101,6 @@ def setShare(ticker, share):
 	
 def getCashShare():
 	return getCash() / getWalletEquity()
+	
+def getSpan():
+	return __quotes__.Span

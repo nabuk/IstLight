@@ -26,6 +26,11 @@
         <Key word="__quotes__" />
         <Key word="getDate" />
         <Key word="getIndex" />
+        <Key word="getDescription" />
+        <Key word="getName" />
+        <Key word="getTickerCount" />
+        <Key word="isBuyable" />
+        <Key word="isBuyableNow" />
         <Key word="isFirst" />
         <Key word="isLast" />
         <Key word="getQuotes" />
@@ -41,6 +46,7 @@
         <Key word="getShare" />
         <Key word="setShare" />
         <Key word="getCashShare" />
+        <Key word="getSpan" />
       </KeyWords>
       <KeyWords name="BuiltInStatements" bold="false" color="CornflowerBlue">
         <Key word="assert" />

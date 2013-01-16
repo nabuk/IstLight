@@ -44,7 +44,8 @@ namespace IstLight.ViewModels
                     new EquityViewModel(result),
                     new SummarySectionViewModel(analyzerList,result),
                     new OutputViewModel(result)
-                });
+                },
+                new IstLight.Excel.Concrete.SimulationResultExcelExporter());
         }
     }
 }

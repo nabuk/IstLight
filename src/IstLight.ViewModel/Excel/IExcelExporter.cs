@@ -20,20 +20,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
-using IstLight.Excel;
 
-namespace IstLight.ViewModels
+namespace IstLight.Excel
 {
-    public class SimulationResultViewModel
+    public interface IExcelExporter<in T>
     {
-        public SimulationResultViewModel(IEnumerable<ISectionViewModel> sections, IExcelExporter<SimulationResultViewModel> excelExporter)
-        {
-            this.Sections = sections;
-            this.ExportToExcelCommand = excelExporter.GetExportCommand(this);
-        }
-
-        public IEnumerable<ISectionViewModel> Sections { get; private set; }
-
-        public ICommand ExportToExcelCommand { get; private set; }
+        ICommand GetExportCommand(T data);
     }
 }

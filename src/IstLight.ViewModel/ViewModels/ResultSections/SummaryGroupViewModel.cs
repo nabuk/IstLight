@@ -63,6 +63,7 @@ namespace IstLight.ViewModels.ResultSections
                 }
 
                 Items = analyzeResult.Result;
+                LoadState = AsyncState.Completed;
             });
         }
 

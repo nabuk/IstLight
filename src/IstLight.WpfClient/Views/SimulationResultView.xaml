@@ -26,11 +26,18 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
         Title="Simulation result"
         Background="{StaticResource ControlBackgroundBrush}"
         WindowState="Maximized" Icon="../AppIcon.ico">
-    <TabControl Margin="10" ItemsSource="{Binding Sections, Mode=OneTime}" SelectedIndex="0">
-        <TabControl.ItemContainerStyle>
-            <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
-                <Setter Property="Header" Value="{Binding Header, Mode=OneTime}" />
-            </Style>
-        </TabControl.ItemContainerStyle>
-    </TabControl>
+    <DockPanel Margin="10">
+        <Button DockPanel.Dock="Bottom" Margin="0,4,0,0" Padding="10,5"
+                Command="{Binding ExportToExcelCommand, Mode=OneTime}"
+                Content="Export"
+                HorizontalAlignment="Left"
+                />
+        <TabControl ItemsSource="{Binding Sections, Mode=OneTime}" SelectedIndex="0">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Setter Property="Header" Value="{Binding Header, Mode=OneTime}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+    </DockPanel>
 </Window>

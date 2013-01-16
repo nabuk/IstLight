@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\lib\EPPlus 3.1.2\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.WPF4, Version=4.0.23.37706, Culture=neutral, PublicKeyToken=63eb5c012e0b3c1c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvvmLight.4.1.23.0\GalaSoft.MvvmLight.WPF4.dll</HintPath>
@@ -38,6 +41,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,6 +62,9 @@
     <Compile Include="Commands\Concrete\RunSimulationCommand.cs" />
     <Compile Include="Commands\Concrete\StopSimulationCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Excel\Concrete\SimulationResultExcelExporter.cs" />
+    <Compile Include="Excel\DialogExcelExporter.cs" />
+    <Compile Include="Excel\IExcelExporter.cs" />
     <Compile Include="Simulation\SimulationRunnerResultDecorator.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModelFactory.cs" />
@@ -123,6 +130,7 @@
       <Name>IstLight.Scripting</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(SolutionDir)..\lib\Scripting\*.dll $(TargetDir)</PostBuildEvent>

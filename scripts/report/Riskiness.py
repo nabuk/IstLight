@@ -49,7 +49,11 @@ def HighestDrawdown(result, startIndex, endIndex):
 	
 def GetHighestDrawdown(result):
 	drawDown = HighestDrawdown(result,0,result.Count-1) * 100
-	return AsStringPair('Highest drawdown', InvariantFormat('{0:0.00} %', drawDown))
+	return AsStringPair('Max drawdown', InvariantFormat('{0:0.00} %', drawDown))
+def GetMaxUp(result):
+	up = max([Equity(result,i) for i in range(result.Count)])
+	up = ((up / result.Settings.Get[InitialEquitySetting]().Value) - 1)*100
+	return AsStringPair('Max profit', InvariantFormat('{0:0.00} %', up))
 def GetLongestFlatRange(result):
 	maxDaySpan = 0
 	maxValue = Equity(result,0)
@@ -117,6 +121,7 @@ def GetSterlingRatio(result):
 
 def Analyze(result):
 	return Array[KeyValuePair[String,String]]([
+		GetMaxUp(result),
 		GetHighestDrawdown(result),
 		GetLongestFlatRange(result),
 		GetStandardDeviation(result),

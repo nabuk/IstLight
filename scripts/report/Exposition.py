@@ -65,9 +65,8 @@ def DescribeExpositions(result, exps):
 	for i in range(descCount):
 		exps[i] = (descs[i].Name, exps[i])
 	exps[descCount] = ("Cash", exps[descCount])
-	exps = [exps[descCount]] + sorted(exps[:descCount], cmp = lambda x,y: y[1] > x[1])
+	exps = [exps[descCount]] + [r for r in sorted(exps[:descCount], cmp = lambda x,y: y[1] > x[1]) if r[1] > 0]
 	return Array[KeyValuePair[String,String]]([AsStringPair(x[0], InvariantFormat('{0:0.00} %', x[1] * 100)) for x in exps])
-	#return Array[KeyValuePair[String,String]]([])
 		
 def Analyze(result):
 	return DescribeExpositions(result, GetExpositions(result))

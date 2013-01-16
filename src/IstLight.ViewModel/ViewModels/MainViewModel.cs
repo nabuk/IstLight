@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Reflection;
 using GalaSoft.MvvmLight;
 using IstLight.Commands;
 
@@ -34,6 +36,14 @@ namespace IstLight.ViewModels
             this.SimulationSettings = simulationSettings;
             this.StrategyExplorer = strategyExplorer;
             this.Commands = commands;
+
+            var assembly = Assembly.GetEntryAssembly();
+            var v = new Version(((AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(
+                assembly, typeof(AssemblyFileVersionAttribute), false)).Version);
+            Title = string.Format("{0} v{1}.{2}",
+                assembly.GetName().Name,
+                v.Major,
+                v.Minor);
         }
 
         public TickerExplorerViewModel TickerExplorer { get; private set; }
@@ -42,5 +52,7 @@ namespace IstLight.ViewModels
         public ErrorListViewModel ErrorList { get; private set; }
 
         public GlobalCommandContainer Commands { get; private set; }
+
+        public string Title { get; private set; }
     }
 }

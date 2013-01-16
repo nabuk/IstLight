@@ -28,7 +28,8 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 		Background="{StaticResource ControlBackgroundBrush}"
         TextOptions.TextFormattingMode="Display"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized" Icon="AppIcon.ico">
+        WindowState="Maximized" Icon="AppIcon.ico"
+        Title="{Binding Title, Mode=OneWay}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

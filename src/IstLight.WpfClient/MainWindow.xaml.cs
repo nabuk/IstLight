@@ -27,10 +27,6 @@ namespace IstLight
         public MainWindow()
         {
             InitializeComponent();
-            this.Title = string.Format("{0} v{1}.{2}",
-                ExecutingAssembly.Name,
-                ExecutingAssembly.Version.Major,
-                ExecutingAssembly.Version.Minor);
         }
     }
 }

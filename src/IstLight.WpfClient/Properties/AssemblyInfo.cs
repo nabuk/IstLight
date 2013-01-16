@@ -32,22 +32,3 @@ using System.Windows;
     //(used if a resource is not found in the page, 
     // app, or any theme specific resource dictionaries)
 )]
-
-public static class ExecutingAssembly
-{
-    public static Version Version
-    {
-        get
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-        }
-    }
-
-    public static string Name
-    {
-        get
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-        }
-    }
-}

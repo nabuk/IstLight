@@ -33,19 +33,19 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
         </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
-        
-        <!--<ItemsControl ItemsSource="{Binding Groups, Mode=OneTime}">-->
-        <ItemsControl ItemsSource="{Binding Source={StaticResource csv}}">
-            <ItemsControl.Style>
-                <Style TargetType="ItemsControl">
-                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-                </Style>
-            </ItemsControl.Style>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Source={StaticResource csv}, Mode=OneTime}">
+                <ItemsControl.Style>
+                    <Style TargetType="ItemsControl">
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                    </Style>
+                </ItemsControl.Style>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

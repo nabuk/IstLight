@@ -64,9 +64,15 @@ namespace IstLight.Excel
             {
                 var cells = sheet.Cells[sheet.Dimension.Start.Row, columnI, sheet.Dimension.End.Row, columnI];
 
-                int maxLength = cells.Max(cell => cell.Value.ToString().Count(c => char.IsLetterOrDigit(c)));
+                if (cells.Any())
+                {
+                    int maxLength = cells.Max(cell => (cell.Value ?? "x").ToString()
+                        .Split('\n')
+                        .Aggregate((s1,s2) => s1.Length > s2.Length ? s1 : s2)
+                        .Length);
 
-                sheet.Column(columnI).Width = maxLength + 2;
+                    sheet.Column(columnI).Width = maxLength + 2;
+                }
             }
         }
     }

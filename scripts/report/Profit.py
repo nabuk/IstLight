@@ -27,7 +27,7 @@ from IstLight.Simulation import *
 from IstLight.Settings import *
 clr.ImportExtensions(System.Linq)
 
-Category = 'Net profit (by year)'
+Category = 'Performance (by year)'
 
 def AsStringPair(k,v): return KeyValuePair[String,String](k,v)
 def InvariantFormat(format,x): return String.Format(CultureInfo.InvariantCulture,format, x)

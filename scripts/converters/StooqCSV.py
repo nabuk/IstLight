@@ -33,7 +33,7 @@ Name = "Stooq.com"
 Format = "CSV;TXT"
 
 def ExtractDate(x):
-	return DateTime.ParseExact(x,Array[String](("yyyy-MM-dd","yyyyMMdd")),CultureInfo.InvariantCulture,DateTimeStyles.AssumeLocal)
+	return DateTime.ParseExact(x,Array[String](("yyyyMMdd","yyyy-MM-dd")),CultureInfo.InvariantCulture,DateTimeStyles.AssumeLocal)
 def ExtractDouble(x): return Double.Parse(x, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture)
 def ExtractQuote(row):
 	date = ExtractDate(row[0])

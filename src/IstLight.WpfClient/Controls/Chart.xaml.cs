@@ -58,6 +58,7 @@ namespace IstLight.Controls
             chart.BackColor = System.Drawing.Color.FromArgb(255, 50,50,50);
             chart.Series.Clear();
             chart.ChartAreas.Clear();
+            
 
             var area = chart.ChartAreas.Add("DefaultArea");
             var series = chart.Series.Add("DefaultSeries");
@@ -70,7 +71,6 @@ namespace IstLight.Controls
             area.BackColor = System.Drawing.Color.FromArgb(255, 11, 84, 136);
             area.BackSecondaryColor = System.Drawing.Color.FromArgb(255, 0,0,0);
             area.BackGradientStyle = winChart.GradientStyle.TopBottom;
-            area.AxisX.IsMarginVisible = false;
             area.AxisX.InterlacedColor = System.Drawing.Color.Red;
             area.AxisX.LineWidth = 0;
             area.AxisY.LineWidth = 0;
@@ -93,27 +93,31 @@ namespace IstLight.Controls
             
 
             area.AxisY.LabelStyle.Format = "F2";
-            //area.AxisX.IntervalType = winChart.DateTimeIntervalType.Days;
-            //area.AxisX.MajorGrid.IntervalType = winChart.DateTimeIntervalType.Days;
-            //area.AxisX.MinorGrid.IntervalType = winChart.DateTimeIntervalType.Days;
             area.AxisX.MinorGrid.Enabled = true;
 
-            area.AxisX.MajorTickMark.Enabled = false;
-            area.AxisY.MajorTickMark.Enabled = false;
+            area.AxisX.MajorTickMark.Enabled = true;
+            area.AxisY.MajorTickMark.Enabled = true;
 
-
-            //area.AxisY.IsLogarithmic = points.All(p => p.Value > 0);
-            //area.AxisY.LogarithmBase = 2;
+            area.AxisX.IsMarginVisible = false;
             area.AxisY.IsStartedFromZero = false;
-            area.AxisY.IntervalType = winChart.DateTimeIntervalType.Number;
+
 
             double minY = points.Select(p => p.Value).Min();
             double maxY = points.Select(p => p.Value).Max();
             if (minY != maxY)
             {
-                area.AxisY.Interval = Math.Abs((maxY - minY) / 5);
+                area.AxisY.IsMarginVisible = false;
+
+                area.AxisY.Interval = Double.NaN;// Math.Abs((maxY - minY) / 5);
                 area.AxisY.Minimum = minY;
                 area.AxisY.Maximum = maxY;
+
+                //area.AxisX.Interval = Double.NaN;
+                //area.AxisX.IsLabelAutoFit = true;
+                //area.AxisX.LabelAutoFitStyle =
+                    //winChart.LabelAutoFitStyles.DecreaseFont | winChart.LabelAutoFitStyles.IncreaseFont |
+                    //winChart.LabelAutoFitStyles.WordWrap;
+
 
                 //area.AxisY.MinorGrid.Interval = area.AxisY.Interval / 2;
             }
@@ -130,6 +134,40 @@ namespace IstLight.Controls
             foreach (var p in points)
                 series.Points.AddXY(p.Key.ToShortDateString(),p.Value);
 
+            //foreach (var cl in series.Points.Select((x, i) => new { Id = i, data = x }))
+            //{
+            //    if (cl.Id == 0 || cl.Id == points.Length - 1)
+            //        cl.data.AxisLabel = points[cl.Id].Key.ToShortDateString();
+            //    else
+            //        cl.data.AxisLabel = "";
+            //}
+            //area.AxisX.CustomLabels.Add(points[points.Length - 1].Key.ToOADate(), points[points.Length - 1].Key.ToOADate(), "end");
+                
+                
+            //test
+            //series = chart.Series.Add("SecondSeries");
+            //series.ChartArea = area.Name;
+            //series.ChartType = winChart.SeriesChartType.Area;
+            //series.Color = System.Drawing.Color.FromArgb(180, 240,120,120);
+            //series.BackSecondaryColor = System.Drawing.Color.FromArgb(180, 120,60,60);
+            //series.BackGradientStyle = winChart.GradientStyle.TopBottom;
+            //foreach (var p in points)
+            //    series.Points.AddXY(p.Key.ToShortDateString(), (p.Value-100)/2);
+
+            //test hide
+            chart.Padding = new System.Windows.Forms.Padding(0);
+            area.Position = new winChart.ElementPosition(0, 0, 100, 100);
+            area.InnerPlotPosition = new winChart.ElementPosition(0, 0, 100, 100);
+            area.AxisX.LabelStyle.Enabled = false;
+            area.AxisY.LabelStyle.Enabled = false;
+            area.AxisX.MajorTickMark.Enabled = area.AxisX.MinorTickMark.Enabled = false;
+            area.AxisY.MajorTickMark.Enabled = area.AxisY.MinorTickMark.Enabled = false;
+
+            tbYMin.Text = minY.ToString("F2");
+            tbYMax.Text = maxY.ToString("F2");
+
+            tbXMin.Text = points[0].Key.ToShortDateString();
+            tbXMax.Text = points[points.Length-1].Key.ToShortDateString();
 
             chart.EndInit();
         }

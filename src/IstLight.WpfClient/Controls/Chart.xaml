@@ -23,7 +23,38 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,3,-2"
+                   x:Name="tbYMin"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                   Foreground="{StaticResource GlyphBrush}"
+                   />
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,-2,3,0"
+                   x:Name="tbYMax"
+                   VerticalAlignment="Top" HorizontalAlignment="Right"
+                   Foreground="{StaticResource GlyphBrush}"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,2,0,0"
+                   x:Name="tbXMin"
+                   HorizontalAlignment="Left"
+                   Foreground="{StaticResource GlyphBrush}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,2,0,0"
+                   x:Name="tbXMax"
+                   HorizontalAlignment="Right"
+                   Foreground="{StaticResource GlyphBrush}"/>
+
+        <WindowsFormsHost Grid.Column="1" Grid.Row="0"
+            x:Name="winHost" Background="{x:Null}" />
+    </Grid>
     
-    <WindowsFormsHost x:Name="winHost" Background="{x:Null}" />
     
 </UserControl>

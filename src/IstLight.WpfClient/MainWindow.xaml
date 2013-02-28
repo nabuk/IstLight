@@ -90,7 +90,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                     <ei:ControlStoryboardAction ControlStoryboardOption="Play">
                         <ei:ControlStoryboardAction.Storyboard>
                             <Storyboard>
-                                <ColorAnimation From="{StaticResource GlyphColor}" To="#F00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
+                                <ColorAnimation To="#C00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
                             </Storyboard>
                         </ei:ControlStoryboardAction.Storyboard>
                     </ei:ControlStoryboardAction>
@@ -99,7 +99,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                     <ei:ControlStoryboardAction ControlStoryboardOption="Play">
                         <ei:ControlStoryboardAction.Storyboard>
                             <Storyboard>
-                                <ColorAnimation To="{StaticResource GlyphColor}" From="#F00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
+                                <ColorAnimation To="{StaticResource GlyphColor}" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
                             </Storyboard>
                         </ei:ControlStoryboardAction.Storyboard>
                     </ei:ControlStoryboardAction>

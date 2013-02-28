@@ -87,7 +87,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                 <TextBlock Margin="2"
                     VerticalAlignment="Center"
                     Text="{Binding LoadedCount, Mode=OneWay}"
-                    Foreground="SlateBlue" />
+                    Foreground="{StaticResource GlyphBrush}" />
                 
                 <Button Margin="2" Padding="4,1"
                     Content="Clear all"

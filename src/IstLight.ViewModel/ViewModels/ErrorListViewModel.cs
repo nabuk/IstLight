@@ -31,7 +31,13 @@ namespace IstLight.ViewModels
         
         public ErrorListViewModel()
         {
-            this.ClearCommand = new DelegateCommand(() => errorList.Clear(), () => ErrorList.Count > 0);
+            this.ClearCommand = new DelegateCommand(
+                () =>
+                {
+                    errorList.Clear();
+                    ErrorsCleared(this,EventArgs.Empty);
+                },
+                () => ErrorList.Count > 0);
             this.ErrorList = new ReadOnlyObservableCollection<string>(errorList);
             (this.ErrorList as INotifyCollectionChanged).CollectionChanged += delegate { (ClearCommand as DelegateCommand).RaiseCanExecuteChanged(); };
             (this.ErrorList as INotifyCollectionChanged).CollectionChanged += (s, e) =>
@@ -49,6 +55,7 @@ namespace IstLight.ViewModels
         }
 
         public event EventHandler NewError = delegate { };
+        public event EventHandler ErrorsCleared = delegate { };
 
         public ICommand ClearCommand { get; private set; }
 

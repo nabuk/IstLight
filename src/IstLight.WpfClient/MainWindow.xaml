@@ -70,27 +70,43 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                 <RotateTransform Angle="90" />
             </CheckBox.LayoutTransform>
         </CheckBox>
-
+        
         <CheckBox
             x:Name="cbErrorList"
             Style="{StaticResource PanelCheckBoxStyle}"
             HorizontalAlignment="Left"
             Tag="2"
-            Content="Error List"
             Grid.Row="2" Grid.Column="1"
             Margin="0,5,0,0" >
+            <CheckBox.Content>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <Binding Path="ErrorList.ErrorList.Count" Mode="OneWay" StringFormat="Error List ( {0} )" />
+                    </TextBlock.Text>
+                </TextBlock>
+            </CheckBox.Content>
             <i:Interaction.Triggers>
                 <i:EventTrigger SourceObject="{Binding ErrorList, Mode=OneTime}" EventName="NewError">
                     <ei:ControlStoryboardAction ControlStoryboardOption="Play">
                         <ei:ControlStoryboardAction.Storyboard>
-                            <Storyboard AutoReverse="True" RepeatBehavior="0:0:.9">
+                            <Storyboard>
                                 <ColorAnimation From="{StaticResource GlyphColor}" To="#F00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
+                            </Storyboard>
+                        </ei:ControlStoryboardAction.Storyboard>
+                    </ei:ControlStoryboardAction>
+                </i:EventTrigger>
+                <i:EventTrigger SourceObject="{Binding ErrorList, Mode=OneTime}" EventName="ErrorsCleared">
+                    <ei:ControlStoryboardAction ControlStoryboardOption="Play">
+                        <ei:ControlStoryboardAction.Storyboard>
+                            <Storyboard>
+                                <ColorAnimation To="{StaticResource GlyphColor}" From="#F00" Duration="0:0:.15" Storyboard.TargetName="cbErrorList" Storyboard.TargetProperty="Foreground.Color" />
                             </Storyboard>
                         </ei:ControlStoryboardAction.Storyboard>
                     </ei:ControlStoryboardAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </CheckBox>
+
 
         <CheckBox
             x:Name="cbSimulationSettings"

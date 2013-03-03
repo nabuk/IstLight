@@ -27,5 +27,7 @@ namespace IstLight
         void Show();
 
         bool? ShowDialog();
+
+        bool IsBlurred { get; set; }
     }
 }

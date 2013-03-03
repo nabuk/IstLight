@@ -17,6 +17,8 @@
 
 using System;
 using System.Windows;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using IstLight.Dictionaries;
 
 namespace IstLight
@@ -24,6 +26,7 @@ namespace IstLight
     public class WindowAdapter : IWindow
     {
         protected readonly Window wpfWindow;
+        protected readonly BlurEffect blurEffect;
 
         public WindowAdapter(Window wpfWindow)
         {
@@ -31,6 +34,10 @@ namespace IstLight
                 throw new ArgumentNullException("wpfWindow");
 
             this.wpfWindow = wpfWindow;
+
+
+            blurEffect = new BlurEffect { Radius = 0 };
+            this.WpfWindow.Effect = blurEffect;
         }
 
         #region IWindow Members
@@ -62,6 +69,20 @@ namespace IstLight
         public virtual bool? ShowDialog()
         {
             return this.wpfWindow.ShowDialog();
+        }
+
+        private bool isBlurred;
+        public bool IsBlurred
+        {
+            get
+            {
+                return this.isBlurred;
+            }
+            set
+            {
+                this.blurEffect.Radius = value ? 5 : 0;
+                this.isBlurred = value;
+            }
         }
 
         #endregion

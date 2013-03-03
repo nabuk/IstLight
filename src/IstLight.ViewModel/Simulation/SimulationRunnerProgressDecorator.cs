@@ -32,11 +32,13 @@ namespace IstLight.Simulation
         private void ShowProgress()
         {
             statusViewModel.Status = new SimulationProgressStatus("Initializing", 0, 100);
+            mainWindow.IsBlurred = true;
             StatusWindow.Show();
 
         }
         private void HideProgress()
         {
+            mainWindow.IsBlurred = false;
             StatusWindow.Close();
             _statusWindow = null;
         }

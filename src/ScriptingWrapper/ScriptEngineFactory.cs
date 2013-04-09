@@ -17,6 +17,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
+using ScriptingWrapper.Attributes;
+using System.IO;
 
 namespace ScriptingWrapper
 {
@@ -25,6 +29,37 @@ namespace ScriptingWrapper
     /// </summary>
     public static class ScriptEngineFactory
     {
+        private static Dictionary<ScriptingLanguage, Type> languageType;
+        private static Dictionary<string, ScriptingLanguage> languageExtensions;
+
+        private static void AssignSyntaxHighlighting(ScriptEngineBase engine)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName =
+                assembly.GetManifestResourceNames()
+                    .Where(x => x.EndsWith("xshd") && x.Contains(engine.Language.ToString()))
+                    .Single();
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var streamReader = new StreamReader(stream))
+                engine.SyntaxHighlightingRules = streamReader.ReadToEnd();
+        }
+
+        static ScriptEngineFactory()
+        {
+            languageType = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(x => x.IsClass && !x.IsAbstract && typeof(ScriptEngineBase).IsAssignableFrom(x))
+                .ToDictionary(x => ((LanguageAttribute)x.GetCustomAttributes(typeof(LanguageAttribute), true).First()).Language);
+            languageExtensions = languageType.ToDictionary(x =>
+                ((AllowedExtensionAttribute)x.Value
+                    .GetCustomAttributes(typeof(AllowedExtensionAttribute), true)
+                    .Single())
+                .Extension, x => x.Key);
+        }
+
+        
+
         /// <summary>
         /// Creates script engine according to passed language argument.
         /// </summary>
@@ -32,8 +67,13 @@ namespace ScriptingWrapper
         /// <returns>Script engine wrapper.</returns>
         public static ScriptEngineBase CreateEngine(ScriptingLanguage language)
         {
-            return languageCreatorMap[language]();
+            var engine = (ScriptEngineBase)Activator.CreateInstance(languageType[language]);
+            AssignSyntaxHighlighting(engine);
+            return engine;
         }
+
+        
+
         /// <summary>
         /// Creates script engine according to passed script language extension (i.e. 'py' for python)
         /// </summary>
@@ -45,39 +85,23 @@ namespace ScriptingWrapper
             if (scriptExtension == null) throw new ArgumentNullException("scriptExtension");
 
             string ext = scriptExtension.Replace(".", "").ToLower();
-            if (!extensionToLanguageMap.ContainsKey(ext))
+            if (!languageExtensions.ContainsKey(ext))
                 return null;
             else
-                return CreateEngine(extensionToLanguageMap[ext]);
+                return CreateEngine(languageExtensions[ext]);
         }
         
-        
-
-        private static Dictionary<ScriptingLanguage, Func<ScriptEngineBase>> languageCreatorMap =
-            new Dictionary<ScriptingLanguage, Func<ScriptEngineBase>>
-            {
-                { ScriptingLanguage.IronPython,  () => new Implementations.PythonScriptEngine() }
-
-
-            };
-
-        private static Dictionary<string, ScriptingLanguage> extensionToLanguageMap =
-            new Dictionary<string, ScriptingLanguage>
-            {
-                { "py", ScriptingLanguage.IronPython }
-            };
-
         public static IEnumerable<KeyValuePair<string, ScriptingLanguage>> ExtensionToLanguageMap
         {
             get
             {
-                return extensionToLanguageMap;
+                return languageExtensions;
             }
         }
 
         /// <summary>
         /// Supported scipt language extensions.
         /// </summary>
-        public static IEnumerable<string> AllowedExtensions { get { return extensionToLanguageMap.Keys; } }
+        public static IEnumerable<string> AllowedExtensions { get { return languageExtensions.Keys; } }
     }
 }

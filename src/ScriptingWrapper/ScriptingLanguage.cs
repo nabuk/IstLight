@@ -16,6 +16,10 @@
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
 
+using System;
+using System.Reflection;
+using ScriptingWrapper.Attributes;
+
 namespace ScriptingWrapper
 {
     /// <summary>
@@ -23,6 +27,23 @@ namespace ScriptingWrapper
     /// </summary>
     public enum ScriptingLanguage
     {
-        IronPython
+        [Description("Iron Python")]
+        IronPython,
+        [Description("C#")]
+        CSharp
+    }
+
+    public static class ScriptLanguageExtensions
+    {
+        public static string GetDescription(this ScriptingLanguage language)
+        {
+            var type = typeof(ScriptingLanguage);
+            FieldInfo field = type.GetField(language.ToString());
+
+            DescriptionAttribute attribute
+                    = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+
+            return attribute == null ? language.ToString() : attribute.Description;
+        }
     }
 }

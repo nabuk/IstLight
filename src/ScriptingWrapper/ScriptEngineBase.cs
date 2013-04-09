@@ -19,10 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
+using ScriptingWrapper.Attributes;
+using ScriptingWrapper.Helpers;
 
 namespace ScriptingWrapper
 {
@@ -31,42 +34,38 @@ namespace ScriptingWrapper
     /// </summary>
     public abstract class ScriptEngineBase : IDisposable
     {
-        /// <summary>
-        /// Wrapped engine.
-        /// </summary>
-        protected ScriptEngine engine;
-        /// <summary>
-        /// Script engine scope.
-        /// </summary>
-        protected ScriptScope scope;
-        /// <summary>
-        /// Compiled script.
-        /// </summary>
-        protected CompiledCode compiledScript;
+        protected readonly List<string> searchPaths = new List<string>();
 
-        /// <summary>
-        /// Execution output stream.
-        /// </summary>
-        private MemoryStream outputStream = new MemoryStream();
-
-        private void SaveExceptionAsLastError(Exception ex)
+        protected IEnumerable<string> GetAssembliesFromSearchPaths(IEnumerable<string> searchPaths)
         {
-            ExceptionOperations eo = engine.GetService<ExceptionOperations>();
-            LastError = eo.FormatException(ex);
+            return searchPaths.SelectMany(path =>
+                {
+                    if (!Directory.Exists(path) && !File.Exists(path))
+                        throw new DirectoryNotFoundException("Directory not found: " + path);
+
+                    var attributes = File.GetAttributes(path);
+                    if ((attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                    {
+                        return Directory.GetFiles(path, "*.dll")
+                            .Distinct()
+                            .Where(libPath => CheckAssembly.IsManagedAssembly(libPath));
+                    }
+                    else
+                    {
+                        if (!CheckAssembly.IsManagedAssembly(path))
+                            throw new FileNotFoundException("This is not a path to managed library: " + path);
+                        return new[] { path };
+                    }
+                });
         }
 
-        /// <summary>
-        /// Script engine wrapper base class constructor.
-        /// </summary>
-        /// <param name="engine">Script engine.</param>
-        /// <exception cref="ArgumentNullException">Thrown if engine argument is null.</exception>
-        public ScriptEngineBase(ScriptEngine engine)
+        public ScriptEngineBase()
         {
-            if (engine == null)
-                throw new ArgumentNullException("engine");
-            this.engine = engine;
-            engine.Runtime.IO.SetOutput(outputStream = new MemoryStream(), Encoding.UTF8);
-            scope = this.engine.CreateScope();
+            searchPaths.Add(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            //Microsoft.CSharp
+            searchPaths.Add(typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException).Assembly.Location);
+            //System.Core
+            searchPaths.Add(typeof(System.Runtime.CompilerServices.CallSite).Assembly.Location);
         }
 
         /// <summary>
@@ -75,10 +74,7 @@ namespace ScriptingWrapper
         /// <param name="name">Variable name.</param>
         /// <param name="value">Variable value.</param>
         /// <exception cref="ArgumentNullException">Thrown if name argument is null.</exception>
-        public void SetVariable(string name, object value)
-        {
-            scope.SetVariable(name, value);
-        }
+        public abstract void SetVariable(string name, object value);
 
         /// <summary>
         /// Gets a value stored in the scope under the given name.
@@ -87,10 +83,7 @@ namespace ScriptingWrapper
         /// <returns>Variable.</returns>
         /// <exception cref="MissingMemberException">The specified name is not defined in the scope.</exception>
         /// <exception cref="ArgumentNullException">name is a null reference.</exception>
-        public dynamic GetVariable(string name)
-        {
-            return scope.GetVariable(name);
-        }
+        public abstract dynamic GetVariable(string name);
 
         /// <summary>
         /// Gets a value stored in the scope under the given name.  Converts the result
@@ -103,10 +96,7 @@ namespace ScriptingWrapper
         /// <returns>Variable.</returns>
         /// <exception cref="MissingMemberException">The specified name is not defined in the scope.</exception>
         /// <exception cref="ArgumentNullException">name is a null reference.</exception>
-        public T GetVariable<T>(string name)
-        {
-            return scope.GetVariable<T>(name);
-        }
+        public abstract T GetVariable<T>(string name);
 
         /// <summary>
         /// Tries to get variable from script scope.
@@ -115,10 +105,8 @@ namespace ScriptingWrapper
         /// <param name="value">Variable value.</param>
         /// <returns>A return value indicates whether operation succeeeded or failed.</returns>
         /// <exception cref="ArgumentNullException">Thrown if name argument is null.</exception>
-        public bool TryGetVariable(string name, out dynamic value)
-        {
-            return scope.TryGetVariable(name, out value);
-        }
+        public abstract bool TryGetVariable(string name, out dynamic value);
+
         /// <summary>
         /// Tries to get variable from script scope.
         /// </summary>
@@ -127,10 +115,7 @@ namespace ScriptingWrapper
         /// <param name="value">Variable value.</param>
         /// <returns>A return value indicates whether operation succeeeded or failed.</returns>
         /// <exception cref="ArgumentNullException">Thrown if name argument is null.</exception>
-        public bool TryGetVariable<T>(string name, out T value)
-        {
-            return scope.TryGetVariable<T>(name, out value);
-        }
+        public abstract bool TryGetVariable<T>(string name, out T value);
 
         /// <summary>
         /// Determines if this context or any outer scope contains the defined name.
@@ -138,10 +123,7 @@ namespace ScriptingWrapper
         /// <param name="name">Variable name.</param>
         /// <returns>True if scope contains variable.</returns>
         /// <exception cref="ArgumentNullException">Thrown if name argument is null.</exception>
-        public bool ContainsVariable(string name)
-        {
-            return scope.ContainsVariable(name);
-        }
+        public abstract bool ContainsVariable(string name);
 
         /// <summary>
         /// Tries to remove variable from script scope.
@@ -149,30 +131,21 @@ namespace ScriptingWrapper
         /// <param name="name">Variable name.</param>
         /// <returns>A return value indicates whether operation succeeeded or failed.</returns>
         /// <exception cref="ArgumentNullException">Thrown if name argument is null.</exception>
-        public bool RemoveVariable(string name)
-        {
-            return scope.RemoveVariable(name);
-        }
+        public abstract bool RemoveVariable(string name);
 
         /// <summary>
         /// Gets an array of variable names and their values stored in the scope.
         /// </summary>
-        public IEnumerable<KeyValuePair<string,dynamic>> GetItems()
-        {
-            return scope.GetItems();
-        }
+        public abstract IEnumerable<KeyValuePair<string, dynamic>> GetItems();
 
         /// <summary>
         /// Adds the search paths used by the engine.
         /// </summary>
         /// <param name="paths">Additional search paths.</param>
-        /// <exception cref="NotSupportedException">The language doesn't allow to set search paths.</exception>
         public void AddSearchPaths(params string[] paths)
         {
-            var currentSearchPath = engine.GetSearchPaths();
-            foreach(var path in paths)
-                currentSearchPath.Add(path);
-            engine.SetSearchPaths(currentSearchPath);
+            searchPaths.AddRange(paths);
+
         }
 
         /// <summary>
@@ -181,7 +154,7 @@ namespace ScriptingWrapper
         /// <returns>Search paths.</returns>
         public IEnumerable<string> GetSearchPaths()
         {
-            return engine.GetSearchPaths();
+            return searchPaths;
         }
 
         /// <summary>
@@ -190,47 +163,12 @@ namespace ScriptingWrapper
         /// <param name="script">Script content.</param>
         /// <returns>A return value indicates whether operation succeeeded or failed.</returns>
         /// <exception cref="ArgumentNullException">Thrown if script argument is null.</exception>
-        public bool SetScript(string script)
-        {
-            if (script == null) throw new ArgumentNullException("script");
-
-            ScriptSource scriptSource;
-            try
-            {
-                scriptSource = engine.CreateScriptSourceFromString(script, Microsoft.Scripting.SourceCodeKind.Statements);
-            }
-            catch (Exception ex)
-            {
-                this.LastError = string.Format("Exception has been thrown during script creation. Message: {0}", ex.Message);
-                this.compiledScript = null;
-                return false;
-            }
-
-            var errors = new CustomErrorListener();
-            var compiled = scriptSource.Compile(errors);
-            if (errors.Count > 0)
-            {
-                this.compiledScript = null;
-                LastError = errors.ErrorList.Aggregate((s1,s2) => s1 + Environment.NewLine + s2);
-                return false;
-            }
-            else
-            {
-                this.compiledScript = compiled;
-                return true;
-            }
-        }
+        public abstract bool SetScript(string script);
 
         /// <summary>
         /// Property indicating whether the script was set.
         /// </summary>
-        public bool IsScriptSet
-        {
-            get
-            {
-                return compiledScript != null;
-            }
-        }
+        public abstract bool IsScriptSet { get; }
 
         /// <summary>
         /// Executes compiled script. If execution failed, LastError property will contain explanation.
@@ -241,10 +179,10 @@ namespace ScriptingWrapper
         {
             if (!IsScriptSet)
                 throw new InvalidOperationException("Script was not set.");
-            
+
             try
             {
-                compiledScript.Execute(scope);
+                OnExecute();
                 return true;
             }
             catch (ThreadAbortException tae)
@@ -254,28 +192,51 @@ namespace ScriptingWrapper
                     Thread.ResetAbort();
                 }
 
-                SaveExceptionAsLastError(tae);
+                LastError = FormatException(tae);
                 return false;
             }
             catch (Exception ex)
             {
-                SaveExceptionAsLastError(ex);
+                LastError = FormatException(ex);
                 return false;
             }
+
+        }
+
+        protected abstract void OnExecute();
+
+        protected virtual string FormatException(Exception ex)
+        {
+            string error = string.Empty;
+            while (ex != null)
+            {
+                error += string.Format("{1}{0}Trace: {2}{0}",
+                    Environment.NewLine,
+                    ex.Message,
+                    ex.StackTrace);
+                ex = ex.InnerException;
+            }
+            return error;
         }
 
         /// <summary>
         /// Clears variables.
         /// </summary>
-        public void ClearScope()
-        {
-            this.scope = engine.CreateScope();
-        }
+        public abstract void ClearScope();
 
         /// <summary>
         /// Underlying script language.
         /// </summary>
-        public abstract ScriptingLanguage Language { get; }
+        public ScriptingLanguage Language
+        {
+            get
+            {
+                return ((LanguageAttribute)this.GetType()
+                    .GetCustomAttributes(typeof(LanguageAttribute), true)
+                    .First())
+                    .Language;
+            }
+        }
 
         /// <summary>
         /// Script language name.
@@ -285,57 +246,29 @@ namespace ScriptingWrapper
         {
             return Language.ToString();
         }
-        /// <summary>
-        /// Error output execution listener.
-        /// </summary>
-        private class CustomErrorListener : ErrorListener
-        {
-            private List<String> _errorList = new List<string>();
-            public IEnumerable<string> ErrorList { get { return _errorList; } }
 
-            public override void ErrorReported(ScriptSource source, string message, SourceSpan span, int errorCode, Severity severity)
-            {
-                _errorList.Add(string.Format("{0}; Line: {1}, Column: {2}", message, span.Start.Line, span.Start.Column));
-            }
-
-            public int Count
-            {
-                get { return _errorList.Count; }
-            }
-        }
 
         /// <summary>
         /// Last error(s) message(s) or null
         /// </summary>
         public string LastError
         {
-            get; private set;
+            get;
+            protected set;
         }
 
         /// <summary>
         /// Execution output (if any).
         /// </summary>
-        public string Output
-        {
-            get
-            {
-                outputStream.Position = 0;
-                return new StreamReader(outputStream).ReadToEnd().TrimEnd();
-            }
-        }
+        public abstract string Output { get; }
 
-        public void ClearOutput()
-        {
-            outputStream.Position = 0;
-            outputStream.SetLength(0);
-        }
+        public abstract void ClearOutput();
+
+        public string SyntaxHighlightingRules { get; internal set; }
 
         /// <summary>
         /// Releases all reasources used by wrapper.
         /// </summary>
-        public void Dispose()
-        {
-            outputStream.Dispose();
-        }
+        public virtual void Dispose() { }
     }
 }

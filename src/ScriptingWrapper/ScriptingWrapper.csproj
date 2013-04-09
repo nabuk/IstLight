@@ -42,6 +42,7 @@
       <HintPath>..\..\lib\Scripting\IronPython.Modules.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Scripting\Microsoft.Dynamic.dll</HintPath>
@@ -68,11 +69,27 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Attributes\AllowedExtensionAttribute.cs" />
+    <Compile Include="Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Attributes\LanguageAttribute.cs" />
+    <Compile Include="BaseScript.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Helpers\CheckAssembly.cs" />
+    <Compile Include="IContext.cs" />
+    <Compile Include="Implementations\CSharpScriptEngine.cs" />
+    <Compile Include="MsHostingScriptEngine.cs" />
+    <Compile Include="CodeDomScriptEngine.cs" />
     <Compile Include="ScriptEngineFactory.cs" />
     <Compile Include="Implementations\PythonScriptEngine.cs" />
     <Compile Include="ScriptingLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptEngineBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SyntaxHighlighting\IronPython.xshd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SyntaxHighlighting\CSharp.xshd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

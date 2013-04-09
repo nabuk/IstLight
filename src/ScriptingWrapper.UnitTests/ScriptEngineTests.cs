@@ -419,7 +419,9 @@ namespace ScriptingWrapper.UnitTests
             {
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage,string>[]
                 {
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = 5*5")
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = 5*5"),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("ctx[\"x\"] = 5*5;"))
+
                 });
             }
         }
@@ -430,7 +432,8 @@ namespace ScriptingWrapper.UnitTests
             {
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = x*2")
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = x*2"),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("ctx[\"x\"] = ctx[\"x\"]*2;"))
                 });
             }
         }
@@ -441,7 +444,8 @@ namespace ScriptingWrapper.UnitTests
             {
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "-")
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "-"),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("-;"))
                 });
             }
         }
@@ -452,7 +456,8 @@ namespace ScriptingWrapper.UnitTests
             {
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = y")
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = y"),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("int x = 0;int y = 2 / x;"))
                 });
             }
         }
@@ -463,7 +468,8 @@ namespace ScriptingWrapper.UnitTests
             {
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "print 'X'")
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "print 'X'"),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("Console.Write('X');"))
                 });
             }
         }
@@ -479,6 +485,11 @@ namespace ScriptingWrapper.UnitTests
                     ScriptEngineFactory.CreateEngine(x.Key),
                     x.Value
                 });
+        }
+
+        private static string CreateCSharpScript(string operation)
+        {
+            return string.Format("using System;public class SomeScript : BaseScript {{ public override void Run() {{ {0} }} }}", operation);
         }
     }
 }

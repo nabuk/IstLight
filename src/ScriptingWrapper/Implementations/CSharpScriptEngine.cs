@@ -15,14 +15,20 @@
 // You should have received a copy of the GNU General Public License
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using Microsoft.CSharp;
 using ScriptingWrapper.Attributes;
+
 namespace ScriptingWrapper.Implementations
 {
-    [Language(ScriptingLanguage.IronPython)]
-    [AllowedExtension("py")]
-    sealed class PythonScriptEngine : MsHostingScriptEngine
+    [Language(ScriptingLanguage.CSharp)]
+    [AllowedExtension("cs")]
+    sealed class CSharpScriptEngine : CodeDomScriptEngine
     {
-        public PythonScriptEngine() : base(IronPython.Hosting.Python.CreateEngine()) { }
+        public CSharpScriptEngine() : base(new CSharpCodeProvider()) { }
     }
 }

@@ -19,6 +19,23 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using IstLight.Strategy;
+using System.Windows.Input;
+using System;
+
+
+/*
+ * Commands:
+ * New - możliwe zawsze, po kliknięciu dodaje nową strategię
+ * Open - możliwe zawsze, można otworzyć tylko pliki o konkretnych rozszerzeniach
+ *      Sprawdzenie czy już taki plik nie został otwarty - jak tak to przełączenie na niego
+ * Save - możliwe tylko jeśli plik ma ścieżkę i został zmieniony, jeśli zapis się nie udał to changed dalej true
+ * Save As - możliwe zawsze, wykonanie opcji włącza okno dialogowe z zapisem pliku o konkretnym rozszerzeniu
+ *      Jeżeli zapis się udał to zmiana ścieżki i changed = false
+ * Close - zamyka aktualnie aktywny plik (jeśli ma zmiany to pytanie o zapis zmian)
+ *      Jeśli ma dojść do faktycznego zamknięcia a jest to jedyny otwarty plik to wcześniej wywołanie New z językiem taki jak aktualnego pliku
+ 
+ 
+ */
 
 namespace IstLight.ViewModels
 {
@@ -28,12 +45,13 @@ namespace IstLight.ViewModels
         private StrategyViewModel selectedStrategy;
         //private ICommand runCommand = DelegateCommand.NotRunnable;
         
-        public StrategyExplorerViewModel(StrategyTypes strategyTypes)
+        public StrategyExplorerViewModel(StrategyFileCommands fileCommands, StrategyTypes strategyTypes)
         {
             this.StrategyTypes = strategyTypes;
-            this.selectedStrategy = new StrategyViewModel("Default", "py", strategyTypes.GetSyntaxHighlighting("py"));
-            this.strategies = new ObservableCollection<StrategyViewModel>(new StrategyViewModel[] { selectedStrategy });
+            this.strategies = new ObservableCollection<StrategyViewModel>();
             this.Strategies = new ReadOnlyObservableCollection<StrategyViewModel>(strategies);
+            this.FileCommands = fileCommands;
+            fileCommands.Attach(this);
         }
 
         public ReadOnlyObservableCollection<StrategyViewModel> Strategies { get; private set; }
@@ -51,6 +69,21 @@ namespace IstLight.ViewModels
         }
 
         public StrategyTypes StrategyTypes { get; private set; }
+
+        public StrategyFileCommands FileCommands { get; private set; }
+
+        public event Action<StrategyViewModel> SelectedStrategyChanged = delegate { };
+
+        internal void AddAndSelect(StrategyViewModel strategyVM)
+        {
+            strategies.Add(strategyVM);
+            SelectedStrategy = strategyVM;
+        }
+
+        internal void Remove(StrategyViewModel strategyVM)
+        {
+            strategies.Remove(strategyVM);
+        }
 
         //public ICommand RunCommand
         //{

@@ -65,7 +65,9 @@
     <Compile Include="Excel\Concrete\SimulationResultExcelExporter.cs" />
     <Compile Include="Excel\DialogExcelExporter.cs" />
     <Compile Include="Excel\IExcelExporter.cs" />
+    <Compile Include="Services\ViewModelVisitor.cs" />
     <Compile Include="Simulation\SimulationRunnerResultDecorator.cs" />
+    <Compile Include="Strategy\StrategyFileCommands.cs" />
     <Compile Include="Strategy\StrategyTypes.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModelFactory.cs" />

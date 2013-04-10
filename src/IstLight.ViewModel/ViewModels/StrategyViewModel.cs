@@ -23,13 +23,26 @@ namespace IstLight.ViewModels
     public class StrategyViewModel : ViewModelBase
     {
         private string name = "Default";
+        private string orgContent = string.Empty;
         private string content = string.Empty;
+        
+
+        private void StrategyViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "Name": RaisePropertyChanged<string>(() => Caption); break;
+                case "Changed": RaisePropertyChanged<string>(() => Caption); ChangedPropertyChanged(Changed); break;
+            }
+        }
 
         public StrategyViewModel(string name, string extension, string syntaxHighlighting)
         {
             this.name = name;
             this.Extension = extension;
             this.SyntaxHighlighting = syntaxHighlighting;
+
+            base.PropertyChanged += StrategyViewModel_PropertyChanged;
         }
 
         public string Name
@@ -40,18 +53,10 @@ namespace IstLight.ViewModels
                 if (name == value)
                     return;
                 name = value;
-                RaisePropertyChanged<string>(() => Caption);
+                RaisePropertyChanged<string>(() => Name);
             }
         }
         public string Extension { get; private set; }
-
-        public string Caption
-        {
-            get
-            {
-                return name + (string.IsNullOrWhiteSpace(Extension) ? "" : ".") + Extension;
-            }
-        }
         public string Content
         {
             get { return content ?? ""; }
@@ -61,11 +66,33 @@ namespace IstLight.ViewModels
                     return;
 
                 content = value;
+                RaisePropertyChanged<bool>(() => Changed);
+            }
+        }
+
+        public bool Changed
+        {
+            get { return orgContent != content; }
+        }
+        public string Caption
+        {
+            get
+            {
+                return (Changed ? "* ":"")
+                    + name
+                    + (string.IsNullOrWhiteSpace(Extension) ? "" : ".") + Extension;
             }
         }
 
         public string SyntaxHighlighting { get; private set; }
+        public event Action<bool> ChangedPropertyChanged = delegate { };
 
+        internal string Path { get; set; }
+        internal void SetNotChanged()
+        {
+            orgContent = content;
+            RaisePropertyChanged<bool>(() => Changed);
+        }
         internal Script ToScript()
         {
             return new Script(name, Extension, content);

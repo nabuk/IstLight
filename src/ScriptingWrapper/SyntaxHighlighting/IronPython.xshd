@@ -21,33 +21,6 @@
         <Begin>"</Begin>
         <End>"</End>
       </Span>
-      <KeyWords name="DomainObjects" bold="false" color="#B8D7A3">
-        <Key word="__wallet__" />
-        <Key word="__quotes__" />
-        <Key word="getDate" />
-        <Key word="getIndex" />
-        <Key word="getDescription" />
-        <Key word="getName" />
-        <Key word="getTickerCount" />
-        <Key word="isBuyable" />
-        <Key word="isBuyableNow" />
-        <Key word="isFirst" />
-        <Key word="isLast" />
-        <Key word="getQuotes" />
-        <Key word="getPrice" />
-        <Key word="getPrices" />
-        <Key word="getVolume" />
-        <Key word="getVolumes" />
-        <Key word="getQuantity" />
-        <Key word="setQuantity" />
-        <Key word="getCash" />
-        <Key word="getEquity" />
-        <Key word="getWalletEquity" />
-        <Key word="getShare" />
-        <Key word="setShare" />
-        <Key word="getCashShare" />
-        <Key word="getSpan" />
-      </KeyWords>
       <KeyWords name="BuiltInStatements" bold="false" color="CornflowerBlue">
         <Key word="assert" />
         <Key word="del" />

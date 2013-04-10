@@ -91,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="SyntaxHighlighting\CSharp.xshd" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExampleScripts\CSharp.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

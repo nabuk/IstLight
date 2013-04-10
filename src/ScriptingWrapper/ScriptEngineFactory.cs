@@ -32,6 +32,7 @@ namespace ScriptingWrapper
         private static Dictionary<ScriptingLanguage, Type> languageType;
         private static Dictionary<string, ScriptingLanguage> languageExtensions;
         private static Dictionary<ScriptingLanguage, string> languageSyntaxHighlighting;
+        private static Dictionary<ScriptingLanguage, string> languageExampleScript;
 
         private static string GetSyntaxHighlighting(ScriptingLanguage language)
         {
@@ -39,7 +40,26 @@ namespace ScriptingWrapper
             string resourceName =
                 assembly.GetManifestResourceNames()
                     .Where(x => x.EndsWith("xshd") && x.Contains(language.ToString()))
-                    .Single();
+                    .FirstOrDefault();
+
+            if (resourceName == null)
+                return null;
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var streamReader = new StreamReader(stream))
+                return streamReader.ReadToEnd();
+        }
+
+        private static string GetExampleScript(ScriptingLanguage language)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName =
+                assembly.GetManifestResourceNames()
+                    .Where(x => x.Contains(language.ToString()) && x.Contains("ExampleScripts"))
+                    .FirstOrDefault();
+
+            if (resourceName == null)
+                return null;
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var streamReader = new StreamReader(stream))
@@ -61,6 +81,9 @@ namespace ScriptingWrapper
             languageSyntaxHighlighting = languageType.ToDictionary(
                 x => x.Key,
                 x => GetSyntaxHighlighting(x.Key));
+            languageExampleScript = languageType.ToDictionary(
+                x => x.Key,
+                x => GetExampleScript(x.Key));
         }
 
         
@@ -107,6 +130,14 @@ namespace ScriptingWrapper
             get
             {
                 return languageSyntaxHighlighting;
+            }
+        }
+
+        public static IEnumerable<KeyValuePair<ScriptingLanguage, string>> LanguageExampleScript
+        {
+            get
+            {
+                return languageExampleScript;
             }
         }
 

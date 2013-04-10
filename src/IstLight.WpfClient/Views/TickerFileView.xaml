@@ -38,7 +38,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
     <Border
         x:Name="mainBorder"
         BorderThickness="0"
-        CornerRadius="2"
+        CornerRadius="0"
         >
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -49,11 +49,15 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
         <StackPanel Margin="2">
             <DockPanel>
                 <Button DockPanel.Dock="Right"
-                    Content="X"
-                    Command="{Binding CloseCommand, Mode=OneWay}"
-                    VerticalAlignment="Top"
-                    Padding="6,2"
-                    />
+                        Padding="5"
+                        Command="{Binding CloseCommand, Mode=OneWay}"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource sLightButton}">
+                    <Image
+                        Height="8"
+                        Width="8"
+                        Source="pack://application:,,,/Resources/Icons/cross_black.png" />
+                </Button>
 
                 <TextBox
                     x:Name="tbIndex"

@@ -16,6 +16,7 @@
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 
 namespace IstLight.ViewModels
@@ -41,8 +42,9 @@ namespace IstLight.ViewModels
             this.name = name;
             this.Extension = extension;
             this.SyntaxHighlighting = syntaxHighlighting;
-
+            this.CloseCommand = new DelegateCommand(() => CloseCommandExecuted(this));
             base.PropertyChanged += StrategyViewModel_PropertyChanged;
+
         }
 
         public string Name
@@ -69,7 +71,6 @@ namespace IstLight.ViewModels
                 RaisePropertyChanged<bool>(() => Changed);
             }
         }
-
         public bool Changed
         {
             get { return orgContent != content; }
@@ -83,8 +84,11 @@ namespace IstLight.ViewModels
                     + (string.IsNullOrWhiteSpace(Extension) ? "" : ".") + Extension;
             }
         }
-
         public string SyntaxHighlighting { get; private set; }
+
+        public ICommand CloseCommand { get; private set; }
+
+        public event Action<StrategyViewModel> CloseCommandExecuted = delegate { };
         public event Action<bool> ChangedPropertyChanged = delegate { };
 
         internal string Path { get; set; }

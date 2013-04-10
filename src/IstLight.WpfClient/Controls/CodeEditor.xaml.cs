@@ -37,34 +37,35 @@ using IstLight.Helpers;
 
 namespace IstLight.Controls
 {
-    /// <summary>
-    /// Interaction logic for StrategyEditor.xaml
-    /// </summary>
     public partial class CodeEditor
     {
-        PropertyChangeNotifier notifier;
+        PropertyChangeNotifier textPropertyNotifier;
+        PropertyChangeNotifier syntaxHighlightingPropertyNotifier;
         public CodeEditor()
         {
             InitializeComponent();
             
-            StreamResourceInfo sri = Application.GetResourceStream(new Uri("IstLight;component/dictionaries/SyntaxHighlighting.Python.xshd", UriKind.Relative));
-            if (sri != null)
-                using (Stream s = sri.Stream)
-                {
-                    avalonTextEditor.SyntaxHighlighting = HighlightingLoader.Load(new XmlTextReader(s), HighlightingManager.Instance);
-                }
-
             avalonTextEditor.TextChanged += delegate
             {
                 if(Text != avalonTextEditor.Text)
                     Text = avalonTextEditor.Text;
             };
 
-            notifier = new PropertyChangeNotifier(this, TextProperty);
-            notifier.ValueChanged += delegate
+            textPropertyNotifier = new PropertyChangeNotifier(this, TextProperty);
+            textPropertyNotifier.ValueChanged += delegate
             {
                 if (Text != avalonTextEditor.Text)
                     avalonTextEditor.Text = Text;
+            };
+
+            syntaxHighlightingPropertyNotifier = new PropertyChangeNotifier(this, SyntaxHighlightingProperty);
+            syntaxHighlightingPropertyNotifier.ValueChanged += delegate
+            {
+                if (string.IsNullOrWhiteSpace(SyntaxHighlighting))
+                    return;
+                using (Stream s = SyntaxHighlighting.ToStream())
+                using (var xmlReader = new XmlTextReader(s))
+                    avalonTextEditor.SyntaxHighlighting = HighlightingLoader.Load(xmlReader, HighlightingManager.Instance);
             };
         }
 
@@ -75,6 +76,15 @@ namespace IstLight.Controls
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
+        }
+
+        public static readonly DependencyProperty SyntaxHighlightingProperty =
+            DependencyProperty.Register("SyntaxHighlighting", typeof(string), typeof(CodeEditor), new PropertyMetadata(""));
+
+        public string SyntaxHighlighting
+        {
+            get { return (string)GetValue(SyntaxHighlightingProperty); }
+            set { SetValue(SyntaxHighlightingProperty, value); }
         }
     }
 }

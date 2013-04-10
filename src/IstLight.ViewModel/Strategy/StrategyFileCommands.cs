@@ -38,7 +38,7 @@ namespace IstLight.Strategy
             NewCommand.Execute(ViewModel.StrategyTypes.ExtensionWithName.First().Key);
         }
 
-        void ViewModel_SelectedStrategyChanged(StrategyViewModel obj)
+        private void ViewModel_SelectedStrategyChanged(StrategyViewModel obj)
         {
             if (previousStrategy != null)
                 previousStrategy.ChangedPropertyChanged -= Strategy_ChangedPropertyChanged;
@@ -47,12 +47,12 @@ namespace IstLight.Strategy
             RaiseCanExecuteSaveCommandChanged();
         }
 
-        void Strategy_ChangedPropertyChanged(bool obj)
+        private void Strategy_ChangedPropertyChanged(bool obj)
         {
             RaiseCanExecuteSaveCommandChanged();
         }
 
-        void RaiseCanExecuteSaveCommandChanged()
+        private void RaiseCanExecuteSaveCommandChanged()
         {
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
@@ -121,11 +121,13 @@ namespace IstLight.Strategy
         #region Command handlers
         private void NewCommandHandler(string extension)
         {
-            ViewModel.AddAndSelect(
-                new StrategyViewModel(
-                    "New" + (++lastIndex),
-                    extension,
-                    ViewModel.StrategyTypes.GetSyntaxHighlighting(extension)));
+            var strategy =
+                new StrategyViewModel("New" + (++lastIndex), extension, ViewModel.StrategyTypes.GetSyntaxHighlighting(extension))
+                {
+                    Content = ViewModel.StrategyTypes.GetExampleScript(extension) ?? ""
+                };
+            strategy.SetNotChanged();
+            ViewModel.AddAndSelect(strategy);
         }
 
         private void OpenCommandHandler()
@@ -155,12 +157,14 @@ namespace IstLight.Strategy
                             content = reader.ReadToEnd();
                         }
                         string name = Path.GetFileNameWithoutExtension(fileName);
-                        string extension = Path.GetExtension(fileName);
+                        string extension = Path.GetExtension(fileName).Substring(1);
+                        extension = ViewModel.StrategyTypes.ExtensionWithName.Where(x => StringComparer.InvariantCultureIgnoreCase.Compare(x.Key, extension) == 0).First().Key;
                         var strategy = new StrategyViewModel(name, extension, ViewModel.StrategyTypes.GetSyntaxHighlighting(extension))
                         {
                             Content = content
                         };
                         strategy.SetNotChanged();
+                        strategies.Add(strategy);
                     }
                     catch (Exception)
                     {
@@ -189,29 +193,7 @@ namespace IstLight.Strategy
 
         private void CloseCommandHandler()
         {
-            var strategy = ViewModel.SelectedStrategy;
-            if (strategy.Changed)
-            {
-                string dialogMessage = string.Format("Save file \"{0}.{1}\" ?", strategy.Name, strategy.Extension);
-                switch (winForms.MessageBox.Show(dialogMessage, "Save", winForms.MessageBoxButtons.YesNoCancel, winForms.MessageBoxIcon.Question))
-                {
-                    case winForms.DialogResult.Cancel: return;
-
-                    case winForms.DialogResult.Yes:
-                        if (ForcedSave(strategy))
-                            break;
-                        else
-                            return;
-                    case winForms.DialogResult.No: break;
-                }
-            }
-
-            bool onlyOne = ViewModel.Strategies.Count == 1;
-            if (onlyOne)
-            {
-                NewCommand.Execute(strategy.Extension);
-                ViewModel.Remove(strategy);
-            }
+            CloseStrategy(ViewModel.SelectedStrategy);
         }
         #endregion
 
@@ -240,5 +222,31 @@ namespace IstLight.Strategy
         public ICommand SaveAsCommand { get; private set; }
         public ICommand CloseCommand { get; private set; }
         #endregion
+
+        internal void CloseStrategy(StrategyViewModel strategy)
+        {
+            if (strategy.Changed)
+            {
+                string dialogMessage = string.Format("Save file \"{0}.{1}\" ?", strategy.Name, strategy.Extension);
+                switch (winForms.MessageBox.Show(dialogMessage, "Save", winForms.MessageBoxButtons.YesNoCancel, winForms.MessageBoxIcon.Question))
+                {
+                    case winForms.DialogResult.Cancel: return;
+
+                    case winForms.DialogResult.Yes:
+                        if (ForcedSave(strategy))
+                            break;
+                        else
+                            return;
+                    case winForms.DialogResult.No: break;
+                }
+            }
+
+            bool onlyOne = ViewModel.Strategies.Count == 1;
+            if (onlyOne)
+            {
+                NewCommand.Execute(strategy.Extension);
+            }
+            ViewModel.Remove(strategy);
+        }
     }
 }

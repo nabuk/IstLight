@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Dictionaries\ViewModelToWindowMap.cs" />
     <Compile Include="Helpers\PropertyChangeNotifier.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
@@ -259,7 +260,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
-    <Resource Include="Dictionaries\SyntaxHighlighting.Python.xshd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -286,6 +286,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\folder_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\cross_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\disks_black.png" />
+    <Resource Include="Resources\Icons\disk_black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

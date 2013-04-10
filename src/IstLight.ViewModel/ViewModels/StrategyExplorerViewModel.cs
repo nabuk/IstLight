@@ -76,6 +76,7 @@ namespace IstLight.ViewModels
 
         internal void AddAndSelect(StrategyViewModel strategyVM)
         {
+            strategyVM.CloseCommandExecuted += FileCommands.CloseStrategy;
             strategies.Add(strategyVM);
             SelectedStrategy = strategyVM;
         }
@@ -83,6 +84,7 @@ namespace IstLight.ViewModels
         internal void Remove(StrategyViewModel strategyVM)
         {
             strategies.Remove(strategyVM);
+            strategyVM.CloseCommandExecuted -= FileCommands.CloseStrategy;
         }
 
         //public ICommand RunCommand

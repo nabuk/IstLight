@@ -28,17 +28,30 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
         SelectedItem="{Binding SelectedStrategy}">
         <TabControl.ItemContainerStyle>
             <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
-                <Setter Property="Header" Value="{Binding Caption, Mode=OneWay}" />
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Caption, Mode=OneWay}" />
+                                <Button
+                                    Margin="3,0,0,0"
+                                    Padding="5,0"
+                                    Command="{Binding CloseCommand, Mode=OneTime}"
+                                    Style="{StaticResource sLightButton}">
+                                    <Image
+                                        Height="8"
+                                        Width="8"
+                                        Source="pack://application:,,,/Resources/Icons/cross_black.png" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Header" Value="{Binding}" />
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
                             <DockPanel>
-                                <!--<ToolBarPanel DockPanel.Dock="Top">
-                                    <ToolBar>
-                                        <Button Content="Run" />
-                                    </ToolBar>
-                                </ToolBarPanel>-->
-                                
                                 <ContentPresenter Content="{Binding}" />
                             </DockPanel>
                             

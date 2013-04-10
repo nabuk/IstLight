@@ -1,0 +1,7 @@
+﻿public class CustomScript : IBaseScript
+{
+	public void Run(IContext ctx)
+	{
+		//Your code goes here
+	}
+}

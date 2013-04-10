@@ -40,7 +40,9 @@ namespace IstLight.Bootstrapper
                     var dictLangToExt = ScriptEngineFactory.ExtensionToLanguageMap.ToDictionary(x => x.Value, x => x.Key);
                     return new StrategyTypes(
                         ScriptEngineFactory.ExtensionToLanguageMap.ToDictionary(x => x.Key, x => x.Value.GetDescription()),
-                        ScriptEngineFactory.LanguageSyntaxHighlighting.ToDictionary(x => dictLangToExt[x.Key], x => x.Value));
+                        ScriptEngineFactory.LanguageSyntaxHighlighting.ToDictionary(x => dictLangToExt[x.Key], x => x.Value),
+                        ScriptEngineFactory.LanguageExampleScript.ToDictionary(x => dictLangToExt[x.Key], x => x.Value)
+                        );
                 }).InSingletonScope();
                 
                     

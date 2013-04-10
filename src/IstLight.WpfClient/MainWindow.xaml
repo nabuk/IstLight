@@ -41,21 +41,75 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-    	
-        <Menu x:Name="MainMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="0,0,0,20">
-            <MenuItem Header="_File" >
-                <MenuItem Header="_Open" Command="{Binding Commands[Open], Mode=OneTime}" />
-                <MenuItem Header="_Close" Command="{Binding Commands[Close], Mode=OneTime}" />
-            </MenuItem>
-            <MenuItem Header="_Simulation" >
-                <MenuItem Header="_Run" Command="{Binding Commands[RunSimulation], Mode=OneTime}" />
-                <MenuItem Header="_Stop" Command="{Binding Commands[StopSimulation], Mode=OneTime}" />
-            </MenuItem>
-            <MenuItem Header="_Help" >
-                <MenuItem Header="Project _Website" Command="{Binding Commands[ProjectWebsite], Mode=OneTime}" />
-                <MenuItem Header="_About" Command="{Binding Commands[About], Mode=OneTime}" />
-            </MenuItem>
-    	</Menu>
+
+        <DockPanel Grid.ColumnSpan="3" Margin="0,0,0,20" LastChildFill="False">
+            <Menu x:Name="MainMenu" HorizontalAlignment="Left" DockPanel.Dock="Top" >
+                <MenuItem Header="_File" >
+                    <MenuItem Header="_Open ticker" Command="{Binding Commands[Open], Mode=OneTime}" />
+                    <MenuItem Header="_Close" Command="{Binding Commands[Close], Mode=OneTime}" />
+                </MenuItem>
+                <MenuItem Header="_Simulation" >
+                    <MenuItem Header="_Run" Command="{Binding Commands[RunSimulation], Mode=OneTime}" />
+                    <MenuItem Header="_Stop" Command="{Binding Commands[StopSimulation], Mode=OneTime}" />
+                </MenuItem>
+                <MenuItem Header="_Help" >
+                    <MenuItem Header="Project _Website" Command="{Binding Commands[ProjectWebsite], Mode=OneTime}" />
+                    <MenuItem Header="_About" Command="{Binding Commands[About], Mode=OneTime}" />
+                </MenuItem>
+            </Menu>
+
+            <DockPanel DockPanel.Dock="Top"
+                       Margin="14,0,0,0"
+                       HorizontalAlignment="Left"
+                       LastChildFill="False"
+                       DataContext="{Binding StrategyExplorer, Mode=OneWay}">
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type Button}" x:Key="sTrayLightButton" BasedOn="{StaticResource sLightButton}">
+                        <Setter Property="Height" Value="20" />
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Padding" Value="2" />
+                        <Setter Property="Margin" Value="5,0,0,0" />
+                    </Style>
+                </DockPanel.Resources>
+
+                <Button
+                    ToolTip="New script"
+                    Command="{Binding FileCommands.NewCommand, Mode=OneWay}"
+                    CommandParameter="{Binding Path=SelectedValue.Key, ElementName=cbLanguageType}"
+                    Style="{StaticResource sTrayLightButton}">
+                    <Image Source="pack://application:,,,/Resources/Icons/document.png" />
+                </Button>
+
+                <ComboBox x:Name="cbLanguageType"
+                    Height="20"
+                    FontSize="10"
+                    VerticalAlignment="Center"
+                    ItemsSource="{Binding StrategyTypes.ExtensionWithName, Mode=OneWay}"
+                    DisplayMemberPath="Value"
+                    SelectedIndex="0" />
+                <Button
+                    ToolTip="Open script"
+                    Command="{Binding FileCommands.OpenCommand, Mode=OneWay}"
+                    Style="{StaticResource sTrayLightButton}">
+                    <Image Source="pack://application:,,,/Resources/Icons/folder_open.png" />
+                </Button>
+
+                <Button
+                    ToolTip="Save current script"
+                    Command="{Binding FileCommands.SaveCommand, Mode=OneWay}"
+                    Style="{StaticResource sTrayLightButton}">
+                    <Image Source="pack://application:,,,/Resources/Icons/disk_black.png" />
+                </Button>
+
+                <Button
+                    ToolTip="Save current script as ..."
+                    Command="{Binding FileCommands.SaveAsCommand, Mode=OneWay}"
+                    Style="{StaticResource sTrayLightButton}">
+                    <Image Source="pack://application:,,,/Resources/Icons/disks_black.png" />
+                </Button>
+            </DockPanel>
+        </DockPanel>
+
 
         <CheckBox
             x:Name="cbTickerExplorer"
@@ -70,7 +124,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                 <RotateTransform Angle="90" />
             </CheckBox.LayoutTransform>
         </CheckBox>
-        
+
         <CheckBox
             x:Name="cbErrorList"
             Style="{StaticResource PanelCheckBoxStyle}"
@@ -120,7 +174,7 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                 <RotateTransform Angle="90" />
             </CheckBox.LayoutTransform>
         </CheckBox>
-        
+
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -132,17 +186,17 @@ along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
+
             <TabControl Margin="0,0,3,0" Grid.RowSpan="2"
                         Visibility="{Binding IsChecked, ElementName=cbTickerExplorer, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
                 <TabItem Header="Ticker Explorer">
                     <ContentPresenter Content="{Binding TickerExplorer, Mode=OneTime}" />
                 </TabItem>
             </TabControl>
-            
+
             <ContentPresenter Grid.RowSpan="2" Grid.Column="2"
                 Content="{Binding StrategyExplorer, Mode=OneTime}" />
-            
+
             <TabControl Margin="3,0,0,0" Grid.RowSpan="2" Grid.Column="3"
                         Visibility="{Binding IsChecked, ElementName=cbSimulationSettings, Converter={StaticResource boolToVisConverter}, Mode=OneWay}">
                 <TabItem Header="Simulation Settings">

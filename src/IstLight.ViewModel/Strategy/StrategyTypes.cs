@@ -26,11 +26,16 @@ namespace IstLight.Strategy
     {
         private readonly Dictionary<string,string> extensionWithName;
         private readonly Dictionary<string, string> extensionWithSyntaxHighlighting;
+        private readonly Dictionary<string, string> extensionWithExampleScript;
 
-        public StrategyTypes(IEnumerable<KeyValuePair<string,string>> extensionWithName, IEnumerable<KeyValuePair<string,string>> extensionWithSyntaxHighlighting)
+        public StrategyTypes(
+            IEnumerable<KeyValuePair<string,string>> extensionWithName,
+            IEnumerable<KeyValuePair<string,string>> extensionWithSyntaxHighlighting,
+            IEnumerable<KeyValuePair<string, string>> extensionWithExampleScript)
         {
             this.extensionWithName = extensionWithName.ToDictionary(x => x.Key, x => x.Value);
             this.extensionWithSyntaxHighlighting = extensionWithSyntaxHighlighting.ToDictionary(x => x.Key, x => x.Value);
+            this.extensionWithExampleScript = extensionWithExampleScript.ToDictionary(x => x.Key, x => x.Value);
         }
 
         public IEnumerable<KeyValuePair<string, string>> ExtensionWithName
@@ -44,6 +49,11 @@ namespace IstLight.Strategy
         public string GetSyntaxHighlighting(string strategyExtension)
         {
             return extensionWithSyntaxHighlighting[strategyExtension];
+        }
+
+        public string GetExampleScript(string strategyExtension)
+        {
+            return extensionWithExampleScript[strategyExtension];
         }
     }
 }

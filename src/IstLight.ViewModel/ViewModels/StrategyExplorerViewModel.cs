@@ -50,6 +50,7 @@ namespace IstLight.ViewModels
 
                 selectedStrategy = value;
                 base.RaisePropertyChanged<StrategyViewModel>(() => SelectedStrategy);
+                SelectedStrategyChanged(value);
             }
         }
 

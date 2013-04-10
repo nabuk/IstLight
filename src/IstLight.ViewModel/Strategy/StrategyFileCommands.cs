@@ -161,7 +161,8 @@ namespace IstLight.Strategy
                         extension = ViewModel.StrategyTypes.ExtensionWithName.Where(x => StringComparer.InvariantCultureIgnoreCase.Compare(x.Key, extension) == 0).First().Key;
                         var strategy = new StrategyViewModel(name, extension, ViewModel.StrategyTypes.GetSyntaxHighlighting(extension))
                         {
-                            Content = content
+                            Content = content,
+                            Path = fileName
                         };
                         strategy.SetNotChanged();
                         strategies.Add(strategy);
@@ -246,7 +247,14 @@ namespace IstLight.Strategy
             {
                 NewCommand.Execute(strategy.Extension);
             }
-            ViewModel.Remove(strategy);
+
+            if (strategy == ViewModel.SelectedStrategy)
+            {
+                int index = ViewModel.Strategies.IndexOf(strategy);
+                index += index == ViewModel.Strategies.Count - 1 ? -1 : 1;
+                ViewModel.SelectedStrategy = ViewModel.Strategies[index];
+                ViewModel.Remove(strategy);
+            }
         }
     }
 }

@@ -20,14 +20,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ScriptingWrapper
+public interface IContext
 {
-    public interface IContext
-    {
-        dynamic this[string name] { get; set; }
+    dynamic this[string name] { get; set; }
 
-        bool Exists(string name);
+    bool Exists(string name);
 
-        IEnumerable<KeyValuePair<string, dynamic>> GetItems();
-    }
+    IEnumerable<KeyValuePair<string, dynamic>> GetItems();
 }

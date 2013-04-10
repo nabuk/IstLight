@@ -36,6 +36,7 @@ namespace ScriptingWrapper
         private readonly StringBuilder sbOutput = new StringBuilder();
 
         private Type scriptType;
+        private IBaseScript scriptObject;
 
         
         private void AddAssembliesToProviderParameters(IEnumerable<string> libPaths, CompilerParameters providerParameters)
@@ -123,6 +124,7 @@ namespace ScriptingWrapper
             if (errors.Length > 0)
             {
                 this.scriptType = null;
+                this.scriptObject = null;
                 LastError =
                     errors
                     .Select(x => string.Format("{0} (Line {1}): {2}",
@@ -135,13 +137,17 @@ namespace ScriptingWrapper
             
             this.scriptType =
                 compilationResult.CompiledAssembly.GetTypes()
-                .Where(x => x.IsClass && x.IsPublic && x.BaseType == typeof(BaseScript))
+                .Where(x =>
+                    x.IsClass
+                    && x.IsPublic
+                    && !x.IsAbstract
+                    && typeof(IBaseScript).IsAssignableFrom(x))
                 .SingleOrDefault();
             if (scriptType == null)
             {
                 LastError =
-                    string.Format("There must be exactly one public class derived from {0}.",
-                        typeof(BaseScript).Name);
+                    string.Format("There must be exactly one public class implementing {0} interface.",
+                        typeof(IBaseScript).Name);
                 return false;
             }
             return true;
@@ -154,17 +160,22 @@ namespace ScriptingWrapper
 
         protected override void OnExecute()
         {
-            BaseScript script = (BaseScript)Activator.CreateInstance(scriptType);
-            script.ctx = new Context(items);
+            scriptObject = scriptObject ?? (IBaseScript)Activator.CreateInstance(scriptType);
+            var ctx = new Context(items);
 
             var orgOut = Console.Out;
             Console.SetOut(new StringWriter(sbOutput));
 
-            script.Run();
+            scriptObject.Run(ctx);
 
             Console.SetOut(orgOut);
 
-            items = ((Context)script.ctx).variables;
+            items = ctx.variables;
+        }
+
+        protected override void OnExecuteFailed()
+        {
+            scriptObject = null;
         }
 
         public override string Output

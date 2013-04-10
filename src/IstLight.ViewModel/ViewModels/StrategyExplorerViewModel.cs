@@ -15,8 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using IstLight.Strategy;
 
 namespace IstLight.ViewModels
 {
@@ -26,9 +28,10 @@ namespace IstLight.ViewModels
         private StrategyViewModel selectedStrategy;
         //private ICommand runCommand = DelegateCommand.NotRunnable;
         
-        public StrategyExplorerViewModel()
+        public StrategyExplorerViewModel(StrategyTypes strategyTypes)
         {
-            this.selectedStrategy = new StrategyViewModel();
+            this.StrategyTypes = strategyTypes;
+            this.selectedStrategy = new StrategyViewModel("Default", "py", strategyTypes.GetSyntaxHighlighting("py"));
             this.strategies = new ObservableCollection<StrategyViewModel>(new StrategyViewModel[] { selectedStrategy });
             this.Strategies = new ReadOnlyObservableCollection<StrategyViewModel>(strategies);
         }
@@ -46,6 +49,8 @@ namespace IstLight.ViewModels
                 base.RaisePropertyChanged<StrategyViewModel>(() => SelectedStrategy);
             }
         }
+
+        public StrategyTypes StrategyTypes { get; private set; }
 
         //public ICommand RunCommand
         //{

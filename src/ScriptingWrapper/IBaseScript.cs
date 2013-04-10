@@ -15,10 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
-public abstract class BaseScript
+public interface IBaseScript
 {
-    protected internal ScriptingWrapper.IContext ctx { get; internal set; }
-
-    public abstract void Run();
+    void Run(IContext ctx);
 }
 

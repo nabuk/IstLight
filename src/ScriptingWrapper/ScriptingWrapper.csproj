@@ -72,7 +72,7 @@
     <Compile Include="Attributes\AllowedExtensionAttribute.cs" />
     <Compile Include="Attributes\DescriptionAttribute.cs" />
     <Compile Include="Attributes\LanguageAttribute.cs" />
-    <Compile Include="BaseScript.cs" />
+    <Compile Include="IBaseScript.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Helpers\CheckAssembly.cs" />
     <Compile Include="IContext.cs" />

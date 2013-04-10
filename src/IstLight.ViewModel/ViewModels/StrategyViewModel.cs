@@ -15,30 +15,43 @@
 // You should have received a copy of the GNU General Public License
 // along with IstLight.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using GalaSoft.MvvmLight;
 
 namespace IstLight.ViewModels
 {
     public class StrategyViewModel : ViewModelBase
     {
-        private string name;
-        private string content;
-        private string extension;
+        private string name = "Default";
+        private string content = string.Empty;
 
-        public StrategyViewModel()
+        public StrategyViewModel(string name, string extension, string syntaxHighlighting)
         {
-            name = "Strategy";
-            extension = "py";
+            this.name = name;
+            this.Extension = extension;
+            this.SyntaxHighlighting = syntaxHighlighting;
         }
+
+        public string Name
+        {
+            get { return name; }
+            internal set
+            {
+                if (name == value)
+                    return;
+                name = value;
+                RaisePropertyChanged<string>(() => Caption);
+            }
+        }
+        public string Extension { get; private set; }
 
         public string Caption
         {
             get
             {
-                return name + (string.IsNullOrWhiteSpace(extension) ? "" : ".") + extension;
+                return name + (string.IsNullOrWhiteSpace(Extension) ? "" : ".") + Extension;
             }
         }
-
         public string Content
         {
             get { return content ?? ""; }
@@ -51,9 +64,11 @@ namespace IstLight.ViewModels
             }
         }
 
+        public string SyntaxHighlighting { get; private set; }
+
         internal Script ToScript()
         {
-            return new Script(name, extension, content);
+            return new Script(name, Extension, content);
         }
     }
 }

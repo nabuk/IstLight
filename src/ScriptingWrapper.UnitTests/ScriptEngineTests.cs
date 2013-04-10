@@ -489,7 +489,7 @@ namespace ScriptingWrapper.UnitTests
 
         private static string CreateCSharpScript(string operation)
         {
-            return string.Format("using System;public class SomeScript : BaseScript {{ public override void Run() {{ {0} }} }}", operation);
+            return string.Format("using System;public class SomeScript : IBaseScript {{ public void Run(IContext ctx) {{ {0} }} }}", operation);
         }
     }
 }

@@ -27,6 +27,7 @@ using IstLight.Synchronization;
 using IstLight.ViewModels;
 using Ninject;
 using Ninject.Modules;
+using ScriptingWrapper;
 
 namespace IstLight.Bootstrapper
 {
@@ -34,6 +35,15 @@ namespace IstLight.Bootstrapper
     {
         public override void Load()
         {
+            Kernel.Bind<StrategyTypes>().ToMethod(ctx =>
+                {
+                    var dictLangToExt = ScriptEngineFactory.ExtensionToLanguageMap.ToDictionary(x => x.Value, x => x.Key);
+                    return new StrategyTypes(
+                        ScriptEngineFactory.ExtensionToLanguageMap.ToDictionary(x => x.Key, x => x.Value.GetDescription()),
+                        ScriptEngineFactory.LanguageSyntaxHighlighting.ToDictionary(x => dictLangToExt[x.Key], x => x.Value));
+                }).InSingletonScope();
+                
+                    
             Kernel.Bind<TickerExplorerViewModel>().ToSelf().InSingletonScope();
             Kernel.Bind<StrategyExplorerViewModel>().ToSelf().InSingletonScope();
             Kernel.Bind<SimulationSettingsViewModel>().ToSelf().InSingletonScope();

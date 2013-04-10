@@ -279,6 +279,10 @@
       <Project>{55cec47d-6139-4e9c-91fb-445cac5844fc}</Project>
       <Name>IstLight.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScriptingWrapper\ScriptingWrapper.csproj">
+      <Project>{f50ba90b-b686-43b9-9fab-180d1c17cc81}</Project>
+      <Name>ScriptingWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AppIcon.ico" />

@@ -31,18 +31,19 @@ namespace ScriptingWrapper
     {
         private static Dictionary<ScriptingLanguage, Type> languageType;
         private static Dictionary<string, ScriptingLanguage> languageExtensions;
+        private static Dictionary<ScriptingLanguage, string> languageSyntaxHighlighting;
 
-        private static void AssignSyntaxHighlighting(ScriptEngineBase engine)
+        private static string GetSyntaxHighlighting(ScriptingLanguage language)
         {
             var assembly = Assembly.GetExecutingAssembly();
             string resourceName =
                 assembly.GetManifestResourceNames()
-                    .Where(x => x.EndsWith("xshd") && x.Contains(engine.Language.ToString()))
+                    .Where(x => x.EndsWith("xshd") && x.Contains(language.ToString()))
                     .Single();
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var streamReader = new StreamReader(stream))
-                engine.SyntaxHighlightingRules = streamReader.ReadToEnd();
+                return streamReader.ReadToEnd();
         }
 
         static ScriptEngineFactory()
@@ -51,11 +52,15 @@ namespace ScriptingWrapper
                 .GetTypes()
                 .Where(x => x.IsClass && !x.IsAbstract && typeof(ScriptEngineBase).IsAssignableFrom(x))
                 .ToDictionary(x => ((LanguageAttribute)x.GetCustomAttributes(typeof(LanguageAttribute), true).First()).Language);
-            languageExtensions = languageType.ToDictionary(x =>
-                ((AllowedExtensionAttribute)x.Value
-                    .GetCustomAttributes(typeof(AllowedExtensionAttribute), true)
-                    .Single())
-                .Extension, x => x.Key);
+            languageExtensions = languageType.ToDictionary(
+                x => ((AllowedExtensionAttribute)x.Value
+                        .GetCustomAttributes(typeof(AllowedExtensionAttribute), true)
+                        .Single())
+                    .Extension,
+                x => x.Key);
+            languageSyntaxHighlighting = languageType.ToDictionary(
+                x => x.Key,
+                x => GetSyntaxHighlighting(x.Key));
         }
 
         
@@ -67,9 +72,7 @@ namespace ScriptingWrapper
         /// <returns>Script engine wrapper.</returns>
         public static ScriptEngineBase CreateEngine(ScriptingLanguage language)
         {
-            var engine = (ScriptEngineBase)Activator.CreateInstance(languageType[language]);
-            AssignSyntaxHighlighting(engine);
-            return engine;
+            return (ScriptEngineBase)Activator.CreateInstance(languageType[language]);
         }
 
         
@@ -96,6 +99,14 @@ namespace ScriptingWrapper
             get
             {
                 return languageExtensions;
+            }
+        }
+
+        public static IEnumerable<KeyValuePair<ScriptingLanguage,string>> LanguageSyntaxHighlighting
+        {
+            get
+            {
+                return languageSyntaxHighlighting;
             }
         }
 

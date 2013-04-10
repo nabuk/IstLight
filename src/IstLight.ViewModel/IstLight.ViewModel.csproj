@@ -66,6 +66,7 @@
     <Compile Include="Excel\DialogExcelExporter.cs" />
     <Compile Include="Excel\IExcelExporter.cs" />
     <Compile Include="Simulation\SimulationRunnerResultDecorator.cs" />
+    <Compile Include="Strategy\StrategyTypes.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModelFactory.cs" />
     <Compile Include="ViewModels\ErrorListViewModel.cs" />

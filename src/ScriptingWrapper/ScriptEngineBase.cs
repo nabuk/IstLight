@@ -192,11 +192,13 @@ namespace ScriptingWrapper
                     Thread.ResetAbort();
                 }
 
+                OnExecuteFailed();
                 LastError = FormatException(tae);
                 return false;
             }
             catch (Exception ex)
             {
+                OnExecuteFailed();
                 LastError = FormatException(ex);
                 return false;
             }
@@ -204,6 +206,8 @@ namespace ScriptingWrapper
         }
 
         protected abstract void OnExecute();
+
+        protected virtual void OnExecuteFailed() { }
 
         protected virtual string FormatException(Exception ex)
         {
@@ -244,7 +248,7 @@ namespace ScriptingWrapper
         /// <returns>Script language name.</returns>
         public override string ToString()
         {
-            return Language.ToString();
+            return Language.GetDescription();
         }
 
 
@@ -263,8 +267,6 @@ namespace ScriptingWrapper
         public abstract string Output { get; }
 
         public abstract void ClearOutput();
-
-        public string SyntaxHighlightingRules { get; internal set; }
 
         /// <summary>
         /// Releases all reasources used by wrapper.

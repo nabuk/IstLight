@@ -48,6 +48,7 @@
       <HintPath>..\..\lib\Scripting\Microsoft.Dynamic.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Scripting\Microsoft.Scripting.dll</HintPath>
@@ -77,6 +78,7 @@
     <Compile Include="Helpers\CheckAssembly.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="Implementations\CSharpScriptEngine.cs" />
+    <Compile Include="Implementations\JScriptScriptEngine.cs" />
     <Compile Include="Implementations\VBNetScriptEngine.cs" />
     <Compile Include="MsHostingScriptEngine.cs" />
     <Compile Include="CodeDomScriptEngine.cs" />
@@ -100,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExampleScripts\VBNet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExampleScripts\JScript.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SyntaxHighlighting\JScript.xshd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -3,10 +3,9 @@
 <!-- Converted to AvalonEdit format by Daniel Grunwald in 2010 -->
 <!-- Updated 2010 by Siegfried Oleg Pammer for VB.NET 9 and 10 -->
 <!-- Updated 2011 by Siegfried Oleg Pammer for VB 11 CTP -->
-<!-- 2013 Colors changed by Jakub Niemyjski -->
 <SyntaxDefinition name="VBNET" extensions=".vb" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
   <Color name="Comment" foreground="Gray" exampleText="' comment" />
-  <Color name="String" exampleText="text = &quot;Hello, World!&quot;" />
+  <Color name="String" foreground="#D69D85" exampleText="text = &quot;Hello, World!&quot;" />
 
   <Color name="DateLiteral" foreground="CornflowerBlue" exampleText="endOfWorld = #2012-12-21#" />
   <Color name="Preprocessor" foreground="CornflowerBlue" exampleText="#Region &quot;Title&quot;" />

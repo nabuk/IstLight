@@ -32,7 +32,9 @@ namespace ScriptingWrapper
         [Description("C#")]
         CSharp,
         [Description("VB.NET")]
-        VBNet
+        VBNet,
+        [Description("JScript")]
+        JScript
     }
 
     public static class ScriptLanguageExtensions

@@ -2,6 +2,15 @@
 {
 	public void Run(IContext ctx)
 	{
-		//Your code goes here
+		// Your code goes here
 	}
 }
+
+// IContext is defined as follows:
+// public interface IContext
+// {
+//     dynamic this[string name] { get; set; }
+//     bool Exists(string name);
+//     dynamic Invoke(string name, bool returnsValue, params dynamic[] args);
+//     IEnumerable<KeyValuePair<string, dynamic>> GetItems();
+// }

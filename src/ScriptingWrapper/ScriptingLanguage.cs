@@ -30,7 +30,9 @@ namespace ScriptingWrapper
         [Description("Iron Python")]
         IronPython,
         [Description("C#")]
-        CSharp
+        CSharp,
+        [Description("VB.NET")]
+        VBNet
     }
 
     public static class ScriptLanguageExtensions

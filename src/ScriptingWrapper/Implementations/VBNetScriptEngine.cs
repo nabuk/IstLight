@@ -19,11 +19,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic;
+using ScriptingWrapper.Attributes;
 
-public interface IContext
+namespace ScriptingWrapper.Implementations
 {
-    dynamic this[string name] { get; set; }
-    bool Exists(string name);
-    dynamic Invoke(string name, bool returnsValue, params dynamic[] args);
-    IEnumerable<KeyValuePair<string, dynamic>> GetItems();
+    [Language(ScriptingLanguage.VBNet)]
+    [AllowedExtension("vb")]
+    public class VBNetScriptEngine : CodeDomScriptEngine
+    {
+        public VBNetScriptEngine() : base(new VBCodeProvider()) { }
+    }
 }

@@ -420,7 +420,8 @@ namespace ScriptingWrapper.UnitTests
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage,string>[]
                 {
                     new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = 5*5"),
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("ctx[\"x\"] = 5*5;"))
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("ctx[\"x\"] = 5*5;")),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.VBNet, CreateVBNetScript("ctx(\"x\") = 5*5"))
 
                 });
             }
@@ -433,7 +434,8 @@ namespace ScriptingWrapper.UnitTests
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
                     new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = x*2"),
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("ctx[\"x\"] = ctx[\"x\"]*2;"))
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("ctx[\"x\"] = ctx[\"x\"]*2;")),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.VBNet, CreateVBNetScript("ctx(\"x\") = ctx(\"x\")*2"))
                 });
             }
         }
@@ -445,7 +447,8 @@ namespace ScriptingWrapper.UnitTests
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
                     new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "-"),
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("-;"))
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("-;")),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.VBNet, CreateVBNetScript("-"))
                 });
             }
         }
@@ -457,7 +460,8 @@ namespace ScriptingWrapper.UnitTests
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
                     new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "x = y"),
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("int x = 0;int y = 2 / x;"))
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("int x = 0;int y = 2 / x;")),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.VBNet, CreateVBNetScript("Dim x = Nothing\r\nx.ToString()"))
                 });
             }
         }
@@ -469,7 +473,8 @@ namespace ScriptingWrapper.UnitTests
                 return CombineEnginesWithScripts(new KeyValuePair<ScriptingLanguage, string>[]
                 {
                     new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.IronPython, "print 'X'"),
-                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("Console.Write('X');"))
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.CSharp, CreateCSharpScript("Console.Write('X');")),
+                    new KeyValuePair<ScriptingLanguage,string>(ScriptingLanguage.VBNet, CreateVBNetScript("System.Console.Write(\"X\")"))
                 });
             }
         }
@@ -490,6 +495,11 @@ namespace ScriptingWrapper.UnitTests
         private static string CreateCSharpScript(string operation)
         {
             return string.Format("using System;public class SomeScript : IBaseScript {{ public void Run(IContext ctx) {{ {0} }} }}", operation);
+        }
+
+        private static string CreateVBNetScript(string operation)
+        {
+            return string.Format("Public Class CustomScript\r\nImplements IBaseScript\r\nPublic Sub Run(ctx As IContext) Implements IBaseScript.Run\r\n{0}\r\nEnd Sub\r\nEnd Class", operation);
         }
     }
 }

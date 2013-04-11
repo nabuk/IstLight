@@ -1,0 +1,16 @@
+﻿Public Class CustomScript
+	Implements IBaseScript
+	
+	Public Sub Run(ctx As IContext) Implements IBaseScript.Run
+		' Your code goes here
+	End Sub
+End Class
+
+' IContext is defined as follows:
+' public interface IContext
+' {
+'     dynamic this[string name] { get; set; }
+'     bool Exists(string name);
+'     dynamic Invoke(string name, bool returnsValue, params dynamic[] args);
+'     IEnumerable<KeyValuePair<string, dynamic>> GetItems();
+' }

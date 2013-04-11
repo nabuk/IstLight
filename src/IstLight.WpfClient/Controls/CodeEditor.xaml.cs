@@ -62,8 +62,13 @@ namespace IstLight.Controls
             syntaxHighlightingPropertyNotifier.ValueChanged += delegate
             {
                 if (string.IsNullOrWhiteSpace(SyntaxHighlighting))
+                {
+                    avalonTextEditor.SyntaxHighlighting.MainRuleSet.Rules.Clear();
+                    avalonTextEditor.SyntaxHighlighting.MainRuleSet.Spans.Clear();
                     return;
-                using (Stream s = SyntaxHighlighting.ToStream())
+                }
+                
+                using (Stream s = (SyntaxHighlighting??"").ToStream())
                 using (var xmlReader = new XmlTextReader(s))
                     avalonTextEditor.SyntaxHighlighting = HighlightingLoader.Load(xmlReader, HighlightingManager.Instance);
             };

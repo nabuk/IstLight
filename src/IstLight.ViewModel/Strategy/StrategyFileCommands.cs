@@ -253,8 +253,8 @@ namespace IstLight.Strategy
                 int index = ViewModel.Strategies.IndexOf(strategy);
                 index += index == ViewModel.Strategies.Count - 1 ? -1 : 1;
                 ViewModel.SelectedStrategy = ViewModel.Strategies[index];
-                ViewModel.Remove(strategy);
             }
+            ViewModel.Remove(strategy);
         }
     }
 }

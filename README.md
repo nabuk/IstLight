@@ -2,13 +2,14 @@
 **Investment Strategy Tester Light**
 
 IstLight is a flexible software application made for testing investment strategies.
-It heavily incorporates Python scripting language giving you the ability to:
+Investment strategies can be written in following languages: C#, VB.NET, Iron Python, JScript.
+With IstLight you have the ability to:
 
-* write arbitrarily complex investment strategies
+* write arbitrarily complex strategies
 * bind custom data sources
 * create indicators
 * make your own reports
-* transform data (i.e. bond yield to absolute value) (planned)
+
 
 [Watch](http://www.youtube.com/watch?v=RsLcKhea1hQ&hd=1) presentation.
 

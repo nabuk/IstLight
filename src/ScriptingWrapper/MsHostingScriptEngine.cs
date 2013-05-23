@@ -110,7 +110,9 @@ namespace ScriptingWrapper
         {
             if (script == null) throw new ArgumentNullException("script");
 
-            var currentSearchPaths = engine.GetSearchPaths();
+            ICollection<string> currentSearchPaths;
+            try { currentSearchPaths = engine.GetSearchPaths() ?? new List<string>(); }
+            catch { currentSearchPaths = new List<string>(); }
             foreach (var path in base.GetSearchPaths())
                 if(!currentSearchPaths.Contains(path))
                     currentSearchPaths.Add(path);

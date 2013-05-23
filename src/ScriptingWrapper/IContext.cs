@@ -26,4 +26,6 @@ public interface IContext
     bool Exists(string name);
     dynamic Invoke(string name, bool returnsValue, params dynamic[] args);
     IEnumerable<KeyValuePair<string, dynamic>> GetItems();
+    dynamic Get(string name);
+    void Set(string name, dynamic value);
 }

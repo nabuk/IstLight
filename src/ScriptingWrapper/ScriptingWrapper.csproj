@@ -42,6 +42,15 @@
       <HintPath>..\..\lib\Scripting\IronPython.Modules.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IronRuby">
+      <HintPath>..\..\lib\Scripting\IronRuby.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby.Libraries">
+      <HintPath>..\..\lib\Scripting\IronRuby.Libraries.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby.Libraries.Yaml">
+      <HintPath>..\..\lib\Scripting\IronRuby.Libraries.Yaml.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,6 +88,7 @@
     <Compile Include="IContext.cs" />
     <Compile Include="Implementations\CSharpScriptEngine.cs" />
     <Compile Include="Implementations\JScriptScriptEngine.cs" />
+    <Compile Include="Implementations\RubyScriptEngine.cs" />
     <Compile Include="Implementations\VBNetScriptEngine.cs" />
     <Compile Include="MsHostingScriptEngine.cs" />
     <Compile Include="CodeDomScriptEngine.cs" />
@@ -108,6 +118,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SyntaxHighlighting\JScript.xshd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SyntaxHighlighting\IronRuby.xshd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExampleScripts\IronRuby.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

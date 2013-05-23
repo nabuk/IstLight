@@ -116,6 +116,19 @@ namespace ScriptingWrapper
             return variables;
         }
 
+        public dynamic Get(string name)
+        {
+            return Exists(name) ? this[name] : null;
+        }
+
+        public void Set(string name, dynamic value)
+        {
+            this[name] = value;
+        }
+
         #endregion //IContext
+
+
+        
     }
 }

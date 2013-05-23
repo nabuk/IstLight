@@ -1,0 +1,15 @@
+﻿# invoke global method:
+# ctx.Invoke('method_name',true if return value false otherwise, *args)
+# 
+# set global variable:
+# ctx['variable_name'] = variable_value
+# 
+# get global variable:
+# variable_value = ctx['variable_name']
+#
+# check if global variable exists:
+# ctx.Exists('variable_name')
+#
+# get all defined global variables:
+# ctx.GetItems()
+

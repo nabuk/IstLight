@@ -29,6 +29,8 @@ namespace ScriptingWrapper
     {
         [Description("Iron Python")]
         IronPython,
+        [Description("Iron Ruby")]
+        IronRuby,
         [Description("C#")]
         CSharp,
         [Description("VB.NET")]

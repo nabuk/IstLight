@@ -1,0 +1,177 @@
+﻿<SyntaxDefinition name="Ruby" extensions=".rb">
+
+  <Properties>
+    <Property name="LineComment" value="#"/>
+  </Properties>
+
+  <Digits name="Digits" color="#FBDE2D"/>
+
+  <RuleSets>
+    <RuleSet ignorecase="false">
+
+      <Delimiters>()[]{}@,:.`=;+-*/%~ &amp;|^&gt;&lt;</Delimiters>
+
+      <Span name="Char" stopateol="true" color="#D69D85" escapecharacter="\">
+        <Begin>'</Begin>
+        <End>'</End>
+      </Span>
+
+      <Span name="DocComment" color="Gray">
+        <Begin>"""</Begin>
+        <End>"""</End>
+      </Span>
+
+      <Span name="MultiLineComment" color="Gray">
+        <Begin>=begin</Begin>
+        <End>=end</End>
+      </Span>
+
+      <Span name="LineComment" stopateol="true" color="Gray">
+        <Begin>#</Begin>
+      </Span>
+
+      <Span name="String" stopateol="true" color="#D69D85" escapecharacter="\">
+        <Begin>"</Begin>
+        <End>"</End>
+      </Span>
+
+      <MarkPrevious color="CornflowerBlue">(</MarkPrevious>
+
+      <KeyWords name="BuiltInStatements" color="CornflowerBlue">
+        <Key word="abort"/>
+        <Key word="Array"/>
+        <Key word="at_exit"/>
+        <Key word="autoload"/>
+        <Key word="binding"/>
+        <Key word="callcc"/>
+        <Key word="caller"/>
+        <Key word="chomp"/>
+        <Key word="chop"/>
+        <Key word="eval"/>
+        <Key word="exec"/>
+        <Key word="exit"/>
+        <Key word="fail"/>
+        <Key word="Float"/>
+        <Key word="fork"/>
+        <Key word="format"/>
+        <Key word="gets"/>
+        <Key word="global_variables"/>
+        <Key word="gsub"/>
+        <Key word="Integer"/>
+        <Key word="lambda"/>
+        <Key word="proc"/>
+        <Key word="load"/>
+        <Key word="local_variables"/>
+        <Key word="loop"/>
+        <Key word="open"/>
+        <Key word="p"/>
+        <Key word="print"/>
+        <Key word="print"/>
+        <Key word="printf"/>
+        <Key word="putc"/>
+        <Key word="puts"/>
+        <Key word="rand"/>
+        <Key word="readline"/>
+        <Key word="scan"/>
+        <Key word="select"/>
+        <Key word="set_trace_func"/>
+        <Key word="sleep"/>
+        <Key word="split"/>
+        <Key word="sprintf"/>
+        <Key word="srand"/>
+        <Key word="String"/>
+        <Key word="syscall"/>
+        <Key word="system"/>
+        <Key word="sub"/>
+        <Key word="test"/>
+        <Key word="throw"/>
+        <Key word="trace_var"/>
+        <Key word="trap"/>
+        <Key word="untrace_var"/>
+        <Key word="attr_reader"/>
+        <Key word="attr_writer"/>
+        <Key word="attr_accessor"/>
+      </KeyWords>
+
+      <KeyWords name="ClassStatement" color="CornflowerBlue" >
+        <Key word="class"/>
+        <Key word="module"/>
+        <Key word="public"/>
+        <Key word="protected"/>
+        <Key word="private"/>
+      </KeyWords>
+
+      <KeyWords name="ExceptionHandlingStatements" color="CornflowerBlue">
+        <Key word="begin"/>
+        <Key word="rescue"/>
+        <Key word="ensure"/>
+        <Key word="raise"/>
+        <Key word="catch"/>
+      </KeyWords>
+
+      <KeyWords name="FunctionDefinition" color="CornflowerBlue">
+        <Key word="def"/>
+        <Key word="end"/>
+        <Key word="undef"/>
+      </KeyWords>
+
+      <KeyWords name="Imports" color="CornflowerBlue">
+        <Key word="import"/>
+        <Key word="alias"/>
+      </KeyWords>
+
+      <KeyWords name="IterationStatements" color="CornflowerBlue">
+        <Key word="for"/>
+        <Key word="do"/>
+        <Key word="in"/>
+        <Key word="while"/>
+        <Key word="until"/>
+      </KeyWords>
+
+      <KeyWords name="JumpStatements" color="CornflowerBlue">
+        <Key word="break"/>
+        <Key word="yield"/>
+        <Key word="redo"/>
+        <Key word="return"/>
+        <Key word="retry"/>
+        <Key word="next"/>
+      </KeyWords>
+
+      <KeyWords name="OperatorStatements" color="CornflowerBlue">
+        <Key word="and"/>
+        <Key word="not"/>
+        <Key word="or"/>
+      </KeyWords>
+
+      <KeyWords name="NullStatement" color="CornflowerBlue">
+        <Key word="nil"/>
+      </KeyWords>
+
+      <KeyWords name="SelectionStatements" color="CornflowerBlue">
+        <Key word="elsif"/>
+        <Key word="else"/>
+        <Key word="if"/>
+        <Key word="then"/>
+        <Key word="case"/>
+        <Key word="unless"/>
+      </KeyWords>
+
+      <KeyWords name="BooleanStatements" color="CornflowerBlue">
+        <Key word="true"/>
+        <Key word="false"/>
+      </KeyWords>
+
+      <KeyWords name="DefinedStatement" color="CornflowerBlue">
+        <Key word="defined"/>
+      </KeyWords>
+
+      <KeyWords name="ClassSelfStatement" color="CornflowerBlue">
+        <Key word="self"/>
+      </KeyWords>
+
+      <KeyWords name="ClassInheritanceStatement" color="CornflowerBlue">
+        <Key word="super"/>
+      </KeyWords>
+    </RuleSet>
+  </RuleSets>
+</SyntaxDefinition>
